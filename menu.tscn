@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://db7retadphrg4"]
+[gd_scene load_steps=6 format=3 uid="uid://db7retadphrg4"]
 
 [ext_resource type="Script" path="res://Menu.gd" id="1_fcwrb"]
 [ext_resource type="Texture2D" uid="uid://djul3pr8eqib6" path="res://Images/Menu Images/Forest for main menu.png" id="2_twy5p"]
 [ext_resource type="FontFile" uid="uid://csxxuldqoa2f" path="res://Fonts/CAMBRIA.TTC" id="3_j50ea"]
+[ext_resource type="AudioStream" uid="uid://crugsjevjtoqc" path="res://Music/the-white-lion-10379.mp3" id="4_1e7ud"]
 
 [sub_resource type="Theme" id="Theme_inpge"]
 default_font = ExtResource("3_j50ea")
@@ -70,6 +71,11 @@ theme_override_fonts/normal_font = ExtResource("3_j50ea")
 theme_override_font_sizes/normal_font_size = 70
 bbcode_enabled = true
 text = "[center]Realist Hero"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(369, 195)
+stream = ExtResource("4_1e7ud")
+autoplay = true
 
 [connection signal="pressed" from="TextureRect/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="TextureRect/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
