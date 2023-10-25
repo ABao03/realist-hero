@@ -10,9 +10,13 @@ config_version=5
 
 [application]
 
-config/name="realist hero"
+config/name="Realist Hero"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[dotnet]
+
+project/assembly_name="Realist Hero"
 
 [rendering]
 
