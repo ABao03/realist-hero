@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5yppbmj6d2hq"]
+
+[ext_resource type="Texture2D" uid="uid://b5nmj5ulwiusq" path="res://Images/Villain.png" id="1_hu1pl"]
+[ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frnpn"]
+size = Vector2(32.7359, 53.6863)
+
+[node name="PlayerAdolf" type="CharacterBody2D"]
+script = ExtResource("1_qvw2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hu1pl")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.999999, 0.999999)
+scale = Vector2(1.09971, 1.1176)
+shape = SubResource("RectangleShape2D_frnpn")
