@@ -1,3 +1,10 @@
-[gd_scene format=3 uid="uid://ck1w0me5cr3tk"]
+[gd_scene load_steps=2 format=3 uid="uid://ck1w0me5cr3tk"]
+
+[ext_resource type="Texture2D" uid="uid://bd221ximxw77y" path="res://d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png" id="1_27hxq"]
 
 [node name="Game" type="Node2D"]
+
+[node name="D515Mo1-542e7751-ee0a-461a-a383-bd1a90824873" type="Sprite2D" parent="."]
+position = Vector2(584, 319)
+scale = Vector2(0.407713, 0.397243)
+texture = ExtResource("1_27hxq")
