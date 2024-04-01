@@ -314,9 +314,12 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_fjfia")
+}
 tree_root = SubResource("AnimationNodeStateMachine_havxf")
 anim_player = NodePath("..")
-active = true
 parameters/conditions/idle = false
 parameters/conditions/walk = false
 parameters/Idle/blend_position = Vector2(-1.0784, 0.423581)
