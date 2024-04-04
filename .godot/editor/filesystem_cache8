@@ -1,19 +1,19 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1712010491
+::res://::1712271723
 DataHandler.gd::GDScript::-1::1712009768::0::1::::<>Node<>::
 export_presets.cfg::TextFile::-1::1712009769::0::1::::<><>::
-game.tscn::PackedScene::5529784681886420712::1712010414::0::1::::<><>::uid://bd221ximxw77y::::res://Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://0nqqxacxuayc::::res://inventory.tscn
-icon.svg::CompressedTexture2D::618227881530079290::1712009769::1712009769::1::::<><>::
+game.tscn::PackedScene::5529784681886420712::1712271723::0::1::::<><>::uid://bd221ximxw77y::::res://Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://0nqqxacxuayc::::res://inventory.tscn<>uid://duct1l4f25ios::::res://Images/TX Tileset Grass.png<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn
 inventory.gd::GDScript::-1::1712009769::0::1::::<>Control<>::
-inventory.tscn::PackedScene::1782559254499775234::1712010491::0::1::::<><>::res://inventory.gd
+inventory.tscn::PackedScene::1782559254499775234::1712255399::0::1::::<><>::res://inventory.gd
 item.gd::GDScript::-1::1712009769::0::1::::<>Node2D<>::
-item.tscn::PackedScene::5220632423001930039::1712009769::0::1::::<><>::res://item.gd
+item.tscn::PackedScene::5220632423001930039::1712255399::0::1::::<><>::res://item.gd
 Menu.gd::GDScript::-1::1712009769::0::1::::<>Control<>::
-menu.tscn::PackedScene::7296551313000196917::1712010414::0::1::::<><>::res://Menu.gd<>uid://djul3pr8eqib6::::res://Images/Menu Images/Forest for main menu.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3
+menu.tscn::PackedScene::7296551313000196917::1712271616::0::1::::<><>::res://Menu.gd<>uid://djul3pr8eqib6::::res://Images/Menu Images/Forest for main menu.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3
 Settings.gd::GDScript::-1::1712009769::0::1::::<>Control<>::
-Settings.tscn::PackedScene::1449213619529447454::1712009769::0::1::::<><>::res://Settings.gd
+Settings.tscn::PackedScene::1449213619529447454::1712255399::0::1::::<><>::res://Settings.gd
 slot.gd::GDScript::-1::1712009769::0::1::::<>TextureRect<>::
-slot.tscn::PackedScene::3976353318320087248::1712010414::0::1::::<><>::uid://c0k38wcn2trlw::::res://Assets/slot1.png<>res://slot.gd
+slot.tscn::PackedScene::3976353318320087248::1712255399::0::1::::<><>::uid://c0k38wcn2trlw::::res://Assets/slot1.png<>res://slot.gd
+spawn_info.gd::GDScript::-1::1712262136::0::1::::Spawn_info<>Resource<>::
 VBoxContainer.gd::GDScript::-1::1712009769::0::1::::<>RefCounted<>::
 ::res://Assets/::1712010135
 inventory_texture.png::CompressedTexture2D::7428568879017022575::1712009768::1712009829::1::::<><>::
@@ -22,9 +22,14 @@ Item2.png::CompressedTexture2D::2584845723301824366::1712009768::1712009829::1::
 Item3.png::CompressedTexture2D::8953873293197511912::1712009768::1712009829::1::::<><>::
 Item4.png::CompressedTexture2D::6342820459268564756::1712009768::1712009829::1::::<><>::
 slot1.png::CompressedTexture2D::6549966402104752440::1712010124::1712010135::1::::<><>::
-::res://Characters/::1712009768
+::res://Characters/::1712271616
 player_adolf.gd::GDScript::-1::1712009768::0::1::::<>CharacterBody2D<>::
-player_adolf.tscn::PackedScene::4542568672243075346::1712009768::0::1::::<><>::res://Characters/player_adolf.gd<>uid://csjy17y2uompe::::res://Images/PlayerSpriteSheet.png
+player_adolf.tscn::PackedScene::4542568672243075346::1712271616::0::1::::<><>::res://Characters/player_adolf.gd<>uid://csjy17y2uompe::::res://Images/PlayerSpriteSheet.png
+::res://Characters/Enemy/::1712271723
+enemy.gd::GDScript::-1::1712262267::0::1::::<>CharacterBody2D<>::
+EnemySpawner.gd::GDScript::-1::1712262136::0::1::::<>Node2D<>::
+enemy_spawner.tscn::PackedScene::3746545622702081094::1712271723::0::1::::<><>::res://Characters/Enemy/EnemySpawner.gd<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd
+slime.tscn::PackedScene::2938900666268323740::1712271758::0::1::::<><>::res://Characters/Enemy/enemy.gd<>uid://ckrpdremyt5p3::::res://Images/slime-Sheet.png
 ::res://Data/::1712009768
 Item_data.json::JSON::-1::1712009768::0::1::::<><>::
 ::res://Fonts/::1712009829
@@ -32,9 +37,10 @@ CAMBRIA.TTC::FontFile::178975118560672299::1712009768::1712009829::1::::<><>::
 CAMBRIAB.TTF::FontFile::4586833295546370841::1712009768::1712009829::1::::<><>::
 CAMBRIAI.TTF::FontFile::6442532545763141232::1712009769::1712009829::1::::<><>::
 CAMBRIAZ.TTF::FontFile::7186213338800642863::1712009769::1712009829::1::::<><>::
-::res://Images/::1712011287
+::res://Images/::1712254098
 d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png::CompressedTexture2D::2654412424385386232::1712009769::1712009829::1::::<><>::
 PlayerSpriteSheet.png::CompressedTexture2D::6056325310201803842::1712009769::1712009829::1::::<><>::
+slime-Sheet.png::CompressedTexture2D::5510741237513003050::1712178863::1712178872::1::::<><>::
 TX Tileset Grass.png::CompressedTexture2D::8568368355672787214::1712011287::1712011288::1::::<><>::
 Villain.png::CompressedTexture2D::4519669186821311172::1712009769::1712009829::1::::<><>::
 x-button.png::CompressedTexture2D::1991411250533729648::1712009769::1712009829::1::::<><>::
