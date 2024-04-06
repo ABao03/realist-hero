@@ -3,11 +3,30 @@
 extends CharacterBody2D
 
 @export var speed : float = 100
+@export var hp = 100
+
+# Attacks
+var iceSpear = preload("res://Characters/Weapons/ice_spear.tscn") # This has to change if u change the filename
+
+# AttackNodes
+@onready var iceSpearTimer = get_node("%IceSpearTimer")
+@onready var iceSpearAttackTimer = get_node("%IceSpearAttackTimer")
+
+# IceSpear (change later)
+var icespear_ammo = 0
+var icespear_baseammo = 1
+var icespear_attackspeed = 1.5
+var icespear_level = 1
+
+# Enemy Related
+var enemy_close = []
+
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer/AnimationTree
 @onready var sprite = $Sprite2D
 @onready var state_machine = animation.get('parameters/playback')
 func _ready():
+	attack()
 	update_animation(starting)
 
 func _physics_process(_delta):
@@ -34,9 +53,36 @@ func update_animation(move_input: Vector2):
 		
 		animation["parameters/Idle/blend_position"] = move_input
 		animation["parameters/Walk/blend_position"] = move_input
+
+func attack():
+	if icespear_level > 0:
+		iceSpearTimer.wait_time = icespear_attackspeed
+		if iceSpearTimer.is_stopped():
+			iceSpearTimer.start()
 		
 func new_state():
 	if velocity != Vector2.ZERO:
 		state_machine.travel('Walk')
 	else:
 		state_machine.travel('Idle')
+
+
+func _on_hurt_box_hurt(damage):
+	hp -= damage
+	print(hp)
+
+
+func _on_ice_spear_timer_timeout():
+	pass # Replace with function body.
+
+
+func _on_ice_spear_attack_timer_timeout():
+	var icespear_attack = iceSpear.instantiate()
+	icespear_attack.position = position
+	icespear_attack.target = get_random_target()
+	icespear_attack.level = icespear_level
+	add_child(icespear_attack)
+	# Removed ice spear ammo because this is a melee weapon
+	
+func get_random_target(): # may need to remove later. for targetting projectile
+	pass

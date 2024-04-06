@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://5kkwx0t5l4e1"]
+
+[ext_resource type="Texture2D" uid="uid://bd221ximxw77y" path="res://Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png" id="1_wgydk"]
+
+[node name="Tree" type="Node2D"]
+
+[node name="D515Mo1-542e7751-ee0a-461a-a383-bd1a90824873" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(-3.05511, 3.20352)
+scale = Vector2(0.407713, 0.397243)
+texture = ExtResource("1_wgydk")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+z_index = 2
+polygon = PackedVector2Array(-67, 138, -20, 137, -11, 150, 4, 151, 14, 137, 62, 138, 45, 130, 35, 121, -40, 121, -53, 133)

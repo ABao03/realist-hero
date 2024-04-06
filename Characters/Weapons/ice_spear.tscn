@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dlrfbgyjerxfi"]
+
+[ext_resource type="Script" path="res://Characters/Weapons/ice_spear.gd" id="1_qcssm"]
+[ext_resource type="Texture2D" uid="uid://cxcg8aco1xc1g" path="res://Images/ComfyUI_00346_.png" id="1_xyfqq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylphp"]
+size = Vector2(130, 640)
+
+[node name="IceSpear" type="Area2D" groups=["attack"]]
+scale = Vector2(0.1, 0.1)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_qcssm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_xyfqq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.99999, 150)
+scale = Vector2(0.999999, 0.999999)
+shape = SubResource("RectangleShape2D_ylphp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 8.0
+
+[node name="snd_play" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(10, 10)

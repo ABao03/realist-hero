@@ -1,5 +1,6 @@
 extends Node2D
 
+# Hold array of currently alive enemies 
 @export var spawns: Array[Spawn_info] = []
 
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -11,18 +12,19 @@ extends Node2D
 #func _ready():
 	#connect("changetime",Callable(player,"change_time"))
 
+# When timer hits 0, run this code
 func _on_timer_timeout():
-	print("hi")
 	time += 1
 	var enemy_spawns = spawns
+	
+	# Basically, every time the timer hits zero, load the enemy 
 	for i in enemy_spawns:
-		print("spawned")
 		if time >= i.time_start and time <= i.time_end:
 			if i.spawn_delay_counter < i.enemy_spawn_delay:
 				i.spawn_delay_counter += 1
 			else:
 				i.spawn_delay_counter = 0
-				var new_enemy = load(str(i.enemy.resource_path))
+				var new_enemy = i.enemy
 				var counter = 0
 				while counter < i.enemy_num:
 					var enemy_spawn = new_enemy.instantiate()
@@ -31,6 +33,7 @@ func _on_timer_timeout():
 					counter += 1
 	#emit_signal("changetime",time)
 
+# Randomly generate the enemy's position based on where the player is at 
 func get_random_position():
 	var vpr = get_viewport_rect().size * randf_range(1.1,1.4)
 	var top_left = Vector2(player.global_position.x - vpr.x/2, player.global_position.y - vpr.y/2)

@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://ck1w0me5cr3tk"]
 
-[ext_resource type="Texture2D" uid="uid://bd221ximxw77y" path="res://Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png" id="1_cuak6"]
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="2_nl0kn"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://inventory.tscn" id="3_p4lm1"]
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Images/TX Tileset Grass.png" id="4_bd1gl"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="5_dvqwl"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="6_ikbc3"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="7_0vbhx"]
+[ext_resource type="PackedScene" uid="uid://5kkwx0t5l4e1" path="res://Background/tree.tscn" id="7_dw2aw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtnxh"]
 texture = ExtResource("4_bd1gl")
@@ -255,11 +255,8 @@ offset_top = -35.0
 offset_right = -122.0
 offset_bottom = -35.0
 
-[node name="D515Mo1-542e7751-ee0a-461a-a383-bd1a90824873" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(584, 319)
-scale = Vector2(0.407713, 0.397243)
-texture = ExtResource("1_cuak6")
+[node name="Tree" parent="." instance=ExtResource("7_dw2aw")]
+position = Vector2(620, 386)
 
 [node name="PlayerAdolf" parent="." groups=["player"] instance=ExtResource("2_nl0kn")]
 z_index = 1
@@ -273,6 +270,3 @@ layer_0/tile_data = PackedInt32Array(65535, 131072, 2, 131071, 131072, 2, 196607
 [node name="EnemySpawner" parent="." instance=ExtResource("6_ikbc3")]
 position = Vector2(477, 1)
 spawns = Array[ExtResource("7_0vbhx")]([SubResource("Resource_g8xax")])
-
-[node name="slime" parent="." instance=ExtResource("5_dvqwl")]
-position = Vector2(49, 0)

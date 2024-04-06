@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://bh4vi84vnnpf5"]
+[gd_scene load_steps=14 format=3 uid="uid://bh4vi84vnnpf5"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/slime.gd" id="1_dtmf7"]
 [ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Images/slime-Sheet.png" id="2_li24n"]
+[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Hitbox/hurt_box.tscn" id="3_moyka"]
+[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Hitbox/hit_box.tscn" id="4_d2e3y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjmpm"]
-size = Vector2(30, 15.5)
+size = Vector2(15, 6)
 
 [sub_resource type="Animation" id="Animation_8kdsa"]
 length = 0.001
@@ -44,6 +46,23 @@ _data = {
 "move": SubResource("Animation_qbk7v")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ia5fa"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v76bw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sxs7k"]
+states/move/node = SubResource("AnimationNodeAnimation_ia5fa")
+states/move/position = Vector2(323, 100)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_v76bw")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yey8l"]
+size = Vector2(33, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xg1"]
+size = Vector2(20, 10)
+
 [node name="slime" type="Node2D"]
 
 [node name="slime" type="CharacterBody2D" parent="."]
@@ -53,7 +72,7 @@ script = ExtResource("1_dtmf7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
 z_index = 2
-position = Vector2(2, 4.25)
+position = Vector2(0.5, 5)
 shape = SubResource("RectangleShape2D_tjmpm")
 
 [node name="Sprite2D" type="Sprite2D" parent="slime"]
@@ -65,5 +84,34 @@ vframes = 3
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")
 }
+speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="slime/AnimationPlayer"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_i6kpg")
+}
+tree_root = SubResource("AnimationNodeStateMachine_sxs7k")
+anim_player = NodePath("..")
+
+[node name="HurtBox" parent="slime" instance=ExtResource("3_moyka")]
+position = Vector2(-16, -12)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="slime/HurtBox" index="0"]
+position = Vector2(16.5, 16)
+shape = SubResource("RectangleShape2D_yey8l")
+
+[node name="HitBox" parent="slime" instance=ExtResource("4_d2e3y")]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="slime/HitBox" index="0"]
+position = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_g0xg1")
+
+[connection signal="hurt" from="slime/HurtBox" to="slime" method="_on_hurt_box_hurt"]
+
+[editable path="slime/HurtBox"]
+[editable path="slime/HitBox"]
