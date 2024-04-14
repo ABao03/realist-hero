@@ -1,8 +1,8 @@
 extends Control
 
-@onready var slot_scene = preload("res://slot.tscn")
+@onready var slot_scene = preload("res://Inventory/slot.tscn")
 @onready var grid_container = $Background/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
-@onready var item_scene = preload("res://item.tscn")
+@onready var item_scene = preload("res://Inventory/item.tscn")
 @onready var scroll_container = $Background/MarginContainer/VBoxContainer/ScrollContainer
 @onready var col_count = grid_container.columns #save column number
 @onready var grid_container2 = $Background2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
