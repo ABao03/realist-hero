@@ -2,8 +2,9 @@
 
 extends CharacterBody2D
 
-@export var speed : float = 100
-@export var hp = 100
+# Stats
+var speed : float = 100
+var hp = 100
 
 # Attacks
 var iceSpear = preload("res://Characters/Weapons/ice_spear.tscn") # This has to change if u change the filename

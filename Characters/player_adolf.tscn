@@ -296,9 +296,10 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7sva7"]
 size = Vector2(11, 30)
 
-[node name="PlayerAdolf" type="CharacterBody2D"]
+[node name="PlayerAdolf" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_qvw2t")
-speed = 200.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1.25, 2)
@@ -344,6 +345,8 @@ unique_name_in_owner = true
 
 [node name="IceSpearAttackTimer" type="Timer" parent="Attack/IceSpearTimer"]
 unique_name_in_owner = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Attack/IceSpearTimer" to="." method="_on_ice_spear_timer_timeout"]

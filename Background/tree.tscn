@@ -2,11 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://bd221ximxw77y" path="res://Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png" id="1_wgydk"]
 
-[node name="Tree" type="Node2D"]
+[node name="Tree" type="StaticBody2D"]
+collision_layer = 7
+collision_mask = 7
 
 [node name="D515Mo1-542e7751-ee0a-461a-a383-bd1a90824873" type="Sprite2D" parent="."]
 z_index = 2
-position = Vector2(-3.05511, 3.20352)
 scale = Vector2(0.407713, 0.397243)
 texture = ExtResource("1_wgydk")
 

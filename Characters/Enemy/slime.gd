@@ -17,8 +17,11 @@ func _physics_process(_delta):
 	elif direction.x < -0.1:
 		sprite.flip_h = false
 
+func death():
+	emit_signal("remove_from_array",self)
+	queue_free()
 
 func _on_hurt_box_hurt(damage):
 	hp -= damage
 	if hp <= 0:
-		queue_free()
+		death()

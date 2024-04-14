@@ -1,6 +1,7 @@
-extends Area2D
+extends CharacterBody2D
 
 var level = 1
+var hp = 1
 var speed = 100
 var damage = 5
 var knock_amount = 100
@@ -22,14 +23,13 @@ func _ready():
 			knock_amount = 100
 			attack_size = 1.0
 
-
-# Projectile movement (shoots outwards)
-func _physics_process(delta):
-	position += angle * speed * delta
 	
 # Projectile hits enemy
 func enemy_hit(charge = 1):
-	pass
+	hp -= charge
+	if hp <= 0:
+		emit_signal("remove_from_array",self)
+		queue_free()
 	
 # on_timer_timeout for if the projectile misses 
 	
