@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://buux43qer5pgb"]
+
+[ext_resource type="Script" path="res://Menu/Death.gd" id="1_x0v5c"]
+[ext_resource type="Texture2D" uid="uid://ct741cugcv00f" path="res://Assets/YOU_DIED.webp" id="2_hm0af"]
+
+[node name="Death" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x0v5c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 646.0
+texture = ExtResource("2_hm0af")
+expand_mode = 2
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 389.0
+offset_top = 500.0
+offset_right = 839.0
+offset_bottom = 610.0
+text = "TRY AGAIN?"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
