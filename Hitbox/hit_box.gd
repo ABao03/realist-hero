@@ -1,5 +1,9 @@
+# This code is responsible for DEALING damage to another entity.
+# It is a generic script with a modifiable damage value.
+
 extends Area2D
 
+# Modifiable damage value. Shows up in Inspector tab (right-hand side).
 @export var damage = 1
 @onready var collision = $CollisionShape2D
 @onready var disableTimer = $DisableHitboxTimer

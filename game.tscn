@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ck1w0me5cr3tk"]
+[gd_scene load_steps=11 format=3 uid="uid://ck1w0me5cr3tk"]
 
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="2_nl0kn"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="3_p4lm1"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="6_ikbc3"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="7_0vbhx"]
 [ext_resource type="PackedScene" uid="uid://5kkwx0t5l4e1" path="res://Background/tree.tscn" id="7_dw2aw"]
-[ext_resource type="PackedScene" uid="uid://dlrfbgyjerxfi" path="res://Characters/Weapons/ice_spear.tscn" id="8_ijy2d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtnxh"]
 texture = ExtResource("4_bd1gl")
@@ -274,9 +273,5 @@ layer_0/tile_data = PackedInt32Array(524287, 131072, 1, 2424831, 131072, 1, 1966
 [node name="EnemySpawner" parent="." instance=ExtResource("6_ikbc3")]
 position = Vector2(477, 1)
 spawns = Array[ExtResource("7_0vbhx")]([SubResource("Resource_g8xax")])
-
-[node name="weapon" parent="." instance=ExtResource("8_ijy2d")]
-position = Vector2(878, 352)
-rotation = 1.92016
 
 [editable path="Tree"]

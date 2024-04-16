@@ -17,6 +17,7 @@ func _physics_process(_delta):
 	elif direction.x < -0.1:
 		sprite.flip_h = false
 
+# Slime is killed by damage
 func death():
 	emit_signal("remove_from_array",self)
 	queue_free()

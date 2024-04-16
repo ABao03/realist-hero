@@ -22,13 +22,21 @@ var icespear_level = 1
 # Enemy Related
 var enemy_close = []
 
+# Animation Status
+var isAttacking: bool = false
+
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer/AnimationTree
 @onready var sprite = $Sprite2D
 @onready var state_machine = animation.get('parameters/playback')
+
 func _ready():
 	attack()
 	update_animation(starting)
+
+func handleInput():
+	if Input.is_action_just_pressed("mouse_leftclick"):
+		isAttacking = true
 
 func _physics_process(_delta):
 	var input_direction = Vector2(
@@ -42,18 +50,27 @@ func _physics_process(_delta):
 	move_and_slide()
 	new_state()
 	
+	handleInput()
 	update_animation(input_direction)
 	
 func update_animation(move_input: Vector2):
 	if move_input == Vector2.ZERO:
 		animation["parameters/conditions/idle"] = true
 		animation["parameters/conditions/walk"] = false
+		
 	else:
 		animation["parameters/conditions/idle"] = false
 		animation["parameters/conditions/walk"] = true
 		
 		animation["parameters/Idle/blend_position"] = move_input
 		animation["parameters/Walk/blend_position"] = move_input
+	
+	if isAttacking == true:
+		animation["parameters/conditions/attack"] = true
+		isAttacking = false
+		
+	else:
+		animation["parameters/conditions/attack"] = false
 
 func attack():
 	if icespear_level > 0:
@@ -80,12 +97,4 @@ func _on_ice_spear_timer_timeout():
 
 
 func _on_ice_spear_attack_timer_timeout():
-	var icespear_attack = iceSpear.instantiate()
-	icespear_attack.position = position
-	icespear_attack.target = get_random_target()
-	icespear_attack.level = icespear_level
-	add_child(icespear_attack)
-	# Removed ice spear ammo because this is a melee weapon
-	
-func get_random_target(): # may need to remove later. for targetting projectile
 	pass

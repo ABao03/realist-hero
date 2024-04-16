@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=37 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://csjy17y2uompe" path="res://Images/PlayerSpriteSheet.png" id="2_s4jyb"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Hitbox/hurt_box.tscn" id="3_5wu8m"]
+[ext_resource type="PackedScene" uid="uid://dlrfbgyjerxfi" path="res://Characters/Weapons/weapon.tscn" id="4_ioilp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
 size = Vector2(4.54665, 17.8955)
@@ -33,6 +34,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Attack/weapon/Area2D:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.785398]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Attack/weapon/Area2D/HitBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_8xnl8"]
 resource_name = "Walk_down"
@@ -49,6 +74,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+
+[sub_resource type="Animation" id="Animation_h4buo"]
+resource_name = "attack"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Attack/weapon/Area2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.785398, -0.785398, 0.785398]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Attack/weapon/Area2D/HitBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_8kdci"]
@@ -219,6 +272,7 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_q5tuw"),
 "Walk_down": SubResource("Animation_8xnl8"),
+"attack": SubResource("Animation_h4buo"),
 "idle_down": SubResource("Animation_8kdci"),
 "idle_left": SubResource("Animation_f4pko"),
 "idle_right": SubResource("Animation_afsps"),
@@ -227,6 +281,9 @@ _data = {
 "walk_right": SubResource("Animation_t7p4x"),
 "walk_up": SubResource("Animation_o0j7h")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_35rht"]
+animation = &"attack"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dc81f"]
 animation = &"idle_left"
@@ -285,16 +342,37 @@ advance_condition = &"walk"
 advance_mode = 2
 advance_condition = &"idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_knccy"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c32j4"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_f6b5d"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sovlh"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"walk"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_havxf"]
+states/Attack/node = SubResource("AnimationNodeAnimation_35rht")
+states/Attack/position = Vector2(410, 118)
+states/End/position = Vector2(814, 221)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_evhrj")
-states/Idle/position = Vector2(323, 95)
-states/Start/position = Vector2(201, 95)
+states/Idle/position = Vector2(327, 221)
+states/Start/position = Vector2(175, 221)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_ujyoe")
-states/Walk/position = Vector2(481, 95)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4kinb"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_2710k"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ab3pr")]
+states/Walk/position = Vector2(495, 221)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4kinb"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_2710k"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_ab3pr"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_knccy"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_c32j4"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_f6b5d"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_sovlh")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7sva7"]
-size = Vector2(11, 30)
+size = Vector2(27, 47)
 
 [node name="PlayerAdolf" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -325,6 +403,7 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_havxf")
 anim_player = NodePath("..")
+parameters/conditions/attack = false
 parameters/conditions/idle = false
 parameters/conditions/walk = false
 parameters/Idle/blend_position = Vector2(-1.0784, 0.423581)
@@ -335,10 +414,15 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(0.5, 3)
+position = Vector2(-0.5, -2.5)
 shape = SubResource("RectangleShape2D_7sva7")
 
 [node name="Attack" type="Node2D" parent="."]
+
+[node name="weapon" parent="Attack" instance=ExtResource("4_ioilp")]
+
+[node name="Area2D" parent="Attack/weapon" index="0"]
+rotation = 0.785398
 
 [node name="IceSpearTimer" type="Timer" parent="Attack"]
 unique_name_in_owner = true
@@ -353,3 +437,5 @@ unique_name_in_owner = true
 [connection signal="timeout" from="Attack/IceSpearTimer/IceSpearAttackTimer" to="." method="_on_ice_spear_attack_timer_timeout"]
 
 [editable path="HurtBox"]
+[editable path="Attack/weapon"]
+[editable path="Attack/weapon/Area2D/HitBox"]

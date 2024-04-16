@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-var level = 1
-var hp = 1
-var speed = 100
-var damage = 5
-var knock_amount = 100
-var attack_size = 1.0
+#var level = 1
+#var hp = 1
+#var speed = 100
+#var damage = 5
+#var knock_amount = 100
+#var attack_size = 1.0
 
 var target = Vector2.ZERO
 var angle = Vector2.ZERO
@@ -16,20 +16,20 @@ var angle = Vector2.ZERO
 func _ready():
 	angle = global_position.direction_to(target)
 	rotation = angle.angle() # + deg_to_rad(135)
-	match level:
-		1:
-			speed = 100
-			damage = 5
-			knock_amount = 100
-			attack_size = 1.0
+	#match level:
+		#1:
+			#speed = 100
+			#damage = 5
+			#knock_amount = 100
+			#attack_size = 1.0
 
 	
 # Projectile hits enemy
-func enemy_hit(charge = 1):
-	hp -= charge
-	if hp <= 0:
-		emit_signal("remove_from_array",self)
-		queue_free()
+#func enemy_hit(charge = 1):
+	#hp -= charge
+	#if hp <= 0:
+		#emit_signal("remove_from_array",self)
+		#queue_free()
 	
 # on_timer_timeout for if the projectile misses 
 	
