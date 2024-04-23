@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp8ciu2mk6po"]
+
+[ext_resource type="Script" path="res://Characters/Enemy/Drops/xp_drop.gd" id="1_hhkf1"]
+[ext_resource type="Texture2D" uid="uid://b63rmv62tpsle" path="res://Assets/Images/Star Stage 1.png" id="1_iqd2n"]
+[ext_resource type="AudioStream" uid="uid://cv4uhrfuxow6s" path="res://Assets/SoundEffects/collectgem.mp3" id="3_duuxb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c5eqf"]
+radius = 30.2655
+
+[node name="Area2D" type="Area2D" groups=["loot"]]
+scale = Vector2(0.3, 0.3)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_hhkf1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_iqd2n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c5eqf")
+
+[node name="snd_collected" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_duuxb")

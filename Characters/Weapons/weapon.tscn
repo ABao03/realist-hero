@@ -1,15 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlrfbgyjerxfi"]
+[gd_scene load_steps=6 format=3 uid="uid://dlrfbgyjerxfi"]
 
 [ext_resource type="Script" path="res://Characters/Weapons/weapon.gd" id="1_blaor"]
 [ext_resource type="Script" path="res://Characters/Weapons/sword.gd" id="2_lp00d"]
-[ext_resource type="Texture2D" uid="uid://cxcg8aco1xc1g" path="res://Images/ComfyUI_00346_.png" id="3_l822q"]
+[ext_resource type="Texture2D" uid="uid://cxcg8aco1xc1g" path="res://Assets/Images/ComfyUI_00346_.png" id="3_6wjy3"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Hitbox/hit_box.tscn" id="4_33jeo"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tkj5i"]
-size = Vector2(8, 42)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7smbw"]
-size = Vector2(12, 41)
+size = Vector2(18.3848, 70.7107)
 
 [node name="weapon" type="Marker2D"]
 light_mask = 7
@@ -18,6 +15,7 @@ script = ExtResource("1_blaor")
 
 [node name="Area2D" type="CharacterBody2D" parent="."]
 position = Vector2(25, 25)
+rotation = -0.785398
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("2_lp00d")
@@ -25,12 +23,8 @@ script = ExtResource("2_lp00d")
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
 position = Vector2(0, 6)
 scale = Vector2(0.05, 0.066)
-texture = ExtResource("3_l822q")
+texture = ExtResource("3_6wjy3")
 offset = Vector2(10, 300)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, 36)
-shape = SubResource("RectangleShape2D_tkj5i")
 
 [node name="HitBox" parent="Area2D" instance=ExtResource("4_33jeo")]
 position = Vector2(-25, -25)
@@ -39,7 +33,7 @@ collision_mask = 4
 damage = 10
 
 [node name="CollisionShape2D" parent="Area2D/HitBox" index="0"]
-position = Vector2(25, 61.5)
+position = Vector2(25.7071, 49.0416)
 shape = SubResource("RectangleShape2D_7smbw")
 disabled = true
 

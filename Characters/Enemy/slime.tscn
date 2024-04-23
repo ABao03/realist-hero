@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://bh4vi84vnnpf5"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/slime.gd" id="1_dtmf7"]
-[ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Images/slime-Sheet.png" id="2_li24n"]
+[ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/slime-Sheet.png" id="2_li24n"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Hitbox/hurt_box.tscn" id="3_moyka"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Hitbox/hit_box.tscn" id="4_d2e3y"]
 
@@ -89,6 +89,7 @@ libraries = {
 speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="slime/AnimationPlayer"]
+active = false
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")

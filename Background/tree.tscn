@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5kkwx0t5l4e1"]
 
-[ext_resource type="Texture2D" uid="uid://bd221ximxw77y" path="res://Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png" id="1_wgydk"]
+[ext_resource type="Texture2D" uid="uid://bd221ximxw77y" path="res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png" id="1_wgydk"]
 
 [node name="Tree" type="StaticBody2D"]
 collision_layer = 7

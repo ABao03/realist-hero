@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=3 uid="uid://db7retadphrg4"]
 
 [ext_resource type="Script" path="res://Menu/Menu.gd" id="1_fcwrb"]
-[ext_resource type="Texture2D" uid="uid://djul3pr8eqib6" path="res://Images/Menu Images/Forest for main menu.png" id="2_twy5p"]
+[ext_resource type="Texture2D" uid="uid://djul3pr8eqib6" path="res://Assets/Images/Menu Images/Forest for main menu.png" id="2_twy5p"]
 [ext_resource type="FontFile" uid="uid://csxxuldqoa2f" path="res://Fonts/CAMBRIA.TTC" id="3_j50ea"]
 [ext_resource type="AudioStream" uid="uid://crugsjevjtoqc" path="res://Music/the-white-lion-10379.mp3" id="4_1e7ud"]
 

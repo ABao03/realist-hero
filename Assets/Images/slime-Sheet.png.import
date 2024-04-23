@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxcg8aco1xc1g"
-path="res://.godot/imported/ComfyUI_00346_.png-565a8f6bb0c7775421f712132591b57e.ctex"
+uid="uid://ckrpdremyt5p3"
+path="res://.godot/imported/slime-Sheet.png-98425c6670a7df5ab9dd667687b09c2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/ComfyUI_00346_.png"
-dest_files=["res://.godot/imported/ComfyUI_00346_.png-565a8f6bb0c7775421f712132591b57e.ctex"]
+source_file="res://Assets/Images/slime-Sheet.png"
+dest_files=["res://.godot/imported/slime-Sheet.png-98425c6670a7df5ab9dd667687b09c2c.ctex"]
 
 [params]
 
