@@ -89,7 +89,6 @@ libraries = {
 speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="slime/AnimationPlayer"]
-active = false
 root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")

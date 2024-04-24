@@ -8,6 +8,7 @@ var hp = 100
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
+var held_items = []
 
 # Attacks
 var iceSpear = preload("res://Characters/Weapons/weapon.tscn") # This has to change if u change the filename
@@ -25,9 +26,6 @@ var icespear_level = 1
 # Enemy Related
 var enemy_close = []
 
-# Animation Status
-var isAttacking: bool = false
-
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer/AnimationTree
 @onready var sprite = $Sprite2D
@@ -35,16 +33,13 @@ var isAttacking: bool = false
 
 # GUI
 @onready var expBar = get_node('%ExperienceBar')
+@onready var healthBar = get_node('%HealthBar')
 @onready var lblLevel = get_node('%lbl_level')
 
 func _ready():
-	attack()
 	set_expbar(experience, calculate_experiencecap())
+	set_healthbar(hp, 100)
 	update_animation(starting)
-
-func handleInput():
-	if Input.is_action_just_pressed("mouse_leftclick"):
-		isAttacking = true
 
 func _physics_process(_delta):
 	var input_direction = Vector2(
@@ -58,7 +53,6 @@ func _physics_process(_delta):
 	move_and_slide()
 	new_state()
 	
-	handleInput()
 	update_animation(input_direction)
 	
 func update_animation(move_input: Vector2):
@@ -72,19 +66,6 @@ func update_animation(move_input: Vector2):
 		
 		animation["parameters/Idle/blend_position"] = move_input
 		animation["parameters/Walk/blend_position"] = move_input
-	
-	if isAttacking == true:
-		animation["parameters/conditions/attack"] = true
-		isAttacking = false
-		
-	else:
-		animation["parameters/conditions/attack"] = false
-
-func attack():
-	if icespear_level > 0:
-		iceSpearTimer.wait_time = icespear_attackspeed
-		if iceSpearTimer.is_stopped():
-			iceSpearTimer.start()
 		
 func new_state():
 	if velocity != Vector2.ZERO:
@@ -97,7 +78,7 @@ func _on_hurt_box_hurt(damage):
 	hp -= damage
 	if hp == 0:
 		get_tree().change_scene_to_file("res://Menu/death.tscn")
-	print(hp)
+	set_healthbar(hp-damage, 100)
 
 
 func _on_ice_spear_timer_timeout():
@@ -115,10 +96,19 @@ func _on_grab_area_area_entered(area):
 
 # Run the collect function inside of the xp drop.
 # Collect function plays the xp collected sound and provides the xp to the player.
+# If the player gets a chest, add one to the held items variable. 
+# These chests will be opened later (I think.)
 func _on_collect_area_area_entered(area):
 	if area.is_in_group("loot"):
-		var gem_exp = area.collect()
-		calculate_experience(gem_exp)
+		var collected_item = area.collect()
+		
+		# Update held items with new chest if chest
+		if area.isChest == true:
+			held_items.append(area.chestRarity)
+		
+		# Otherwise, add to EXP bar
+		else:
+			calculate_experience(collected_item)
 
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
@@ -135,8 +125,9 @@ func calculate_experience(gem_exp):
 		experience += collected_experience
 		collected_experience = 0
 	
-	set_expbar(experience, exp_required)	
+	set_expbar(experience, exp_required)
 	
+
 # Calculate experience needed to level up each time
 func calculate_experiencecap():
 	var exp_cap = experience_level
@@ -152,3 +143,7 @@ func calculate_experiencecap():
 func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
+
+func set_healthbar(set_value = 1, set_max_value = 100):
+	healthBar.value = set_value
+	healthBar.max_value = set_max_value

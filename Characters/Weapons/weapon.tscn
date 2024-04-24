@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlrfbgyjerxfi"]
+[gd_scene load_steps=16 format=3 uid="uid://dlrfbgyjerxfi"]
 
 [ext_resource type="Script" path="res://Characters/Weapons/weapon.gd" id="1_blaor"]
 [ext_resource type="Script" path="res://Characters/Weapons/sword.gd" id="2_lp00d"]
@@ -8,14 +8,117 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7smbw"]
 size = Vector2(18.3848, 70.7107)
 
+[sub_resource type="Animation" id="Animation_y6tlf"]
+resource_name = "attack"
+length = 0.2
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-2.35619, -0.959931, -1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_l0e0q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HitBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_efwqo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8vx3y"]
+_data = {
+"RESET": SubResource("Animation_efwqo"),
+"attack": SubResource("Animation_y6tlf"),
+"reset": SubResource("Animation_l0e0q")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ye46f"]
+animation = &"attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_14f1h"]
+animation = &"reset"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fsl3u"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hoxdo"]
+advance_mode = 2
+advance_condition = &"attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fdxfm"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"reset"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3r4su"]
+states/attack/node = SubResource("AnimationNodeAnimation_ye46f")
+states/attack/position = Vector2(492, 100)
+states/reset/node = SubResource("AnimationNodeAnimation_14f1h")
+states/reset/position = Vector2(334, 100)
+transitions = ["Start", "reset", SubResource("AnimationNodeStateMachineTransition_fsl3u"), "reset", "attack", SubResource("AnimationNodeStateMachineTransition_hoxdo"), "attack", "reset", SubResource("AnimationNodeStateMachineTransition_fdxfm")]
+
 [node name="weapon" type="Marker2D"]
 light_mask = 7
 visibility_layer = 7
 script = ExtResource("1_blaor")
 
 [node name="Area2D" type="CharacterBody2D" parent="."]
-position = Vector2(25, 25)
-rotation = -0.785398
+position = Vector2(40, 0)
+rotation = -1.5708
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("2_lp00d")
@@ -36,5 +139,20 @@ damage = 10
 position = Vector2(25.7071, 49.0416)
 shape = SubResource("RectangleShape2D_7smbw")
 disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+libraries = {
+"": SubResource("AnimationLibrary_8vx3y")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Area2D/AnimationPlayer"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_8vx3y")
+}
+tree_root = SubResource("AnimationNodeStateMachine_3r4su")
+anim_player = NodePath("..")
+parameters/conditions/attack = false
+parameters/conditions/reset = false
 
 [editable path="Area2D/HitBox"]

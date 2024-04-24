@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $Sprite2D
 
-var exp_gem = preload("res://Characters/Enemy/Drops/xp_drop.tscn")
+var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 
 # Moving slime around 
 func _physics_process(_delta):
@@ -23,7 +23,7 @@ func _physics_process(_delta):
 
 # Slime is killed by damage
 func death():
-	var new_gem = exp_gem.instantiate()
+	var new_gem = loot.instantiate()
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
