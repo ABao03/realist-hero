@@ -16,7 +16,9 @@ func _on_resume_pressed():
 	game_manager.game_paused = false
 
 func _on_exit_to_menu_pressed():
+	game_manager.game_paused = false
 	get_tree().change_scene_to_file("res://Menu/menu.tscn")	
+
 
 func _on_exit_to_desktop_pressed():
 	get_tree().quit()
