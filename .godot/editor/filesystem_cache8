@@ -1,13 +1,11 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1714098306
-door.gd::GDScript::-1::1714094546::0::1::::<>Area2D<>::
+::res://::1714151975
 export_presets.cfg::TextFile::-1::1714002924::0::1::::<><>::
-gamemanager.gd::GDScript::-1::1714098283::0::1::::<>Node<>::
-gamemanager.tscn::PackedScene::5529784681886420712::1714098162::0::1::::<><>::res://gamemanager.gd<>uid://5kkwx0t5l4e1::::res://Background/tree.tscn<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://0nqqxacxuayc::::res://Inventory/inventory.tscn<>uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd<>uid://bo27w10kf21vu::::res://pause_menu.tscn
+gamemanager.gd::GDScript::-1::1714098742::0::1::::gamemanager<>Node<>::
+gamemanager.tscn::PackedScene::5529784681886420712::1714151909::0::1::::<><>::res://gamemanager.gd<>uid://5kkwx0t5l4e1::::res://Background/tree.tscn<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://0nqqxacxuayc::::res://Inventory/inventory.tscn<>uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd<>uid://bo27w10kf21vu::::res://Menu/Pause menu/pause_menu.tscn
 game_over.gd::GDScript::-1::1714002924::0::1::::<>Node2D<>::
-game_over.tscn::PackedScene::1554421911217381554::1714098162::0::1::::<><>::
-hubworld.tscn::PackedScene::4016415103628302259::1714098163::0::1::::<><>::uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>res://door.gd
-pause_menu.tscn::PackedScene::3426786329908945006::1714098311::0::1::::<><>::res://Characters/pause_menu.gd
+game_over.tscn::PackedScene::1554421911217381554::1714151909::0::1::::<><>::
+hubworld.tscn::PackedScene::4016415103628302259::1714151974::0::1::::<><>::uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>res://Hub World/door1.gd<>res://Hub World/Door2.gd
 restart_button.gd::GDScript::-1::1714002924::0::1::::<>Button<>::
 spawn_info.gd::GDScript::-1::1714002924::0::1::::Spawn_info<>Resource<>::
 ::res://Assets/::1714002970
@@ -37,17 +35,16 @@ x-button.png::CompressedTexture2D::1991411250533729648::1714002924::1714002970::
 Forest for main menu.png::CompressedTexture2D::7832967903669838081::1714002924::1714002970::1::::<><>::
 ::res://Assets/SoundEffects/::1714002970
 collectgem.mp3::AudioStreamMP3::6307901780626274728::1714002924::1714002970::1::::<><>::
-::res://Background/::1714098162
-tree.tscn::PackedScene::2126956791636134510::1714098162::0::1::::<><>::uid://bd221ximxw77y::::res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png
-::res://Characters/::1714098305
-pause_menu.gd::GDScript::-1::1714098305::0::1::::<>Control<>::
-player_adolf.gd::GDScript::-1::1714098283::0::1::::player_adolf<>CharacterBody2D<>::
-player_adolf.tscn::PackedScene::4542568672243075346::1714098305::0::1::::<><>::res://Characters/player_adolf.gd<>uid://csjy17y2uompe::::res://Assets/Images/PlayerSpriteSheet.png<>uid://b8hdsbgcfrf4k::::res://Hitbox/hurt_box.tscn<>uid://dlrfbgyjerxfi::::res://Characters/Weapons/weapon.tscn<>uid://uor1uregugxf::::res://Assets/Images/exp_background.png<>uid://cdcys2h3m3tnr::::res://Assets/Images/exp_progress.png<>uid://d18ev83q6aql5::::res://Assets/Images/hp_background.png<>uid://da6lw3e74eyy0::::res://Assets/Images/hp_progress.png
-::res://Characters/Enemy/::1714098163
+::res://Background/::1714151909
+tree.tscn::PackedScene::2126956791636134510::1714151909::0::1::::<><>::uid://bd221ximxw77y::::res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png
+::res://Characters/::1714151909
+player_adolf.gd::GDScript::-1::1714098340::0::1::::<>CharacterBody2D<>::
+player_adolf.tscn::PackedScene::4542568672243075346::1714151909::0::1::::<><>::res://Characters/player_adolf.gd<>uid://csjy17y2uompe::::res://Assets/Images/PlayerSpriteSheet.png<>uid://b8hdsbgcfrf4k::::res://Hitbox/hurt_box.tscn<>uid://dlrfbgyjerxfi::::res://Characters/Weapons/weapon.tscn<>uid://uor1uregugxf::::res://Assets/Images/exp_background.png<>uid://cdcys2h3m3tnr::::res://Assets/Images/exp_progress.png<>uid://d18ev83q6aql5::::res://Assets/Images/hp_background.png<>uid://da6lw3e74eyy0::::res://Assets/Images/hp_progress.png
+::res://Characters/Enemy/::1714151909
 EnemySpawner.gd::GDScript::-1::1714002924::0::1::::<>Node2D<>::
 enemy_spawner.tscn::PackedScene::3746545622702081094::1714002924::0::1::::<><>::res://Characters/Enemy/EnemySpawner.gd
 slime.gd::GDScript::-1::1714002924::0::1::::<>CharacterBody2D<>::
-slime.tscn::PackedScene::2938900666268323740::1714098163::0::1::::<><>::res://Characters/Enemy/slime.gd<>uid://ckrpdremyt5p3::::res://Assets/Images/slime-Sheet.png<>uid://b8hdsbgcfrf4k::::res://Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Hitbox/hit_box.tscn
+slime.tscn::PackedScene::2938900666268323740::1714151909::0::1::::<><>::res://Characters/Enemy/slime.gd<>uid://ckrpdremyt5p3::::res://Assets/Images/slime-Sheet.png<>uid://b8hdsbgcfrf4k::::res://Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Hitbox/hit_box.tscn
 ::res://Characters/Enemy/Drops/::1714002924
 loot_drop.gd::GDScript::-1::1714002924::0::1::::<>Area2D<>::
 loot_drop.tscn::PackedScene::173351038262175864::1714002924::0::1::::<><>::res://Characters/Enemy/Drops/loot_drop.gd<>uid://b63rmv62tpsle::::res://Assets/Images/Star Stage 1.png<>uid://cv4uhrfuxow6s::::res://Assets/SoundEffects/collectgem.mp3
@@ -69,18 +66,24 @@ hit_box.gd::GDScript::-1::1714002924::0::1::::<>Area2D<>::
 hit_box.tscn::PackedScene::7845138849173671698::1714002924::0::1::::<><>::res://Hitbox/hit_box.gd
 hurt_box.gd::GDScript::-1::1714002924::0::1::::<>Area2D<>::
 hurt_box.tscn::PackedScene::4717317525185579792::1714002924::0::1::::<><>::res://Hitbox/hurt_box.gd
-::res://Inventory/::1714098162
+::res://Hub World/::1714151974
+door1.gd::GDScript::-1::1714099051::0::1::::<>Area2D<>::
+Door2.gd::GDScript::-1::1714100470::0::1::::<>Area2D<>::
+::res://Inventory/::1714151908
 inventory.gd::GDScript::-1::1714002924::0::1::::<>Control<>::
-inventory.tscn::PackedScene::1782559254499775234::1714098162::0::1::::<><>::res://Inventory/inventory.gd
+inventory.tscn::PackedScene::1782559254499775234::1714151908::0::1::::<><>::res://Inventory/inventory.gd
 item.gd::GDScript::-1::1714002924::0::1::::<>Node2D<>::
 item.tscn::PackedScene::5220632423001930039::1714002924::0::1::::<><>::res://Inventory/item.gd
 slot.gd::GDScript::-1::1714002924::0::1::::<>TextureRect<>::
 slot.tscn::PackedScene::3976353318320087248::1714002924::0::1::::<><>::uid://c0k38wcn2trlw::::res://Assets/slot1.png<>res://Inventory/slot.gd
-::res://Menu/::1714098162
+::res://Menu/::1714151909
 Death.gd::GDScript::-1::1714002924::0::1::::<>Control<>::
-death.tscn::PackedScene::3832934885968145673::1714002924::0::1::::<><>::res://Menu/Death.gd<>uid://ct741cugcv00f::::res://Assets/YOU_DIED.webp
+death.tscn::PackedScene::3832934885968145673::1714151909::0::1::::<><>::res://Menu/Death.gd<>uid://ct741cugcv00f::::res://Assets/YOU_DIED.webp
 Menu.gd::GDScript::-1::1714092311::0::1::::<>Control<>::
-menu.tscn::PackedScene::7296551313000196917::1714098162::0::1::::<><>::res://Menu/Menu.gd<>uid://djul3pr8eqib6::::res://Assets/Images/Menu Images/Forest for main menu.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3
+menu.tscn::PackedScene::7296551313000196917::1714151908::0::1::::<><>::res://Menu/Menu.gd<>uid://djul3pr8eqib6::::res://Assets/Images/Menu Images/Forest for main menu.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3
+::res://Menu/Pause menu/::1714151909
+pause_menu.gd::GDScript::-1::1714098706::0::1::::<>Control<>::
+pause_menu.tscn::PackedScene::3426786329908945006::1714151909::0::1::::<><>::res://Menu/Pause menu/pause_menu.gd
 ::res://Menu/Settings/::1714002924
 Settings.gd::GDScript::-1::1714002924::0::1::::<>Control<>::
 Settings.tscn::PackedScene::1449213619529447454::1714002924::0::1::::<><>::res://Menu/Settings/Settings.gd
