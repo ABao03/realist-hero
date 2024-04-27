@@ -1,5 +1,4 @@
 # https://www.youtube.com/watch?v=Xf2RduncoNU
-
 extends CharacterBody2D
 
 # Stats
@@ -9,6 +8,12 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 var held_items = []
+
+#Represents paused state
+var paused
+
+#UI nodes
+@onready var pause_screen = $GUILayer/Pausescreen
 
 # Attacks
 var iceSpear = preload("res://Characters/Weapons/weapon.tscn") # This has to change if u change the filename
@@ -34,12 +39,18 @@ var enemy_close = []
 # GUI
 @onready var expBar = get_node('%ExperienceBar')
 @onready var healthBar = get_node('%HealthBar')
-@onready var lblLevel = get_node('%lbl_level')
+@onready var lblLevel = get_node('%lbl_level')			
+var game_pause
+var pause_visibility
 
 func _ready():
 	set_expbar(experience, calculate_experiencecap())
 	set_healthbar(hp, 100)
 	update_animation(starting)
+	game_pause = false
+	pause_visibility = false
+	pause_screen.visible = pause_visibility
+	
 
 func _physics_process(_delta):
 	var input_direction = Vector2(
@@ -147,3 +158,61 @@ func set_expbar(set_value = 1, set_max_value = 100):
 func set_healthbar(set_value = 1, set_max_value = 100):
 	healthBar.value = set_value
 	healthBar.max_value = set_max_value
+
+
+func _input(event: InputEvent):
+	#show pause menu
+	if (event.is_action_pressed("esc")):
+
+		get_tree().paused = !game_pause
+		pause_screen.visible = !pause_visibility
+		
+		#
+		#if pause_screen.visible == false:
+			#game_paused = true
+			#print("bruh")
+			#get_tree().paused = true
+			#pause_screen.visible = true	
+			#
+		#elif pause_screen.visible == true:
+			#game_paused = false
+			#print("hi")
+			#get_tree().paused = false
+			#pause_screen.visible = false
+			
+			
+			
+			#paused = true
+			#pause game     s
+			#get_tree().paused = true
+			#print("yo")
+			#show pause screen popup
+			#pause_screen.visible = true
+			#stops movement processing 
+			#set_physics_process(false)
+			#set pauses state to be true
+			#
+		#elif pause_screen.visible == true:
+			#paused = false
+			#get_tree().paused = false
+			#print("hi")
+			#pause_screen.visible = false
+			#set_physics_process(true)
+			
+#Pause menu functions
+
+func _on_resume_pressed():
+	get_tree().paused = false
+	pause_screen.visible = false
+
+func _on_exit_to_menu_pressed():
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://Menu/menu.tscn")	
+
+func _on_exit_to_desktop_pressed():
+	get_tree().quit()
+
+
+
+
+
