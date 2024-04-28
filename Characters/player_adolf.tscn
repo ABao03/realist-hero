@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=39 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://csjy17y2uompe" path="res://Assets/Images/PlayerSpriteSheet.png" id="2_s4jyb"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cdcys2h3m3tnr" path="res://Assets/Images/exp_progress.png" id="6_k3mh8"]
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
+[ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
 size = Vector2(4.54665, 17.8955)
@@ -386,9 +387,6 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
 root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_fjfia")
-}
 tree_root = SubResource("AnimationNodeStateMachine_havxf")
 anim_player = NodePath("..")
 parameters/conditions/idle = false
@@ -423,6 +421,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_0rg43")
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
+process_mode = 3
 layer = 0
 
 [node name="GUI" type="Control" parent="GUILayer"]
@@ -462,7 +461,8 @@ texture_under = ExtResource("7_f0adl")
 texture_progress = ExtResource("8_2a1gi")
 
 [node name="Pausescreen" type="CanvasLayer" parent="GUILayer"]
-process_mode = 2
+process_mode = 1
+script = ExtResource("9_aacrx")
 
 [node name="Menu" type="ColorRect" parent="GUILayer/Pausescreen"]
 process_mode = 2
@@ -510,7 +510,10 @@ text = "Exit to desktop"
 [connection signal="hidden" from="GUILayer/Pausescreen/Menu" to="." method="_on_menu_hidden"]
 [connection signal="ready" from="GUILayer/Pausescreen/Menu" to="." method="_on_menu_ready"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="GUILayer/Pausescreen/Menu/Resume" to="GUILayer/Pausescreen" method="_on_resume_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Exit to menu" to="." method="_on_exit_to_menu_pressed"]
+[connection signal="pressed" from="GUILayer/Pausescreen/Menu/Exit to menu" to="GUILayer/Pausescreen" method="_on_exit_to_menu_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Exit to desktop" to="." method="_on_exit_to_desktop_pressed"]
+[connection signal="pressed" from="GUILayer/Pausescreen/Menu/Exit to desktop" to="GUILayer/Pausescreen" method="_on_exit_to_desktop_pressed"]
 
 [editable path="HurtBox"]
