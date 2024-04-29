@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=40 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://csjy17y2uompe" path="res://Assets/Images/PlayerSpriteSheet.png" id="2_s4jyb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
 [ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
+[ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
 size = Vector2(4.54665, 17.8955)
@@ -387,6 +388,9 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
 root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_fjfia")
+}
 tree_root = SubResource("AnimationNodeStateMachine_havxf")
 anim_player = NodePath("..")
 parameters/conditions/idle = false
@@ -487,8 +491,10 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -15.5
-offset_bottom = 15.5
+offset_left = -1.0
+offset_top = -105.0
+offset_right = -1.0
+offset_bottom = -74.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Exit to Menu"
@@ -503,6 +509,53 @@ offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Exit to desktop"
+
+[node name="Label" type="Label" parent="GUILayer/Pausescreen/Menu"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 105.0
+offset_right = 181.0
+offset_bottom = 128.0
+text = "Master Volume
+"
+
+[node name="Master Volume2" parent="GUILayer/Pausescreen/Menu" instance=ExtResource("10_mcrcv")]
+offset_left = 9.0
+offset_top = 132.0
+offset_right = 240.0
+offset_bottom = 148.0
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="GUILayer/Pausescreen/Menu"]
+offset_left = 69.0
+offset_top = 155.0
+offset_right = 178.0
+offset_bottom = 178.0
+text = "Music Volume
+"
+
+[node name="Music_Volume3" parent="GUILayer/Pausescreen/Menu" instance=ExtResource("10_mcrcv")]
+offset_left = 8.0
+offset_top = 179.0
+offset_right = 239.0
+offset_bottom = 195.0
+bus_name = "music"
+
+[node name="Label3" type="Label" parent="GUILayer/Pausescreen/Menu"]
+offset_left = 82.0
+offset_top = 206.0
+offset_right = 169.0
+offset_bottom = 229.0
+text = "Sfx Volume
+"
+
+[node name="sfx_volume" parent="GUILayer/Pausescreen/Menu" instance=ExtResource("10_mcrcv")]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 231.0
+offset_right = 239.0
+offset_bottom = 247.0
+bus_name = "sfx"
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]

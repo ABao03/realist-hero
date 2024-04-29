@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ck1w0me5cr3tk"]
+[gd_scene load_steps=12 format=3 uid="uid://ck1w0me5cr3tk"]
 
 [ext_resource type="Script" path="res://gamemanager.gd" id="1_531g6"]
 [ext_resource type="PackedScene" uid="uid://5kkwx0t5l4e1" path="res://Background/tree.tscn" id="2_arrib"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="6_b1lhj"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="7_n3sif"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="8_uytoy"]
-[ext_resource type="PackedScene" uid="uid://bo27w10kf21vu" path="res://Menu/Pause menu/pause_menu.tscn" id="9_5houq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtnxh"]
 texture = ExtResource("5_d4jm0")
@@ -284,9 +283,5 @@ spawns = Array[ExtResource("8_uytoy")]([SubResource("Resource_g8xax")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 process_mode = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Pause Menu" parent="CanvasLayer" instance=ExtResource("9_5houq")]
 
 [editable path="Tree"]

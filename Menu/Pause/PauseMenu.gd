@@ -1,14 +1,12 @@
 extends CanvasLayer
 
 var game_pause
-var pause_visibility
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
 	game_pause = false
-	pause_visibility = false
 	hide()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

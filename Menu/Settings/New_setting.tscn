@@ -1,0 +1,91 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpjdsn3thheks"]
+
+[ext_resource type="Script" path="res://Menu/Settings/New_setting.gd" id="1_84u78"]
+[ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="2_dkeoh"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_84u78")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 50.0
+offset_right = 761.0
+offset_bottom = 560.0
+color = Color(0.211765, 0.337255, 0.333333, 1)
+
+[node name="Return" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.5
+offset_top = -70.0
+offset_right = 74.5
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Return"
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 43.0
+offset_right = 267.0
+offset_bottom = 66.0
+text = "Master Volume"
+
+[node name="Volume_Slider" parent="ColorRect" instance=ExtResource("2_dkeoh")]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 74.0
+offset_right = 377.0
+offset_bottom = 90.0
+bus_name = "Master"
+
+[node name="Label2" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 179.0
+offset_right = 268.0
+offset_bottom = 202.0
+text = "Music Volume"
+
+[node name="Volume_Slider2" parent="ColorRect" instance=ExtResource("2_dkeoh")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.362
+anchor_top = 0.201
+anchor_right = 0.362
+anchor_bottom = 0.201
+offset_left = -104.61
+offset_top = 103.49
+offset_right = 227.39
+offset_bottom = 119.49
+bus_name = "music"
+
+[node name="Label3" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 328.0
+offset_right = 253.0
+offset_bottom = 351.0
+text = "Sfx Volume"
+
+[node name="Volume_Slider3" parent="ColorRect" instance=ExtResource("2_dkeoh")]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 361.0
+offset_right = 378.0
+offset_bottom = 377.0
+bus_name = "sfx"
+
+[connection signal="pressed" from="ColorRect/Return" to="." method="_on_return_pressed"]
