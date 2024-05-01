@@ -22,5 +22,4 @@ shape = SubResource("CircleShape2D_c5eqf")
 
 [node name="snd_collected" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_w0322")
-bus = &"sfx"
 area_mask = 7

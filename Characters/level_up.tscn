@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhcc2pwqkk8lf"]
+
+[ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="1_2oscl"]
+
+[node name="LevelUp" type="Panel"]
+process_mode = 2
+offset_left = 1300.0
+offset_top = 112.0
+offset_right = 1500.0
+offset_bottom = 362.0
+scale = Vector2(1.7, 1.7)
+
+[node name="lbl_levelUp" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 50.0
+text = "Level Up! "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeOptions" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 190.0
+offset_bottom = 100.0
+
+[node name="snd_levelup" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_2oscl")
+volume_db = -10.0

@@ -18,7 +18,7 @@ func load_data(path : String) -> void:
 	item_data_file.close()
 	#print(item_data)	#check value
 	
-#process the json and put the grid information into accessable array format for iterating
+#process the json and put the grid information into accessible array format for iterating
 func set_grid_data() -> void:
 	for item in item_data.keys():
 		var temp_grid_array := []
@@ -27,3 +27,6 @@ func set_grid_data() -> void:
 		item_grid_data[item] = temp_grid_array
 	#print(item_grid_data)	#check values
 	
+
+
+

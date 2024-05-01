@@ -18,10 +18,6 @@ var paused
 # Attacks
 var iceSpear = preload("res://Characters/Weapons/weapon.tscn") # This has to change if u change the filename
 
-# AttackNodes
-@onready var iceSpearTimer = get_node("%IceSpearTimer")
-@onready var iceSpearAttackTimer = get_node("%IceSpearAttackTimer")
-
 # IceSpear (change later)
 var icespear_ammo = 0
 var icespear_baseammo = 1
@@ -39,10 +35,15 @@ var enemy_close = []
 # GUI
 @onready var expBar = get_node('%ExperienceBar')
 @onready var healthBar = get_node('%HealthBar')
-@onready var lblLevel = get_node('%lbl_level')
+@onready var lblLevel = get_node('%lbl_levelUp')
+@onready var levelPanel = get_node('%LevelUp')
+@onready var upgradeOptions = get_node('%UpgradeOptions')
+@onready var itemOptions = preload("res://Characters/item_option.tscn")
+@onready var sndLevelUp = get_node('%snd_levelUp')
 
 
 func _ready():
+	#upgrade_character()
 	set_expbar(experience, calculate_experiencecap())
 	set_healthbar(hp, 100)
 	update_animation(starting)
@@ -126,14 +127,12 @@ func calculate_experience(gem_exp):
 		lblLevel.text = str("Level: ", experience_level)
 		experience = 0
 		exp_required = calculate_experiencecap()
-		calculate_experience(0)
-		# levelup()
+		levelup()
 	else:
 		experience += collected_experience
 		collected_experience = 0
 	
 	set_expbar(experience, exp_required)
-	
 
 # Calculate experience needed to level up each time
 func calculate_experiencecap():
@@ -150,48 +149,35 @@ func calculate_experiencecap():
 func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
+	
+func levelup():
+	sndLevelUp.play()
+	lblLevel.text = str("Level: ",experience_level)
+	var tween = levelPanel.create_tween()
+	tween.tween_property(levelPanel,"position",Vector2(442,150),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.play()
+	levelPanel.visible = true
+	var options = 0
+	var optionsmax = 4
+	while options < optionsmax:
+		var option_choice = itemOptions.instantiate()
+		#option_choice.item = get_random_item()
+		upgradeOptions.add_child(option_choice)
+		options += 1
+	get_tree().paused = true
 
 func set_healthbar(set_value = 1, set_max_value = 100):
 	healthBar.value = set_value
 	healthBar.max_value = set_max_value
 
-
-
-		
-		#
-		#if pause_screen.visible == false:
-			#game_paused = true
-			#print("bruh")
-			#get_tree().paused = true
-			#pause_screen.visible = true	
-			#
-		#elif pause_screen.visible == true:
-			#game_paused = false
-			#print("hi")
-			#get_tree().paused = false
-			#pause_screen.visible = false
-			
-			
-			
-			#paused = true
-			#pause game     s
-			#get_tree().paused = true
-			#print("yo")
-			#show pause screen popup
-			#pause_screen.visible = true
-			#stops movement processing 
-			#set_physics_process(false)
-			#set pauses state to be true
-			#
-		#elif pause_screen.visible == true:
-			#paused = false
-			#get_tree().paused = false
-			#print("hi")
-			#pause_screen.visible = false
-			#set_physics_process(true)
-			
-#Pause menu functions
-
+func upgrade_character(upgrade):
+	var option_children = upgradeOptions.get_children()
+	for i in option_children:
+		i.queue_free()
+	levelPanel.visible = false
+	levelPanel.position = Vector2(800, 50)
+	get_tree().paused = false
+	calculate_experience(0)
 
 
 
