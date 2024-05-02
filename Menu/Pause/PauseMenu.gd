@@ -33,4 +33,28 @@ func _on_exit_to_desktop_pressed():
 	get_tree().quit()
 
 
- 
+
+
+#func _on_load_pressed(): WIP too buggy
+	#var loaded_scene = load("res://save/save.tscn")
+	#if loaded_scene:
+		#print("Loaded resource type: ", loaded_scene.get_class())
+		#if loaded_scene is PackedScene:
+			#var instance = loaded_scene.instantiate()
+			#get_tree().root.add_child(instance)
+			#get_tree().current_scene = instance
+		#else:
+			#print("Loaded resource is not a PackedScene!")
+	#else:
+		#print("Failed to load the scene. Make sure the file exists and the path is correct.")
+#
+#
+#
+#func _on_save_pressed():
+	#var scene = get_tree().player_adolf
+	#var packed_scene = PackedScene.new()
+	#packed_scene.pack(scene)
+	#var save_path = "res://saved_scene.tscn"
+	#var result = ResourceSaver.save(packed_scene, save_path)
+
+

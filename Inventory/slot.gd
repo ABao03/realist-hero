@@ -14,8 +14,7 @@ var item_stored = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	pass
 func set_color(a_state = States.DEFAULT) -> void :
 	match a_state:
 		States.DEFAULT:

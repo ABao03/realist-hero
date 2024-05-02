@@ -15,7 +15,7 @@ var icon_anchor : Vector2
 var is_open = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(8):
+	for i in range(80):
 		create_slot()
 	visible = false
 	
@@ -91,7 +91,6 @@ func check_slot_availability(a_Slot):
 		if grid_array[grid_to_check].state == grid_array[grid_to_check].States.TAKEN:
 			can_place = false
 			return
-		
 	can_place = true
 	
 func set_grids(a_Slot):
@@ -134,7 +133,7 @@ func place_item():
 	####
 	var calculated_grid_id = current_slot.slot_ID + icon_anchor.x * col_count + icon_anchor.y
 	item_held._snap_to(grid_array[calculated_grid_id].global_position)
-	print(calculated_grid_id)
+	#print(calculated_grid_id)
 	item_held.grid_anchor = current_slot
 	for grid in item_held.item_grids:
 		var grid_to_check = current_slot.slot_ID + grid[0] + grid[1] * col_count
@@ -145,7 +144,8 @@ func place_item():
 	
 	item_held = null
 	clear_grid()
-	
+
+
 func pick_item():
 	if not current_slot or not current_slot.item_stored: 
 		return

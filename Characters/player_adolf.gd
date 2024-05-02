@@ -1,20 +1,31 @@
 # https://www.youtube.com/watch?v=Xf2RduncoNU
 extends CharacterBody2D
 
-# Stats
-var speed : float = 100
+# Stats in data/playerdata to be done
+var speed : float = 200
 var hp = 100
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
 var held_items = []
+var x = true
+var old
 
 #Represents paused state
 var paused
 
 #UI nodes
-
-
+#dumb lazy code i will rewrite later
+func _process(delta):
+	if Input.is_action_just_pressed("i"):
+		if x:
+			x = false
+			old = speed
+			speed = 0
+		else:
+			x = true
+			speed = old
+	
 # Attacks
 var iceSpear = preload("res://Characters/Weapons/weapon.tscn") # This has to change if u change the filename
 
