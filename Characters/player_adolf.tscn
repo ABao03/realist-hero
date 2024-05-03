@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
 [ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
 [ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="9_vrbu8"]
-[ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
+[ext_resource type="PackedScene" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
@@ -390,6 +390,9 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
 root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_fjfia")
+}
 tree_root = SubResource("AnimationNodeStateMachine_havxf")
 anim_player = NodePath("..")
 parameters/conditions/idle = false

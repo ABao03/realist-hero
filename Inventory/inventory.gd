@@ -73,7 +73,7 @@ func _on_slot_mouse_exited(a_Slot):
 func _on_button_spawn_pressed():
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
-	new_item.load_item(randi_range(1,4))    #randomize this for different items to spawn
+	new_item.load_item(randi_range(1,5))    #randomize this for different items to spawn
 	new_item.selected = true
 	item_held = new_item
 	
@@ -141,6 +141,7 @@ func place_item():
 		grid_array[grid_to_check].item_stored = item_held
 	
 	#put item into a data storage here
+	print(item_held)
 	
 	item_held = null
 	clear_grid()
