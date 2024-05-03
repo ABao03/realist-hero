@@ -8,6 +8,7 @@ extends Control
 @onready var grid_container2 = $Background2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
 
 var grid_array := []
+var current_items_held := {}
 var item_held = null
 var current_slot = null
 var can_place := false
@@ -140,8 +141,11 @@ func place_item():
 		grid_array[grid_to_check].state = grid_array[grid_to_check].States.TAKEN 
 		grid_array[grid_to_check].item_stored = item_held
 	
-	#put item into a data storage here
-	print(item_held)
+	# put item into a data storage here
+	if item_held.item_name in current_items_held:
+		current_items_held[item_held.item_name] += 1
+	else:
+		current_items_held[item_held.item_name] = 1
 	
 	item_held = null
 	clear_grid()

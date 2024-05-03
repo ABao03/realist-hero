@@ -8,32 +8,16 @@ var experience = 0
 var experience_level = 1
 var collected_experience = 0
 var held_items = []
-var x = true
-var old
 
 #Represents paused state
 var paused
+var inventoryOpen = false
 
-#UI nodes
-#dumb lazy code i will rewrite later
-func _process(delta):
-	if Input.is_action_just_pressed("i"):
-		if x:
-			x = false
-			old = speed
-			speed = 0
-		else:
-			x = true
-			speed = old
-	
 # Attacks
 var iceSpear = preload("res://Characters/Weapons/weapon.tscn") # This has to change if u change the filename
 
-# IceSpear (change later)
-var icespear_ammo = 0
-var icespear_baseammo = 1
-var icespear_attackspeed = 1.5
-var icespear_level = 1
+# Upgrades
+var upgrade_options = []
 
 # Enemy Related
 var enemy_close = []
@@ -58,21 +42,23 @@ func _ready():
 	set_expbar(experience, calculate_experiencecap())
 	set_healthbar(hp, 100)
 	update_animation(starting)
-	
+	get_random_item()
+	print(upgrade_options)
 
 func _physics_process(_delta):
-	var input_direction = Vector2(
-		Input.get_action_strength('right') - Input.get_action_strength('left'),
-		Input.get_action_strength('down') - Input.get_action_strength('up')
-	)
-	
-	velocity = velocity.normalized()
-	velocity = input_direction * speed
+	if inventoryOpen == false:
+		var input_direction = Vector2(
+			Input.get_action_strength('right') - Input.get_action_strength('left'),
+			Input.get_action_strength('down') - Input.get_action_strength('up')
+		)
 		
-	move_and_slide()
-	new_state()
-	
-	update_animation(input_direction)
+		velocity = velocity.normalized()
+		velocity = input_direction * speed
+			
+		move_and_slide()
+		new_state()
+		
+		update_animation(input_direction)
 	
 func update_animation(move_input: Vector2):
 	if move_input == Vector2.ZERO:
@@ -172,7 +158,7 @@ func levelup():
 	var optionsmax = 4
 	while options < optionsmax:
 		var option_choice = itemOptions.instantiate()
-		#option_choice.item = get_random_item()
+		option_choice.item = get_random_item()
 		upgradeOptions.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
@@ -189,8 +175,14 @@ func upgrade_character(upgrade):
 	levelPanel.position = Vector2(800, 50)
 	get_tree().paused = false
 	calculate_experience(0)
+	
+func get_random_item():
+	var randomItem = DataHandler.item_data[str(randi_range(1,5))]
+	upgrade_options.append(randomItem)
+	return randomItem
 
+func _on_gamemanager_inventory_open():
+	inventoryOpen = true
 
-
-
-
+func _on_gamemanager_inventory_closed():
+	inventoryOpen = false
