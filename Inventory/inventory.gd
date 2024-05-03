@@ -142,7 +142,7 @@ func place_item():
 	
 	#put item into a data storage here
 	print(item_held)
-	
+	8
 	item_held = null
 	clear_grid()
 

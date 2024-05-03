@@ -9,7 +9,7 @@ var experience_level = 1
 var collected_experience = 0
 var held_items = []
 var x = true
-var old
+var old = speed
 
 #Represents paused state
 var paused
@@ -25,7 +25,11 @@ func _process(delta):
 		else:
 			x = true
 			speed = old
-	
+	if Input.is_action_just_pressed("recall"): # add an animation here to make recall look nice
+		speed = 0
+		await get_tree().create_timer(5.0).timeout
+		get_tree().change_scene_to_file("res://Hub World/hubworld.tscn")
+		speed = old
 # Attacks
 var iceSpear = preload("res://Characters/Weapons/weapon.tscn") # This has to change if u change the filename
 
@@ -189,6 +193,7 @@ func upgrade_character(upgrade):
 	levelPanel.position = Vector2(800, 50)
 	get_tree().paused = false
 	calculate_experience(0)
+
 
 
 
