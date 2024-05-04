@@ -7,6 +7,9 @@ extends Node2D
 
 @export var time = 0
 
+# Pause
+var inventoryOpen = false
+
 #signal changetime(time)
 
 #func _ready():
@@ -61,3 +64,13 @@ func get_random_position():
 	var x_spawn = randf_range(spawn_pos1.x, spawn_pos2.x)
 	var y_spawn = randf_range(spawn_pos1.y,spawn_pos2.y)
 	return Vector2(x_spawn,y_spawn)
+
+
+func _on_gamemanager_inventory_open():
+	inventoryOpen = true
+	# come back to this later
+
+
+func _on_gamemanager_inventory_closed():
+	inventoryOpen = false
+	# come back to this later
