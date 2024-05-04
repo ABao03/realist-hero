@@ -14,9 +14,10 @@ func _ready():
 	connect("selected_upgrade",Callable(player,"upgrade_character"))
 	#if item == null:
 		#item = "food"
-	lblName.text = item["Name"]
-	lblDescription.text = item["Info"]
-	itemIcon.texture = load("res://Assets/" + item["Name"] + ".png")
+	#lblName.text = UpgradeDb.UPGRADES[item]["displayname"]
+	#lblDescription.text = UpgradeDb.UPGRADES[item]["details"]
+	#lblLevel.text = UpgradeDb.UPGRADES[item]["level"]
+	#itemIcon.texture = load(UpgradeDb.UPGRADES[item]["icon"])
 	
 func _input(event):
 	if event.is_action("mouse_leftclick"):
@@ -24,6 +25,7 @@ func _input(event):
 			emit_signal("selected_upgrade",item)
 
 func _on_mouse_entered():
+	print("ok")
 	mouse_over = true
 
 func _on_mouse_exited():

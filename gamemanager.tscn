@@ -1,5 +1,4 @@
 [gd_scene load_steps=13 format=3 uid="uid://ck1w0me5cr3tk"]
-[gd_scene load_steps=12 format=3 uid="uid://ck1w0me5cr3tk"]
 
 [ext_resource type="Script" path="res://gamemanager.gd" id="1_531g6"]
 [ext_resource type="PackedScene" uid="uid://5kkwx0t5l4e1" path="res://Background/tree.tscn" id="2_arrib"]
@@ -8,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="6_b1lhj"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="7_n3sif"]
 [ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/skeleton.tscn" id="8_gffs7"]
-[ext_resource type="PackedScene" uid="uid://cp8ciu2mk6po" path="res://Characters/Enemy/Drops/loot_drop.tscn" id="8_4nyav"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="8_uytoy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtnxh"]
@@ -286,14 +284,5 @@ spawns = Array[ExtResource("8_uytoy")]([SubResource("Resource_g8xax"), SubResour
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 process_mode = 1
-
-[node name="Area2D" parent="." instance=ExtResource("8_4nyav")]
-position = Vector2(1051, 424)
-experience = 10
-
-[connection signal="inventory_closed" from="." to="PlayerAdolf" method="_on_gamemanager_inventory_closed"]
-[connection signal="inventory_closed" from="." to="EnemySpawner" method="_on_gamemanager_inventory_closed"]
-[connection signal="inventory_open" from="." to="PlayerAdolf" method="_on_gamemanager_inventory_open"]
-[connection signal="inventory_open" from="." to="EnemySpawner" method="_on_gamemanager_inventory_open"]
 
 [editable path="Tree"]
