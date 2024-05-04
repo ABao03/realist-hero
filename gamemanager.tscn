@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ck1w0me5cr3tk"]
+[gd_scene load_steps=13 format=3 uid="uid://ck1w0me5cr3tk"]
 
 [ext_resource type="Script" path="res://gamemanager.gd" id="1_531g6"]
 [ext_resource type="PackedScene" uid="uid://5kkwx0t5l4e1" path="res://Background/tree.tscn" id="2_arrib"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Assets/Images/TX Tileset Grass.png" id="5_d4jm0"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="6_b1lhj"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="7_n3sif"]
+[ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/skeleton.tscn" id="8_gffs7"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="8_uytoy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtnxh"]
@@ -246,6 +247,14 @@ enemy = ExtResource("7_n3sif")
 enemy_num = 1
 enemy_spawn_delay = 0
 
+[sub_resource type="Resource" id="Resource_iq0vr"]
+script = ExtResource("8_uytoy")
+time_start = 5
+time_end = 10000
+enemy = ExtResource("8_gffs7")
+enemy_num = 1
+enemy_spawn_delay = 5
+
 [node name="gamemanager" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_531g6")
@@ -271,7 +280,7 @@ layer_0/tile_data = PackedInt32Array(262148, 131072, 1, 1179652, 524288, 4, 2490
 [node name="EnemySpawner" parent="." instance=ExtResource("6_b1lhj")]
 process_mode = 1
 position = Vector2(477, 1)
-spawns = Array[ExtResource("8_uytoy")]([SubResource("Resource_g8xax")])
+spawns = Array[ExtResource("8_uytoy")]([SubResource("Resource_g8xax"), SubResource("Resource_iq0vr")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 process_mode = 1
