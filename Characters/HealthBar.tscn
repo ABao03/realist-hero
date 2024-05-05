@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwr23xwqndk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_omlch"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_csjp3"]
+bg_color = Color(0.639216, 0, 0.152941, 1)
+
+[sub_resource type="GDScript" id="GDScript_xydje"]
+script/source = "extends ProgressBar
+
+#@onready var health = $Skeleton
+#
+#func _set_health(new_health):
+	#var prev_health = health
+	#health = min(max_value, new_health)
+	#value = health
+	#
+	#if health <= 0:
+		#queue_free()
+#
+#func init_health(_health):
+	#health = _health
+	#max_value = health
+	#value = health
+	#
+#
+## Called when the node enters the scene tree for the first time.
+#func _ready():
+	#pass # Replace with function body.
+#
+#
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+	#pass
+"
+
+[node name="HealthBar" type="ProgressBar"]
+offset_right = 62.0
+offset_bottom = 4.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_omlch")
+theme_override_styles/fill = SubResource("StyleBoxFlat_csjp3")
+value = 100.0
+show_percentage = false
+script = SubResource("GDScript_xydje")
