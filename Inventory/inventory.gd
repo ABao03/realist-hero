@@ -166,6 +166,8 @@ func place_item():
 	# Pass item stat data to the Player node so that stuff can get calculated
 	emit_signal("pass_upgrade", item_held.stats_data)
 	
+	print(item_held)
+	8
 	item_held = null
 	clear_grid()
 
