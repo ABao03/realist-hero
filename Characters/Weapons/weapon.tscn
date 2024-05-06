@@ -22,6 +22,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [-1.5708]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox2/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_y6tlf"]
 resource_name = "attack"
@@ -46,6 +58,18 @@ tracks/1/path = NodePath("HitBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox2/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
@@ -77,6 +101,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox2/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8vx3y"]
@@ -140,6 +176,18 @@ position = Vector2(25.7071, 49.0416)
 shape = SubResource("RectangleShape2D_7smbw")
 disabled = true
 
+[node name="HitBox2" parent="Area2D" instance=ExtResource("4_33jeo")]
+position = Vector2(-25, -25)
+collision_layer = 4
+collision_mask = 4
+damage = 0
+magic = true
+
+[node name="CollisionShape2D" parent="Area2D/HitBox2" index="0"]
+position = Vector2(25.7071, 49.0416)
+shape = SubResource("RectangleShape2D_7smbw")
+disabled = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
 libraries = {
 "": SubResource("AnimationLibrary_8vx3y")
@@ -156,3 +204,4 @@ parameters/conditions/attack = false
 parameters/conditions/reset = false
 
 [editable path="Area2D/HitBox"]
+[editable path="Area2D/HitBox2"]

@@ -5,6 +5,8 @@ extends Area2D
 
 # Modifiable damage value. Shows up in Inspector tab (right-hand side).
 @export var damage = 1
+@export var magic = false
+@export var crit = 0.0
 @onready var collision = $CollisionShape2D
 @onready var disableTimer = $DisableHitboxTimer
 

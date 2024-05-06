@@ -9,6 +9,7 @@ var maxHealth = 20.0
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $Skeleton
+@onready var damage_numbers_origin = $DamageNumbers
 
 var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 
@@ -35,8 +36,11 @@ func death():
 	loot_base.call_deferred("add_child", new_gem)
 	queue_free()
 
-func _on_hurt_box_hurt(damage):
+func _on_hurt_box_hurt(damage, isMagic, isCrit):
+	if isCrit == true:
+		damage = damage * 2
 	health -= damage
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, isMagic, isCrit)
 	if health <= 0:
 		death()
 

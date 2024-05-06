@@ -5,7 +5,10 @@ extends Marker2D
 var isAttacking: bool = false
 
 @onready var animation = $Area2D/AnimationPlayer/AnimationTree
+@onready var physicalHitbox = $Area2D/HitBox
+@onready var magicHitbox = $Area2D/HitBox2
 @onready var state_machine = animation.get('parameters/playback')
+@onready var anim = $Area2D/AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,3 +37,16 @@ func _process(delta):
 	
 	new_state()
 	handleInput()
+	
+func changeWeaponDamage(value):
+	physicalHitbox.damage += value
+
+func changeMagicDamage(value):
+	magicHitbox.damage += value
+
+func changeWeaponCrit(value):
+	physicalHitbox.crit += value
+
+func changeWeaponSpeed(value):
+	var currentSpeed = anim.speed_scale 
+	anim.speed_scale = currentSpeed + currentSpeed * value

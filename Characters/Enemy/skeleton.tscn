@@ -1,10 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://dhg2xqrtvfpi6"]
+[gd_scene load_steps=56 format=3 uid="uid://btv65pgy33wwb"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/skeleton.gd" id="1_joy33"]
-[ext_resource type="Texture2D" uid="uid://dwphtdt1vrpvg" path="res://Assets/Images/Skeleton enemy.png" id="1_q4bqo"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Skeleton enemy.png" id="1_q4bqo"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Hitbox/hurt_box.tscn" id="3_xet6c"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Hitbox/hit_box.tscn" id="4_acw4m"]
-[ext_resource type="PackedScene" uid="uid://bwr23xwqndk" path="res://Characters/HealthBar.tscn" id="5_ja13o"]
+[ext_resource type="PackedScene" path="res://Characters/HealthBar.tscn" id="5_ja13o"]
+[ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="6_dpkwt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ad36o"]
 atlas = ExtResource("1_q4bqo")
@@ -405,6 +406,9 @@ offset_top = 120.0
 offset_right = 83.0
 offset_bottom = 124.0
 value = 0.0
+
+[node name="DamageNumbers" parent="." instance=ExtResource("6_dpkwt")]
+position = Vector2(60, -5)
 
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

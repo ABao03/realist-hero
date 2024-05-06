@@ -1,5 +1,6 @@
 extends Control
 
+# GUI
 @onready var slot_scene = preload("res://Inventory/slot.tscn")
 @onready var grid_container = $Background/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
 @onready var item_scene = preload("res://Inventory/item.tscn")
@@ -7,14 +8,21 @@ extends Control
 @onready var col_count = grid_container.columns #save column number
 @onready var grid_container2 = $Background2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
 
+# Placing Items
 var grid_array := []
 var item_held = null
 var current_slot = null
 var can_place := false
 var icon_anchor : Vector2
 var is_open = false
+
+# Send upgrades to Player node
+signal pass_upgrade(upgrade)
+@onready var player = get_tree().get_first_node_in_group("player")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	connect("pass_upgrade",Callable(player,"update_stats"))
 	for i in range(80):
 		create_slot()
 	visible = false
@@ -22,10 +30,12 @@ func _ready():
 func open():
 	visible = true
 	is_open = true
+	get_tree().paused = true
 
 func close():
 	visible = false
 	is_open = false
+	get_tree().paused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -77,6 +87,13 @@ func _on_button_spawn_pressed():
 	new_item.selected = true
 	item_held = new_item
 	
+# Called via signal whenever the player chooses an upgrade in the upgrade options
+func upgrade_character(upgrade):
+	var new_item = item_scene.instantiate()
+	add_child(new_item)
+	new_item.load_item(int(upgrade["ID"]))
+	new_item.selected = true
+	item_held = new_item
 	
 func check_slot_availability(a_Slot):
 	for grid in item_held.item_grids:
@@ -122,6 +139,7 @@ func rotate_item():
 	if current_slot:
 		_on_slot_mouse_entered(current_slot)
 
+# Handles the snapping of the item to the GUI grid as well as adding the stats to the player
 func place_item():
 	if not can_place or not current_slot: 
 		return #put indication of placement failed, sound or visual here
@@ -130,9 +148,11 @@ func place_item():
 	item_held.get_parent().remove_child(item_held)
 	grid_container.add_child(item_held)
 	item_held.global_position = get_global_mouse_position()
-	####
+
 	var calculated_grid_id = current_slot.slot_ID + icon_anchor.x * col_count + icon_anchor.y
+	
 	item_held._snap_to(grid_array[calculated_grid_id].global_position)
+	
 	#print(calculated_grid_id)
 	item_held.grid_anchor = current_slot
 	for grid in item_held.item_grids:
@@ -141,7 +161,10 @@ func place_item():
 		grid_array[grid_to_check].item_stored = item_held
 	
 	#put item into a data storage here
-	print(item_held)
+	#print(item_held.item_ID)
+	
+	# Pass item stat data to the Player node so that stuff can get calculated
+	emit_signal("pass_upgrade", item_held.stats_data)
 	
 	item_held = null
 	clear_grid()

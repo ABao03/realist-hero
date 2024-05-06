@@ -9,7 +9,7 @@ func _ready():
 	load_data(item_data_path)
 	set_grid_data()
 
-#load the data file
+# Load the data file
 func load_data(path : String) -> void:
 	if not FileAccess.file_exists(path):
 		print("Item Data file not found")
@@ -18,7 +18,7 @@ func load_data(path : String) -> void:
 	item_data_file.close()
 	#print(item_data)	#check value
 	
-#process the json and put the grid information into accessible array format for iterating
+# Process the json and put the grid information into accessible array format for iterating
 func set_grid_data() -> void:
 	for item in item_data.keys():
 		var temp_grid_array := []

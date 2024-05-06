@@ -9,31 +9,29 @@ var experience_level = 1
 var collected_experience = 0
 var held_items = []
 var x = true
-var old
 
 #Represents paused state
 var paused
 
 #UI nodes
-#dumb lazy code i will rewrite later
-func _process(delta):
-	if Input.is_action_just_pressed("i"):
-		if x:
-			x = false
-			old = speed
-			speed = 0
-		else:
-			x = true
-			speed = old
-	
-# Attacks
-var iceSpear = preload("res://Characters/Weapons/weapon.tscn") # This has to change if u change the filename
 
-# IceSpear (change later)
-var icespear_ammo = 0
-var icespear_baseammo = 1
-var icespear_attackspeed = 1.5
-var icespear_level = 1
+# Attacks
+@onready var weapon = $weapon
+
+# Upgrades
+var upgrade_options = []
+@onready var inventory = get_tree().get_first_node_in_group("inventory")
+signal selected_upgrade(upgrade)
+
+# Stats
+var addedStats = {
+	"addedPhysical" = 0, 
+	"addedMagic" = 0, 
+	"addedCrit" = 0,
+	"addedAttack Speed" = 0,
+	"addedMove Speed" = 0,
+	"addedMax Health" = 0
+	}
 
 # Enemy Related
 var enemy_close = []
@@ -54,7 +52,7 @@ var enemy_close = []
 
 
 func _ready():
-	#upgrade_character()
+	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
 	set_expbar(experience, calculate_experiencecap())
 	set_healthbar(hp, 100)
 	update_animation(starting)
@@ -93,7 +91,7 @@ func new_state():
 		state_machine.travel('Idle')
 
 
-func _on_hurt_box_hurt(damage):
+func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	hp -= damage
 	if hp == 0:
 		get_tree().change_scene_to_file("res://Menu/death.tscn")
@@ -172,7 +170,7 @@ func levelup():
 	var optionsmax = 4
 	while options < optionsmax:
 		var option_choice = itemOptions.instantiate()
-		#option_choice.item = get_random_item()
+		option_choice.item = get_random_item()
 		upgradeOptions.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
@@ -182,6 +180,7 @@ func set_healthbar(set_value = 1, set_max_value = 100):
 	healthBar.max_value = set_max_value
 
 func upgrade_character(upgrade):
+	emit_signal("selected_upgrade",upgrade)
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
@@ -190,7 +189,30 @@ func upgrade_character(upgrade):
 	get_tree().paused = false
 	calculate_experience(0)
 
+func get_random_item():
+	var randomItem = DataHandler.item_data[str(randi_range(1,5))]
+	return randomItem
 
+func update_stats(data):
+	for stat in data:
+		var statName = "added" + stat
+		if statName in addedStats:
+			addedStats[statName] += data.get(stat)
 
+		if stat == "Physical":
+			var damage = int(data.get(stat)/10)
+			weapon.changeWeaponDamage(damage)
+		if stat == "Magic":
+			var damage = int(data.get(stat)/10)
+			weapon.changeMagicDamage(damage)
+		if stat == "Attack Speed":
+			weapon.changeWeaponSpeed(data.get(stat))
+		if stat == "Crit":
+			weapon.changeWeaponCrit(data.get(stat))
+		if stat == "Move Speed":
+			speed += data.get(stat)
+		if stat == "Max Health":
+			hp += data.get(stat)
+	
 
 

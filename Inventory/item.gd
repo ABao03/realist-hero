@@ -5,12 +5,7 @@ extends Node2D
 var item_ID : int
 var item_name : String
 var item_grids := []
-var item_physical : int
-var item_magic : int
-var item_atkSpd : int
-var item_crit : int
-var item_mvSpd : int
-var item_maxHealth : int
+var stats_data := {}
 var item_info : String
 var selected = false
 var grid_anchor = null
@@ -40,14 +35,17 @@ func load_item(a_ItemID : int) -> void:
 	
 	# Andrew wuz here
 	# Extra functionality to load in all the data for an item
-	
+	for stat in DataHandler.item_data[str(a_ItemID)]:
+		var thisValue = DataHandler.item_data[str(a_ItemID)][stat]
+		var intValue = float(thisValue)
+
+		if str(intValue) == str(thisValue) && stat != "ID":
+			if intValue != 0:
+				stats_data[stat] = intValue
+		
+
+	item_ID = int(DataHandler.item_data[str(a_ItemID)]["ID"])
 	item_name = DataHandler.item_data[str(a_ItemID)]["Name"]
-	item_physical = int(DataHandler.item_data[str(a_ItemID)]["Physical"])
-	item_magic = int(DataHandler.item_data[str(a_ItemID)]["Magic"])
-	item_atkSpd = int(DataHandler.item_data[str(a_ItemID)]["Attack Speed"])
-	item_crit = int(DataHandler.item_data[str(a_ItemID)]["Crit"])
-	item_mvSpd = int(DataHandler.item_data[str(a_ItemID)]["Move Speed"])
-	item_maxHealth = int(DataHandler.item_data[str(a_ItemID)]["Max Health"])
 	item_info = DataHandler.item_data[str(a_ItemID)]["Info"]
 
 # Rotate 90 degress CW
