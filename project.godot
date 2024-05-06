@@ -18,6 +18,8 @@ config/icon="res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.pn
 [autoload]
 
 DataHandler="*res://Data/DataHandler.gd"
+Transition="*res://Miscellaneous/transition.tscn"
+DamageNumbers="*res://DamageNumbers.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
