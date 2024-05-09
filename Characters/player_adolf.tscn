@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=43 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://csjy17y2uompe" path="res://Assets/Images/PlayerSpriteSheet.png" id="2_s4jyb"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="9_vrbu8"]
 [ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
+[ext_resource type="PackedScene" uid="uid://cynh3whul4t8n" path="res://Characters/abilities/sprint.tscn" id="13_qhlup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
 size = Vector2(4.54665, 17.8955)
@@ -378,6 +379,7 @@ flip_h = true
 hframes = 48
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0.5, 3)
 scale = Vector2(1.09971, 1.1176)
 shape = SubResource("RectangleShape2D_hh6ld")
@@ -401,6 +403,7 @@ parameters/Idle/blend_position = Vector2(-1.0784, 0.423581)
 parameters/Walk/blend_position = Vector2(-0.00160003, -0.965065)
 
 [node name="HurtBox" parent="." instance=ExtResource("3_5wu8m")]
+unique_name_in_owner = true
 collision_layer = 2
 collision_mask = 2
 
@@ -616,6 +619,9 @@ offset_left = -667.0
 offset_top = -280.0
 offset_right = -667.0
 offset_bottom = -280.0
+
+[node name="Sprint" parent="." instance=ExtResource("13_qhlup")]
+position = Vector2(-91, 285)
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]

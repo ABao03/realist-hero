@@ -43,6 +43,7 @@ func _on_hurt_box_hurt(damage):
 func update_health():
 	var healthbar = $HealthBar
 	
+	
 	healthbar.value = (health/maxHealth)*100
 	
 	if healthbar.value == 100:
