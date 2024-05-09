@@ -1,5 +1,6 @@
 {
 	"1": {
+		"ID": "1",
 		"Name": "Pickaxe",
 		"Grid": "0,0/0,1/0,2/-1,0/1,0",
 		"Physical": "85",
@@ -12,11 +13,12 @@
 		"Icon": "UPGRADE_PATH+\"pickaxe.png\""
 	},
 	"2": {
+		"ID": "2",
 		"Name": "Dagger",
 		"Grid": "0,0/0,1",
 		"Physical": "0",
 		"Magic": "0",
-		"Attack Speed": "10.00%",
+		"Attack Speed": "0.12",
 		"Crit": "0",
 		"Move Speed": "0",
 		"Max Health": "0",
@@ -24,6 +26,7 @@
 		"Icon": "UPGRADE_PATH+\"dagger.png\""
 	},
 	"3": {
+		"ID": "3",
 		"Name": "Wand",
 		"Grid": "0,0/1,0",
 		"Physical": "0",
@@ -36,6 +39,7 @@
 		"Icon": "UPGRADE_PATH+\"wand.png"
 	},
 	"4": {
+		"ID": "4",
 		"Name": "Ruby",
 		"Grid": "0,0",
 		"Physical": "0",
@@ -48,6 +52,7 @@
 		"Icon": "UPGRADE_PATH+\"ruby.png"
 	},
 	"5": {
+		"ID": "5",
 		"Name": "Longsword",
 		"Grid": "0,0/0,1/0,2",
 		"Physical": "30",

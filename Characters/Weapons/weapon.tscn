@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dlrfbgyjerxfi"]
+[gd_scene load_steps=9 format=3 uid="uid://dlrfbgyjerxfi"]
 
 [ext_resource type="Script" path="res://Characters/Weapons/weapon.gd" id="1_blaor"]
 [ext_resource type="Script" path="res://Characters/Weapons/sword.gd" id="2_lp00d"]
@@ -21,6 +21,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitBox2/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_y6tlf"]
@@ -51,65 +63,24 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
-
-[sub_resource type="Animation" id="Animation_l0e0q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HitBox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitBox2/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8vx3y"]
 _data = {
 "RESET": SubResource("Animation_efwqo"),
-"attack": SubResource("Animation_y6tlf"),
-"reset": SubResource("Animation_l0e0q")
+"attack": SubResource("Animation_y6tlf")
 }
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ye46f"]
-animation = &"attack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_14f1h"]
-animation = &"reset"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fsl3u"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hoxdo"]
-advance_mode = 2
-advance_condition = &"attack"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fdxfm"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"reset"
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3r4su"]
-states/attack/node = SubResource("AnimationNodeAnimation_ye46f")
-states/attack/position = Vector2(492, 100)
-states/reset/node = SubResource("AnimationNodeAnimation_14f1h")
-states/reset/position = Vector2(334, 100)
-transitions = ["Start", "reset", SubResource("AnimationNodeStateMachineTransition_fsl3u"), "reset", "attack", SubResource("AnimationNodeStateMachineTransition_hoxdo"), "attack", "reset", SubResource("AnimationNodeStateMachineTransition_fdxfm")]
 
 [node name="weapon" type="Marker2D"]
 light_mask = 7
@@ -140,19 +111,22 @@ position = Vector2(25.7071, 49.0416)
 shape = SubResource("RectangleShape2D_7smbw")
 disabled = true
 
+[node name="HitBox2" parent="Area2D" instance=ExtResource("4_33jeo")]
+position = Vector2(-25, -25)
+collision_layer = 4
+collision_mask = 4
+damage = 0
+magic = true
+
+[node name="CollisionShape2D" parent="Area2D/HitBox2" index="0"]
+position = Vector2(25.7071, 49.0416)
+shape = SubResource("RectangleShape2D_7smbw")
+disabled = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
 libraries = {
 "": SubResource("AnimationLibrary_8vx3y")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="Area2D/AnimationPlayer"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_8vx3y")
-}
-tree_root = SubResource("AnimationNodeStateMachine_3r4su")
-anim_player = NodePath("..")
-parameters/conditions/attack = false
-parameters/conditions/reset = false
-
 [editable path="Area2D/HitBox"]
+[editable path="Area2D/HitBox2"]

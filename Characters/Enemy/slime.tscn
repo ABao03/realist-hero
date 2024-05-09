@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bh4vi84vnnpf5"]
+[gd_scene load_steps=15 format=3 uid="uid://bh4vi84vnnpf5"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/slime.gd" id="1_dtmf7"]
 [ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/slime-Sheet.png" id="2_li24n"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Hitbox/hurt_box.tscn" id="3_moyka"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Hitbox/hit_box.tscn" id="4_d2e3y"]
+[ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="5_yrl4f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjmpm"]
 size = Vector2(18, 8)
@@ -112,6 +113,9 @@ collision_mask = 2
 [node name="CollisionShape2D" parent="slime/HitBox" index="0"]
 position = Vector2(1, 5)
 shape = SubResource("RectangleShape2D_g0xg1")
+
+[node name="DamageNumbers" parent="slime" instance=ExtResource("5_yrl4f")]
+position = Vector2(1, -6)
 
 [connection signal="hurt" from="slime/HurtBox" to="slime" method="_on_hurt_box_hurt"]
 

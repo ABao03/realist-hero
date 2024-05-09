@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $Sprite2D
+@onready var damage_numbers_origin = $DamageNumbers
 
 var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 
@@ -29,7 +30,50 @@ func death():
 	loot_base.call_deferred("add_child", new_gem)
 	queue_free()
 
-func _on_hurt_box_hurt(damage):
+func _on_hurt_box_hurt(damage, isMagic, isCrit):
+	if isCrit == true:
+		damage = damage * 2
 	hp -= damage
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, isMagic, isCrit)
 	if hp <= 0:
 		death()
+
+#extends CharacterBody2D
+#
+#@export var movement_speed = 50.0
+#@export var hp = 5.0
+#@export var experience = 1
+#
+#@onready var player = get_tree().get_first_node_in_group("player")
+#@onready var loot_base = get_tree().get_first_node_in_group("loot")
+#@onready var sprite = $Sprite2D
+#@onready var damage_numbers_origin = $DamageNumbers
+#
+#var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
+#
+## Moving slime around 
+#func _physics_process(_delta):
+	#var direction = global_position.direction_to(player.global_position)
+	#velocity = direction*movement_speed
+	#move_and_slide()
+	#
+	#if direction.x > 0.1:
+		#sprite.flip_h = true
+	#elif direction.x < -0.1:
+		#sprite.flip_h = false
+#
+## Slime is killed by damage
+#func death():
+	#var new_gem = loot.instantiate()
+	#new_gem.global_position = global_position
+	#new_gem.experience = experience
+	#loot_base.call_deferred("add_child", new_gem)
+	#queue_free()
+#
+#func _on_hurt_box_hurt(damage, isMagic, isCrit):
+	#if isCrit == true:
+		#damage = damage * 2
+	#hp -= damage
+	#DamageNumbers.display_number(damage, damage_numbers_origin.global_position, isMagic, isCrit)
+	#if hp <= 0:
+		#death()
