@@ -15,7 +15,7 @@ text = "Sprint
 "
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 0.1
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 5.0
