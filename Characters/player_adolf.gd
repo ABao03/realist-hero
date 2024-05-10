@@ -2,7 +2,7 @@
 extends CharacterBody2D
 
 # Stats in data/playerdata to be done
-@export var speed : float = 200
+@export var speed : float = 150
 @onready var collision = $CollisionShape2D
 var hp = 100
 var experience = 0
@@ -10,6 +10,9 @@ var experience_level = 1
 var collected_experience = 0
 var held_items = []
 var x = true
+
+# Movement
+@onready var axis = Vector2.ZERO
 
 #Represents paused state
 var paused
@@ -38,9 +41,8 @@ var addedStats = {
 var enemy_close = []
 
 @export var starting : Vector2 = Vector2(0, 1)
-@onready var animation = $AnimationPlayer/AnimationTree
+@onready var animation = $AnimationPlayer
 @onready var sprite = $Sprite2D
-@onready var state_machine = animation.get('parameters/playback')
 
 # GUI
 @onready var expBar = get_node('%ExperienceBar')
@@ -56,41 +58,32 @@ func _ready():
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
 	set_expbar(experience, calculate_experiencecap())
 	set_healthbar(hp, 100)
-	update_animation(starting)
-	
 
-func _physics_process(_delta):
-	var input_direction = Vector2(
-		Input.get_action_strength('right') - Input.get_action_strength('left'),
-		Input.get_action_strength('down') - Input.get_action_strength('up')
-	)
+func _physics_process(delta):
+	axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
+	axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
 	
-	velocity = velocity.normalized()
-	velocity = input_direction * speed
+	var thisSpeed = speed * 100
+	velocity = delta * thisSpeed * axis
+	
+	if velocity == Vector2.ZERO:
+		if sprite.flip_h == true:
+			animation.play("idle_left")
+		else:
+			animation.play("idle_right")
+	else:
+		if axis.x > 0:
+			sprite.flip_h = false
+		elif axis.x < 0:
+			sprite.flip_h = true
+		else:
+			if sprite.flip_h == true:
+				sprite.flip_h = true
+			else:
+				sprite.flip_h = false
+		animation.play("walk")
 		
 	move_and_slide()
-	new_state()
-	
-	update_animation(input_direction)
-	
-func update_animation(move_input: Vector2):
-	if move_input == Vector2.ZERO:
-		animation["parameters/conditions/idle"] = true
-		animation["parameters/conditions/walk"] = false
-		
-	else:
-		animation["parameters/conditions/idle"] = false
-		animation["parameters/conditions/walk"] = true
-		
-		animation["parameters/Idle/blend_position"] = move_input
-		animation["parameters/Walk/blend_position"] = move_input
-		
-func new_state():
-	if velocity != Vector2.ZERO:
-		state_machine.travel('Walk')
-	else:
-		state_machine.travel('Idle')
-
 
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	hp -= damage

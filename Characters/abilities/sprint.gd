@@ -8,7 +8,6 @@ var isReady : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	originalSpeed = player.speed
-	print(hurtbox)
 
 func _input(event: InputEvent): # Show/hide pause menu
 	if event.is_action_pressed("shift") and isReady == true:
@@ -42,6 +41,7 @@ func _on_timer_timeout():
 
 func _on_cooldown_timer_timeout():
 	isReady = true
+	print("sprint ready")
 	
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

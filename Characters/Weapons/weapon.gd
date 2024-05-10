@@ -47,3 +47,4 @@ func changeWeaponCrit(value):
 func changeWeaponSpeed(value):
 	var currentSpeed = animation.speed_scale
 	animation.speed_scale = currentSpeed + currentSpeed * value
+	rotationSpeed = rotationSpeed * (1 + value)
