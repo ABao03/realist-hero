@@ -2,7 +2,7 @@ extends Node2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var hurtbox = get_node("../HurtBox")
 @onready var originalSpeed
-@onready var sprintSpeed = 50
+@onready var sprintSpeed = 2000
 var isReady : bool = true
 
 # Called when the node enters the scene tree for the first time.

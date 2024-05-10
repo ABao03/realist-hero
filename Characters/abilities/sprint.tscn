@@ -15,10 +15,10 @@ text = "Sprint
 "
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 0.1
 
 [node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 100.0
 
 [connection signal="pressed" from="VBoxContainer/Sprint_button" to="." method="_on_sprint_button_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
