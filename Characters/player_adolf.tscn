@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=24 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
 [ext_resource type="PackedScene" uid="uid://cynh3whul4t8n" path="res://Characters/abilities/sprint.tscn" id="13_qhlup"]
+[ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
 size = Vector2(5.00132, 14.3164)
@@ -405,6 +406,9 @@ offset_bottom = -280.0
 
 [node name="Sprint" parent="." instance=ExtResource("13_qhlup")]
 position = Vector2(-91, 285)
+
+[node name="Node2D" parent="." instance=ExtResource("14_qufa4")]
+position = Vector2(129, 288)
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
