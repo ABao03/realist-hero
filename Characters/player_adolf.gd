@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var speed : float = 150
 @onready var collision = $CollisionShape2D
 var hp = 100
+var maxhp = 100
 var experience = 0
 var experience_level = 1
 var collected_experience = 0
