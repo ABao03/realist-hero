@@ -25,6 +25,7 @@ func _input(event: InputEvent): # Show/hide pause menu
 
 func _on_sprint_button_pressed():
 	if isReady == true:
+
 		$Timer.start()
 		$CooldownTimer.start()
 		player.speed = sprintSpeed

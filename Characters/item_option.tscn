@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://yes3vaj25c15"]
 
 [ext_resource type="Script" path="res://Characters/item_option.gd" id="1_86eoi"]
-[ext_resource type="Texture2D" path="res://Assets/Images/pickaxe.png" id="2_jpqo7"]
+[ext_resource type="Texture2D" uid="uid://n2boiufo6bon" path="res://Assets/Images/pickaxe_mini.png" id="2_larh1"]
 
 [node name="itemOption" type="ColorRect"]
 custom_minimum_size = Vector2(180, 50)
@@ -23,7 +23,7 @@ texture_filter = 1
 layout_mode = 0
 offset_right = 24.0
 offset_bottom = 24.0
-texture = ExtResource("2_jpqo7")
+texture = ExtResource("2_larh1")
 expand_mode = 1
 
 [node name="lbl_name" type="Label" parent="."]
