@@ -12,3 +12,5 @@
 .godot/global_script_class_cache.cfg
 .godot/editor/project_metadata.cfg
 .godot/editor/filesystem_cache8
+*.bin
+*.cfg
