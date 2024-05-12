@@ -6,7 +6,7 @@ extends Marker2D
 @onready var magicHitbox = $Area2D/HitBox2
 
 # Animation speed variables (for attack speed)
-var rotationSpeed = 0.01
+var rotationSpeed = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

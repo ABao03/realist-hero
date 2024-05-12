@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://n2boiufo6bon"
-path="res://.godot/imported/pickaxe.png-d101e74e95ed77700de3e9a90689b281.ctex"
+uid="uid://b2hs2ntkap0sh"
+path="res://.godot/imported/backpack.png-b5c0d098e3a0aa4f4ae663b6efeaa5ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/pickaxe.png"
-dest_files=["res://.godot/imported/pickaxe.png-d101e74e95ed77700de3e9a90689b281.ctex"]
+source_file="res://Assets/Images/backpack.png"
+dest_files=["res://.godot/imported/backpack.png-b5c0d098e3a0aa4f4ae663b6efeaa5ca.ctex"]
 
 [params]
 
