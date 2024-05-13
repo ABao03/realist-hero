@@ -1,7 +1,7 @@
 extends Control
 func _on_start_game_pressed():
-	get_tree().change_scene_to_file("res://Worlds/Procedural  World/Random-world.tscn")
-	#get_tree().change_scene_to_file("res://Hub World/hubworld.tscn")
+	#get_tree().change_scene_to_file("res://Worlds/Procedural  World/Random-world.tscn")
+	get_tree().change_scene_to_file("res://Worlds/Hub World/hubworld.tscn")
 
 
 func _on_settings_pressed():

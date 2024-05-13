@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Characters/Enemy/slime.gd" id="1_dtmf7"]
 [ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/slime-Sheet.png" id="2_li24n"]
-[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Hitbox/hurt_box.tscn" id="3_moyka"]
-[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Hitbox/hit_box.tscn" id="4_d2e3y"]
+[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_moyka"]
+[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_d2e3y"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="5_yrl4f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjmpm"]

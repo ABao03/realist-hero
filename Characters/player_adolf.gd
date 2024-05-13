@@ -89,7 +89,7 @@ func _physics_process(delta):
 
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	hp -= damage
-	if hp == 0:
+	if hp == 0 or hp < 0:
 		get_tree().change_scene_to_file("res://Menu/death.tscn")
 	set_healthbar(hp-damage, 100)
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
-[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Hitbox/hurt_box.tscn" id="3_5wu8m"]
+[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
 [ext_resource type="PackedScene" uid="uid://dlrfbgyjerxfi" path="res://Characters/Weapons/weapon.tscn" id="4_ioilp"]
 [ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/exp_background.png" id="5_e34iq"]
 [ext_resource type="Texture2D" uid="uid://cdcys2h3m3tnr" path="res://Assets/Images/exp_progress.png" id="6_k3mh8"]

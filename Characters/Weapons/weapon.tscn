@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Characters/Weapons/weapon.gd" id="1_blaor"]
 [ext_resource type="Script" path="res://Characters/Weapons/sword.gd" id="2_lp00d"]
 [ext_resource type="Texture2D" uid="uid://cxcg8aco1xc1g" path="res://Assets/Images/ComfyUI_00346_.png" id="3_6wjy3"]
-[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Hitbox/hit_box.tscn" id="4_33jeo"]
+[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_33jeo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7smbw"]
 size = Vector2(18.3848, 70.7107)
