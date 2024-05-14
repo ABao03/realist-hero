@@ -18,6 +18,7 @@ var x = true
 
 #Represents paused state
 var paused
+var playerPaused = false
 
 #UI nodes
 
@@ -48,6 +49,7 @@ var enemy_close = []
 
 # GUI
 @onready var expBar = get_node('%ExperienceBar')
+@onready var expBarLbl = get_node('%lbl_level')
 @onready var healthBar = get_node('%HealthBar')
 @onready var lblLevel = get_node('%lbl_levelUp')
 @onready var levelPanel = get_node('%LevelUp')
@@ -62,44 +64,37 @@ func _ready():
 	set_healthbar(hp, 100)
 
 func _physics_process(delta):
-	axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
-	axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
-	
-	var thisSpeed = speed * 100
-	velocity = delta * thisSpeed * axis
-	
-	if velocity == Vector2.ZERO:
-		if sprite.flip_h == true:
-			animation.play("idle_left")
-		else:
-			animation.play("idle_right")
-	else:
-		if axis.x > 0:
-			sprite.flip_h = false
-		elif axis.x < 0:
-			sprite.flip_h = true
-		else:
+	if playerPaused == false:
+		axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
+		axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
+		
+		var thisSpeed = speed * 100
+		velocity = delta * thisSpeed * axis
+		
+		if velocity == Vector2.ZERO:
 			if sprite.flip_h == true:
+				animation.play("idle_left")
+			else:
+				animation.play("idle_right")
+		else:
+			if axis.x > 0:
+				sprite.flip_h = false
+			elif axis.x < 0:
 				sprite.flip_h = true
 			else:
-				sprite.flip_h = false
-		animation.play("walk")
-		
-	move_and_slide()
+				if sprite.flip_h == true:
+					sprite.flip_h = true
+				else:
+					sprite.flip_h = false
+			animation.play("walk")
+			
+		move_and_slide()
 
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	hp -= damage
 	if hp == 0 or hp < 0:
 		get_tree().change_scene_to_file("res://Menu/death.tscn")
 	set_healthbar(hp-damage, 100)
-
-
-func _on_ice_spear_timer_timeout():
-	pass # Replace with function body.
-
-
-func _on_ice_spear_attack_timer_timeout():
-	pass
 
 # Changes the target variable inside of the xp drop from null to the player. 
 # So, the xp drop is pulled towards the player. 
@@ -130,6 +125,9 @@ func calculate_experience(gem_exp):
 		collected_experience -= exp_required-experience
 		experience_level += 1
 		lblLevel.text = str("Level: ", experience_level)
+		expBarLbl.text = lblLevel.text
+		
+		print(lblLevel.text)
 		experience = 0
 		exp_required = calculate_experiencecap()
 		levelup()

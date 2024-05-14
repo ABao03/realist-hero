@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
 [ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
 [ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="9_vrbu8"]
-[ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
+[ext_resource type="PackedScene" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
 [ext_resource type="PackedScene" uid="uid://cynh3whul4t8n" path="res://Characters/abilities/sprint.tscn" id="13_qhlup"]
 [ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
@@ -227,9 +227,9 @@ offset_bottom = 648.0
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 32.0
-offset_top = 25.0
+offset_top = 590.0
 offset_right = 672.0
-offset_bottom = 45.0
+offset_bottom = 610.0
 scale = Vector2(1.7, 1.7)
 texture_under = ExtResource("5_e34iq")
 texture_progress = ExtResource("6_k3mh8")
@@ -237,7 +237,8 @@ texture_progress = ExtResource("6_k3mh8")
 [node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 100.0
+offset_left = 5.0
+offset_right = 105.0
 offset_bottom = 23.0
 theme_override_font_sizes/font_size = 14
 text = " Level: 1"

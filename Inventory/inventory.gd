@@ -30,12 +30,12 @@ func _ready():
 func open():
 	visible = true
 	is_open = true
-	get_tree().paused = true
+	player.playerPaused = true
 
 func close():
 	visible = false
 	is_open = false
-	get_tree().paused = false
+	player.playerPaused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -167,7 +167,6 @@ func place_item():
 	emit_signal("pass_upgrade", item_held.stats_data)
 	
 	print(item_held)
-	8
 	item_held = null
 	clear_grid()
 
