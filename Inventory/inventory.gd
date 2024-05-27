@@ -16,6 +16,9 @@ var can_place := false
 var icon_anchor : Vector2
 var is_open = false
 
+# Tracking Items
+var currentInventory = []
+
 # Send upgrades to Player node
 signal pass_upgrade(upgrade)
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -26,7 +29,8 @@ func _ready():
 	for i in range(80):
 		create_slot()
 	visible = false
-	
+
+# Open and close inventory
 func open():
 	visible = true
 	is_open = true
@@ -37,7 +41,6 @@ func close():
 	is_open = false
 	player.playerPaused = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if item_held:
 		if Input.is_action_just_pressed("mouse_rightclick"):
@@ -50,13 +53,21 @@ func _process(delta):
 		if Input.is_action_just_pressed("mouse_leftclick"):
 			if scroll_container.get_global_rect().has_point(get_global_mouse_position()):
 				pick_item()
+	
 	if Input.is_action_just_pressed("i"):
 		if is_open:
 			close()
 		else:
 			open()
 	
-	
+	if item_held:
+		if Input.is_action_pressed("delete"):
+			if currentInventory.has(item_held):
+				currentInventory.erase(item_held)
+			item_held.delete_item()
+			item_held = null
+				
+# Debug
 func create_slot():
 	var new_slot = slot_scene.instantiate()
 	new_slot.slot_ID = grid_array.size()
@@ -64,26 +75,30 @@ func create_slot():
 	grid_array.push_back(new_slot)
 	new_slot.slot_entered.connect(_on_slot_mouse_entered)
 	new_slot.slot_exited.connect(_on_slot_mouse_exited)
-	pass
 
-
+# Scan hovered slots and change their color depending on if they're empty or not
 func _on_slot_mouse_entered(a_Slot):
 	icon_anchor = Vector2(10000,100000)
 	current_slot = a_Slot
 	if item_held:
 		check_slot_availability(current_slot)
 		set_grids.call_deferred(current_slot)
-	
+
+# When exiting a previously-hovered slot with the mouse, reset the slot's color back to the default clear
 func _on_slot_mouse_exited(a_Slot):
 	clear_grid()
 	
 	if not grid_container.get_global_rect().has_point(get_global_mouse_position()):
 		current_slot = null
 
+# Debug spawn item button
 func _on_button_spawn_pressed():
+	# These three lines handle all the instantiation
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
-	new_item.load_item(randi_range(1,5))    #randomize this for different items to spawn
+	new_item.load_item(randi_range(1,13))    #randomize this for different items to spawn
+	
+	# This places the item into the player's hand
 	new_item.selected = true
 	item_held = new_item
 	
@@ -95,6 +110,7 @@ func upgrade_character(upgrade):
 	new_item.selected = true
 	item_held = new_item
 	
+# Checks to see if the item can be placed in the slot 
 func check_slot_availability(a_Slot):
 	for grid in item_held.item_grids:
 		var grid_to_check = a_Slot.slot_ID + grid[0] + grid[1] * col_count
@@ -110,6 +126,7 @@ func check_slot_availability(a_Slot):
 			return
 	can_place = true
 	
+# Draws the grid inventory
 func set_grids(a_Slot):
 	for grid in item_held.item_grids:
 		var grid_to_check = a_Slot.slot_ID + grid[0] + grid[1] * col_count
@@ -117,7 +134,7 @@ func set_grids(a_Slot):
 			continue
 		#make sure the check don't wrap around boarders
 		var line_switch_check = a_Slot.slot_ID % col_count + grid[0]
-		if line_switch_check <0 or line_switch_check >= col_count:
+		if line_switch_check < 0 or line_switch_check >= col_count:
 			continue
 		
 		if can_place:
@@ -129,7 +146,7 @@ func set_grids(a_Slot):
 		else:
 			grid_array[grid_to_check].set_color(grid_array[grid_to_check].States.TAKEN)
 
-func clear_grid():
+func clear_grid():	
 	for grid in grid_array:
 		grid.set_color(grid.States.DEFAULT)
 
@@ -141,6 +158,9 @@ func rotate_item():
 
 # Handles the snapping of the item to the GUI grid as well as adding the stats to the player
 func place_item():
+	# For the purpose of wiping item info at the end (or not)
+	var createdCombo = false
+	
 	if not can_place or not current_slot: 
 		return #put indication of placement failed, sound or visual here
 		
@@ -153,35 +173,43 @@ func place_item():
 	
 	item_held._snap_to(grid_array[calculated_grid_id].global_position)
 	
-	#print(calculated_grid_id)
+	# Creates the boxes that are used to snap to the grid
 	item_held.grid_anchor = current_slot
 	for grid in item_held.item_grids:
 		var grid_to_check = current_slot.slot_ID + grid[0] + grid[1] * col_count
 		grid_array[grid_to_check].state = grid_array[grid_to_check].States.TAKEN 
 		grid_array[grid_to_check].item_stored = item_held
 	
-	#put item into a data storage here
-	#print(item_held.item_ID)
-	
 	# Pass item stat data to the Player node so that stuff can get calculated
-	emit_signal("pass_upgrade", item_held.stats_data)
+	if not currentInventory.has(item_held):
+		emit_signal("pass_upgrade", item_held.stats_data)
+		
+		# Place item into array that keeps track of which items are currently in inventory
+		currentInventory.append(item_held)
+		createdCombo = check_combos(item_held)
 	
-	print(item_held)
-	item_held = null
+	# Needs a conditional, or else it'll auto-wipe the item at the end even if a new one was made via combo
+	if createdCombo == false:
+		item_held = null
+		
 	clear_grid()
 
-
+# Used when the item is picked up by the player
 func pick_item():
+	# Check if slot is empty
 	if not current_slot or not current_slot.item_stored: 
 		return
+	
+	# Assign item to item_held
 	item_held = current_slot.item_stored
 	item_held.selected = true
-	#move node in the scene tree
+	
+	# Move node in the scene tree
 	item_held.get_parent().remove_child(item_held)
 	add_child(item_held)
 	item_held.global_position = get_global_mouse_position()
-	####
 	
+	# Free up grid
 	for grid in item_held.item_grids:
 		var grid_to_check = item_held.grid_anchor.slot_ID + grid[0] + grid[1] * col_count # use grid anchor instead of current slot to prevent bug
 		grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE 
@@ -190,8 +218,71 @@ func pick_item():
 	check_slot_availability(current_slot)
 	set_grids.call_deferred(current_slot)
 	
-	
-
-
+# Debug
 func _on_add_slot_pressed():
 	create_slot()
+	
+# Deleting item from inventory (do not mix up with delete_item function in item scene)
+func delete_from_inventory(thisItem):
+	if currentInventory.has(thisItem):
+		# An attempt at clearing the slots occupied by thisItem in inventory
+		for grid in thisItem.item_grids:
+			var grid_to_check = thisItem.grid_anchor.slot_ID + grid[0] + grid[1] * col_count # use grid anchor instead of current slot to prevent bug
+			grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE 
+			grid_array[grid_to_check].item_stored = null
+			
+		# Wiping from currentInventory array
+		currentInventory.erase(thisItem)
+		thisItem.delete_item()
+			
+		# Update grid
+		set_grids.call_deferred(current_slot)
+		
+# Check if a combo is present among the current items in inventory after adding in newItem
+func check_combos(newItem):
+	# Keep track of both the normal and reverse side of the possible combos 
+	var possibleCombos = DataHandler.item_valid_combo_data
+	var reversePossibleCombos = DataHandler.item_valid_combo_data_2
+	var keyID = newItem.item_ID
+	var foundCombo = false
+	
+	# Normal order check
+	if possibleCombos.has(keyID):
+		for item in currentInventory:
+			for id in possibleCombos[keyID]:
+				# If valid combo found, combine the items
+				if id == item.item_ID && foundCombo == false:
+					combineItems(newItem, item)
+					foundCombo = true
+					
+	# Reverse order check
+	if reversePossibleCombos.has(keyID):
+		for item in currentInventory:
+			for id in reversePossibleCombos[keyID]:
+				if id == item.item_ID && foundCombo == false:
+					combineItems(newItem, item)
+					foundCombo = true
+	
+	return foundCombo
+
+# Combines two items into the new combined item (combination already found)
+func combineItems(item1, item2):
+	# Fetch the new item from the data handler dictionary.
+	var combinedItemID = DataHandler.component_product_data[[item1.item_ID, item2.item_ID]]
+	
+	# Instantiate the new item into the scene. 
+	var combinedItem = item_scene.instantiate()
+	add_child(combinedItem)
+	
+	# Load the new item's data. Place it into the player's hand. 
+	combinedItem.load_item(int(combinedItemID))
+	combinedItem.selected = true
+	item_held = combinedItem
+	
+	# Delete the item elements. 
+	delete_from_inventory(item1)
+	delete_from_inventory(item2)
+
+func recalculateStats():
+	pass
+

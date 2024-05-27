@@ -36,15 +36,21 @@ func _process(delta):
 	handleInput()
 
 func changeWeaponDamage(value):
-	physicalHitbox.damage += value
+	if value > 2:
+		physicalHitbox.damage += value
+	else:
+		physicalHitbox.damage *= value
 
 func changeMagicDamage(value):
-	magicHitbox.damage += value
+	if value > 2 || value == 1:
+		magicHitbox.damage += value
+	else:
+		magicHitbox.damage *= value
 
 func changeWeaponCrit(value):
-	physicalHitbox.crit += value
+	physicalHitbox.crit += value - 1
 
 func changeWeaponSpeed(value):
 	var currentSpeed = animation.speed_scale
-	animation.speed_scale = currentSpeed + currentSpeed * value
-	rotationSpeed = rotationSpeed * (1 + value)
+	animation.speed_scale = currentSpeed * value
+	rotationSpeed = rotationSpeed * value

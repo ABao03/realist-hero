@@ -37,7 +37,8 @@ var addedStats = {
 	"addedCrit" = 0,
 	"addedAttack Speed" = 0,
 	"addedMove Speed" = 0,
-	"addedMax Health" = 0
+	"addedMax Health" = 0,
+	"addedDefense" = 0
 	}
 
 # Enemy Related
@@ -127,7 +128,6 @@ func calculate_experience(gem_exp):
 		lblLevel.text = str("Level: ", experience_level)
 		expBarLbl.text = lblLevel.text
 		
-		print(lblLevel.text)
 		experience = 0
 		exp_required = calculate_experiencecap()
 		levelup()
@@ -184,7 +184,7 @@ func upgrade_character(upgrade):
 	calculate_experience(0)
 
 func get_random_item():
-	var randomItem = DataHandler.item_data[str(randi_range(1,5))]
+	var randomItem = DataHandler.item_data[str(randi_range(1,13))]
 	return randomItem
 
 func update_stats(data):
@@ -194,19 +194,36 @@ func update_stats(data):
 			addedStats[statName] += data.get(stat)
 
 		if stat == "Physical":
-			var damage = int(data.get(stat)/10)
+			var damage = data.get(stat)
+			if damage > 2:
+				damage = int(damage/10)
+			else:
+				pass
 			weapon.changeWeaponDamage(damage)
 		if stat == "Magic":
-			var damage = int(data.get(stat)/10)
+			var damage = data.get(stat)
+			if data.get(stat) > 2:
+				damage = int(damage/10)
+			else:
+				pass
 			weapon.changeMagicDamage(damage)
 		if stat == "Attack Speed":
 			weapon.changeWeaponSpeed(data.get(stat))
 		if stat == "Crit":
 			weapon.changeWeaponCrit(data.get(stat))
 		if stat == "Move Speed":
-			speed += data.get(stat)
+			if float(stat) > 2:
+				speed += data.get(stat)
+			else:
+				speed *= data.get(stat)
 		if stat == "Max Health":
-			hp += data.get(stat)
+			if float(stat) > 2:
+				hp += data.get(stat)
+			else:
+				hp *= data.get(stat)
+		if stat == "Defense":
+			pass
+			
 	
 
 

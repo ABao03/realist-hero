@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var IconRect_path = $Icon
 
-var item_ID : int
+var item_ID : String
 var item_name : String
 var item_grids := []
 var stats_data := {}
@@ -22,6 +22,7 @@ func _process(delta):
 
 # Load the image in the assets as an item
 func load_item(a_ItemID : int) -> void:
+	# NOTE: .PNG FILE MUST HAVE SAME FILE NAME AS THE ITEM NAME OR THIS LINE WILL NOT WORK
 	var Icon_path = "res://Assets/" + DataHandler.item_data[str(a_ItemID)]["Name"] + ".png"
 	IconRect_path.texture = load(Icon_path)
 	
@@ -39,14 +40,16 @@ func load_item(a_ItemID : int) -> void:
 		var thisValue = DataHandler.item_data[str(a_ItemID)][stat]
 		var intValue = float(thisValue)
 
-		if str(intValue) == str(thisValue) && stat != "ID":
+		if str("%.2f" % intValue) == str(thisValue) || str("%.3f" % intValue) == str(thisValue) && stat != "ID":
 			if intValue != 0:
 				stats_data[stat] = intValue
-		
 
-	item_ID = int(DataHandler.item_data[str(a_ItemID)]["ID"])
+	item_ID = DataHandler.item_data[str(a_ItemID)]["ID"]
 	item_name = DataHandler.item_data[str(a_ItemID)]["Name"]
 	item_info = DataHandler.item_data[str(a_ItemID)]["Info"]
+
+func delete_item():
+	queue_free()
 
 # Rotate 90 degress CW
 func rotate_item():

@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://08qrvu43ttcy"]
+
+[ext_resource type="Script" path="res://Characters/Enemy/dummy.gd" id="1_6u6en"]
+[ext_resource type="Texture2D" uid="uid://cph5lko3tokyy" path="res://Assets/Images/Training Dummy Sprite Sheet.png" id="2_0vor3"]
+[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_xh2pi"]
+[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_55m6p"]
+[ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="4_64m23"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mw0w"]
+size = Vector2(9, 20)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6wwkh"]
+radius = 14.5
+height = 35.0
+
+[node name="dummy" type="CharacterBody2D"]
+collision_layer = 6
+collision_mask = 7
+script = ExtResource("1_6u6en")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6mw0w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1, 1.25)
+texture = ExtResource("2_0vor3")
+hframes = 8
+vframes = 3
+
+[node name="HurtBox" parent="." instance=ExtResource("3_xh2pi")]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("CapsuleShape2D_6wwkh")
+
+[node name="HitBox" parent="." instance=ExtResource("4_55m6p")]
+
+[node name="DamageNumbers" parent="." instance=ExtResource("4_64m23")]
+
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+
+[editable path="HurtBox"]
+[editable path="HitBox"]

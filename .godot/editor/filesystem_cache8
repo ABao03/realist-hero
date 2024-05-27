@@ -1,6 +1,6 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1716008287
-DamageNumbers.gd::GDScript::-1::1716008287::0::1::::<>Marker2D<>::
+::res://::1716848328
+DamageNumbers.gd::GDScript::-1::1716585913::0::1::::<>Marker2D<>::
 default_bus_layout.tres::AudioBusLayout::4234630908366441341::1714425664::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1714336974::0::1::::<><>::
 spawn_info.gd::GDScript::-1::1714336974::0::1::::Spawn_info<>Resource<>::
@@ -702,16 +702,24 @@ loot-table-item.gd::GDScript::-1::1714962358::0::1::::LootTableItem<>Resource<>:
 loot-table-item.tres::Resource/Resource::3500496404292104216::1714962358::0::1::::<><>::res://addons/lootie/loot-table/loot-table-item.gd
 loot-table.gd::GDScript::-1::1714962358::0::1::::LootTable<>Node<>::
 loot_table.svg::CompressedTexture2D::5159785600472509717::1714962358::1714962618::1::::<><>::
-::res://Assets/::1715535983
+::res://Assets/::1716522418
+armoured gauntlets.png::CompressedTexture2D::844821639793431791::1716144976::1716247866::1::::<><>::
+bulwark.png::CompressedTexture2D::8886900744830289817::1716142071::1716142116::1::::<><>::
+cloak.png::CompressedTexture2D::5079890060641851005::1716142406::1716142430::1::::<><>::
 dagger.png::CompressedTexture2D::5013684712454318916::1715535983::1715469396::1::::<><>::
+dainsleif bow.png::CompressedTexture2D::4357543830581793469::1716245534::1716247520::1::::<><>::
 inventory_texture.png::CompressedTexture2D::7428568879017022575::1714336974::1714337025::1::::<><>::
 longsword.png::CompressedTexture2D::5305137396033361670::1715535983::1715471759::1::::<><>::
+oni's star.png::CompressedTexture2D::5084267854837620881::1716266039::1716266128::1::::<><>::
 pickaxe.png::CompressedTexture2D::4262490189949154070::1715535983::1715484058::1::::<><>::
+pulsing halberd.png::CompressedTexture2D::2900365670205281138::1716245969::1716247539::1::::<><>::
 ruby.png::CompressedTexture2D::3408215043333141520::1715535983::1715469396::1::::<><>::
+sickle.png::CompressedTexture2D::6083557740176092386::1716142100::1716142116::1::::<><>::
 slot1.png::CompressedTexture2D::6549966402104752440::1715535983::1715459220::1::::<><>::
+suspicious seal.png::CompressedTexture2D::2261990842097606122::1716143678::1716522418::1::::<><>::
 wand.png::CompressedTexture2D::1895943570588054896::1715535983::1715496739::1::::<><>::
 YOU_DIED.webp::CompressedTexture2D::6174296844289413955::1714336974::1714337025::1::::<><>::
-::res://Assets/Images/::1715535983
+::res://Assets/Images/::1716272209
 backpack.png::CompressedTexture2D::4297111941113431495::1715535983::1715535983::1::::<><>::
 ComfyUI_00346_.png::CompressedTexture2D::6391736763485883546::1714336974::1714337025::1::::<><>::
 ComfyUI_00355_.png::CompressedTexture2D::4354472011501517217::1714336974::1714337025::1::::<><>::
@@ -727,9 +735,10 @@ Skeleton enemy.png::CompressedTexture2D::8734841414591875172::1714797271::171479
 skeleton-Sheet.png::CompressedTexture2D::6813774431274033593::1715295199::1715302824::1::::<><>::
 slime-Sheet.png::CompressedTexture2D::5510741237513003050::1714336974::1714337025::1::::<><>::
 Star Stage 1.png::CompressedTexture2D::4621132184121714826::1714336974::1714337025::1::::<><>::
+Training Dummy Sprite Sheet.png::CompressedTexture2D::5841966367909962256::1716272175::1716272209::1::::<><>::
 TX Tileset Grass.png::CompressedTexture2D::8568368355672787214::1714336974::1714337025::1::::<><>::
 x-button.png::CompressedTexture2D::1991411250533729648::1714336974::1714337025::1::::<><>::
-::res://Assets/Images/All the tilesets/::1716130971
+::res://Assets/Images/All the tilesets/::1716130974
 Dungeon.png::CompressedTexture2D::1304727841221502355::1715535977::1715536015::1::::<><>::
 overworld.png::CompressedTexture2D::6316734494207866895::1715535977::1715536015::1::::<><>::
 wall_tilemap.png::CompressedTexture2D::5574730935665027417::1716130962::1716130974::1::::<><>::
@@ -738,65 +747,67 @@ Forest for main menu.png::CompressedTexture2D::7832967903669838081::1714336974::
 ::res://Assets/SoundEffects/::1714427065
 collectgem.mp3::AudioStreamMP3::6307901780626274728::1714336974::1714337025::1::::<><>::
 levelup.ogg::AudioStreamOggVorbis::4198481917066548828::1714337678::1714427065::1::::<><>::
-::res://Characters/::1716128743
+::res://Characters/::1716847484
 DamageNumbers.gd::GDScript::-1::1715730100::0::1::::<>Marker2D<>::
 damage_numbers.tscn::PackedScene::8224176648128856550::1715730100::0::1::::<><>::res://Characters/DamageNumbers.gd
 HealthBar.tscn::PackedScene::3431972551340900::1714797271::0::1::::<><>::
 item_option.gd::GDScript::-1::1714834642::0::1::::<>ColorRect<>::
-item_option.tscn::PackedScene::1693933769864685018::1716128742::0::1::::<><>::res://Characters/item_option.gd<>uid://n2boiufo6bon::::res://Assets/Images/pickaxe_mini.png
+item_option.tscn::PackedScene::1693933769864685018::1716847484::0::1::::<><>::res://Characters/item_option.gd<>uid://n2boiufo6bon::::res://Assets/Images/pickaxe_mini.png
 level_up.tscn::PackedScene::7654883185051325551::1714427586::0::1::::<><>::uid://b021nbvvi66w3::::res://Assets/SoundEffects/levelup.ogg
-player_adolf.gd::GDScript::-1::1715730107::0::1::::<>CharacterBody2D<>::
-player_adolf.tscn::PackedScene::4542568672243075346::1716128743::0::1::::<><>::res://Characters/player_adolf.gd<>uid://c4cv4tabmh56l::::res://Assets/Images/skeleton-Sheet.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dlrfbgyjerxfi::::res://Characters/Weapons/weapon.tscn<>uid://uor1uregugxf::::res://Assets/Images/exp_background.png<>uid://cdcys2h3m3tnr::::res://Assets/Images/exp_progress.png<>uid://d18ev83q6aql5::::res://Assets/Images/hp_background.png<>uid://da6lw3e74eyy0::::res://Assets/Images/hp_progress.png<>res://Menu/Pause/PauseMenu.gd<>uid://b021nbvvi66w3::::res://Assets/SoundEffects/levelup.ogg<>uid://rehlioxu3d30::::res://Music/volume_slider.tscn<>uid://0nqqxacxuayc::::res://Inventory/inventory.tscn<>uid://cynh3whul4t8n::::res://Characters/abilities/sprint.tscn<>uid://bpfd543m6nv6n::::res://Characters/abilities/heal.tscn
-::res://Characters/abilities/::1716128742
+player_adolf.gd::GDScript::-1::1716419128::0::1::::<>CharacterBody2D<>::
+player_adolf.tscn::PackedScene::4542568672243075346::1716847484::0::1::::<><>::res://Characters/player_adolf.gd<>uid://c4cv4tabmh56l::::res://Assets/Images/skeleton-Sheet.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dlrfbgyjerxfi::::res://Characters/Weapons/weapon.tscn<>uid://uor1uregugxf::::res://Assets/Images/exp_background.png<>uid://cdcys2h3m3tnr::::res://Assets/Images/exp_progress.png<>uid://d18ev83q6aql5::::res://Assets/Images/hp_background.png<>uid://da6lw3e74eyy0::::res://Assets/Images/hp_progress.png<>res://Menu/Pause/PauseMenu.gd<>uid://b021nbvvi66w3::::res://Assets/SoundEffects/levelup.ogg<>uid://rehlioxu3d30::::res://Music/volume_slider.tscn<>uid://0nqqxacxuayc::::res://Inventory/inventory.tscn<>uid://cynh3whul4t8n::::res://Characters/abilities/sprint.tscn<>uid://bpfd543m6nv6n::::res://Characters/abilities/heal.tscn
+::res://Characters/abilities/::1716137750
 heal.gd::GDScript::-1::1715730100::0::1::::<>Node2D<>::
 heal.tscn::PackedScene::3449812518848197591::1715730100::0::1::::<><>::res://Characters/abilities/heal.gd
 sprint.gd::GDScript::-1::1715535983::0::1::::<>Node2D<>::
-sprint.tscn::PackedScene::6484686713932363923::1716128742::0::1::::<><>::res://Characters/abilities/sprint.gd
-::res://Characters/Enemy/::1716128743
+sprint.tscn::PackedScene::6484686713932363923::1716137750::0::1::::<><>::res://Characters/abilities/sprint.gd
+::res://Characters/Enemy/::1716847484
+dummy.gd::GDScript::-1::1716272964::0::1::::<>CharacterBody2D<>::
+dummy.tscn::PackedScene::1823848522457683744::1716273540::0::1::::<><>::res://Characters/Enemy/dummy.gd<>uid://cph5lko3tokyy::::res://Assets/Images/Training Dummy Sprite Sheet.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
 EnemySpawner.gd::GDScript::-1::1714797271::0::1::::<>Node2D<>::
 enemy_spawner.tscn::PackedScene::3746545622702081094::1714846772::0::1::::<><>::res://Characters/Enemy/EnemySpawner.gd
 skeleton.gd::GDScript::-1::1715301943::0::1::::<>CharacterBody2D<>::
 skeleton.tscn::PackedScene::7664651522661223299::1715730100::0::1::::<><>::res://Characters/Enemy/skeleton.gd<>uid://dwphtdt1vrpvg::::res://Assets/Images/Skeleton enemy.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn<>uid://bwr23xwqndk::::res://Characters/HealthBar.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
 slime.gd::GDScript::-1::1714962851::0::1::::<>CharacterBody2D<>::
-slime.tscn::PackedScene::2938900666268323740::1716128743::0::1::::<><>::res://Characters/Enemy/slime.gd<>uid://ckrpdremyt5p3::::res://Assets/Images/slime-Sheet.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
-::res://Characters/Enemy/Drops/::1714763084
-loot_drop.gd::GDScript::-1::1714336974::0::1::::<>Area2D<>::
-loot_drop.tscn::PackedScene::173351038262175864::1714763084::0::1::::<><>::res://Characters/Enemy/Drops/loot_drop.gd<>uid://b63rmv62tpsle::::res://Assets/Images/Star Stage 1.png<>uid://cv4uhrfuxow6s::::res://Assets/SoundEffects/collectgem.mp3
+slime.tscn::PackedScene::2938900666268323740::1716847484::0::1::::<><>::res://Characters/Enemy/slime.gd<>uid://ckrpdremyt5p3::::res://Assets/Images/slime-Sheet.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
+::res://Characters/Enemy/Drops/::1716273069
+loot_drop.gd::GDScript::-1::1716273069::0::1::::<>Area2D<>::
+loot_drop.tscn::PackedScene::173351038262175864::1716273069::0::1::::<><>::res://Characters/Enemy/Drops/loot_drop.gd<>uid://b63rmv62tpsle::::res://Assets/Images/Star Stage 1.png<>uid://cv4uhrfuxow6s::::res://Assets/SoundEffects/collectgem.mp3
 random_picker.gd::GDScript::-1::1714336974::0::1::::<>Node<>::
-::res://Characters/Hitbox/::1716128742
+::res://Characters/Hitbox/::1716137750
 hit_box.gd::GDScript::-1::1715730100::0::1::::<>Area2D<>::
-hit_box.tscn::PackedScene::7845138849173671698::1716128742::0::1::::<><>::res://Characters/Hitbox/hit_box.gd
+hit_box.tscn::PackedScene::7845138849173671698::1716137750::0::1::::<><>::res://Characters/Hitbox/hit_box.gd
 hurt_box.gd::GDScript::-1::1715730100::0::1::::<>Area2D<>::
-hurt_box.tscn::PackedScene::4717317525185579792::1716128742::0::1::::<><>::res://Characters/Hitbox/hurt_box.gd
-::res://Characters/Weapons/::1716128743
+hurt_box.tscn::PackedScene::4717317525185579792::1716137750::0::1::::<><>::res://Characters/Hitbox/hurt_box.gd
+::res://Characters/Weapons/::1716847484
 sword.gd::GDScript::-1::1714336974::0::1::::<>CharacterBody2D<>::
-weapon.gd::GDScript::-1::1715535983::0::1::::<>Marker2D<>::
-weapon.tscn::PackedScene::7966739476304778742::1716128743::0::1::::<><>::res://Characters/Weapons/weapon.gd<>res://Characters/Weapons/sword.gd<>uid://cxcg8aco1xc1g::::res://Assets/Images/ComfyUI_00346_.png<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn
-::res://Data/::1714836731
-DataHandler.gd::GDScript::-1::1714836025::0::1::::<>Node<>::
-Item_data.json::JSON::-1::1714836731::0::1::::<><>::
+weapon.gd::GDScript::-1::1716278079::0::1::::<>Marker2D<>::
+weapon.tscn::PackedScene::7966739476304778742::1716847484::0::1::::<><>::res://Characters/Weapons/weapon.gd<>res://Characters/Weapons/sword.gd<>uid://cxcg8aco1xc1g::::res://Assets/Images/ComfyUI_00346_.png<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn
+::res://Data/::1716847113
+DataHandler.gd::GDScript::-1::1716841481::0::1::::<>Node<>::
+Item_data.json::JSON::-1::1716847113::0::1::::<><>::
 stats.gd::GDScript::-1::1714708437::0::1::::PlayerData<>Resource<>::
-::res://Deprecated files/::1716128743
+::res://Deprecated files/::1716273749
 gamemanager.gd::GDScript::-1::1715730100::0::1::::<>Node<>::
-gamemanager.tscn::PackedScene::5529784681886420712::1716128743::0::1::::<><>::res://Deprecated files/gamemanager.gd<>uid://5kkwx0t5l4e1::::res://Deprecated files/Background/tree.tscn<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>uid://dhg2xqrtvfpi6::::res://Characters/Enemy/skeleton.tscn<>res://spawn_info.gd<>uid://clopaewqesprl::::res://Assets/Images/All the tilesets/wall_tilemap.png
+gamemanager.tscn::PackedScene::5529784681886420712::1716273749::0::1::::<><>::res://Deprecated files/gamemanager.gd<>uid://5kkwx0t5l4e1::::res://Deprecated files/Background/tree.tscn<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>uid://dhg2xqrtvfpi6::::res://Characters/Enemy/skeleton.tscn<>res://spawn_info.gd<>uid://clopaewqesprl::::res://Assets/Images/All the tilesets/wall_tilemap.png
 game_over.gd::GDScript::-1::1715730100::0::1::::<>Node2D<>::
 game_over.tscn::PackedScene::1554421911217381554::1715730100::0::1::::<><>::
 restart_button.gd::GDScript::-1::1715730100::0::1::::<>Button<>::
 saved_scene.tscn::PackedScene::3019773337677505625::1715730100::0::1::::<><>::res://Deprecated files/gamemanager.gd<>uid://5kkwx0t5l4e1::::res://Deprecated files/Background/tree.tscn<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd
-::res://Deprecated files/Background/::1716128742
-tree.tscn::PackedScene::2126956791636134510::1716128742::0::1::::<><>::uid://bd221ximxw77y::::res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png
+::res://Deprecated files/Background/::1716137750
+tree.tscn::PackedScene::2126956791636134510::1716137750::0::1::::<><>::uid://bd221ximxw77y::::res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png
 ::res://Fonts/::1714337025
 CAMBRIA.TTC::FontFile::178975118560672299::1714336974::1714337025::1::::<><>::
 CAMBRIAB.TTF::FontFile::4586833295546370841::1714336974::1714337025::1::::<><>::
 CAMBRIAI.TTF::FontFile::6442532545763141232::1714336974::1714337025::1::::<><>::
 CAMBRIAZ.TTF::FontFile::7186213338800642863::1714336974::1714337025::1::::<><>::
-::res://Inventory/::1716128742
-inventory.gd::GDScript::-1::1715730107::0::1::::<>Control<>::
-inventory.tscn::PackedScene::1782559254499775234::1716128742::0::1::::<><>::res://Inventory/inventory.gd<>uid://b2hs2ntkap0sh::::res://Assets/Images/backpack.png
-item.gd::GDScript::-1::1714939526::0::1::::<>Node2D<>::
-item.tscn::PackedScene::5220632423001930039::1714336974::0::1::::<><>::res://Inventory/item.gd
+::res://Inventory/::1716847485
+inventory.gd::GDScript::-1::1716847453::0::1::::<>Control<>::
+inventory.tscn::PackedScene::1782559254499775234::1716847485::0::1::::<><>::res://Inventory/inventory.gd<>uid://b2hs2ntkap0sh::::res://Assets/Images/backpack.png
+item.gd::GDScript::-1::1716589844::0::1::::<>Node2D<>::
+item.tscn::PackedScene::5220632423001930039::1716847485::0::1::::<><>::res://Inventory/item.gd
 slot.gd::GDScript::-1::1714708437::0::1::::<>TextureRect<>::
-slot.tscn::PackedScene::3976353318320087248::1714336974::0::1::::<><>::uid://c0k38wcn2trlw::::res://Assets/slot1.png<>res://Inventory/slot.gd
+slot.tscn::PackedScene::3976353318320087248::1716847485::0::1::::<><>::uid://c0k38wcn2trlw::::res://Assets/slot1.png<>res://Inventory/slot.gd
 ::res://Menu/::1715730100
 Death.gd::GDScript::-1::1714336974::0::1::::<>Control<>::
 death.tscn::PackedScene::3832934885968145673::1714336974::0::1::::<><>::res://Menu/Death.gd<>uid://ct741cugcv00f::::res://Assets/YOU_DIED.webp
@@ -816,8 +827,8 @@ volume_slider.tscn::PackedScene::1201912958432018141::1714425664::0::1::::<><>::
 ::res://Save (not implemented)/::1715730100
 save.tscn::PackedScene::7187100633933306405::1715730100::0::1::::<><>::uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>res://Worlds/Hub World/door1.gd<>res://Worlds/Hub World/Door2.gd
 ::res://Worlds/::1715730100
-::res://Worlds/Hub World/::1715730100
+::res://Worlds/Hub World/::1716273540
 hubworld.gd::GDScript::-1::1715730100::0::1::::<>Node2D<>::
-hubworld.tscn::PackedScene::4016415103628302259::1715730100::0::1::::<><>::uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>res://Worlds/Hub World/hubworld.gd<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn
-::res://Worlds/Procedural  World/::1716128743
-Random-world.tscn::PackedScene::714032672451450665::1716128743::0::1::::<><>::res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd<>uid://clopaewqesprl::::res://Assets/Images/All the tilesets/wall_tilemap.png<>res://addons/gaea/generators/2D/walker_generator/walker_generator.gd<>res://addons/gaea/modifiers/2D/fill.gd<>res://addons/gaea/tile_info/tilemap_tile_info.gd<>res://addons/gaea/modifiers/2D/walls.gd<>res://addons/gaea/generators/2D/walker_generator/walker_generator_settings.gd<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd<>uid://dhg2xqrtvfpi6::::res://Characters/Enemy/skeleton.tscn
+hubworld.tscn::PackedScene::4016415103628302259::1716273540::0::1::::<><>::uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>res://Worlds/Hub World/hubworld.gd<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://08qrvu43ttcy::::res://Characters/Enemy/dummy.tscn
+::res://Worlds/Procedural  World/::1716273749
+Random-world.tscn::PackedScene::714032672451450665::1716273749::0::1::::<><>::res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd<>uid://clopaewqesprl::::res://Assets/Images/All the tilesets/wall_tilemap.png<>res://addons/gaea/generators/2D/walker_generator/walker_generator.gd<>res://addons/gaea/modifiers/2D/fill.gd<>res://addons/gaea/tile_info/tilemap_tile_info.gd<>res://addons/gaea/modifiers/2D/walls.gd<>res://addons/gaea/generators/2D/walker_generator/walker_generator_settings.gd<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd<>uid://dhg2xqrtvfpi6::::res://Characters/Enemy/skeleton.tscn

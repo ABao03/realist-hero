@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bxht1gcfp034r"]
+[gd_scene load_steps=16 format=3 uid="uid://bxht1gcfp034r"]
 
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Assets/Images/TX Tileset Grass.png" id="1_6ie46"]
 [ext_resource type="Script" path="res://Worlds/Hub World/hubworld.gd" id="1_ubf4m"]
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="2_qe1pk"]
+[ext_resource type="PackedScene" uid="uid://08qrvu43ttcy" path="res://Characters/Enemy/dummy.tscn" id="4_jcoi0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ogyh8"]
 texture = ExtResource("1_6ie46")
@@ -350,6 +351,10 @@ shape = SubResource("RectangleShape2D_btn2d")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(661, 173)
 shape = SubResource("RectangleShape2D_licmy")
+
+[node name="dummy" parent="." instance=ExtResource("4_jcoi0")]
+position = Vector2(162, 57)
+scale = Vector2(2, 2)
 
 [connection signal="body_entered" from="Door1" to="." method="_on_door_1_body_entered"]
 [connection signal="body_entered" from="Door2" to="." method="_on_door_2_body_entered"]
