@@ -75,3 +75,4 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Needs a TileMap to work.")
 
 	return warnings
+

@@ -844,10 +844,10 @@ tile = SubResource("Resource_dyits")
 fullness_check = 0
 max_tiles = 1000
 constrain_world_size = false
-max_walkers = 10
+max_walkers = 5
 new_dir_chance = 0.5
-new_walker_chance = 0.5
-destroy_walker_chance = 0.0
+new_walker_chance = 0.05
+destroy_walker_chance = 0.05
 room_chances = {
 Vector2i(2, 2): 0.5,
 Vector2i(3, 3): 0.1
@@ -911,10 +911,9 @@ expand_mode = 1
 script = ExtResource("9_ghhio")
 
 [node name="Button" type="Button" parent="box"]
-modulate = Color(1, 1, 1, 0)
+visible = false
 layout_mode = 0
 offset_right = 133.0
 offset_bottom = 99.0
 
-[connection signal="pressed" from="box/Button" to="PlayerAdolf" method="_on_button_pressed"]
 [connection signal="pressed" from="box/Button" to="box" method="_on_button_pressed"]

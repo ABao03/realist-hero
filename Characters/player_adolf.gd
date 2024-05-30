@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var collision = $CollisionShape2D
 @onready var maxhp = 100
 var hp = 100
+@onready var acc: int = 0
 
 var experience = 0
 var experience_level = 1
@@ -130,7 +131,9 @@ func calculate_experience(gem_exp):
 		
 		experience = 0
 		exp_required = calculate_experiencecap()
-		levelup()
+		#levelup()
+		acc += 1
+		print(acc)
 	else:
 		experience += collected_experience
 		collected_experience = 0
@@ -223,8 +226,13 @@ func update_stats(data):
 				hp *= data.get(stat)
 		if stat == "Defense":
 			pass
-			
 	
 
 
 
+
+
+func _on_button_pressed():
+	if acc > 0:
+		acc -= 1
+		levelup()
