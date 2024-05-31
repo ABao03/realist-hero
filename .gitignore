@@ -14,3 +14,4 @@
 .godot/editor/filesystem_cache8
 *.bin
 *.cfg
+/.godot

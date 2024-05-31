@@ -12,8 +12,6 @@ func _ready():
 	load_data(item_data_path)
 	set_grid_data()
 	set_component_data()
-	print(item_valid_combo_data)
-	print(item_valid_combo_data_2)
 
 # Load the data file
 func load_data(path : String) -> void:

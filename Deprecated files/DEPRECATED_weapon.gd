@@ -10,8 +10,7 @@ var rotationSpeed = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Slow down starting attack speed
-	animation.speed_scale = 0.5
+	pass
 
 func handleInput():
 	if Input.is_action_just_pressed("mouse_leftclick"):

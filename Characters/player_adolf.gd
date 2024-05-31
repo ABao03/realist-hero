@@ -23,8 +23,11 @@ var playerPaused = false
 
 #UI nodes
 
-# Attacks
-@onready var weapon = $weapon
+## Attacks
+#@onready var weapon = $weapon
+@onready var attackBox1 = $HitBox
+@onready var attackBox2 = $HitBox2
+var boxesFlipped = false
 
 # Upgrades
 var upgrade_options = []
@@ -47,6 +50,7 @@ var enemy_close = []
 
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer
+@onready var animation_tree = $AnimationTree
 @onready var sprite = $Sprite2D
 
 # GUI
@@ -63,34 +67,50 @@ var enemy_close = []
 func _ready():
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
 	set_expbar(experience, calculate_experiencecap())
-	set_healthbar(hp, 100)
+	animation_tree.active = true
+	set_healthbar(hp, maxhp)
+	modulate = Color(1, 1, 1, 1)
 
 func _physics_process(delta):
 	if playerPaused == false:
-		axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
-		axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
-		
-		var thisSpeed = speed * 100
-		velocity = delta * thisSpeed * axis
-		
-		if velocity == Vector2.ZERO:
-			if sprite.flip_h == true:
-				animation.play("idle_left")
-			else:
-				animation.play("idle_right")
+		if Input.is_action_pressed("mouse_leftclick"):
+			animation_tree["parameters/conditions/swing"] = true
 		else:
-			if axis.x > 0:
-				sprite.flip_h = false
-			elif axis.x < 0:
-				sprite.flip_h = true
+			animation_tree["parameters/conditions/swing"] = false
+			
+			axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
+			axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
+			
+			var thisSpeed = speed * 100
+			velocity = delta * thisSpeed * axis
+			
+			if velocity == Vector2.ZERO:
+				animation_tree["parameters/conditions/idle"] = true
+				animation_tree["parameters/conditions/is_moving"] = false
 			else:
-				if sprite.flip_h == true:
+				animation_tree["parameters/conditions/idle"] = false
+				animation_tree["parameters/conditions/is_moving"] = true
+				if axis.x > 0:
+					sprite.flip_h = false
+				elif axis.x < 0:
 					sprite.flip_h = true
 				else:
-					sprite.flip_h = false
-			animation.play("walk")
-			
-		move_and_slide()
+					if sprite.flip_h == true:
+						sprite.flip_h = true
+					else:
+						sprite.flip_h = false
+				
+			if animation_tree.get("parameters/playback").get_current_node() != "attack":
+				move_and_slide()
+		
+		if sprite.flip_h == true && boxesFlipped == false:
+			attackBox1.position -= Vector2(28,0)
+			attackBox2.position -= Vector2(58,0)
+			boxesFlipped = true
+		if sprite.flip_h == false && boxesFlipped == true:
+			attackBox1.position += Vector2(28,0)
+			attackBox2.position += Vector2(58,0)
+			boxesFlipped = false
 
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	hp -= damage
@@ -172,9 +192,9 @@ func levelup():
 		options += 1
 	get_tree().paused = true
 
-func set_healthbar(set_value = 1, set_max_value = 100):
-	healthBar.value = set_value
+func set_healthbar(added_hp, set_max_value):
 	healthBar.max_value = set_max_value
+	healthBar.value += added_hp
 
 func upgrade_character(upgrade):
 	emit_signal("selected_upgrade",upgrade)
@@ -200,38 +220,48 @@ func update_stats(data):
 			var damage = data.get(stat)
 			if damage > 2:
 				damage = int(damage/10)
+				attackBox1.damage += damage
+				attackBox2.damage += damage
 			else:
-				pass
-			weapon.changeWeaponDamage(damage)
+				attackBox1.damage *= damage
+				attackBox2.damage *= damage
+			
 		if stat == "Magic":
 			var damage = data.get(stat)
 			if data.get(stat) > 2:
 				damage = int(damage/10)
+				attackBox1.magicDamage += damage
+				attackBox2.magicDamage += damage
 			else:
-				pass
-			weapon.changeMagicDamage(damage)
+				attackBox1.magicDamage *= damage
+				attackBox2.magicDamage *= damage
+				
 		if stat == "Attack Speed":
-			weapon.changeWeaponSpeed(data.get(stat))
+			var currentSpeed = animation.speed_scale
+			animation.speed_scale = currentSpeed * data.get(stat)
+			
 		if stat == "Crit":
-			weapon.changeWeaponCrit(data.get(stat))
+			attackBox1.crit *= data.get(stat)
+			attackBox2.crit *= data.get(stat)
+			
 		if stat == "Move Speed":
 			if float(stat) > 2:
 				speed += data.get(stat)
 			else:
 				speed *= data.get(stat)
+				
 		if stat == "Max Health":
-			if float(stat) > 2:
-				hp += data.get(stat)
+			var addedhp
+			if float(data.get(stat)) > 2:
+				addedhp = data.get(stat)
 			else:
-				hp *= data.get(stat)
+				addedhp = maxhp * data.get(stat)
+			maxhp += addedhp
+			set_healthbar(addedhp, maxhp)
+			
 		if stat == "Defense":
 			pass
 	
-
-
-
-
-
 func _on_button_pressed():
 	if acc > 0:
 		acc -= 1

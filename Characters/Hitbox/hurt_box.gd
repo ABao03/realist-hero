@@ -13,7 +13,7 @@ extends Area2D
 @onready var disableTimer = $DisableTimer 
 
 # Send the signal for damage taken
-signal hurt(damage, isMagic, isCrit)
+signal hurt(damage, magicDamage, isCrit)
 
 # Detect when the hitbox enters a hurtbox 
 func _on_area_entered(area): 
@@ -30,11 +30,11 @@ func _on_area_entered(area):
 					if area.has_method("tempdisable"):
 						area.tempdisable()
 			var damage = area.damage
-			var isMagic = area.magic
+			var magicDamage = area.magicDamage
 			var isCrit = false
-			if randf_range(0,1) < area.crit && isMagic == false:
+			if randf_range(0,1) < area.crit:
 				isCrit = true
-			emit_signal("hurt", damage, isMagic, isCrit)
+			emit_signal("hurt", damage, magicDamage, isCrit)
 
 # Once cooldown runs out, re-enable hurtbox
 func _on_disable_timer_timeout():

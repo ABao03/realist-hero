@@ -11,7 +11,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "2.5% magic and 10% move speed"
+		"Info": "85 physical damage"
 	},
 	"2": {
 		"ID": "2",
@@ -25,7 +25,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "7% move speed and crit"
+		"Info": "12% attack speed"
 	},
 	"3": {
 		"ID": "3",
@@ -39,7 +39,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "5% crit and 10% attack speed"
+		"Info": "30 magic damage and 3% attack speed"
 	},
 	"4": {
 		"ID": "4",
@@ -53,7 +53,7 @@
 		"Max Health": "20.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": ""
+		"Info": "20 max health"
 	},
 	"5": {
 		"ID": "5",
@@ -67,7 +67,7 @@
 		"Max Health": "15.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "15% attack speed and 10% move speed"
+		"Info": "30 physical damage and 5% move speed"
 	},
 	"6": {
 		"ID": "6",
@@ -81,12 +81,12 @@
 		"Max Health": "0.00",
 		"Defense": "30.00",
 		"Components": "",
-		"Info": "25 max health"
+		"Info": "30 defense"
 	},
 	"7": {
 		"ID": "7",
 		"Name": "Sickle",
-		"Grid": "0,0/1,0/1,1",
+		"Grid": "0,0/1,0/1,-1",
 		"Physical": "0.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
@@ -95,7 +95,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": ""
+		"Info": "7.5% crit and 2.5% move speed"
 	},
 	"8": {
 		"ID": "8",
@@ -109,7 +109,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": ""
+		"Info": "4% magic, crit and move speed"
 	},
 	"9": {
 		"ID": "9",
@@ -122,8 +122,8 @@
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "15.00",
-		"Components": "1,2",
-		"Info": ""
+		"Components": "",
+		"Info": "10 magic and 15 defense"
 	},
 	"10": {
 		"ID": "10",
@@ -137,7 +137,7 @@
 		"Max Health": "0.00",
 		"Defense": "20.00",
 		"Components": "6,5",
-		"Info": ""
+		"Info": "2.5% physical and 20 defense"
 	},
 	"11": {
 		"ID": "11",
@@ -151,7 +151,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "8,2",
-		"Info": ""
+		"Info": "5% magic and 7% attack speed"
 	},
 	"12": {
 		"ID": "12",
@@ -165,7 +165,7 @@
 		"Max Health": "10.00",
 		"Defense": "1.06",
 		"Components": "4,7",
-		"Info": ""
+		"Info": "10 max health, 6% crit and defense"
 	},
 	"13": {
 		"ID": "13",
@@ -179,6 +179,6 @@
 		"Max Health": "20.00",
 		"Defense": "0.00",
 		"Components": "4,5",
-		"Info": ""
+		"Info": "60 physical damage and 20 max health"
 	}
 }

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var weapon = get_tree().get_first_node_in_group("weapon")
+@onready var player = get_tree().get_first_node_in_group("player")
 @onready var originalDamage
 @onready var newDamage
 @onready var boost_ready : bool = true
@@ -8,7 +8,8 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	originalDamage = weapon.physicalHitbox.damage
+	await player.ready
+	originalDamage = player.attackBox1.damage
 
 
 	newDamage = originalDamage*1.5
@@ -17,19 +18,22 @@ func _on_button_pressed():
 	if boost_ready == true:
 		#$Timer.start()
 		#boost_ready = false
-		weapon.physicalHitbox.damage = newDamage
+		player.attackBox1.damage = newDamage
+		player.attackBox2.damage = newDamage
+		print(player.attackBox1.damage)
 		button_pressed = true
 
 func _input(event: InputEvent): # Show/hide pause menu
 	if event.is_action_pressed("mouse_leftclick") and boost_ready == true and button_pressed == true:
-		print(weapon.physicalHitbox.damage)
+		#print(player.attackBox1.damage)
 		$Timer.start()
 		boost_ready = false
 		button_pressed = false
 
 
 func _on_timer_timeout():
-	weapon.physicalHitbox.damage = originalDamage
+	player.attackBox1.damage = originalDamage
+	player.attackBox2.damage = originalDamage
 	$CoolDown.start()
 	
 func _on_cool_down_timeout():
@@ -40,7 +44,7 @@ func _on_cool_down_timeout():
 
 #
 #func _on_timer_timeout():
-	#weapon.physicalHitbox.damage = originalDamage
+	#player.attackBox1.damage = originalDamage
 	#$CoolDown.start()
 	#print("timer time out") # Replace with function body.
 #
