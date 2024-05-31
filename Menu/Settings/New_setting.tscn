@@ -53,10 +53,10 @@ bus_name = "Master"
 
 [node name="Label2" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 179.0
-offset_right = 268.0
-offset_bottom = 202.0
+offset_left = 153.0
+offset_top = 104.0
+offset_right = 271.0
+offset_bottom = 127.0
 text = "Music Volume"
 
 [node name="Volume_Slider2" parent="ColorRect" instance=ExtResource("2_dkeoh")]
@@ -67,25 +67,58 @@ anchor_top = 0.201
 anchor_right = 0.362
 anchor_bottom = 0.201
 offset_left = -104.61
-offset_top = 103.49
+offset_top = 37.49
 offset_right = 227.39
-offset_bottom = 119.49
+offset_bottom = 53.49
 bus_name = "music"
 
 [node name="Label3" type="Label" parent="ColorRect"]
 layout_mode = 0
-offset_left = 166.0
-offset_top = 328.0
-offset_right = 253.0
-offset_bottom = 351.0
+offset_left = 163.0
+offset_top = 171.0
+offset_right = 250.0
+offset_bottom = 194.0
 text = "Sfx Volume"
 
 [node name="Volume_Slider3" parent="ColorRect" instance=ExtResource("2_dkeoh")]
 layout_mode = 0
 offset_left = 46.0
-offset_top = 361.0
+offset_top = 201.0
 offset_right = 378.0
-offset_bottom = 377.0
+offset_bottom = 217.0
 bus_name = "sfx"
 
+[node name="Windowed" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.5
+offset_top = -167.0
+offset_right = 72.5
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Windowed"
+
+[node name="Fullscreen" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -74.5
+offset_top = -237.0
+offset_right = 72.5
+offset_bottom = -202.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Full Screen
+"
+
 [connection signal="pressed" from="ColorRect/Return" to="." method="_on_return_pressed"]
+[connection signal="pressed" from="ColorRect/Windowed" to="." method="_on_windowed_pressed"]
+[connection signal="pressed" from="ColorRect/Fullscreen" to="." method="_on_fullscreen_pressed"]
