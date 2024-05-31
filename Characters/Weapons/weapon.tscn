@@ -82,7 +82,7 @@ _data = {
 "attack": SubResource("Animation_y6tlf")
 }
 
-[node name="weapon" type="Marker2D"]
+[node name="weapon" type="Marker2D" groups=["weapon"]]
 light_mask = 7
 visibility_layer = 7
 script = ExtResource("1_blaor")
