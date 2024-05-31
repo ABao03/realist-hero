@@ -11,14 +11,17 @@ var selected = false
 var grid_anchor = null
 
 # Hover Info
-@onready var hoverInfo = get_node('%HoverInfo')
-@onready var hoverGrid = get_node('%GridContainer')
+@onready var hoverInfo = get_tree().get_first_node_in_group("info")
+signal entered_item(selectedItem)
+signal exited_item()
+signal item_rotated()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	process_mode = PROCESS_MODE_ALWAYS
-	hoverInfo.visible = false
-	hoverInfo.z_index = 5
+	connect("entered_item",Callable(hoverInfo,"mouse_entered"))
+	connect("exited_item",Callable(hoverInfo,"mouse_exited"))
+	connect("item_rotated",Callable(hoverInfo,"counter_rotate"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 # Makes the picked up item follow the cursor. 
@@ -53,8 +56,6 @@ func load_item(a_ItemID : int) -> void:
 	item_ID = DataHandler.item_data[str(a_ItemID)]["ID"]
 	item_name = DataHandler.item_data[str(a_ItemID)]["Name"]
 	item_info = DataHandler.item_data[str(a_ItemID)]["Info"]
-	
-	load_info()
 
 func delete_item():
 	queue_free()
@@ -68,8 +69,6 @@ func rotate_item():
 	rotation_degrees += 90
 	if rotation_degrees>=360:
 		rotation_degrees = 0
-	
-	hoverInfo.rotation = deg_to_rad(-rotation_degrees)
 
 # Snap item to the nearest part of grid
 func _snap_to(destination):
@@ -83,24 +82,8 @@ func _snap_to(destination):
 	tween.tween_property(self, "global_position", destination, 0.15).set_trans(Tween.TRANS_SINE)
 	selected = false
 
-func load_info():
-	var nameInfo = Label.new()
-	nameInfo.label_settings = LabelSettings.new()
-	nameInfo.text = item_name
-	nameInfo.label_settings.font_size = 11
-	nameInfo.z_index = 6
-	hoverGrid.add_child(nameInfo)
-	
-	for stat in stats_data:
-		var thisInfo = Label.new()
-		thisInfo.label_settings = LabelSettings.new()
-		thisInfo.text = stat + ": " + str(stats_data[stat])
-		thisInfo.label_settings.font_size = 9
-		thisInfo.z_index = 6
-		hoverGrid.add_child(thisInfo)
-
 func _on_icon_mouse_entered():
-	hoverInfo.visible = true
+	emit_signal("entered_item", self)
 
 func _on_icon_mouse_exited():
-	hoverInfo.visible = false
+	emit_signal("exited_item")

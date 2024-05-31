@@ -106,6 +106,9 @@ collision_mask = 4
 position = Vector2(16.5, 16)
 shape = SubResource("RectangleShape2D_yey8l")
 
+[node name="DisableTimer" parent="slime/HurtBox" index="1"]
+wait_time = 0.7
+
 [node name="HitBox" parent="slime" instance=ExtResource("4_d2e3y")]
 collision_layer = 2
 collision_mask = 2

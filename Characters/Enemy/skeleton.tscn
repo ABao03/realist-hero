@@ -397,7 +397,7 @@ position = Vector2(56, 49)
 shape = SubResource("CircleShape2D_187pg")
 
 [node name="Timer" type="Timer" parent="HurtBox"]
-wait_time = 0.5
+wait_time = 0.7
 one_shot = true
 
 [node name="HealthBar" parent="." instance=ExtResource("5_ja13o")]

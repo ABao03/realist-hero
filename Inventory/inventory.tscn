@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://0nqqxacxuayc"]
+[gd_scene load_steps=4 format=3 uid="uid://0nqqxacxuayc"]
 
 [ext_resource type="Script" path="res://Inventory/inventory.gd" id="1_jolrh"]
 [ext_resource type="Texture2D" uid="uid://b2hs2ntkap0sh" path="res://Assets/Images/backpack.png" id="2_amuen"]
+[ext_resource type="PackedScene" uid="uid://dsql475l10syn" path="res://Inventory/hover_info.tscn" id="3_hero3"]
 
 [node name="Inventory" type="Control"]
 process_mode = 3
@@ -115,6 +116,14 @@ layout_mode = 2
 theme_override_constants/h_separation = 1
 theme_override_constants/v_separation = 1
 columns = 8
+
+[node name="hoverInfo" parent="." instance=ExtResource("3_hero3")]
+z_index = 1
+layout_mode = 0
+offset_left = 594.0
+offset_top = 248.0
+offset_right = 793.0
+offset_bottom = 398.0
 
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Add_slot" to="." method="_on_add_slot_pressed"]

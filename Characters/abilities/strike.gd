@@ -20,7 +20,6 @@ func _on_button_pressed():
 		#boost_ready = false
 		player.attackBox1.damage = newDamage
 		player.attackBox2.damage = newDamage
-		print(player.attackBox1.damage)
 		button_pressed = true
 
 func _input(event: InputEvent): # Show/hide pause menu
