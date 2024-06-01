@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bh4vi84vnnpf5"]
+[gd_scene load_steps=21 format=3 uid="uid://bh4vi84vnnpf5"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/slime.gd" id="1_dtmf7"]
+[ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_hl17i"]
 [ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/slime-Sheet.png" id="2_li24n"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_moyka"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_d2e3y"]
@@ -8,6 +9,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tjmpm"]
 size = Vector2(18, 8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_he13n"]
+resource_local_to_scene = true
+shader = ExtResource("2_hl17i")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_8kdsa"]
 length = 0.001
@@ -22,6 +29,35 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_w7ovp"]
+resource_name = "hurt"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_qbk7v"]
@@ -44,8 +80,12 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6kpg"]
 _data = {
 "RESET": SubResource("Animation_8kdsa"),
+"hurt": SubResource("Animation_w7ovp"),
 "move": SubResource("Animation_qbk7v")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ol6w"]
+animation = &"hurt"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ia5fa"]
 animation = &"move"
@@ -53,10 +93,21 @@ animation = &"move"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v76bw"]
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xiuwx"]
+advance_mode = 2
+advance_condition = &"hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ffldp"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"move"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sxs7k"]
+states/hurt/node = SubResource("AnimationNodeAnimation_0ol6w")
+states/hurt/position = Vector2(452, 100)
 states/move/node = SubResource("AnimationNodeAnimation_ia5fa")
 states/move/position = Vector2(323, 100)
-transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_v76bw")]
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_v76bw"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_xiuwx"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_ffldp")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yey8l"]
 size = Vector2(33, 20)
@@ -79,6 +130,7 @@ position = Vector2(1, 5)
 shape = SubResource("RectangleShape2D_tjmpm")
 
 [node name="Sprite2D" type="Sprite2D" parent="slime"]
+material = SubResource("ShaderMaterial_he13n")
 texture = ExtResource("2_li24n")
 hframes = 8
 vframes = 3
@@ -89,13 +141,14 @@ libraries = {
 }
 speed_scale = 0.5
 
-[node name="AnimationTree" type="AnimationTree" parent="slime/AnimationPlayer"]
-root_node = NodePath("../..")
+[node name="AnimationTree" type="AnimationTree" parent="slime"]
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")
 }
 tree_root = SubResource("AnimationNodeStateMachine_sxs7k")
-anim_player = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/hurt = false
+parameters/conditions/move = false
 
 [node name="HurtBox" parent="slime" instance=ExtResource("3_moyka")]
 position = Vector2(-16, -12)
@@ -120,6 +173,7 @@ shape = SubResource("RectangleShape2D_g0xg1")
 [node name="DamageNumbers" parent="slime" instance=ExtResource("5_yrl4f")]
 position = Vector2(1, -6)
 
+[connection signal="animation_finished" from="slime/AnimationTree" to="slime" method="_on_animation_tree_animation_finished"]
 [connection signal="hurt" from="slime/HurtBox" to="slime" method="_on_hurt_box_hurt"]
 
 [editable path="slime/HurtBox"]

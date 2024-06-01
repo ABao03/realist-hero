@@ -120,7 +120,7 @@ func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	hp -= damage
 	if hp == 0 or hp < 0:
 		get_tree().change_scene_to_file("res://Menu/death.tscn")
-	set_healthbar(hp-damage, 100)
+	set_healthbar(hp-damage, maxhp)
 
 # Changes the target variable inside of the xp drop from null to the player. 
 # So, the xp drop is pulled towards the player. 
@@ -196,7 +196,7 @@ func levelup():
 		options += 1
 	get_tree().paused = true
 
-func set_healthbar(added_hp, set_max_value):
+func set_healthbar(hp, set_max_value):
 	healthBar.max_value = set_max_value
 	healthBar.value = hp
 

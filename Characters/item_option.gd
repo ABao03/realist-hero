@@ -20,6 +20,7 @@ func _ready():
 	
 func _input(event):
 	if event.is_action("mouse_leftclick"):
+		print(lblName.text)
 		if mouse_over:
 			emit_signal("selected_upgrade",item)
 

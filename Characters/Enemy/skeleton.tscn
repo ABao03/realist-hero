@@ -354,11 +354,12 @@ animations = [{
 radius = 18.0
 height = 70.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_busuh"]
-radius = 101.352
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s235e"]
+size = Vector2(67, 68)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_187pg"]
-radius = 76.1052
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ivg80"]
+radius = 28.0
+height = 110.0
 
 [node name="skeleton" type="CharacterBody2D"]
 collision_layer = 6
@@ -370,21 +371,23 @@ script = ExtResource("1_joy33")
 position = Vector2(56, 49)
 scale = Vector2(2.79688, 3.21875)
 sprite_frames = SubResource("SpriteFrames_sdevi")
-animation = &"Attacking"
-frame_progress = 0.316085
+animation = &"Hurt"
+frame = 2
+frame_progress = 0.295759
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(56, 47)
 shape = SubResource("CapsuleShape2D_4vo3d")
 
 [node name="HitBox" parent="." instance=ExtResource("4_acw4m")]
+position = Vector2(4, 2)
 collision_layer = 2
 collision_mask = 2
 damage = 5
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox"]
-position = Vector2(42, 53.5)
-shape = SubResource("CircleShape2D_busuh")
+position = Vector2(30.5, 70)
+shape = SubResource("RectangleShape2D_s235e")
 
 [node name="Timer" type="Timer" parent="HitBox"]
 
@@ -393,8 +396,8 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(56, 49)
-shape = SubResource("CircleShape2D_187pg")
+position = Vector2(49, 50)
+shape = SubResource("CapsuleShape2D_ivg80")
 
 [node name="Timer" type="Timer" parent="HurtBox"]
 wait_time = 0.7
