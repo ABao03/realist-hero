@@ -4,7 +4,9 @@ extends Node2D
 @onready var hurtbox = get_node("../HurtBox")
 @onready var originalSpeed
 @onready var sprintSpeed = 2000
+@onready var buttonclicked: bool = false
 var isReady : bool = true
+var isPressed : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,14 +20,12 @@ func _input(event: InputEvent): # Show/hide pause menu
 		isReady = false
 		hurtbox.collision.call_deferred("set", "disabled", true)
 		#player.collision.call_deferred("set", "disabled", true)
-		player.set_collision_mask_value(2, false)
-			
+		player.set_collision_mask_value(2, false)	
 	else:
 		pass
 
 func _on_sprint_button_pressed():
 	if isReady == true:
-
 		$Timer.start()
 		$CooldownTimer.start()
 		player.speed = sprintSpeed

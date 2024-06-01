@@ -13,6 +13,7 @@ var experience_level = 1
 var collected_experience = 0
 var held_items = []
 var x = true
+@onready var button_clicked = get_node("Sprint")
 
 # Movement
 @onready var axis = Vector2.ZERO
@@ -99,8 +100,11 @@ func _physics_process(delta):
 						sprite.flip_h = true
 					else:
 						sprite.flip_h = false
-				
-			if animation_tree.get("parameters/playback").get_current_node() != "attack":
+			
+			if animation_tree.get("parameters/playback").get_current_node() == "attack" and button_clicked.isReady == false:
+				move_and_slide()
+			
+			elif animation_tree.get("parameters/playback").get_current_node() != "attack":
 				move_and_slide()
 		
 		if sprite.flip_h == true && boxesFlipped == false:
@@ -194,7 +198,7 @@ func levelup():
 
 func set_healthbar(added_hp, set_max_value):
 	healthBar.max_value = set_max_value
-	healthBar.value += added_hp
+	healthBar.value = hp
 
 func upgrade_character(upgrade):
 	emit_signal("selected_upgrade",upgrade)
@@ -257,7 +261,7 @@ func update_stats(data):
 			else:
 				addedhp = maxhp * data.get(stat)
 			maxhp += addedhp
-			set_healthbar(addedhp, maxhp)
+			set_healthbar(hp+addedhp, maxhp)
 			
 		if stat == "Defense":
 			pass
@@ -266,3 +270,8 @@ func _on_button_pressed():
 	if acc > 0:
 		acc -= 1
 		levelup()
+
+
+func _on_timer_timeout():
+	pass
+	#speed = 150

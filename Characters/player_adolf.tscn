@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=38 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
 [ext_resource type="PackedScene" uid="uid://cynh3whul4t8n" path="res://Characters/abilities/sprint.tscn" id="13_qhlup"]
+[ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="14_xrtiu"]
 [ext_resource type="PackedScene" uid="uid://tch3uejinpj0" path="res://Characters/abilities/strike.tscn" id="15_w1d75"]
 
@@ -465,13 +466,14 @@ text = "Load
 
 [node name="Inventory" parent="." groups=["inventory"] instance=ExtResource("12_0ii4i")]
 z_index = 3
-offset_left = -660.0
-offset_top = -342.0
-offset_right = -660.0
-offset_bottom = -342.0
+offset_left = -665.0
+offset_top = -333.0
+offset_right = -665.0
+offset_bottom = -333.0
 
 [node name="Sprint" parent="." instance=ExtResource("13_qhlup")]
-position = Vector2(-91, 285)
+unique_name_in_owner = true
+position = Vector2(-368, 291)
 
 [node name="HitBox" parent="." instance=ExtResource("14_xrtiu")]
 unique_name_in_owner = true
@@ -499,6 +501,12 @@ disabled = true
 [node name="Strike" parent="." instance=ExtResource("15_w1d75")]
 position = Vector2(295, 288)
 
+[node name="Node2D" parent="." instance=ExtResource("14_qufa4")]
+position = Vector2(-12, 298)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
@@ -512,6 +520,7 @@ position = Vector2(295, 288)
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Exit to desktop" to="GUILayer/Pausescreen" method="_on_exit_to_desktop_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Save" to="GUILayer/Pausescreen" method="_on_save_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Load" to="GUILayer/Pausescreen" method="_on_load_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]
