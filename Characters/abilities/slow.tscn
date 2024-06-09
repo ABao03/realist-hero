@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://clegbepd3k4ex"]
+
+[ext_resource type="Script" path="res://Characters/abilities/slow.gd" id="1_nwfo5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oajgm"]
+radius = 128.004
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_nwfo5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 30.0
+
+[node name="Slow" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="Slow" type="CollisionShape2D" parent="Slow"]
+shape = SubResource("CircleShape2D_oajgm")
+disabled = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="Slow" to="." method="_on_slow_body_entered"]
+[connection signal="body_exited" from="Slow" to="." method="_on_slow_body_exited"]

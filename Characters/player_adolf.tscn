@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=39 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="14_xrtiu"]
 [ext_resource type="PackedScene" uid="uid://tch3uejinpj0" path="res://Characters/abilities/strike.tscn" id="15_w1d75"]
+[ext_resource type="PackedScene" uid="uid://clegbepd3k4ex" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
 size = Vector2(5.00132, 14.3164)
@@ -501,11 +502,13 @@ disabled = true
 [node name="Strike" parent="." instance=ExtResource("15_w1d75")]
 position = Vector2(295, 288)
 
-[node name="Node2D" parent="." instance=ExtResource("14_qufa4")]
+[node name="Heal" parent="." instance=ExtResource("14_qufa4")]
 position = Vector2(-12, 298)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
+
+[node name="Slow" parent="." instance=ExtResource("16_axbap")]
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
