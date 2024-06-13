@@ -35,6 +35,12 @@ var upgrade_options = []
 @onready var inventory = get_tree().get_first_node_in_group("inventory")
 signal selected_upgrade(upgrade)
 
+#ranged attack
+var bow_equipped = false
+var bow_cooldown = true
+var arrow_shot = false
+var arrow = preload("res://Characters/arrow.tscn")
+
 # Stats
 var addedStats = {
 	"addedPhysical" = 0, 
@@ -74,7 +80,13 @@ func _ready():
 
 func _physics_process(delta):
 	if playerPaused == false:
-		if Input.is_action_pressed("mouse_leftclick"):
+		if Input.is_action_just_pressed("switch"):
+			if bow_equipped == true:
+				bow_equipped = false
+			else:
+				bow_equipped = true
+		
+		if Input.is_action_pressed("mouse_leftclick") and bow_equipped == false:
 			animation_tree["parameters/conditions/swing"] = true
 		else:
 			animation_tree["parameters/conditions/swing"] = false
@@ -106,6 +118,20 @@ func _physics_process(delta):
 			
 			elif animation_tree.get("parameters/playback").get_current_node() != "attack":
 				move_and_slide()
+				
+			var mouse_pos = get_global_mouse_position()
+			$Marker2D.look_at(mouse_pos)
+			
+			if Input.is_action_just_pressed("mouse_leftclick") and bow_equipped and bow_cooldown:
+				bow_cooldown = false
+				var arrow_instance = arrow.instantiate()
+				arrow_instance.rotation = $Marker2D.rotation
+				arrow_instance.global_position = $Marker2D.global_position
+				add_child(arrow_instance)
+				
+				await get_tree().create_timer(1).timeout
+				bow_cooldown = true
+				
 		
 		if sprite.flip_h == true && boxesFlipped == false:
 			attackBox1.position -= Vector2(28,0)
