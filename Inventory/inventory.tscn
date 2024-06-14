@@ -125,6 +125,10 @@ offset_top = 248.0
 offset_right = 793.0
 offset_bottom = 398.0
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Add_slot" to="." method="_on_add_slot_pressed"]
 [connection signal="pressed" from="Background2/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

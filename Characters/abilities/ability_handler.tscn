@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cinfijdsg7wv1"]
+
+[ext_resource type="Script" path="res://Characters/abilities/ability_handler.gd" id="1_mp48g"]
+[ext_resource type="PackedScene" uid="uid://cx0gccuktsqtu" path="res://Characters/abilities/lightning.tscn" id="2_212kp"]
+[ext_resource type="PackedScene" uid="uid://d2qw82nur8cno" path="res://Characters/abilities/lightning_slash.tscn" id="3_cabjd"]
+
+[node name="ability_handler" type="Node2D" groups=["ability"]]
+script = ExtResource("1_mp48g")
+
+[node name="Lightning" parent="." instance=ExtResource("2_212kp")]
+
+[node name="LightningSlash" parent="." instance=ExtResource("3_cabjd")]
+
+[node name="HitBox" parent="LightningSlash" index="1"]
+damage = 15
+
+[editable path="Lightning"]
+[editable path="Lightning/HitBox"]
+[editable path="LightningSlash"]
+[editable path="LightningSlash/HitBox"]

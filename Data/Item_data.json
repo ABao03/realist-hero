@@ -19,13 +19,13 @@
 		"Grid": "0,0/0,1",
 		"Physical": "0.00",
 		"Magic": "0.00",
-		"Attack Speed": "1.12",
+		"Attack Speed": "1.22",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "12% attack speed"
+		"Info": "22% attack speed"
 	},
 	"3": {
 		"ID": "3",
@@ -33,13 +33,13 @@
 		"Grid": "0,0/1,0",
 		"Physical": "0.00",
 		"Magic": "30.00",
-		"Attack Speed": "1.03",
+		"Attack Speed": "1.13",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "30 magic damage and 3% attack speed"
+		"Info": "30 magic damage and 13% attack speed"
 	},
 	"4": {
 		"ID": "4",
@@ -63,11 +63,11 @@
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
-		"Move Speed": "1.05",
+		"Move Speed": "1.15",
 		"Max Health": "15.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "30 physical damage and 5% move speed"
+		"Info": "30 physical damage and 15% move speed"
 	},
 	"6": {
 		"ID": "6",
@@ -90,29 +90,15 @@
 		"Physical": "0.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
-		"Crit": "1.08",
-		"Move Speed": "1.03",
+		"Crit": "1.15",
+		"Move Speed": "1.13",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
-		"Info": "7.5% crit and 2.5% move speed"
+		"Info": "15% crit and 13% move speed"
 	},
 	"8": {
 		"ID": "8",
-		"Name": "Cloak",
-		"Grid": "-1,-1/-1,0/0,-1/0,0/1,0/2,0",
-		"Physical": "0.00",
-		"Magic": "1.04",
-		"Attack Speed": "0.00",
-		"Crit": "1.04",
-		"Move Speed": "1.04",
-		"Max Health": "0.00",
-		"Defense": "0.00",
-		"Components": "",
-		"Info": "4% magic, crit and move speed"
-	},
-	"9": {
-		"ID": "9",
 		"Name": "Suspicious Seal",
 		"Grid": "0,0/0,1/1,0/1,1",
 		"Physical": "0.00",
@@ -125,11 +111,25 @@
 		"Components": "",
 		"Info": "10 magic and 15 defense"
 	},
+		"9": {
+		"ID": "9",
+		"Name": "Cloak",
+		"Grid": "-1,-1/-1,0/0,-1/0,0/1,0/2,0",
+		"Physical": "0.00",
+		"Magic": "1.10",
+		"Attack Speed": "0.00",
+		"Crit": "1.10",
+		"Move Speed": "1.10",
+		"Max Health": "0.00",
+		"Defense": "0.00",
+		"Components": "3,7",
+		"Info": "10% magic, crit and move speed"
+	},
 	"10": {
 		"ID": "10",
 		"Name": "Armoured Gauntlets",
 		"Grid": "-1,0/-1,1/0,1/1,1",
-		"Physical": "1.03",
+		"Physical": "1.20",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
@@ -137,21 +137,21 @@
 		"Max Health": "0.00",
 		"Defense": "20.00",
 		"Components": "6,5",
-		"Info": "2.5% physical and 20 defense"
+		"Info": "20% physical and 20 defense"
 	},
 	"11": {
 		"ID": "11",
 		"Name": "Dainsleif Bow",
 		"Grid": "-1,1/0,1/0,0/1,1",
 		"Physical": "0.00",
-		"Magic": "1.05",
-		"Attack Speed": "1.07",
+		"Magic": "1.15",
+		"Attack Speed": "1.17",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "8,2",
-		"Info": "5% magic and 7% attack speed"
+		"Info": "15% magic and 17% attack speed"
 	},
 	"12": {
 		"ID": "12",
@@ -160,25 +160,25 @@
 		"Physical": "0.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
-		"Crit": "1.06",
+		"Crit": "1.16",
 		"Move Speed": "0.00",
-		"Max Health": "10.00",
-		"Defense": "1.06",
+		"Max Health": "30.00",
+		"Defense": "1.16",
 		"Components": "4,7",
-		"Info": "10 max health, 6% crit and defense"
+		"Info": "30 max health, 16% crit and defense"
 	},
 	"13": {
 		"ID": "13",
 		"Name": "Pulsing Halberd",
 		"Grid": "0,1/0,2/1,1/1,2/1,0/1,-1/1,-2",
-		"Physical": "60.00",
+		"Physical": "1.15",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
-		"Max Health": "20.00",
+		"Max Health": "1.12",
 		"Defense": "0.00",
 		"Components": "4,5",
-		"Info": "60 physical damage and 20 max health"
+		"Info": "15% physical damage and 12% max health"
 	}
 }

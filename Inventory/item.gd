@@ -1,6 +1,8 @@
 extends Node2D
 
 @onready var IconRect_path = $Icon
+@onready var whiteIcon = $WhiteIcon
+@onready var animation = $AnimationPlayer
 
 var item_ID : String
 var item_name : String
@@ -31,17 +33,21 @@ func _process(delta):
 
 # Load the image in the assets as an item
 func load_item(a_ItemID : int) -> void:
-	# NOTE: .PNG FILE MUST HAVE SAME FILE NAME AS THE ITEM NAME OR THIS LINE WILL NOT WORK
-	var Icon_path = "res://Assets/" + DataHandler.item_data[str(a_ItemID)]["Name"] + ".png"
-	IconRect_path.texture = load(Icon_path)
+	# NOTE: .PNG FILE MUST HAVE THE EXACT SAME FILE NAME AS THE ITEM NAME OR THIS LINE WILL NOT WORK
+	var file_name = DataHandler.item_data[str(a_ItemID)]["Name"]
+	file_name = file_name.replace("'", "")
+	file_name = file_name.replace(" ", "_")
+	file_name = file_name.to_lower()
+	var Icon_path = "res://Assets/" + file_name + ".png"
+	IconRect_path.texture = ResourceLoader.load(Icon_path)
+	whiteIcon.texture = ResourceLoader.load(Icon_path)
 	
 	# Generate the grid for the image
 	for grid in DataHandler.item_grid_data[str(a_ItemID)]:
 		var converter_array := []
-		for i in grid :
+		for i in grid:
 			converter_array.push_back(int(i))
 		item_grids.push_back(converter_array)
-	#print(item_grids)
 	
 	# Andrew wuz here
 	# Extra functionality to load in all the data for an item
@@ -81,6 +87,9 @@ func _snap_to(destination):
 		destination += temp_xy_switch/2
 	tween.tween_property(self, "global_position", destination, 0.15).set_trans(Tween.TRANS_SINE)
 	selected = false
+
+func item_combine_animation():
+	animation.play("combine")
 
 func _on_icon_mouse_entered():
 	emit_signal("entered_item", self)

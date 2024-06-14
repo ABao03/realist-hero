@@ -42,9 +42,9 @@ func collect():
 	collision.call_deferred("set", "disabled", true)
 	sprite.visible = false
 	
-	# Catch chest
-	if isChest == true:
-		return 1
+	# Catch chest (disabled for now because chests are sorta useless)
+	#if isChest == true:
+		#return 1
 		
 	return experience
 	

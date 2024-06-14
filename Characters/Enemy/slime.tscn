@@ -7,8 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_d2e3y"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="5_yrl4f"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjmpm"]
-size = Vector2(18, 8)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e5idd"]
+radius = 7.0
+height = 18.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_he13n"]
 resource_local_to_scene = true
@@ -122,12 +123,14 @@ position = Vector2(16, 12)
 collision_layer = 6
 collision_mask = 7
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_dtmf7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
 z_index = 2
 position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_tjmpm")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e5idd")
 
 [node name="Sprite2D" type="Sprite2D" parent="slime"]
 material = SubResource("ShaderMaterial_he13n")
@@ -173,8 +176,15 @@ shape = SubResource("RectangleShape2D_g0xg1")
 [node name="DamageNumbers" parent="slime" instance=ExtResource("5_yrl4f")]
 position = Vector2(1, -6)
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="slime"]
+
+[node name="Timer" type="Timer" parent="slime"]
+wait_time = 0.3
+autostart = true
+
 [connection signal="animation_finished" from="slime/AnimationTree" to="slime" method="_on_animation_tree_animation_finished"]
 [connection signal="hurt" from="slime/HurtBox" to="slime" method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="slime/Timer" to="slime" method="_on_timer_timeout"]
 
 [editable path="slime/HurtBox"]
 [editable path="slime/HitBox"]

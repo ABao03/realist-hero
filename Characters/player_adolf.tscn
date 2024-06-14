@@ -1,21 +1,25 @@
-[gd_scene load_steps=39 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=43 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
-[ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/exp_background.png" id="5_e34iq"]
-[ext_resource type="Texture2D" uid="uid://cdcys2h3m3tnr" path="res://Assets/Images/exp_progress.png" id="6_k3mh8"]
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
+[ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/exp_background.png" id="7_hfoo5"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
+[ext_resource type="Texture2D" uid="uid://cdcys2h3m3tnr" path="res://Assets/Images/exp_progress.png" id="8_myf4k"]
 [ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
 [ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="9_vrbu8"]
 [ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
 [ext_resource type="PackedScene" uid="uid://cynh3whul4t8n" path="res://Characters/abilities/sprint.tscn" id="13_qhlup"]
+[ext_resource type="PackedScene" uid="uid://d0p71vqc5gam8" path="res://Characters/abilities/cooldown_button.tscn" id="14_1lfu3"]
 [ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="14_xrtiu"]
 [ext_resource type="PackedScene" uid="uid://tch3uejinpj0" path="res://Characters/abilities/strike.tscn" id="15_w1d75"]
-[ext_resource type="PackedScene" uid="uid://clegbepd3k4ex" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
+[ext_resource type="PackedScene" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
+[ext_resource type="Texture2D" uid="uid://btdasfk1thwvm" path="res://Assets/Images/lightning button.png" id="16_wcilh"]
+[ext_resource type="Texture2D" uid="uid://cuunt7l6tuwbf" path="res://Assets/Images/lightning button 2.png" id="17_3jc6o"]
+[ext_resource type="PackedScene" uid="uid://c6j6bswlesema" path="res://Characters/indicator.tscn" id="17_jwaba"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
 size = Vector2(5.00132, 14.3164)
@@ -263,6 +267,9 @@ collision_mask = 2
 position = Vector2(-1.5, -2.5)
 shape = SubResource("RectangleShape2D_7sva7")
 
+[node name="DisableTimer" parent="HurtBox" index="1"]
+wait_time = 1.0
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GrabArea" type="Area2D" parent="."]
@@ -287,28 +294,9 @@ layer = 0
 [node name="GUI" type="Control" parent="GUILayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 1152.0
+offset_left = -16.0
+offset_right = 1136.0
 offset_bottom = 648.0
-
-[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 32.0
-offset_top = 590.0
-offset_right = 672.0
-offset_bottom = 610.0
-scale = Vector2(1.7, 1.7)
-texture_under = ExtResource("5_e34iq")
-texture_progress = ExtResource("6_k3mh8")
-
-[node name="lbl_level" type="Label" parent="GUILayer/GUI/ExperienceBar"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 5.0
-offset_right = 105.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 14
-text = " Level: 1"
 
 [node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
@@ -351,6 +339,16 @@ offset_bottom = 100.0
 unique_name_in_owner = true
 stream = ExtResource("9_vrbu8")
 volume_db = -10.0
+
+[node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 36.0
+offset_top = 17.0
+offset_right = 677.0
+offset_bottom = 47.0
+texture_under = ExtResource("7_hfoo5")
+texture_progress = ExtResource("8_myf4k")
 
 [node name="Pausescreen" type="CanvasLayer" parent="GUILayer"]
 process_mode = 1
@@ -472,15 +470,11 @@ offset_top = -333.0
 offset_right = -665.0
 offset_bottom = -333.0
 
-[node name="Sprint" parent="." instance=ExtResource("13_qhlup")]
-unique_name_in_owner = true
-position = Vector2(-368, 291)
-
 [node name="HitBox" parent="." instance=ExtResource("14_xrtiu")]
 position = Vector2(13, -27)
 collision_layer = 4
 collision_mask = 4
-damage = 10
+damage = 15
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
 position = Vector2(-1, -9)
@@ -491,12 +485,16 @@ disabled = true
 unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 4
-damage = 10
+damage = 15
 
 [node name="CollisionShape2D" parent="HitBox2" index="0"]
 position = Vector2(27, -8)
 shape = SubResource("RectangleShape2D_1yjlf")
 disabled = true
+
+[node name="Sprint" parent="." instance=ExtResource("13_qhlup")]
+unique_name_in_owner = true
+position = Vector2(-368, 291)
 
 [node name="Strike" parent="." instance=ExtResource("15_w1d75")]
 position = Vector2(295, 288)
@@ -504,8 +502,31 @@ position = Vector2(295, 288)
 [node name="Heal" parent="." instance=ExtResource("14_qufa4")]
 position = Vector2(-12, 298)
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.05
+[node name="UltButton" parent="." instance=ExtResource("14_1lfu3")]
+offset_left = 453.0
+offset_top = 178.0
+offset_right = 573.0
+offset_bottom = 298.0
+texture_normal = ExtResource("17_3jc6o")
+abilityType = "ult"
+cooldownTime = 90
+
+[node name="AbilityButton" parent="." instance=ExtResource("14_1lfu3")]
+offset_left = 371.0
+offset_top = 217.0
+offset_right = 446.0
+offset_bottom = 292.0
+texture_normal = ExtResource("16_wcilh")
+abilityType = "dmg"
+cooldownTime = 3
+
+[node name="AbilityDuration" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="Indicator" parent="." instance=ExtResource("17_jwaba")]
+position = Vector2(217, 150)
 
 [node name="Slow" parent="." instance=ExtResource("16_axbap")]
 
@@ -524,7 +545,7 @@ wait_time = 0.05
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Exit to desktop" to="GUILayer/Pausescreen" method="_on_exit_to_desktop_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Save" to="GUILayer/Pausescreen" method="_on_save_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Load" to="GUILayer/Pausescreen" method="_on_load_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="AbilityDuration" to="." method="_on_ability_duration_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

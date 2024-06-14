@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-@export var movement_speed = 30.0
+@export var movement_speed = 70.0
 
-var maxHealth = 20.0
+var maxHealth = 150
 @export var health = maxHealth
 
 @export var experience = 3
@@ -36,11 +36,12 @@ func death():
 	loot_base.call_deferred("add_child", new_gem)
 	queue_free()
 
-func _on_hurt_box_hurt(damage, isMagic, isCrit):
+func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	if isCrit == true:
 		damage = damage * 2
 	health -= damage
-	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, isMagic, isCrit)
+	health -= magicDamage
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
 	if health <= 0:
 		death()
 

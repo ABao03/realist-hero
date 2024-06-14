@@ -18,6 +18,9 @@ var is_open = false
 
 # Tracking Items
 var currentInventory = []
+@onready var animationTimer = $Timer
+var tempItem1
+var tempItem2
 
 # Send upgrades to Player node
 signal pass_upgrade(upgrade)
@@ -104,6 +107,10 @@ func _on_button_spawn_pressed():
 	
 # Called via signal whenever the player chooses an upgrade in the upgrade options
 func upgrade_character(upgrade):
+	if item_held != null:
+		item_held.delete_item()
+		item_held = null
+		
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
 	new_item.load_item(int(upgrade["ID"]))
@@ -267,9 +274,20 @@ func check_combos(newItem):
 
 # Combines two items into the new combined item (combination already found)
 func combineItems(item1, item2):
-	# Fetch the new item from the data handler dictionary.
-	var combinedItemID = DataHandler.component_product_data[[item1.item_ID, item2.item_ID]]
+	tempItem1 = item1
+	tempItem2 = item2
 	
+	# Play an animation on the item
+	item1.item_combine_animation()
+	item2.item_combine_animation()
+	animationTimer.start()
+
+func recalculateStats():
+	pass
+
+func _on_timer_timeout():
+	# Fetch the new item from the data handler dictionary.
+	var combinedItemID = DataHandler.component_product_data[[tempItem1.item_ID, tempItem2.item_ID]]
 	# Instantiate the new item into the scene. 
 	var combinedItem = item_scene.instantiate()
 	add_child(combinedItem)
@@ -280,9 +298,8 @@ func combineItems(item1, item2):
 	item_held = combinedItem
 	
 	# Delete the item elements. 
-	delete_from_inventory(item1)
-	delete_from_inventory(item2)
-
-func recalculateStats():
-	pass
-
+	delete_from_inventory(tempItem1)
+	delete_from_inventory(tempItem2)
+	
+	tempItem1 = null
+	tempItem2 = null

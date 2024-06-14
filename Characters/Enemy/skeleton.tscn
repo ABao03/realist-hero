@@ -368,6 +368,7 @@ motion_mode = 1
 script = ExtResource("1_joy33")
 
 [node name="Skeleton" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(56, 49)
 scale = Vector2(2.79688, 3.21875)
 sprite_frames = SubResource("SpriteFrames_sdevi")

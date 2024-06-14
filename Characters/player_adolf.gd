@@ -22,13 +22,22 @@ var x = true
 var paused
 var playerPaused = false
 
-#UI nodes
-
-## Attacks
+# Attacks
 #@onready var weapon = $weapon
 @onready var attackBox1 = $HitBox
 @onready var attackBox2 = $HitBox2
 var boxesFlipped = false
+
+# Abilities
+@onready var damageAbility = $UltButton
+@onready var ultimateAbility = $AbilityButton
+@onready var abilityDuration = $AbilityDuration
+@onready var indicator = $Indicator
+
+@onready var abilityEffects = get_tree().get_first_node_in_group("ability")
+
+var usingAbility = false
+var heldAbility = null
 
 # Upgrades
 var upgrade_options = []
@@ -62,7 +71,6 @@ var enemy_close = []
 
 # GUI
 @onready var expBar = get_node('%ExperienceBar')
-@onready var expBarLbl = get_node('%lbl_level')
 @onready var healthBar = get_node('%HealthBar')
 @onready var lblLevel = get_node('%lbl_levelUp')
 @onready var levelPanel = get_node('%LevelUp')
@@ -78,7 +86,8 @@ func _ready():
 	set_healthbar(hp, maxhp)
 	modulate = Color(1, 1, 1, 1)
 
-func _physics_process(delta):
+func _physics_process(delta):	
+	# Movement stuff
 	if playerPaused == false:
 		if Input.is_action_just_pressed("switch"):
 			if bow_equipped == true:
@@ -88,6 +97,36 @@ func _physics_process(delta):
 		
 		if Input.is_action_pressed("mouse_leftclick") and bow_equipped == false:
 			animation_tree["parameters/conditions/swing"] = true
+		
+	# Ability pressed stuff
+		if Input.is_action_just_pressed("damage_ability"):
+			if damageAbility.onCooldown == false:
+				indicator.visible = true
+				heldAbility = damageAbility
+		elif Input.is_action_just_pressed("ultimate_ability"):
+			if ultimateAbility.onCooldown == false:
+				indicator.visible = true
+				heldAbility = ultimateAbility
+		
+		if Input.is_action_pressed("mouse_leftclick"):
+			if heldAbility != null && usingAbility == false:
+				player_ability_used(heldAbility)
+				usingAbility = true
+				#heldAbility.activated()
+				#heldAbility = null
+				
+			elif bow_equipped and bow_cooldown:
+				bow_cooldown = false
+				var arrow_instance = arrow.instantiate()
+				arrow_instance.rotation = $Marker2D.rotation
+				arrow_instance.global_position = $Marker2D.global_position
+				add_child(arrow_instance)
+				
+				await get_tree().create_timer(1).timeout
+				bow_cooldown = true
+				
+			else:
+				animation_tree["parameters/conditions/swing"] = true
 		else:
 			animation_tree["parameters/conditions/swing"] = false
 			
@@ -113,25 +152,18 @@ func _physics_process(delta):
 					else:
 						sprite.flip_h = false
 			
-			if animation_tree.get("parameters/playback").get_current_node() == "attack" and button_clicked.isReady == false:
-				move_and_slide()
+			#if animation_tree.get("parameters/playback").get_current_node() == "attack" and button_clicked.isReady == false:
+				#move_and_slide()
 			
-			elif animation_tree.get("parameters/playback").get_current_node() != "attack":
-				move_and_slide()
+			#if animation_tree.get("parameters/playback").get_current_node() != "attack":
+			#move_and_slide()
 				
 			var mouse_pos = get_global_mouse_position()
 			$Marker2D.look_at(mouse_pos)
-			
-			if Input.is_action_just_pressed("mouse_leftclick") and bow_equipped and bow_cooldown:
-				bow_cooldown = false
-				var arrow_instance = arrow.instantiate()
-				arrow_instance.rotation = $Marker2D.rotation
-				arrow_instance.global_position = $Marker2D.global_position
-				add_child(arrow_instance)
 				
-				await get_tree().create_timer(1).timeout
-				bow_cooldown = true
-				
+			if animation_tree.get("parameters/playback").get_current_node() == "attack":
+				velocity = velocity/3
+			move_and_slide()
 		
 		if sprite.flip_h == true && boxesFlipped == false:
 			attackBox1.position -= Vector2(28,0)
@@ -176,14 +208,11 @@ func calculate_experience(gem_exp):
 	if experience + collected_experience >= exp_required: #level up
 		collected_experience -= exp_required-experience
 		experience_level += 1
-		lblLevel.text = str("Level: ", experience_level)
-		expBarLbl.text = lblLevel.text
 		
 		experience = 0
 		exp_required = calculate_experiencecap()
 		#levelup()
 		acc += 1
-		print(acc)
 	else:
 		experience += collected_experience
 		collected_experience = 0
@@ -208,7 +237,6 @@ func set_expbar(set_value = 1, set_max_value = 100):
 	
 func levelup():
 	sndLevelUp.play()
-	lblLevel.text = str("Level: ",experience_level)
 	var tween = levelPanel.create_tween()
 	tween.tween_property(levelPanel,"position",Vector2(442,150),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
@@ -237,7 +265,7 @@ func upgrade_character(upgrade):
 	calculate_experience(0)
 
 func get_random_item():
-	var randomItem = DataHandler.item_data[str(randi_range(1,13))]
+	var randomItem = DataHandler.item_data[str(randi_range(1,8))]
 	return randomItem
 
 func update_stats(data):
@@ -249,7 +277,7 @@ func update_stats(data):
 		if stat == "Physical":
 			var damage = data.get(stat)
 			if damage > 2:
-				damage = int(damage/10)
+				damage = int(damage)
 				attackBox1.damage += damage
 				attackBox2.damage += damage
 			else:
@@ -259,7 +287,7 @@ func update_stats(data):
 		if stat == "Magic":
 			var damage = data.get(stat)
 			if data.get(stat) > 2:
-				damage = int(damage/10)
+				damage = int(damage)
 				attackBox1.magicDamage += damage
 				attackBox2.magicDamage += damage
 			else:
@@ -296,8 +324,23 @@ func _on_button_pressed():
 	if acc > 0:
 		acc -= 1
 		levelup()
+	
+	
+func player_ability_used(ability):
+	if ability.abilityType == "dmg":
+		abilityDuration.wait_time = 0.45
+		abilityDuration.start()
+		abilityEffects.ability_used(get_global_mouse_position(), addedStats["addedMagic"])
+		
+	elif ability.abilityType == "ult":
+		abilityDuration.wait_time = 2
+		abilityDuration.start()
+		abilityEffects.ult_used(global_position, addedStats["addedMagic"])
+		# ability effects handles the actual slash effect
+	
+	indicator.visible = false
 
-
-func _on_timer_timeout():
-	pass
-	#speed = 150
+func _on_ability_duration_timeout():
+	heldAbility.activated()
+	heldAbility = null
+	usingAbility = false
