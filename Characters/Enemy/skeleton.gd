@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var movement_speed = 70.0
+@export var movement_speed = 30.0
 
 var maxHealth = 150
 @export var health = maxHealth
@@ -21,7 +21,6 @@ func _physics_process(_delta):
 	velocity = direction*movement_speed
 	move_and_slide()
 	$Skeleton.play("Walking")
-	update_health()
 	
 	if direction.x > 0.1:
 		sprite.flip_h = false
@@ -44,14 +43,3 @@ func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
 	if health <= 0:
 		death()
-
-func update_health():
-	var healthbar = $HealthBar
-	
-	
-	healthbar.value = (health/maxHealth)*100
-	
-	if healthbar.value == 100:
-		healthbar.visible = false
-	else:
-		healthbar.visible = true

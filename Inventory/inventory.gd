@@ -18,6 +18,7 @@ var is_open = false
 
 # Tracking Items
 var currentInventory = []
+#var combinedInventory = []
 @onready var animationTimer = $Timer
 var tempItem1
 var tempItem2
@@ -99,7 +100,7 @@ func _on_button_spawn_pressed():
 	# These three lines handle all the instantiation
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
-	new_item.load_item(randi_range(1,13))    #randomize this for different items to spawn
+	new_item.load_item(randi_range(1,8))    #randomize this for different items to spawn
 	
 	# This places the item into the player's hand
 	new_item.selected = true
@@ -189,10 +190,11 @@ func place_item():
 	
 	# Pass item stat data to the Player node so that stuff can get calculated
 	if not currentInventory.has(item_held):
-		emit_signal("pass_upgrade", item_held.stats_data)
-		
 		# Place item into array that keeps track of which items are currently in inventory
 		currentInventory.append(item_held)
+		recalculateStats()
+		emit_signal("pass_upgrade", PlayerStatDataHandler.addedStats)
+		
 		createdCombo = check_combos(item_held)
 	
 	# Needs a conditional, or else it'll auto-wipe the item at the end even if a new one was made via combo
@@ -200,6 +202,23 @@ func place_item():
 		item_held = null
 		
 	clear_grid()
+
+# Recalculate stats each time an item is placed in the grid
+func recalculateStats():
+	# Set to default each time
+	for stat in PlayerStatDataHandler.addedStats:
+		# Add the component items if they exist (the default is at base, meaning they'll only exist if it's bigger)
+		if float(PlayerStatDataHandler.addedStats[stat]) < float(PlayerStatDataHandler.combinedComponentStats[stat]):
+			PlayerStatDataHandler.addedStats[stat] = PlayerStatDataHandler.combinedComponentStats[stat]
+		
+		# Add the base stats if there are no component items
+		# (do base stats need to be separate from combined stats? yes, they do need to be separate.)
+		else:
+			PlayerStatDataHandler.addedStats[stat] = PlayerStatDataHandler.baseStats[stat]
+	
+	# Add the data of each item in the inventory to the Autoloaded file
+	for item in currentInventory:
+		add_data(item, PlayerStatDataHandler.addedStats)
 
 # Used when the item is picked up by the player
 func pick_item():
@@ -243,7 +262,7 @@ func delete_from_inventory(thisItem):
 		thisItem.delete_item()
 			
 		# Update grid
-		set_grids.call_deferred(current_slot)
+		#set_grids.call_deferred(current_slot)
 		
 # Check if a combo is present among the current items in inventory after adding in newItem
 func check_combos(newItem):
@@ -274,16 +293,63 @@ func check_combos(newItem):
 
 # Combines two items into the new combined item (combination already found)
 func combineItems(item1, item2):
+	print(item1)
+	print(item2)
 	tempItem1 = item1
 	tempItem2 = item2
+	
+	# Keep the stats from the combined item's components
+	add_data(item1, PlayerStatDataHandler.combinedComponentStats)
+	add_data(item2, PlayerStatDataHandler.combinedComponentStats)
 	
 	# Play an animation on the item
 	item1.item_combine_animation()
 	item2.item_combine_animation()
 	animationTimer.start()
 
-func recalculateStats():
-	pass
+# Adding item stats to a given Autoloaded database
+func add_data(item, database):
+	var data = item.stats_data
+	for stat in data:
+		if stat == "Physical":
+			var damage = data.get(stat)
+			if damage > 2:
+				damage = int(damage)
+				database[stat] += damage
+			else:
+				database[stat] *= damage
+			
+		if stat == "Magic":
+			var damage = data.get(stat)
+			if damage > 2:
+				damage = int(damage)
+				database[stat] += damage
+			else:
+				database[stat] *= damage
+				
+		if stat == "Attack Speed":
+			database[stat] *= data.get(stat)
+			
+		if stat == "Crit":
+			database[stat] *= data.get(stat)
+			
+		if stat == "Move Speed":
+			if float(stat) > 2:
+				database[stat] += data.get(stat)
+			else:
+				database[stat] *= data.get(stat)
+				
+		if stat == "Max Health":
+			if float(data.get(stat)) > 2:
+				database[stat] += data.get(stat)
+			else:
+				database[stat] *= data.get(stat)
+			
+		if stat == "Defense":
+			if float(data.get(stat)) > 2:
+				database[stat] += data.get(stat)
+			else:
+				database[stat] *= data.get(stat)
 
 func _on_timer_timeout():
 	# Fetch the new item from the data handler dictionary.

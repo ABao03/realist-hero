@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var speed : float = 150
 @onready var collision = $CollisionShape2D
 @onready var maxhp = 100
-var hp = 100
+@onready var hpPercent = 1.00
 @onready var acc: int = 0
 
 var experience = 0
@@ -39,27 +39,21 @@ var boxesFlipped = false
 var usingAbility = false
 var heldAbility = null
 
+# Recalling
+var playerRecalling = false
+@onready var recallDuration = $RecallDuration
+@onready var recall = $Recall
+
 # Upgrades
 var upgrade_options = []
 @onready var inventory = get_tree().get_first_node_in_group("inventory")
 signal selected_upgrade(upgrade)
 
-#ranged attack
+# ranged attack
 var bow_equipped = false
 var bow_cooldown = true
 var arrow_shot = false
 var arrow = preload("res://Characters/arrow.tscn")
-
-# Stats
-var addedStats = {
-	"addedPhysical" = 0, 
-	"addedMagic" = 0, 
-	"addedCrit" = 0,
-	"addedAttack Speed" = 0,
-	"addedMove Speed" = 0,
-	"addedMax Health" = 0,
-	"addedDefense" = 0
-	}
 
 # Enemy Related
 var enemy_close = []
@@ -70,6 +64,7 @@ var enemy_close = []
 @onready var sprite = $Sprite2D
 
 # GUI
+@onready var recallBar = get_node('%RecallBar')
 @onready var expBar = get_node('%ExperienceBar')
 @onready var healthBar = get_node('%HealthBar')
 @onready var lblLevel = get_node('%lbl_levelUp')
@@ -83,20 +78,27 @@ func _ready():
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
 	set_expbar(experience, calculate_experiencecap())
 	animation_tree.active = true
-	set_healthbar(hp, maxhp)
-	modulate = Color(1, 1, 1, 1)
+	set_healthbar(maxhp*hpPercent, maxhp)
+	#modulate = Color(1, 1, 1, 1)
 
-func _physics_process(delta):	
+func _physics_process(delta):
+	if Input.is_action_just_pressed("recall"):
+		if playerRecalling == true:
+			playerRecalling = false
+			cancel_recall()
+		else:
+			playerRecalling = true
+			recallBar.visible = true
+			recallDuration.start()
+			recall.visible = true
+	
 	# Movement stuff
-	if playerPaused == false:
+	if playerPaused == false && playerRecalling == false:
 		if Input.is_action_just_pressed("switch"):
 			if bow_equipped == true:
 				bow_equipped = false
 			else:
 				bow_equipped = true
-		
-		if Input.is_action_pressed("mouse_leftclick") and bow_equipped == false:
-			animation_tree["parameters/conditions/swing"] = true
 		
 	# Ability pressed stuff
 		if Input.is_action_just_pressed("damage_ability"):
@@ -125,13 +127,10 @@ func _physics_process(delta):
 				await get_tree().create_timer(1).timeout
 				bow_cooldown = true
 				
-			else:
+			elif bow_equipped == false:
 				animation_tree["parameters/conditions/swing"] = true
 		else:
 			animation_tree["parameters/conditions/swing"] = false
-			
-			axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
-			axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
 			
 			var thisSpeed = speed * 100
 			velocity = delta * thisSpeed * axis
@@ -142,16 +141,6 @@ func _physics_process(delta):
 			else:
 				animation_tree["parameters/conditions/idle"] = false
 				animation_tree["parameters/conditions/is_moving"] = true
-				if axis.x > 0:
-					sprite.flip_h = false
-				elif axis.x < 0:
-					sprite.flip_h = true
-				else:
-					if sprite.flip_h == true:
-						sprite.flip_h = true
-					else:
-						sprite.flip_h = false
-			
 			#if animation_tree.get("parameters/playback").get_current_node() == "attack" and button_clicked.isReady == false:
 				#move_and_slide()
 			
@@ -163,7 +152,20 @@ func _physics_process(delta):
 				
 			if animation_tree.get("parameters/playback").get_current_node() == "attack":
 				velocity = velocity/3
-			move_and_slide()
+		axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
+		axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
+		
+		if axis.x > 0:
+			sprite.flip_h = false
+		elif axis.x < 0:
+			sprite.flip_h = true
+		else:
+			if sprite.flip_h == true:
+				sprite.flip_h = true
+			else:
+				sprite.flip_h = false
+		
+		move_and_slide()
 		
 		if sprite.flip_h == true && boxesFlipped == false:
 			attackBox1.position -= Vector2(28,0)
@@ -173,12 +175,20 @@ func _physics_process(delta):
 			attackBox1.position += Vector2(28,0)
 			attackBox2.position += Vector2(58,0)
 			boxesFlipped = false
+	
+	# handle recall
+	if playerRecalling == true:
+		set_recallbar(5-recallDuration.time_left)
 
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
-	hp -= damage
-	if hp == 0 or hp < 0:
+	var percentDamageTaken = float(damage)/float(maxhp)
+	hpPercent -= percentDamageTaken
+	print(damage, " ", maxhp, " ", percentDamageTaken)
+	if hpPercent <= 0:
 		get_tree().change_scene_to_file("res://Menu/death.tscn")
-	set_healthbar(hp-damage, maxhp)
+	set_healthbar(maxhp*hpPercent, maxhp)
+	if playerRecalling == true:
+		cancel_recall()
 
 # Changes the target variable inside of the xp drop from null to the player. 
 # So, the xp drop is pulled towards the player. 
@@ -234,7 +244,10 @@ func calculate_experiencecap():
 func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
-	
+
+func set_recallbar(set_value = 0):
+	recallBar.value = set_value
+
 func levelup():
 	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
@@ -270,52 +283,30 @@ func get_random_item():
 
 func update_stats(data):
 	for stat in data:
-		var statName = "added" + stat
-		if statName in addedStats:
-			addedStats[statName] += data.get(stat)
-
+		# NOTE: THESE SHOULD ALL BE CHANGED TO SETTERS, NOT ADDER/MULTIPLIER
+		# This logic is all being moved to recalculate stats in Inventory
 		if stat == "Physical":
-			var damage = data.get(stat)
-			if damage > 2:
-				damage = int(damage)
-				attackBox1.damage += damage
-				attackBox2.damage += damage
-			else:
-				attackBox1.damage *= damage
-				attackBox2.damage *= damage
+			attackBox1.damage = data.get(stat)
+			attackBox2.damage = data.get(stat)
 			
 		if stat == "Magic":
-			var damage = data.get(stat)
-			if data.get(stat) > 2:
-				damage = int(damage)
-				attackBox1.magicDamage += damage
-				attackBox2.magicDamage += damage
-			else:
-				attackBox1.magicDamage *= damage
-				attackBox2.magicDamage *= damage
-				
+			attackBox1.magicDamage = data.get(stat)
+			attackBox2.magicDamage = data.get(stat)
+			
 		if stat == "Attack Speed":
 			var currentSpeed = animation.speed_scale
 			animation.speed_scale = currentSpeed * data.get(stat)
 			
 		if stat == "Crit":
-			attackBox1.crit *= data.get(stat)
-			attackBox2.crit *= data.get(stat)
+			attackBox1.crit = data.get(stat) - 1
+			attackBox2.crit = data.get(stat) - 1
 			
 		if stat == "Move Speed":
-			if float(stat) > 2:
-				speed += data.get(stat)
-			else:
-				speed *= data.get(stat)
+			speed = data.get(stat)
 				
 		if stat == "Max Health":
-			var addedhp
-			if float(data.get(stat)) > 2:
-				addedhp = data.get(stat)
-			else:
-				addedhp = maxhp * data.get(stat)
-			maxhp += addedhp
-			set_healthbar(hp+addedhp, maxhp)
+			maxhp = data.get(stat)
+			set_healthbar(maxhp*hpPercent, maxhp)
 			
 		if stat == "Defense":
 			pass
@@ -330,12 +321,12 @@ func player_ability_used(ability):
 	if ability.abilityType == "dmg":
 		abilityDuration.wait_time = 0.45
 		abilityDuration.start()
-		abilityEffects.ability_used(get_global_mouse_position(), addedStats["addedMagic"])
+		abilityEffects.ability_used(get_global_mouse_position(), attackBox1.magicDamage + attackBox2.magicDamage)
 		
 	elif ability.abilityType == "ult":
 		abilityDuration.wait_time = 2
 		abilityDuration.start()
-		abilityEffects.ult_used(global_position, addedStats["addedMagic"])
+		abilityEffects.ult_used(global_position, attackBox1.magicDamage + attackBox2.magicDamage)
 		# ability effects handles the actual slash effect
 	
 	indicator.visible = false
@@ -344,3 +335,13 @@ func _on_ability_duration_timeout():
 	heldAbility.activated()
 	heldAbility = null
 	usingAbility = false
+
+func _on_recall_duration_timeout():
+	get_tree().change_scene_to_file("res://Worlds/Hub World/hubworld.tscn")
+	cancel_recall()
+
+func cancel_recall():
+	playerRecalling = false
+	recall.visible = false
+	recallBar.visible = false
+	recallDuration.stop()

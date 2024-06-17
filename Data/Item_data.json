@@ -11,6 +11,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "85 physical damage"
 	},
 	"2": {
@@ -25,6 +26,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "22% attack speed"
 	},
 	"3": {
@@ -39,6 +41,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "30 magic damage and 13% attack speed"
 	},
 	"4": {
@@ -53,6 +56,7 @@
 		"Max Health": "20.00",
 		"Defense": "0.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "20 max health"
 	},
 	"5": {
@@ -64,9 +68,10 @@
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
 		"Move Speed": "1.15",
-		"Max Health": "15.00",
+		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "30 physical damage and 15% move speed"
 	},
 	"6": {
@@ -81,12 +86,13 @@
 		"Max Health": "0.00",
 		"Defense": "30.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "30 defense"
 	},
 	"7": {
 		"ID": "7",
 		"Name": "Sickle",
-		"Grid": "0,0/1,0/1,-1",
+		"Grid": "0,1/1,0/1,1",
 		"Physical": "0.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
@@ -95,6 +101,7 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "15% crit and 13% move speed"
 	},
 	"8": {
@@ -109,9 +116,10 @@
 		"Max Health": "0.00",
 		"Defense": "15.00",
 		"Components": "",
+		"Points": "10000",
 		"Info": "10 magic and 15 defense"
 	},
-		"9": {
+	"9": {
 		"ID": "9",
 		"Name": "Cloak",
 		"Grid": "-1,-1/-1,0/0,-1/0,0/1,0/2,0",
@@ -123,21 +131,23 @@
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "3,7",
+		"Points": "40000",
 		"Info": "10% magic, crit and move speed"
 	},
 	"10": {
 		"ID": "10",
 		"Name": "Armoured Gauntlets",
 		"Grid": "-1,0/-1,1/0,1/1,1",
-		"Physical": "1.20",
+		"Physical": "25.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "20.00",
-		"Components": "6,5",
-		"Info": "20% physical and 20 defense"
+		"Components": "5,6",
+		"Points": "40000",
+		"Info": "25 physical and 20 defense"
 	},
 	"11": {
 		"ID": "11",
@@ -150,7 +160,8 @@
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
-		"Components": "8,2",
+		"Components": "2,8",
+		"Points": "40000",
 		"Info": "15% magic and 17% attack speed"
 	},
 	"12": {
@@ -165,13 +176,14 @@
 		"Max Health": "30.00",
 		"Defense": "1.16",
 		"Components": "4,7",
+		"Points": "40000",
 		"Info": "30 max health, 16% crit and defense"
 	},
 	"13": {
 		"ID": "13",
 		"Name": "Pulsing Halberd",
 		"Grid": "0,1/0,2/1,1/1,2/1,0/1,-1/1,-2",
-		"Physical": "1.15",
+		"Physical": "60.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
@@ -179,6 +191,7 @@
 		"Max Health": "1.12",
 		"Defense": "0.00",
 		"Components": "4,5",
-		"Info": "15% physical damage and 12% max health"
+		"Points": "40000",
+		"Info": "60 physical damage and 12% max health"
 	}
 }

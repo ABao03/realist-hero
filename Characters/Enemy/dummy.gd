@@ -9,16 +9,6 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var damage_numbers_origin = $DamageNumbers
 
-func _physics_process(_delta):
-	var direction = global_position.direction_to(player.global_position)
-	velocity = direction*movement_speed
-	move_and_slide()
-	
-	#if direction.x > 0.1:
-		#sprite.flip_h = true
-	#elif direction.x < -0.1:
-		#sprite.flip_h = false
-
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	if isCrit == true:
 		damage = damage * 2

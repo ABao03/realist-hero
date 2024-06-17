@@ -1,8 +1,10 @@
-[gd_scene load_steps=43 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=46 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
+[ext_resource type="Texture2D" uid="uid://8g3b4cuhj4og" path="res://Assets/recall_circle.png" id="3_a0sxw"]
+[ext_resource type="Texture2D" uid="uid://dpgjiwepnvy5b" path="res://Assets/Images/recall_progress.png" id="6_pc3d2"]
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
 [ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/exp_background.png" id="7_hfoo5"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
@@ -21,8 +23,8 @@
 [ext_resource type="Texture2D" uid="uid://cuunt7l6tuwbf" path="res://Assets/Images/lightning button 2.png" id="17_3jc6o"]
 [ext_resource type="PackedScene" uid="uid://c6j6bswlesema" path="res://Characters/indicator.tscn" id="17_jwaba"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hh6ld"]
-size = Vector2(5.00132, 14.3164)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4hegg"]
+radius = 4.54665
 
 [sub_resource type="Animation" id="Animation_q5tuw"]
 length = 0.001
@@ -133,6 +135,10 @@ tracks/0/keys = {
 "values": [0, 1]
 }
 
+[sub_resource type="Animation" id="Animation_lasx4"]
+resource_name = "recall"
+length = 7.0
+
 [sub_resource type="Animation" id="Animation_sojb0"]
 resource_name = "walk_left"
 length = 0.8
@@ -156,6 +162,7 @@ _data = {
 "RESET": SubResource("Animation_q5tuw"),
 "attack": SubResource("Animation_6n2eq"),
 "idle": SubResource("Animation_f4pko"),
+"recall": SubResource("Animation_lasx4"),
 "walk": SubResource("Animation_sojb0")
 }
 
@@ -236,11 +243,19 @@ scale = Vector2(0.5, 0.49)
 texture = ExtResource("2_ebvvm")
 hframes = 12
 
+[node name="Recall" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+texture_filter = 1
+position = Vector2(0, 18)
+scale = Vector2(0.75, 0.666667)
+texture = ExtResource("3_a0sxw")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-2, -7)
+position = Vector2(-1, -2)
 scale = Vector2(1.09971, 1.1176)
-shape = SubResource("RectangleShape2D_hh6ld")
+shape = SubResource("CapsuleShape2D_4hegg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 deterministic = true
@@ -298,13 +313,26 @@ offset_left = -16.0
 offset_right = 1136.0
 offset_bottom = 648.0
 
+[node name="RecallBar" type="TextureProgressBar" parent="GUILayer/GUI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 570.0
+offset_top = 280.0
+offset_right = 720.0
+offset_bottom = 300.0
+scale = Vector2(0.3, 0.3)
+max_value = 5.0
+texture_under = ExtResource("7_f0adl")
+texture_progress = ExtResource("6_pc3d2")
+
 [node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 555.0
-offset_top = 365.0
-offset_right = 705.0
-offset_bottom = 385.0
+offset_left = 570.0
+offset_top = 350.0
+offset_right = 720.0
+offset_bottom = 370.0
 scale = Vector2(0.3, 0.3)
 texture_under = ExtResource("7_f0adl")
 texture_progress = ExtResource("8_2a1gi")
@@ -464,6 +492,7 @@ text = "Load
 "
 
 [node name="Inventory" parent="." groups=["inventory"] instance=ExtResource("12_0ii4i")]
+visible = false
 z_index = 3
 offset_left = -665.0
 offset_top = -333.0
@@ -525,6 +554,11 @@ unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
 
+[node name="RecallDuration" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+one_shot = true
+
 [node name="Indicator" parent="." instance=ExtResource("17_jwaba")]
 position = Vector2(217, 150)
 
@@ -546,6 +580,7 @@ position = Vector2(217, 150)
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Save" to="GUILayer/Pausescreen" method="_on_save_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Load" to="GUILayer/Pausescreen" method="_on_load_pressed"]
 [connection signal="timeout" from="AbilityDuration" to="." method="_on_ability_duration_timeout"]
+[connection signal="timeout" from="RecallDuration" to="." method="_on_recall_duration_timeout"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]
