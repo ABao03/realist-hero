@@ -48,6 +48,7 @@ var playerRecalling = false
 var upgrade_options = []
 @onready var inventory = get_tree().get_first_node_in_group("inventory")
 signal selected_upgrade(upgrade)
+signal stop_spawning()
 
 # ranged attack
 var bow_equipped = false
@@ -58,6 +59,7 @@ var arrow = preload("res://Characters/arrow.tscn")
 # Enemy Related
 var enemy_close = []
 
+@onready var spawner = get_tree().get_first_node_in_group("inventory")
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
@@ -76,12 +78,19 @@ var enemy_close = []
 
 func _ready():
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
+	connect("stop_spawning",Callable(inventory,"upgrade_character"))
 	set_expbar(experience, calculate_experiencecap())
 	animation_tree.active = true
 	set_healthbar(maxhp*hpPercent, maxhp)
 	#modulate = Color(1, 1, 1, 1)
 
 func _physics_process(delta):
+	var thisSpeed = speed * 100
+	velocity = delta * thisSpeed * axis
+	
+	axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
+	axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
+	
 	if Input.is_action_just_pressed("recall"):
 		if playerRecalling == true:
 			playerRecalling = false
@@ -114,8 +123,6 @@ func _physics_process(delta):
 			if heldAbility != null && usingAbility == false:
 				player_ability_used(heldAbility)
 				usingAbility = true
-				#heldAbility.activated()
-				#heldAbility = null
 				
 			elif bow_equipped and bow_cooldown:
 				bow_cooldown = false
@@ -132,28 +139,15 @@ func _physics_process(delta):
 		else:
 			animation_tree["parameters/conditions/swing"] = false
 			
-			var thisSpeed = speed * 100
-			velocity = delta * thisSpeed * axis
-			
 			if velocity == Vector2.ZERO:
 				animation_tree["parameters/conditions/idle"] = true
 				animation_tree["parameters/conditions/is_moving"] = false
 			else:
 				animation_tree["parameters/conditions/idle"] = false
 				animation_tree["parameters/conditions/is_moving"] = true
-			#if animation_tree.get("parameters/playback").get_current_node() == "attack" and button_clicked.isReady == false:
-				#move_and_slide()
-			
-			#if animation_tree.get("parameters/playback").get_current_node() != "attack":
-			#move_and_slide()
 				
 			var mouse_pos = get_global_mouse_position()
 			$Marker2D.look_at(mouse_pos)
-				
-			if animation_tree.get("parameters/playback").get_current_node() == "attack":
-				velocity = velocity/3
-		axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
-		axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
 		
 		if axis.x > 0:
 			sprite.flip_h = false
@@ -164,6 +158,9 @@ func _physics_process(delta):
 				sprite.flip_h = true
 			else:
 				sprite.flip_h = false
+		
+		if animation_tree.get("parameters/playback").get_current_node() == "attack":
+			velocity = velocity/3
 		
 		move_and_slide()
 		
@@ -269,6 +266,7 @@ func set_healthbar(hp, set_max_value):
 
 func upgrade_character(upgrade):
 	emit_signal("selected_upgrade",upgrade)
+	emit_signal("stop_spawning")
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()

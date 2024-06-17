@@ -57,10 +57,10 @@ size_flags_vertical = 4
 text = "Add Slot"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Background/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 420)
+custom_minimum_size = Vector2(400, 500)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 3
+size_flags_vertical = 6
 
 [node name="GridContainer" type="GridContainer" parent="Background/MarginContainer/VBoxContainer/ScrollContainer"]
 z_index = 2
