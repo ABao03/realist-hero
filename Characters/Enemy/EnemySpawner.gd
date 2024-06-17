@@ -6,6 +6,7 @@ extends Node2D
 @onready var player = get_tree().get_first_node_in_group("player")
 
 @export var time = 0
+@onready var timer = $Timer
 
 #signal changetime(time)
 
@@ -61,3 +62,6 @@ func get_random_position():
 	var x_spawn = randf_range(spawn_pos1.x, spawn_pos2.x)
 	var y_spawn = randf_range(spawn_pos1.y,spawn_pos2.y)
 	return Vector2(x_spawn,y_spawn)
+
+func stop_spawns():
+	timer.stop()

@@ -9,7 +9,6 @@ extends Control
 @onready var grid_container2 = $Background2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
 
 # Placing Items
-var grid_array := []
 var item_held = null
 var current_slot = null
 var can_place := false
@@ -17,8 +16,8 @@ var icon_anchor : Vector2
 var is_open = false
 
 # Tracking Items
+var grid_array := []
 var currentInventory = []
-#var combinedInventory = []
 @onready var animationTimer = $Timer
 var tempItem1
 var tempItem2
@@ -208,7 +207,7 @@ func recalculateStats():
 	# Set to default each time
 	for stat in PlayerStatDataHandler.addedStats:
 		# Add the component items if they exist (the default is at base, meaning they'll only exist if it's bigger)
-		if float(PlayerStatDataHandler.addedStats[stat]) < float(PlayerStatDataHandler.combinedComponentStats[stat]):
+		if PlayerStatDataHandler.addedStats[stat] < PlayerStatDataHandler.combinedComponentStats[stat]:
 			PlayerStatDataHandler.addedStats[stat] = PlayerStatDataHandler.combinedComponentStats[stat]
 		
 		# Add the base stats if there are no component items
@@ -293,8 +292,6 @@ func check_combos(newItem):
 
 # Combines two items into the new combined item (combination already found)
 func combineItems(item1, item2):
-	print(item1)
-	print(item2)
 	tempItem1 = item1
 	tempItem2 = item2
 	
@@ -350,7 +347,11 @@ func add_data(item, database):
 				database[stat] += data.get(stat)
 			else:
 				database[stat] *= data.get(stat)
+			
+		if stat == "Points":
+			database[stat] += data.get(stat)
 
+# Makes it so that items only get deleted after the animation finishes, not before
 func _on_timer_timeout():
 	# Fetch the new item from the data handler dictionary.
 	var combinedItemID = DataHandler.component_product_data[[tempItem1.item_ID, tempItem2.item_ID]]

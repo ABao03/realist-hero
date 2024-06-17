@@ -14,6 +14,7 @@ func _process(delta):
 
 
 func _on_door_1_body_entered(body):
+	print(PlayerStatDataHandler.addedStats)
 	get_tree().change_scene_to_file("res://Worlds/Procedural  World/Random-world.tscn")
 	
 

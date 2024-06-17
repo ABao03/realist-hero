@@ -18,16 +18,17 @@ var speed = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if randi() % chest_chance == 0:
-		isChest = true
-		if randi() % rare_chest_chance == 0:
-			sprite.texture = rare_chest_sprite
-			chestRarity = 2
-		else:
-			sprite.texture = chest_sprite
-			chestRarity = 1
-		sprite.scale = Vector2(0.12, 0.12)
-	else:
+	# Disabled for now cuz chests are useless
+	#if randi() % chest_chance == 0:
+		#isChest = true
+		#if randi() % rare_chest_chance == 0:
+			#sprite.texture = rare_chest_sprite
+			#chestRarity = 2
+		#else:
+			#sprite.texture = chest_sprite
+			#chestRarity = 1
+		#sprite.scale = Vector2(0.12, 0.12)
+	#else:
 		isChest = false
 		sprite.texture = star_sprite
 	# You can modify the sprite based on the experience value here. Maybe implement rarity? 
@@ -35,7 +36,7 @@ func _ready():
 func _physics_process(delta): 
 	if target != null:
 		global_position = global_position.move_toward(target.global_position, speed)
-		speed += 2 * delta	
+		speed += 2 * delta
 		
 func collect():
 	sound.play()

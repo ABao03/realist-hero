@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://kf5ap7fe8shl"]
+[gd_scene load_steps=28 format=3 uid="uid://kf5ap7fe8shl"]
 
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="1_nkbnu"]
+[ext_resource type="Script" path="res://Worlds/Procedural  World/Random-world.gd" id="1_v8noq"]
 [ext_resource type="Texture2D" uid="uid://clopaewqesprl" path="res://Assets/Images/All the tilesets/wall_tilemap.png" id="2_25wi8"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="3_jdvbe"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/fill.gd" id="4_yljmm"]
@@ -881,6 +882,7 @@ enemy_num = 1
 enemy_spawn_delay = 5
 
 [node name="Random-world" type="Node2D"]
+script = ExtResource("1_v8noq")
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
 script = ExtResource("1_nkbnu")
@@ -912,10 +914,10 @@ spawns = Array[ExtResource("11_b3e8h")]([SubResource("Resource_g8xax"), SubResou
 process_mode = 1
 
 [node name="chest" type="TextureRect" parent="."]
-offset_left = -73.0
-offset_top = 131.0
-offset_right = 63.0
-offset_bottom = 230.0
+offset_left = -87.0
+offset_top = 118.0
+offset_right = -16.0
+offset_bottom = 184.0
 texture = ExtResource("13_bh2wb")
 expand_mode = 1
 script = ExtResource("9_ghhio")
@@ -923,11 +925,8 @@ script = ExtResource("9_ghhio")
 [node name="Level up chest" type="Button" parent="chest"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 133.0
-offset_bottom = 99.0
-
-[node name="slime" parent="." instance=ExtResource("10_um2ss")]
-position = Vector2(-123, 114)
+offset_right = 73.0
+offset_bottom = 63.0
 
 [node name="ability_handler" parent="." instance=ExtResource("15_p4sve")]
 

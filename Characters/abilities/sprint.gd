@@ -45,7 +45,6 @@ func _on_timer_timeout():
 
 func _on_cooldown_timer_timeout():
 	isReady = true
-	print("sprint ready")
 	
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

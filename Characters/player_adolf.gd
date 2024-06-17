@@ -57,9 +57,8 @@ var arrow_shot = false
 var arrow = preload("res://Characters/arrow.tscn")
 
 # Enemy Related
-var enemy_close = []
+@onready var spawner = get_tree().get_first_node_in_group("spawner")
 
-@onready var spawner = get_tree().get_first_node_in_group("inventory")
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer
 @onready var animation_tree = $AnimationTree
@@ -78,7 +77,7 @@ var enemy_close = []
 
 func _ready():
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
-	connect("stop_spawning",Callable(inventory,"upgrade_character"))
+	connect("stop_spawning",Callable(spawner,"stop_spawns"))
 	set_expbar(experience, calculate_experiencecap())
 	animation_tree.active = true
 	set_healthbar(maxhp*hpPercent, maxhp)
@@ -180,7 +179,6 @@ func _physics_process(delta):
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	var percentDamageTaken = float(damage)/float(maxhp)
 	hpPercent -= percentDamageTaken
-	print(damage, " ", maxhp, " ", percentDamageTaken)
 	if hpPercent <= 0:
 		get_tree().change_scene_to_file("res://Menu/death.tscn")
 	set_healthbar(maxhp*hpPercent, maxhp)
@@ -246,6 +244,7 @@ func set_recallbar(set_value = 0):
 	recallBar.value = set_value
 
 func levelup():
+	emit_signal("stop_spawning")
 	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
 	tween.tween_property(levelPanel,"position",Vector2(442,150),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
@@ -259,6 +258,7 @@ func levelup():
 		upgradeOptions.add_child(option_choice)
 		options += 1
 	get_tree().paused = true
+	
 
 func set_healthbar(hp, set_max_value):
 	healthBar.max_value = set_max_value
@@ -266,7 +266,6 @@ func set_healthbar(hp, set_max_value):
 
 func upgrade_character(upgrade):
 	emit_signal("selected_upgrade",upgrade)
-	emit_signal("stop_spawning")
 	var option_children = upgradeOptions.get_children()
 	for i in option_children:
 		i.queue_free()
@@ -308,7 +307,8 @@ func update_stats(data):
 			
 		if stat == "Defense":
 			pass
-	
+
+# Make it so chest is only openable when you level up
 func _on_button_pressed():
 	if acc > 0:
 		inventory.open()
