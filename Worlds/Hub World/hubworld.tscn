@@ -359,5 +359,19 @@ scale = Vector2(2, 2)
 
 [node name="ability_handler" parent="." instance=ExtResource("5_vptm2")]
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 445.0
+offset_top = -52.0
+offset_right = 613.0
+offset_bottom = 2.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = 445.0
+offset_top = -52.0
+offset_right = 612.0
+offset_bottom = 2.0
+text = "Press me for tutorial"
+
 [connection signal="body_entered" from="Door1" to="." method="_on_door_1_body_entered"]
 [connection signal="body_entered" from="Door2" to="." method="_on_door_2_body_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
