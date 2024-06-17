@@ -911,7 +911,7 @@ spawns = Array[ExtResource("11_b3e8h")]([SubResource("Resource_g8xax"), SubResou
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 process_mode = 1
 
-[node name="box" type="TextureRect" parent="."]
+[node name="chest" type="TextureRect" parent="."]
 offset_left = -73.0
 offset_top = 131.0
 offset_right = 63.0
@@ -920,7 +920,7 @@ texture = ExtResource("13_bh2wb")
 expand_mode = 1
 script = ExtResource("9_ghhio")
 
-[node name="Button" type="Button" parent="box"]
+[node name="Level up chest" type="Button" parent="chest"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 133.0
@@ -931,5 +931,5 @@ position = Vector2(-123, 114)
 
 [node name="ability_handler" parent="." instance=ExtResource("15_p4sve")]
 
-[connection signal="pressed" from="box/Button" to="PlayerAdolf" method="_on_button_pressed"]
-[connection signal="pressed" from="box/Button" to="box" method="_on_button_pressed"]
+[connection signal="pressed" from="chest/Level up chest" to="PlayerAdolf" method="_on_button_pressed"]
+[connection signal="pressed" from="chest/Level up chest" to="chest" method="_on_button_pressed"]

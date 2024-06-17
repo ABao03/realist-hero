@@ -311,9 +311,10 @@ func update_stats(data):
 	
 func _on_button_pressed():
 	if acc > 0:
+		inventory.open()
 		acc -= 1
 		levelup()
-	
+		
 	
 func player_ability_used(ability):
 	if ability.abilityType == "dmg":
