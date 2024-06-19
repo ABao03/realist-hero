@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="14_xrtiu"]
 [ext_resource type="PackedScene" uid="uid://tch3uejinpj0" path="res://Characters/abilities/strike.tscn" id="15_w1d75"]
-[ext_resource type="PackedScene" uid="uid://clegbepd3k4ex" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
+[ext_resource type="PackedScene" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
 [ext_resource type="Texture2D" uid="uid://btdasfk1thwvm" path="res://Assets/Images/lightning button.png" id="16_wcilh"]
 [ext_resource type="Texture2D" uid="uid://cuunt7l6tuwbf" path="res://Assets/Images/lightning button 2.png" id="17_3jc6o"]
 [ext_resource type="PackedScene" uid="uid://c6j6bswlesema" path="res://Characters/indicator.tscn" id="17_jwaba"]
@@ -117,6 +117,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Snd:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_f4pko"]
@@ -381,6 +393,7 @@ texture_progress = ExtResource("8_myf4k")
 
 [node name="Pausescreen" type="CanvasLayer" parent="GUILayer"]
 process_mode = 1
+visible = false
 script = ExtResource("9_aacrx")
 
 [node name="Menu" type="ColorRect" parent="GUILayer/Pausescreen"]
@@ -570,11 +583,12 @@ position = Vector2(217, 150)
 
 [node name="Marker2D" type="Marker2D" parent="."]
 
-[node name="Q" type="RichTextLabel" parent="."]
-offset_left = 401.0
-offset_top = 199.0
-offset_right = 449.0
-offset_bottom = 221.0
+[node name="Snd" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+bus = &"sfx"
+
+[node name="AbilitySnd" type="AudioStreamPlayer2D" parent="."]
+bus = &"sfx"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5

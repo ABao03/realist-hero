@@ -41,6 +41,9 @@ shape = SubResource("CapsuleShape2D_6wwkh")
 
 [node name="DamageNumbers" parent="." instance=ExtResource("4_64m23")]
 
+[node name="Snd" type="AudioStreamPlayer2D" parent="."]
+volume_db = -10.0
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 
 [editable path="HurtBox"]

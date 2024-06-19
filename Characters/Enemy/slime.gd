@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var hurtbox = $HurtBox
 @onready var damage_numbers_origin = $DamageNumbers
 
+@onready var snd = $Snd
 @onready var animation_tree = $AnimationTree
 @onready var hurtAnimationPlaying = false
 
@@ -62,6 +63,14 @@ func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	hp -= damage
 	hp -= magicDamage
 	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
+	
+	if magicDamage == 0 && isCrit == false:
+		snd.stream = load("res://Assets/SoundEffects/hit.wav")
+		snd.play()
+	if isCrit == true:
+		snd.stream = load("res://Assets/SoundEffects/crit_hit.mp3")
+		snd.play()
+	
 	if hp <= 0:
 		death()
 	else:

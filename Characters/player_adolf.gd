@@ -22,8 +22,11 @@ var x = true
 var paused
 var playerPaused = false
 
+# Sounds
+@onready var playerSnd = $Snd
+@onready var abilitySnd = $AbilitySnd
+
 # Attacks
-#@onready var weapon = $weapon
 @onready var attackBox1 = $HitBox
 @onready var attackBox2 = $HitBox2
 var boxesFlipped = false
@@ -134,6 +137,9 @@ func _physics_process(delta):
 				bow_cooldown = true
 				
 			elif bow_equipped == false:
+				if animation_tree.get("parameters/playback").get_current_node() != "attack":
+					playerSnd.stream = load("res://Assets/SoundEffects/swing.wav")
+					playerSnd.play()
 				animation_tree["parameters/conditions/swing"] = true
 		else:
 			animation_tree["parameters/conditions/swing"] = false
@@ -144,6 +150,10 @@ func _physics_process(delta):
 			else:
 				animation_tree["parameters/conditions/idle"] = false
 				animation_tree["parameters/conditions/is_moving"] = true
+				if playerSnd.is_playing() == false:
+					playerSnd.stream = load("res://Assets/SoundEffects/footstep.mp3")
+					playerSnd.pitch_scale = 0.75
+					playerSnd.play()
 				
 			var mouse_pos = get_global_mouse_position()
 			$Marker2D.look_at(mouse_pos)
@@ -325,6 +335,8 @@ func _on_button_pressed():
 func player_ability_used(ability):
 	if ability.abilityType == "dmg":
 		abilityDuration.wait_time = 0.45
+		abilitySnd.stream = load("res://Assets/SoundEffects/thunder.mp3")
+		abilitySnd.play()
 		abilityDuration.start()
 		abilityEffects.ability_used(get_global_mouse_position(), attackBox1.magicDamage + attackBox2.magicDamage)
 		
