@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=47 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
@@ -18,10 +18,11 @@
 [ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="14_xrtiu"]
 [ext_resource type="PackedScene" uid="uid://tch3uejinpj0" path="res://Characters/abilities/strike.tscn" id="15_w1d75"]
-[ext_resource type="PackedScene" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
+[ext_resource type="PackedScene" uid="uid://clegbepd3k4ex" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
 [ext_resource type="Texture2D" uid="uid://btdasfk1thwvm" path="res://Assets/Images/lightning button.png" id="16_wcilh"]
 [ext_resource type="Texture2D" uid="uid://cuunt7l6tuwbf" path="res://Assets/Images/lightning button 2.png" id="17_3jc6o"]
 [ext_resource type="PackedScene" uid="uid://c6j6bswlesema" path="res://Characters/indicator.tscn" id="17_jwaba"]
+[ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="23_36e71"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4hegg"]
 radius = 4.54665
@@ -574,6 +575,27 @@ offset_left = 401.0
 offset_top = 199.0
 offset_right = 449.0
 offset_bottom = 221.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("23_36e71")
+texture_scale = 0.6
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(2, 16)
+energy = 0.5
+blend_mode = 1
+texture = ExtResource("23_36e71")
+texture_scale = 0.1
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+energy = 0.3
+shadow_enabled = true
+shadow_filter = 2
+texture = ExtResource("23_36e71")
+texture_scale = 2.0
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
