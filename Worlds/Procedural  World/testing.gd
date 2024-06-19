@@ -1,7 +1,4 @@
-extends TextureRect
-
-
-
+extends Sprite2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,8 +9,8 @@ func _ready():
 func _process(delta):
 	pass
 
-func chest():
-	var sprite = Sprite2D.new()
-	sprite.texture = load("res://Assets/Images/download.png")
-	add_child(sprite)
+#func chest():
+	#var sprite = Sprite2D.new()
+	#sprite.texture = load("res://Assets/Images/download.png")
+	#add_child(sprite)
 

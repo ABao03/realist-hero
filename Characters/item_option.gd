@@ -16,7 +16,12 @@ func _ready():
 		#item = "food"
 	lblName.text = item["Name"]
 	lblDescription.text = item["Info"]
-	itemIcon.texture = load("res://Assets/" + item["Name"] + ".png")
+	var file_name = DataHandler.item_data[item["ID"]]["Name"]
+	file_name = file_name.replace("'", "")
+	file_name = file_name.replace(" ", "_")
+	file_name = file_name.to_lower()
+	var Icon_path = "res://Assets/" + file_name + ".png"
+	itemIcon.texture = ResourceLoader.load(Icon_path)
 	
 func _input(event):
 	if event.is_action("mouse_leftclick"):

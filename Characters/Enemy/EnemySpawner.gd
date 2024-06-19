@@ -64,4 +64,5 @@ func get_random_position():
 	return Vector2(x_spawn,y_spawn)
 
 func stop_spawns():
-	timer.stop()
+	#timer.stop()
+	pass

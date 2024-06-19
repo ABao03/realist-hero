@@ -32,6 +32,8 @@ directories/dtl_directory={
 
 [display]
 
+window/size/resizable=false
+window/size/borderless=true
 window/stretch/mode="canvas_items"
 
 [editor_plugins]

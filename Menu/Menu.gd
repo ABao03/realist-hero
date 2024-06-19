@@ -13,6 +13,3 @@ func _on_quit_pressed():
 	
 
 # إن شاء الله this becomes successful
-
-
-

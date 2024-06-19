@@ -82,5 +82,5 @@ libraries = {
 "": SubResource("AnimationLibrary_dpeaf")
 }
 
-[connection signal="mouse_entered" from="WhiteIcon" to="." method="_on_icon_mouse_entered"]
-[connection signal="mouse_exited" from="WhiteIcon" to="." method="_on_icon_mouse_exited"]
+[connection signal="mouse_entered" from="Icon" to="." method="_on_icon_mouse_entered"]
+[connection signal="mouse_exited" from="Icon" to="." method="_on_icon_mouse_exited"]

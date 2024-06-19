@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://kf5ap7fe8shl"]
+[gd_scene load_steps=29 format=3 uid="uid://kf5ap7fe8shl"]
 
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="1_nkbnu"]
 [ext_resource type="Script" path="res://Worlds/Procedural  World/Random-world.gd" id="1_v8noq"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="10_um2ss"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="11_b3e8h"]
 [ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/skeleton.tscn" id="12_22y40"]
-[ext_resource type="Texture2D" uid="uid://ck03u50bxi7ir" path="res://Assets/Images/download.png" id="13_bh2wb"]
+[ext_resource type="Texture2D" uid="uid://bhxvndxga32g0" path="res://Assets/Images/Fantasy RPG (Toony) 32x32.png" id="14_au8ri"]
 [ext_resource type="PackedScene" uid="uid://cinfijdsg7wv1" path="res://Characters/abilities/ability_handler.tscn" id="15_p4sve"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_4gdcp"]
@@ -881,6 +881,9 @@ enemy = ExtResource("12_22y40")
 enemy_num = 1
 enemy_spawn_delay = 5
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7e6ub"]
+size = Vector2(39, 39)
+
 [node name="Random-world" type="Node2D"]
 script = ExtResource("1_v8noq")
 
@@ -913,22 +916,31 @@ spawns = Array[ExtResource("11_b3e8h")]([SubResource("Resource_g8xax"), SubResou
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 process_mode = 1
 
-[node name="chest" type="TextureRect" parent="."]
-offset_left = -87.0
-offset_top = 118.0
-offset_right = -16.0
-offset_bottom = 184.0
-texture = ExtResource("13_bh2wb")
-expand_mode = 1
+[node name="ability_handler" parent="." instance=ExtResource("15_p4sve")]
+
+[node name="chest" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, 194)
+scale = Vector2(2, 2)
+texture = ExtResource("14_au8ri")
+hframes = 12
+vframes = 8
 script = ExtResource("9_ghhio")
 
 [node name="Level up chest" type="Button" parent="chest"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_right = 73.0
-offset_bottom = 63.0
+offset_left = -15.0
+offset_top = -11.0
+offset_right = 16.0
+offset_bottom = 17.0
+metadata/_edit_use_anchors_ = true
 
-[node name="ability_handler" parent="." instance=ExtResource("15_p4sve")]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(1, 199)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-0.5, 2.5)
+shape = SubResource("RectangleShape2D_7e6ub")
 
 [connection signal="pressed" from="chest/Level up chest" to="PlayerAdolf" method="_on_button_pressed"]
-[connection signal="pressed" from="chest/Level up chest" to="chest" method="_on_button_pressed"]

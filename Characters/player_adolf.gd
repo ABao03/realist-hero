@@ -172,6 +172,12 @@ func _physics_process(delta):
 			attackBox2.position += Vector2(58,0)
 			boxesFlipped = false
 	
+	# Switch player to idle if not moving
+	if playerPaused == true:
+		animation_tree["parameters/conditions/idle"] = true
+		animation_tree["parameters/conditions/is_moving"] = false
+		animation_tree["parameters/conditions/swing"] = false
+	
 	# handle recall
 	if playerRecalling == true:
 		set_recallbar(5-recallDuration.time_left)

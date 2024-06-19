@@ -3,7 +3,7 @@
 		"ID": "1",
 		"Name": "Pickaxe",
 		"Grid": "0,0/0,1/0,2/-1,0/1,0",
-		"Physical": "85.00",
+		"Physical": "15.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
@@ -12,7 +12,7 @@
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "10000",
-		"Info": "85 physical damage"
+		"Info": "15 physical damage"
 	},
 	"2": {
 		"ID": "2",
@@ -20,29 +20,29 @@
 		"Grid": "0,0/0,1",
 		"Physical": "0.00",
 		"Magic": "0.00",
-		"Attack Speed": "1.22",
+		"Attack Speed": "1.12",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "10000",
-		"Info": "22% attack speed"
+		"Info": "12% attack speed"
 	},
 	"3": {
 		"ID": "3",
 		"Name": "Wand",
 		"Grid": "0,0/1,0",
 		"Physical": "0.00",
-		"Magic": "30.00",
-		"Attack Speed": "1.13",
+		"Magic": "10.00",
+		"Attack Speed": "1.08",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "10000",
-		"Info": "30 magic damage and 13% attack speed"
+		"Info": "10 magic damage and 8% attack speed"
 	},
 	"4": {
 		"ID": "4",
@@ -63,7 +63,7 @@
 		"ID": "5",
 		"Name": "Longsword",
 		"Grid": "0,0/0,1/0,-1",
-		"Physical": "30.00",
+		"Physical": "5.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
@@ -72,7 +72,7 @@
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "10000",
-		"Info": "30 physical damage and 15% move speed"
+		"Info": "5 physical damage and 15% move speed"
 	},
 	"6": {
 		"ID": "6",
@@ -96,20 +96,20 @@
 		"Physical": "0.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
-		"Crit": "1.15",
+		"Crit": "1.09",
 		"Move Speed": "1.13",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "10000",
-		"Info": "15% crit and 13% move speed"
+		"Info": "9% crit and 13% move speed"
 	},
 	"8": {
 		"ID": "8",
 		"Name": "Suspicious Seal",
 		"Grid": "0,0/0,1/1,0/1,1",
 		"Physical": "0.00",
-		"Magic": "10.00",
+		"Magic": "7.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
@@ -117,22 +117,22 @@
 		"Defense": "15.00",
 		"Components": "",
 		"Points": "10000",
-		"Info": "10 magic and 15 defense"
+		"Info": "7 magic and 15 defense"
 	},
 	"9": {
 		"ID": "9",
 		"Name": "Cloak",
 		"Grid": "-1,-1/-1,0/0,-1/0,0/1,0/2,0",
 		"Physical": "0.00",
-		"Magic": "1.10",
+		"Magic": "1.15",
 		"Attack Speed": "0.00",
-		"Crit": "1.10",
-		"Move Speed": "1.10",
+		"Crit": "1.15",
+		"Move Speed": "1.15",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "3,7",
 		"Points": "40000",
-		"Info": "10% magic, crit and move speed"
+		"Info": "15% magic, crit and move speed"
 	},
 	"10": {
 		"ID": "10",
@@ -183,7 +183,7 @@
 		"ID": "13",
 		"Name": "Pulsing Halberd",
 		"Grid": "0,1/0,2/1,1/1,2/1,0/1,-1/1,-2",
-		"Physical": "60.00",
+		"Physical": "20.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
@@ -192,6 +192,6 @@
 		"Defense": "0.00",
 		"Components": "4,5",
 		"Points": "40000",
-		"Info": "60 physical damage and 12% max health"
+		"Info": "20 physical damage and 12% max health"
 	}
 }
