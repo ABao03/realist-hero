@@ -29,6 +29,9 @@ directories/dch_directory={}
 directories/dtl_directory={
 "timeline": "res://Dialogue/timeline.dtl"
 }
+layout/style_list=["res://Dialogue/style.tres"]
+layout/default_style="res://Dialogue/style.tres"
+variables={}
 
 [display]
 
@@ -39,6 +42,10 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/gaea/plugin.cfg")
+
+[gui]
+
+theme/custom_font="res://Dialogue/PixelifySans-VariableFont_wght.ttf"
 
 [input]
 
