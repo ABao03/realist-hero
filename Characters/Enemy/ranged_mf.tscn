@@ -1,11 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://bh4vi84vnnpf5"]
+[gd_scene load_steps=20 format=3 uid="uid://b003famhrqw17"]
 
-[ext_resource type="Script" path="res://Characters/Enemy/slime.gd" id="1_dtmf7"]
-[ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_hl17i"]
-[ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/slime-Sheet.png" id="2_li24n"]
-[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_moyka"]
-[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_d2e3y"]
-[ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="5_yrl4f"]
+[ext_resource type="Script" path="res://Characters/Enemy/Ranged.gd" id="1_7vmal"]
+[ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_1ondh"]
+[ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/slime-Sheet.png" id="3_j085o"]
+[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="4_pwb1q"]
+[ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="6_84v5k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e5idd"]
 radius = 7.0
@@ -13,7 +12,7 @@ height = 18.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_he13n"]
 resource_local_to_scene = true
-shader = ExtResource("2_hl17i")
+shader = ExtResource("2_1ondh")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -113,41 +112,40 @@ transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yey8l"]
 size = Vector2(33, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xg1"]
-size = Vector2(20, 10)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v580"]
-radius = 142.688
+radius = 201.487
 
-[node name="slime" type="Node2D"]
+[node name="Ranged" type="Node2D"]
 
-[node name="slime" type="CharacterBody2D" parent="."]
+[node name="Ranged" type="CharacterBody2D" parent="."]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(16, 12)
 collision_layer = 6
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_dtmf7")
+script = ExtResource("1_7vmal")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2
 position = Vector2(1, 5)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_e5idd")
 
-[node name="Sprite2D" type="Sprite2D" parent="slime"]
+[node name="Sprite2D" type="Sprite2D" parent="Ranged"]
+modulate = Color(0.0431373, 0.0431373, 0.0431373, 1)
 material = SubResource("ShaderMaterial_he13n")
-texture = ExtResource("2_li24n")
+texture = ExtResource("3_j085o")
 hframes = 8
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="slime"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ranged"]
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")
 }
 speed_scale = 0.5
 
-[node name="AnimationTree" type="AnimationTree" parent="slime"]
+[node name="AnimationTree" type="AnimationTree" parent="Ranged"]
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")
 }
@@ -156,51 +154,54 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hurt = false
 parameters/conditions/move = false
 
-[node name="HurtBox" parent="slime" instance=ExtResource("3_moyka")]
+[node name="HurtBox" parent="Ranged" instance=ExtResource("4_pwb1q")]
 position = Vector2(-16, -12)
 collision_layer = 4
 collision_mask = 4
 
-[node name="CollisionShape2D" parent="slime/HurtBox" index="0"]
+[node name="CollisionShape2D" parent="Ranged/HurtBox" index="0"]
 position = Vector2(16.5, 16)
 shape = SubResource("RectangleShape2D_yey8l")
 
-[node name="DisableTimer" parent="slime/HurtBox" index="1"]
+[node name="DisableTimer" parent="Ranged/HurtBox" index="1"]
 wait_time = 0.7
 
-[node name="HitBox" parent="slime" instance=ExtResource("4_d2e3y")]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="slime/HitBox" index="0"]
-position = Vector2(1, 5)
-shape = SubResource("RectangleShape2D_g0xg1")
-
-[node name="DamageNumbers" parent="slime" instance=ExtResource("5_yrl4f")]
+[node name="DamageNumbers" parent="Ranged" instance=ExtResource("6_84v5k")]
 position = Vector2(1, -6)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="slime"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Ranged"]
 
-[node name="Timer" type="Timer" parent="slime"]
+[node name="Timer" type="Timer" parent="Ranged"]
 wait_time = 0.3
 autostart = true
 
-[node name="Snd" type="AudioStreamPlayer2D" parent="slime"]
+[node name="Snd" type="AudioStreamPlayer2D" parent="Ranged"]
 position = Vector2(-16, -12)
 volume_db = -5.0
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="Ranged"]
+visible = false
+position = Vector2(-16, -12)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged/Area2D"]
+visible = false
 position = Vector2(17, 17)
 shape = SubResource("CircleShape2D_5v580")
 
-[connection signal="animation_finished" from="slime/AnimationTree" to="slime" method="_on_animation_tree_animation_finished"]
-[connection signal="hurt" from="slime/HurtBox" to="slime" method="_on_hurt_box_hurt"]
-[connection signal="timeout" from="slime/Timer" to="slime" method="_on_timer_timeout"]
-[connection signal="body_entered" from="Area2D" to="slime" method="_on_area_2d_body_entered"]
+[node name="Marker2D" type="Marker2D" parent="Ranged"]
+position = Vector2(1, 5)
 
-[editable path="slime/HurtBox"]
-[editable path="slime/HitBox"]
+[node name="SpawnTimer" type="Timer" parent="Ranged"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="animation_finished" from="Ranged/AnimationTree" to="Ranged" method="_on_animation_tree_animation_finished"]
+[connection signal="hurt" from="Ranged/HurtBox" to="Ranged" method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="Ranged/Timer" to="Ranged" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Ranged/Area2D" to="Ranged" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Ranged/Area2D" to="Ranged" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Ranged/SpawnTimer" to="Ranged" method="_on_spawn_timer_timeout"]
+
+[editable path="Ranged/HurtBox"]

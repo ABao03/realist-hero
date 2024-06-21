@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://kf5ap7fe8shl"]
+[gd_scene load_steps=39 format=3 uid="uid://kf5ap7fe8shl"]
 
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="1_nkbnu"]
 [ext_resource type="Script" path="res://Worlds/Procedural  World/Random-world.gd" id="1_v8noq"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="10_um2ss"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="11_b3e8h"]
 [ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/skeleton.tscn" id="12_22y40"]
+[ext_resource type="PackedScene" uid="uid://b003famhrqw17" path="res://Characters/Enemy/ranged_mf.tscn" id="14_72ou5"]
 [ext_resource type="Texture2D" uid="uid://bhxvndxga32g0" path="res://Assets/Images/Fantasy RPG (Toony) 32x32.png" id="14_au8ri"]
 [ext_resource type="PackedScene" uid="uid://cinfijdsg7wv1" path="res://Characters/abilities/ability_handler.tscn" id="15_p4sve"]
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="17_03wpv"]
@@ -913,6 +914,14 @@ enemy = ExtResource("12_22y40")
 enemy_num = 1
 enemy_spawn_delay = 5
 
+[sub_resource type="Resource" id="Resource_rdqjc"]
+script = ExtResource("11_b3e8h")
+time_start = 0
+time_end = 500
+enemy = ExtResource("14_72ou5")
+enemy_num = 1
+enemy_spawn_delay = 0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7e6ub"]
 size = Vector2(39, 39)
 
@@ -943,7 +952,7 @@ position = Vector2(-1, 0)
 [node name="EnemySpawner" parent="." instance=ExtResource("9_r3gj4")]
 process_mode = 1
 position = Vector2(477, 1)
-spawns = Array[ExtResource("11_b3e8h")]([SubResource("Resource_g8xax"), SubResource("Resource_iq0vr")])
+spawns = Array[ExtResource("11_b3e8h")]([SubResource("Resource_g8xax"), SubResource("Resource_iq0vr"), SubResource("Resource_rdqjc")])
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 process_mode = 1

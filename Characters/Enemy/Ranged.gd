@@ -17,16 +17,52 @@ extends CharacterBody2D
 @onready var animation_tree = $AnimationTree
 @onready var hurtAnimationPlaying = false
 
+@onready var just_spawned = true
 var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
+@onready var in_range : bool = false
+var bow_cooldown = true
+var arrow_shot = false
+var arrow = preload("res://Characters/Enemy/throw.tscn")
 
 func _ready():
 	sprite.visible = false
+	#if just_spawned == true:
+	$SpawnTimer.start()
 
 # Moving slime around 
 func _physics_process(_delta):
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	
 	velocity = direction * movement_speed
+	
+	#if just_spawned == true:
+		#await get_tree().create_timer(3).timeout
+		#just_spawned = false
+	#else:
+	
+	#if in_range == false or just_spawned == true:
+		#velocity = direction * movement_speed
+		#await get_tree().create_timer(3).timeout
+		#just_spawned = false
+		
+	if in_range == true and just_spawned == false:
+		velocity = Vector2(0.01,0.01)
+		
+		if bow_cooldown == true:
+			bow_cooldown = false
+	
+			var arrow_instance = arrow.instantiate()
+	
+			arrow_instance.rotation = $Marker2D.rotation
+			arrow_instance.global_position = $Marker2D.global_position
+			add_child(arrow_instance)
+				
+			await get_tree().create_timer(5).timeout
+			bow_cooldown = true
+	
+		var player_pos = player.position
+		$Marker2D.look_at(player_pos)
+		
 	if hurtAnimationPlaying == true:
 		velocity *= knockback
 	move_and_slide()
@@ -82,10 +118,19 @@ func _on_animation_tree_animation_finished(anim_name):
 	if anim_name == "hurt":
 		hurtAnimationPlaying = false
 
-
 func _on_timer_timeout():
 	make_path()
 
-
 func _on_area_2d_body_entered(body):
-	print(player.global_position)
+	in_range = true
+	
+	#$Marker2D.look_at(player_pos)
+
+func _on_area_2d_body_exited(body):
+	in_range = false
+
+func _on_spawn_timer_timeout():
+	print("bro")
+	just_spawned = false
+	
+#first ranged attack is very inaccurate
