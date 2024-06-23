@@ -920,7 +920,7 @@ time_start = 0
 time_end = 500
 enemy = ExtResource("14_72ou5")
 enemy_num = 1
-enemy_spawn_delay = 0
+enemy_spawn_delay = 30
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7e6ub"]
 size = Vector2(39, 39)

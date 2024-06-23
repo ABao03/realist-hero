@@ -57,7 +57,7 @@ func _physics_process(_delta):
 			arrow_instance.global_position = $Marker2D.global_position
 			add_child(arrow_instance)
 				
-			await get_tree().create_timer(5).timeout
+			await get_tree().create_timer(5).timeout # Delay between projectile atacks
 			bow_cooldown = true
 	
 		var player_pos = player.position

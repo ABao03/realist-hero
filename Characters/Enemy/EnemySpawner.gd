@@ -3,10 +3,11 @@ extends Node2D
 # Hold array of currently alive enemies 
 @export var spawns: Array[Spawn_info] = []
 
-# 
+# Call player node from scene
 @onready var players = get_tree().get_nodes_in_group("player")
 var player
 
+# Delay between spawns (I think)
 @export var time = 0
 @onready var timer = $Timer
 
