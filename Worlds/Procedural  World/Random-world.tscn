@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://kf5ap7fe8shl"]
+[gd_scene load_steps=46 format=3 uid="uid://kf5ap7fe8shl"]
 
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="1_nkbnu"]
 [ext_resource type="Script" path="res://Worlds/Procedural  World/Random-world.gd" id="1_v8noq"]
@@ -922,8 +922,69 @@ enemy = ExtResource("14_72ou5")
 enemy_num = 1
 enemy_spawn_delay = 30
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iv2v8"]
+atlas = ExtResource("14_au8ri")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rp7s"]
+atlas = ExtResource("14_au8ri")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_my7pd"]
+atlas = ExtResource("14_au8ri")
+region = Rect2(96, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65ya1"]
+atlas = ExtResource("14_au8ri")
+region = Rect2(96, 160, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhon6"]
+atlas = ExtResource("14_au8ri")
+region = Rect2(96, 192, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3eygy"]
+atlas = ExtResource("14_au8ri")
+region = Rect2(96, 224, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rr0ji"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iv2v8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rp7s")
+}],
+"loop": true,
+"name": &"Idle_clicked",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_my7pd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65ya1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhon6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eygy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eygy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3eygy")
+}],
+"loop": true,
+"name": &"Open",
+"speed": 6.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7e6ub"]
-size = Vector2(39, 39)
+size = Vector2(58, 53)
 
 [node name="Random-world" type="Node2D"]
 script = ExtResource("1_v8noq")
@@ -959,13 +1020,13 @@ process_mode = 1
 
 [node name="ability_handler" parent="." instance=ExtResource("15_p4sve")]
 
-[node name="chest" type="Sprite2D" parent="."]
+[node name="chest" type="AnimatedSprite2D" parent="." groups=["chest"]]
+unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(0, 194)
-scale = Vector2(2, 2)
-texture = ExtResource("14_au8ri")
-hframes = 12
-vframes = 8
+position = Vector2(8.5, 202)
+scale = Vector2(2.53125, 2.5)
+sprite_frames = SubResource("SpriteFrames_rr0ji")
+animation = &"Open"
 script = ExtResource("9_ghhio")
 
 [node name="Level up chest" type="Button" parent="chest"]
@@ -981,7 +1042,7 @@ position = Vector2(1, 199)
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-0.5, 2.5)
+position = Vector2(7, 10)
 shape = SubResource("RectangleShape2D_7e6ub")
 
 [node name="might delete later idk" type="PointLight2D" parent="."]

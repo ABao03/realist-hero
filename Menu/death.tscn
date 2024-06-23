@@ -11,6 +11,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x0v5c")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -279.0
+offset_top = -2.0
+offset_right = 1513.0
+offset_bottom = 1022.0
+expand_mode = 3
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 6

@@ -4,6 +4,10 @@ extends CharacterBody2D
 # Stats in data/playerdata to be done
 @export var speed : float = 150
 @onready var collision = $CollisionShape2D
+@onready var chest_sprite = get_tree().get_first_node_in_group("chest")
+@onready var animation_player: bool = true
+
+
 @onready var maxhp = 100
 @onready var hpPercent = 1.00
 @onready var acc: int = 0
@@ -244,13 +248,13 @@ func _on_collect_area_area_entered(area):
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
 	collected_experience += gem_exp
-	if experience + collected_experience >= exp_required: #level up
+	if experience + collected_experience >= exp_required: # when xp bar is full, reset it to 0
 		collected_experience -= exp_required-experience
 		experience_level += 1
 		
 		experience = 0
 		exp_required = calculate_experiencecap()
-		#levelup()
+		# LEO change chest to open sprite
 		acc += 1
 	else:
 		experience += collected_experience
@@ -344,10 +348,22 @@ func update_stats(data):
 
 # Make it so chest is only openable when you level up
 func _on_button_pressed():
-	if acc > 0:
-		inventory.open()
+
+	if acc > 0: #When the player levels up
+		chest_sprite.play("Open") #Play the animation of the chest opening
+		await get_tree().create_timer(1).timeout #waits 0.65s 
+		chest_sprite.stop() #stop animation
+
+		inventory.open() #Open inventory menu
 		acc -= 1
 		levelup()
+		
+		# LEO add function to switch chest sprite to closed
+		
+	else: #When the player did not level up
+		chest_sprite.play("Idle_clicked") #Play the idle animation
+		await get_tree().create_timer(1).timeout
+		chest_sprite.stop()
 		
 	
 func player_ability_used(ability):

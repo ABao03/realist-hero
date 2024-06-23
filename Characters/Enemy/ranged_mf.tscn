@@ -146,6 +146,9 @@ libraries = {
 speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="Ranged"]
+libraries = {
+"": SubResource("AnimationLibrary_i6kpg")
+}
 tree_root = SubResource("AnimationNodeStateMachine_sxs7k")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hurt = false
@@ -191,7 +194,7 @@ shape = SubResource("CircleShape2D_5v580")
 position = Vector2(1, 5)
 
 [node name="SpawnTimer" type="Timer" parent="Ranged"]
-wait_time = 5.0
+wait_time = 3.0
 one_shot = true
 
 [connection signal="animation_finished" from="Ranged/AnimationTree" to="Ranged" method="_on_animation_tree_animation_finished"]

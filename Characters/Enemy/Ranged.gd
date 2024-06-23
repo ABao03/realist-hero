@@ -60,7 +60,7 @@ func _physics_process(_delta):
 			await get_tree().create_timer(5).timeout # Delay between projectile atacks
 			bow_cooldown = true
 	
-		var player_pos = player.position
+		var player_pos = player.global_position
 		$Marker2D.look_at(player_pos)
 		
 	if hurtAnimationPlaying == true:
