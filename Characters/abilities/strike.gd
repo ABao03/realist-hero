@@ -1,6 +1,7 @@
 extends Node2D
 
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var players = get_tree().get_nodes_in_group("player")
+var player
 @onready var originalDamage
 @onready var newDamage
 @onready var boost_ready : bool = true
@@ -8,6 +9,9 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for thisPlayer in players:
+		if thisPlayer != null:
+			player = thisPlayer
 	await player.ready
 	originalDamage = player.attackBox1.damage
 

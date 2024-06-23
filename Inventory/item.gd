@@ -9,6 +9,7 @@ var item_name : String
 var item_grids := []
 var stats_data := {}
 var item_info : String
+var item_score : String
 var selected = false
 var grid_anchor = null
 
@@ -62,6 +63,7 @@ func load_item(a_ItemID : int) -> void:
 	item_ID = DataHandler.item_data[str(a_ItemID)]["ID"]
 	item_name = DataHandler.item_data[str(a_ItemID)]["Name"]
 	item_info = DataHandler.item_data[str(a_ItemID)]["Info"]
+	item_score = DataHandler.item_data[str(a_ItemID)]["Points"]
 
 func delete_item():
 	queue_free()

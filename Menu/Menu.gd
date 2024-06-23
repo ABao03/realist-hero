@@ -1,7 +1,8 @@
 extends Control
 func _on_start_game_pressed():
 	#get_tree().change_scene_to_file("res://Worlds/Procedural  World/Random-world.tscn")
-	get_tree().change_scene_to_file("res://Worlds/Hub World/hubworld.tscn")
+	#get_tree().change_scene_to_file("res://Worlds/Hub World/hubworld.tscn")
+	SceneManager.load_new_scene("res://Worlds/Hub World/hubworld.tscn","wipe_to_right")
 
 
 func _on_settings_pressed():

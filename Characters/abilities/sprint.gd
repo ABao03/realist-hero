@@ -1,6 +1,7 @@
 extends Node2D
 
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var players = get_tree().get_nodes_in_group("player")
+var player
 @onready var hurtbox = get_node("../HurtBox")
 @onready var originalSpeed
 @onready var sprintSpeed = 2000
@@ -10,6 +11,9 @@ var isPressed : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for thisPlayer in players:
+		if thisPlayer != null:
+			player = thisPlayer
 	originalSpeed = player.speed
 
 func _input(event: InputEvent): # Show/hide pause menu

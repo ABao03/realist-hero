@@ -3,15 +3,19 @@ extends Node2D
 # Hold array of currently alive enemies 
 @export var spawns: Array[Spawn_info] = []
 
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var players = get_tree().get_nodes_in_group("player")
+var player
 
 @export var time = 0
 @onready var timer = $Timer
 
 #signal changetime(time)
 
-#func _ready():
+func _ready():
 	#connect("changetime",Callable(player,"change_time"))
+	for thisPlayer in players:
+		if thisPlayer != null:
+			player = thisPlayer
 
 # When timer hits 0, run this code
 func _on_timer_timeout():

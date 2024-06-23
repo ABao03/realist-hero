@@ -19,8 +19,8 @@ var x = true
 @onready var axis = Vector2.ZERO
 
 #Represents paused state
-var paused
 var playerPaused = false
+var playerDead = false
 
 # Sounds
 @onready var playerSnd = $Snd
@@ -37,7 +37,8 @@ var boxesFlipped = false
 @onready var abilityDuration = $AbilityDuration
 @onready var indicator = $Indicator
 
-@onready var abilityEffects = get_tree().get_first_node_in_group("ability")
+@onready var abilityEffectsGroup = get_tree().get_nodes_in_group("ability")
+var abilityEffects
 
 var usingAbility = false
 var heldAbility = null
@@ -49,7 +50,8 @@ var playerRecalling = false
 
 # Upgrades
 var upgrade_options = []
-@onready var inventory = get_tree().get_first_node_in_group("inventory")
+@onready var inventoryGroup = get_tree().get_nodes_in_group("inventory")
+var inventory
 signal selected_upgrade(upgrade)
 signal stop_spawning()
 
@@ -79,12 +81,24 @@ var arrow = preload("res://Characters/arrow.tscn")
 
 
 func _ready():
-	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
-	connect("stop_spawning",Callable(spawner,"stop_spawns"))
 	set_expbar(experience, calculate_experiencecap())
 	animation_tree.active = true
 	set_healthbar(maxhp*hpPercent, maxhp)
 	#modulate = Color(1, 1, 1, 1)
+	
+	for abilityEffect in abilityEffectsGroup:
+		if abilityEffect != null:
+			abilityEffects = abilityEffect
+	
+	for inven in inventoryGroup:
+		if inven != null:
+			inventory = inven
+			
+	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
+	connect("stop_spawning",Callable(spawner,"stop_spawns"))
+
+func _exit_tree():
+	remove_from_group("player")
 
 func _physics_process(delta):
 	var thisSpeed = speed * 100
@@ -95,6 +109,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("recall"):
 		if playerRecalling == true:
+			maxhp = 1
 			playerRecalling = false
 			cancel_recall()
 		else:
@@ -195,8 +210,11 @@ func _physics_process(delta):
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	var percentDamageTaken = float(damage)/float(maxhp)
 	hpPercent -= percentDamageTaken
-	if hpPercent <= 0:
-		get_tree().change_scene_to_file("res://Menu/death.tscn")
+	if hpPercent <= 0 && playerDead == false:
+		playerPaused = true
+		playerDead = true
+		#get_tree().change_scene_to_file("res://Menu/death.tscn")
+		SceneManager.load_new_scene("res://Menu/death.tscn","fade_to_black")
 	set_healthbar(maxhp*hpPercent, maxhp)
 	if playerRecalling == true:
 		cancel_recall()

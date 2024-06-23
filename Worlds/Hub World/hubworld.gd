@@ -10,7 +10,8 @@ func _process(delta):
 	pass
 
 func _on_door_1_body_entered(body):
-	get_tree().change_scene_to_file("res://Worlds/Procedural  World/Random-world.tscn")
+	#get_tree().change_scene_to_file("res://Worlds/Procedural  World/Random-world.tscn")
+	SceneManager.load_new_scene("res://Worlds/Procedural  World/Random-world.tscn","wipe_to_right")
 
 func _on_door_2_body_entered(body):
 	get_tree().change_scene_to_file("res://Menu/menu.tscn")

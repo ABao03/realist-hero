@@ -1,10 +1,16 @@
 extends Node2D
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var players = get_tree().get_nodes_in_group("player")
+var player
 @onready var currentHealth
 @onready var maxHealth
 @onready var healAmount = 20
 var isReady : bool = true
 @onready var healthBar = get_node('%HealthBar')
+
+func _ready():
+	for thisPlayer in players:
+		if thisPlayer != null:
+			player = thisPlayer
 
 func _on_heal_button_pressed():
 	if isReady == true:

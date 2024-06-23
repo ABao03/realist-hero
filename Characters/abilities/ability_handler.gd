@@ -6,6 +6,9 @@ extends Node2D
 func _ready():
 	pass # Replace with function body.
 
+func _exit_tree():
+	remove_from_group("ability")
+
 func ability_used(pos, magicDamage):
 	lightning.hitbox.magicDamage = int(magicDamage) + 10
 	lightning.play_animation(pos)

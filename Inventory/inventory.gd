@@ -18,20 +18,26 @@ var is_open = false
 # Tracking Items
 var grid_array := []
 var currentInventory = []
+var componentInventory = []
 @onready var animationTimer = $Timer
 var tempItem1
 var tempItem2
 
 # Send upgrades to Player node
 signal pass_upgrade(upgrade)
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var players = get_tree().get_nodes_in_group("player")
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	for thisPlayer in players:
+		if thisPlayer != null:
+			player = thisPlayer
 	connect("pass_upgrade",Callable(player,"update_stats"))
 	for i in range(80):
 		create_slot()
 	visible = false
+	
 
 # Open and close inventory
 func open():
@@ -292,6 +298,9 @@ func check_combos(newItem):
 
 # Combines two items into the new combined item (combination already found)
 func combineItems(item1, item2):
+	componentInventory.append(DataHandler.deep_clone(item1))
+	componentInventory.append(DataHandler.deep_clone(item2))
+	
 	tempItem1 = item1
 	tempItem2 = item2
 	

@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://buux43qer5pgb"]
+[gd_scene load_steps=2 format=3 uid="uid://buux43qer5pgb"]
 
 [ext_resource type="Script" path="res://Menu/Death.gd" id="1_x0v5c"]
-[ext_resource type="Texture2D" uid="uid://ct741cugcv00f" path="res://Assets/YOU_DIED.webp" id="2_hm0af"]
 
 [node name="Death" type="Control"]
 layout_mode = 3
@@ -12,20 +11,64 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_x0v5c")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 646.0
-texture = ExtResource("2_hm0af")
-expand_mode = 2
-stretch_mode = 3
-
 [node name="Button" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -217.0
+offset_top = -39.0
+offset_right = -34.0
+offset_bottom = 36.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "TRY AGAIN"
+
+[node name="ItemIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -424.0
+offset_top = -17.5
+offset_right = -384.0
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 389.0
-offset_top = 500.0
-offset_right = 839.0
-offset_bottom = 610.0
-text = "TRY AGAIN?"
+offset_left = 67.0
+offset_top = 43.0
+offset_right = 538.0
+offset_bottom = 162.0
+theme_override_font_sizes/normal_font_size = 80
+text = "GAME OVER"
+
+[node name="Background" type="ColorRect" parent="."]
+visible = false
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ScoreLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 263.0
+offset_right = 860.0
+offset_bottom = 394.0
+theme_override_font_sizes/normal_font_size = 80
+text = "0"
+text_direction = 2
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

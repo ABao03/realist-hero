@@ -130,7 +130,7 @@ func _on_area_2d_body_exited(body):
 	in_range = false
 
 func _on_spawn_timer_timeout():
-	print("bro")
+	#print("bro")
 	just_spawned = false
 	
 #first ranged attack is very inaccurate

@@ -88,4 +88,5 @@ func _on_timer_timeout():
 
 
 func _on_area_2d_body_entered(body):
-	print(player.global_position)
+	#print(player.global_position)
+	pass
