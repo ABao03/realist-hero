@@ -14,3 +14,7 @@ func _on_quit_pressed():
 	
 
 # إن شاء الله this becomes successful
+
+
+func _on_button_pressed():
+	OS.shell_open("https://discord.gg/PVaUdtWrxP")

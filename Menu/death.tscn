@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://buux43qer5pgb"]
+[gd_scene load_steps=3 format=3 uid="uid://buux43qer5pgb"]
 
 [ext_resource type="Script" path="res://Menu/Death.gd" id="1_x0v5c"]
+[ext_resource type="Texture2D" uid="uid://cq14qho0qlf1x" path="res://Assets/Images/Menu Images/discord.png" id="2_67lne"]
 
 [node name="Death" type="Control"]
 layout_mode = 3
@@ -78,4 +79,22 @@ theme_override_font_sizes/normal_font_size = 80
 text = "0"
 text_direction = 2
 
+[node name="Discord" type="TextureRect" parent="."]
+offset_left = 997.0
+offset_top = 532.0
+offset_right = 1131.0
+offset_bottom = 703.0
+texture = ExtResource("2_67lne")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="discord" type="Button" parent="Discord"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -3.0
+offset_top = -5.0
+offset_right = 165.0
+offset_bottom = 130.0
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Discord/discord" to="." method="_on_discord_pressed"]

@@ -38,3 +38,7 @@ func pop_effect():
 	## Start the tween
 	#tween.start()
 	pass
+
+
+func _on_discord_pressed():
+	OS.shell_open("https://discord.gg/PVaUdtWrxP")

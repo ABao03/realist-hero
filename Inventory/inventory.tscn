@@ -35,7 +35,6 @@ z_index = 1
 layout_mode = 2
 
 [node name="Header" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 2
@@ -129,8 +128,6 @@ offset_bottom = 398.0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Snd" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Add_slot" to="." method="_on_add_slot_pressed"]
