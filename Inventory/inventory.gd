@@ -28,6 +28,9 @@ signal pass_upgrade(upgrade)
 @onready var players = get_tree().get_nodes_in_group("player")
 var player
 
+# Sound
+@onready var snd = $Snd
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for thisPlayer in players:
@@ -44,11 +47,17 @@ func open():
 	visible = true
 	is_open = true
 	player.playerPaused = true
+	snd.volume_db = -7
+	snd.stream = load("res://Assets/SoundEffects/inventoryOpened.mp3")
+	snd.play()
 
 func close():
 	visible = false
 	is_open = false
 	player.playerPaused = false
+	snd.volume_db = 0
+	snd.stream = load("res://Assets/SoundEffects/inventoryClosed.mp3")
+	snd.play()
 
 func _process(delta):
 	if item_held:
@@ -175,7 +184,9 @@ func place_item():
 	var createdCombo = false
 	
 	if not can_place or not current_slot: 
-		return #put indication of placement failed, sound or visual here
+		snd.stream = load("res://Assets/SoundEffects/itemFailedToPlace.wav")
+		snd.play()
+		return
 		
 	#for changing scene tree
 	item_held.get_parent().remove_child(item_held)
@@ -205,7 +216,10 @@ func place_item():
 	# Needs a conditional, or else it'll auto-wipe the item at the end even if a new one was made via combo
 	if createdCombo == false:
 		item_held = null
-		
+	
+	snd.stream = load("res://Assets/SoundEffects/itemPlaced.mp3")
+	snd.volume_db = 10
+	snd.play()
 	clear_grid()
 
 # Recalculate stats each time an item is placed in the grid
@@ -311,6 +325,9 @@ func combineItems(item1, item2):
 	# Play an animation on the item
 	item1.item_combine_animation()
 	item2.item_combine_animation()
+	snd.volume_db = 0
+	snd.stream = load("res://Assets/SoundEffects/itemCombine.wav")
+	snd.play()
 	animationTimer.start()
 
 # Adding item stats to a given Autoloaded database

@@ -83,6 +83,10 @@ var arrow = preload("res://Characters/arrow.tscn")
 @onready var itemOptions = preload("res://Characters/item_option.tscn")
 @onready var sndLevelUp = get_node('%snd_levelUp')
 
+# Light stuff
+@onready var pointLight = $PointLight2D
+@onready var ambientLight = $PointLight2D3
+@onready var shadow = $PointLight2D2
 
 func _ready():
 	set_expbar(experience, calculate_experiencecap())
@@ -118,12 +122,12 @@ func _physics_process(delta):
 			cancel_recall()
 		else:
 			playerRecalling = true
-			recallBar.visible = true
+			#recallBar.visible = true
 			recallDuration.start()
-			recall.visible = true
+			#recall.visible = true
 	
 	# Movement stuff
-	if playerPaused == false && playerRecalling == false:
+	if playerPaused == false: # && playerRecalling == false
 		if Input.is_action_just_pressed("switch"):
 			if bow_equipped == true:
 				bow_equipped = false
@@ -396,3 +400,6 @@ func cancel_recall():
 	recall.visible = false
 	recallBar.visible = false
 	recallDuration.stop()
+
+func disable_light():
+	pointLight.visible = false
