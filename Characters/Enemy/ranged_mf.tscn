@@ -146,9 +146,6 @@ libraries = {
 speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="Ranged"]
-libraries = {
-"": SubResource("AnimationLibrary_i6kpg")
-}
 tree_root = SubResource("AnimationNodeStateMachine_sxs7k")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hurt = false
