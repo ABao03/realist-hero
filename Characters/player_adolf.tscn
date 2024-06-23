@@ -277,9 +277,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_fjfia")
-}
 tree_root = SubResource("AnimationNodeStateMachine_63fkr")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle = false
@@ -591,7 +588,7 @@ bus = &"sfx"
 bus = &"sfx"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.5
+energy = 0.4
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("23_36e71")
@@ -609,7 +606,7 @@ energy = 0.3
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("23_36e71")
-texture_scale = 2.0
+texture_scale = 1.5
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]

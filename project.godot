@@ -20,8 +20,8 @@ config/icon="res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.pn
 DataHandler="*res://Data/DataHandler.gd"
 DamageNumbers="*res://Characters/DamageNumbers.gd"
 PlayerStatDataHandler="*res://Data/PlayerStatDataHandler.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 SceneManager="*res://Menu/SceneManager.gd"
+Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
