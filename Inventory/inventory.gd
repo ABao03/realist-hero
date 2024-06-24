@@ -1,12 +1,13 @@
 extends Control
 
 # GUI
+@onready var canvas = $CanvasLayer
 @onready var slot_scene = preload("res://Inventory/slot.tscn")
-@onready var grid_container = $Background/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
+@onready var grid_container = $CanvasLayer/Background/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
 @onready var item_scene = preload("res://Inventory/item.tscn")
-@onready var scroll_container = $Background/MarginContainer/VBoxContainer/ScrollContainer
+@onready var scroll_container = $CanvasLayer/Background/MarginContainer/VBoxContainer/ScrollContainer
 @onready var col_count = grid_container.columns #save column number
-@onready var grid_container2 = $Background2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
+@onready var grid_container2 = $CanvasLayer/Background2/MarginContainer/VBoxContainer/ScrollContainer/GridContainer
 
 # Placing Items
 var item_held = null
@@ -39,12 +40,12 @@ func _ready():
 	connect("pass_upgrade",Callable(player,"update_stats"))
 	for i in range(80):
 		create_slot()
-	visible = false
+	canvas.visible = false
 	
 
 # Open and close inventory
 func open():
-	visible = true
+	canvas.visible = true
 	is_open = true
 	player.playerPaused = true
 	snd.volume_db = -7
@@ -52,7 +53,7 @@ func open():
 	snd.play()
 
 func close():
-	visible = false
+	canvas.visible = false
 	is_open = false
 	player.playerPaused = false
 	snd.volume_db = 0

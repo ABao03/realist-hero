@@ -357,7 +357,7 @@ height = 70.0
 size = Vector2(73.5, 112.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vqme"]
-size = Vector2(57, 107.5)
+size = Vector2(61, 108.5)
 
 [node name="skeleton" type="CharacterBody2D"]
 collision_layer = 6
@@ -390,10 +390,12 @@ position = Vector2(48, 49)
 shape = SubResource("RectangleShape2D_ue8qg")
 
 [node name="HitBox" parent="." instance=ExtResource("4_acw4m")]
+collision_layer = 2
+collision_mask = 2
 damage = 3
 
 [node name="CollisionShape2D" parent="HitBox" index="0"]
-position = Vector2(50.5, 49.75)
+position = Vector2(48.5, 49.25)
 shape = SubResource("RectangleShape2D_7vqme")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
