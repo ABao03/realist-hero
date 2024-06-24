@@ -80,7 +80,7 @@ var arrow = preload("res://Characters/arrow.tscn")
 @onready var lblLevel = get_node('%lbl_levelUp')
 @onready var levelPanel = get_node('%LevelUp')
 @onready var upgradeOptions = get_node('%UpgradeOptions')
-@onready var itemOptions = preload("res://Characters/canvas_item_option.tscn")
+@onready var itemOptions = preload("res://Characters/item_option.tscn")
 @onready var sndLevelUp = get_node('%snd_levelUp')
 
 # Light stuff

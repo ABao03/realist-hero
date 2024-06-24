@@ -80,7 +80,6 @@ text = "0"
 text_direction = 2
 
 [node name="Discord" type="TextureRect" parent="."]
-layout_mode = 0
 offset_left = 997.0
 offset_top = 532.0
 offset_right = 1131.0
@@ -96,7 +95,6 @@ offset_left = -3.0
 offset_top = -5.0
 offset_right = 165.0
 offset_bottom = 130.0
-text = "https://discord.gg/f6gskUYUCB"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Discord/discord" to="." method="_on_discord_pressed"]
