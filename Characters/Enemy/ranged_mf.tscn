@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://Characters/Enemy/Ranged.gd" id="1_7vmal"]
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_1ondh"]
-[ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/slime-Sheet.png" id="3_j085o"]
+[ext_resource type="Texture2D" uid="uid://bf1kc1mq0rx30" path="res://Assets/BabyCopperDragon.png" id="3_ox745"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="4_pwb1q"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="6_84v5k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e5idd"]
-radius = 7.0
-height = 18.0
+radius = 18.0
+height = 36.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_he13n"]
 resource_local_to_scene = true
@@ -110,7 +110,7 @@ states/move/position = Vector2(323, 100)
 transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_v76bw"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_xiuwx"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_ffldp")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yey8l"]
-size = Vector2(33, 20)
+size = Vector2(27, 36)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v580"]
 radius = 201.487
@@ -118,26 +118,28 @@ radius = 201.487
 [node name="Ranged" type="Node2D"]
 
 [node name="Ranged" type="CharacterBody2D" parent="."]
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0.85098, 0.85098, 0.85098, 1)
 position = Vector2(16, 12)
 collision_layer = 6
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7vmal")
+movement_speed = 50.0
+hp = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2
-position = Vector2(1, 5)
+position = Vector2(8, 9)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_e5idd")
 
 [node name="Sprite2D" type="Sprite2D" parent="Ranged"]
-modulate = Color(0.0431373, 0.0431373, 0.0431373, 1)
 material = SubResource("ShaderMaterial_he13n")
-texture = ExtResource("3_j085o")
-hframes = 8
-vframes = 3
+position = Vector2(8, 6)
+scale = Vector2(2.125, 2.3125)
+texture = ExtResource("3_ox745")
+hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ranged"]
 libraries = {
@@ -146,6 +148,9 @@ libraries = {
 speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="Ranged"]
+libraries = {
+"": SubResource("AnimationLibrary_i6kpg")
+}
 tree_root = SubResource("AnimationNodeStateMachine_sxs7k")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hurt = false
@@ -157,7 +162,7 @@ collision_layer = 4
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="Ranged/HurtBox" index="0"]
-position = Vector2(16.5, 16)
+position = Vector2(23.5, 22)
 shape = SubResource("RectangleShape2D_yey8l")
 
 [node name="DisableTimer" parent="Ranged/HurtBox" index="1"]

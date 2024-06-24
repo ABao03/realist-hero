@@ -80,6 +80,7 @@ text = "0"
 text_direction = 2
 
 [node name="Discord" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 997.0
 offset_top = 532.0
 offset_right = 1131.0
