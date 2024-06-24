@@ -50,18 +50,18 @@ func _physics_process(_delta):
 		
 		if bow_cooldown == true:
 			bow_cooldown = false
-	
+			
+			var player_pos = player.global_position
+			$Marker2D.look_at(player_pos)
+			
 			var arrow_instance = arrow.instantiate()
-	
+			
 			arrow_instance.rotation = $Marker2D.rotation
 			arrow_instance.global_position = $Marker2D.global_position
 			add_child(arrow_instance)
 				
 			await get_tree().create_timer(5).timeout # Delay between projectile atacks
 			bow_cooldown = true
-	
-		var player_pos = player.global_position
-		$Marker2D.look_at(player_pos)
 		
 	if hurtAnimationPlaying == true:
 		velocity *= knockback
@@ -72,9 +72,9 @@ func _physics_process(_delta):
 		animation_tree["parameters/conditions/hurt"] = false
 	
 	if direction.x > 0.1:
-		sprite.flip_h = true
-	elif direction.x < -0.1:
 		sprite.flip_h = false
+	elif direction.x < -0.1:
+		sprite.flip_h = true
 
 func make_path():
 	nav_agent.target_position = player.global_position
