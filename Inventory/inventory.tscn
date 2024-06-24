@@ -35,6 +35,7 @@ z_index = 1
 layout_mode = 2
 
 [node name="Header" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 2
@@ -69,7 +70,6 @@ theme_override_constants/v_separation = 0
 columns = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/MarginContainer"]
-modulate = Color(1, 1, 1, 0.317647)
 position = Vector2(210, 262)
 texture = ExtResource("2_amuen")
 
@@ -125,6 +125,7 @@ offset_left = 594.0
 offset_top = 248.0
 offset_right = 793.0
 offset_bottom = 398.0
+color = Color(0.321569, 0.152941, 0.0745098, 1)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

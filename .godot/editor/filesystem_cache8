@@ -723,9 +723,9 @@ slot1.png::CompressedTexture2D::6549966402104752440::1719194874::1719194989::1::
 suspicious_seal.png::CompressedTexture2D::1325806430588458611::1719194874::1719194989::1::::<><>::
 wand.png::CompressedTexture2D::1895943570588054896::1719194874::1719194989::1::::<><>::
 YOU_DIED.webp::CompressedTexture2D::6174296844289413955::1719194874::1719194989::1::::<><>::
-::res://Assets/Images/::1719195317
+::res://Assets/Images/::1719196180
 BabyCopperDragon.png::CompressedTexture2D::4808911343632503046::1719195293::1719195319::1::::<><>::
-backpack.png::CompressedTexture2D::4297111941113431495::1719194930::1719194989::1::::<><>::
+backpack.png::CompressedTexture2D::4297111941113431495::1719196173::1719196183::1::::<><>::
 ComfyUI_00346_.png::CompressedTexture2D::6391736763485883546::1719194874::1719194989::1::::<><>::
 ComfyUI_00355_.png::CompressedTexture2D::4354472011501517217::1719194874::1719194989::1::::<><>::
 ComfyUI_00364_.png::CompressedTexture2D::6461770842164014410::1719194874::1719194989::1::::<><>::
@@ -814,13 +814,13 @@ sprint.gd::GDScript::-1::1719194875::0::1::::<>Node2D<>::
 sprint.tscn::PackedScene::6484686713932363923::1719194875::0::1::::<><>::res://Characters/abilities/sprint.gd
 strike.gd::GDScript::-1::1719194875::0::1::::<>Node2D<>::
 strike.tscn::PackedScene::1338192862875795855::1719194875::0::1::::<><>::res://Characters/abilities/strike.gd
-::res://Characters/Enemy/::1719194930
+::res://Characters/Enemy/::1719196097
 dummy.gd::GDScript::-1::1719194875::0::1::::<>CharacterBody2D<>::
 dummy.tscn::PackedScene::1823848522457683744::1719194875::0::1::::<><>::res://Characters/Enemy/dummy.gd<>uid://cph5lko3tokyy::::res://Assets/Images/Training Dummy Sprite Sheet.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
 EnemySpawner.gd::GDScript::-1::1719194875::0::1::::<>Node2D<>::
 enemy_spawner.tscn::PackedScene::3746545622702081094::1719194875::0::1::::<><>::res://Characters/Enemy/EnemySpawner.gd
-Ranged.gd::GDScript::-1::1719194875::0::1::::<>CharacterBody2D<>::
-ranged_mf.tscn::PackedScene::4194460242141464412::1719194880::0::1::::<><>::res://Characters/Enemy/Ranged.gd<>uid://dacx3dsr3ysl8::::res://Characters/hit_flash.tres<>uid://ckrpdremyt5p3::::res://Assets/Images/slime-Sheet.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
+Ranged.gd::GDScript::-1::1719196097::0::1::::<>CharacterBody2D<>::
+ranged_mf.tscn::PackedScene::4194460242141464412::1719196097::0::1::::<><>::res://Characters/Enemy/Ranged.gd<>uid://dacx3dsr3ysl8::::res://Characters/hit_flash.tres<>uid://carqcjy00lyew::::res://Assets/Images/BabyCopperDragon.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
 skeleton.gd::GDScript::-1::1719194875::0::1::::<>CharacterBody2D<>::
 skeleton.tscn::PackedScene::7664651522661223299::1719194930::0::1::::<><>::res://Characters/Enemy/skeleton.gd<>uid://dwphtdt1vrpvg::::res://Assets/Images/Skeleton enemy.png<>uid://b8hdsbgcfrf4k::::res://Characters/Hitbox/hurt_box.tscn<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn<>uid://dpf38t6tmn6t3::::res://Characters/damage_numbers.tscn
 slime.gd::GDScript::-1::1719194875::0::1::::<>CharacterBody2D<>::
@@ -860,22 +860,22 @@ CAMBRIA.TTC::FontFile::178975118560672299::1719194875::1719194988::1::::<><>::
 CAMBRIAB.TTF::FontFile::4586833295546370841::1719194875::1719194988::1::::<><>::
 CAMBRIAI.TTF::FontFile::6442532545763141232::1719194875::1719194988::1::::<><>::
 CAMBRIAZ.TTF::FontFile::7186213338800642863::1719194875::1719194988::1::::<><>::
-::res://Inventory/::1719195139
+::res://Inventory/::1719195973
 hover_info.gd::GDScript::-1::1719194875::0::1::::<>ColorRect<>::
 hover_info.tscn::PackedScene::8456412683199391309::1719194875::0::1::::<><>::res://Inventory/hover_info.gd
 inventory.gd::GDScript::-1::1719194930::0::1::::<>Control<>::
-inventory.tscn::PackedScene::1782559254499775234::1719195139::0::1::::<><>::res://Inventory/inventory.gd<>uid://b2hs2ntkap0sh::::res://Assets/Images/backpack.png<>uid://dsql475l10syn::::res://Inventory/hover_info.tscn
+inventory.tscn::PackedScene::1782559254499775234::1719195973::0::1::::<><>::res://Inventory/inventory.gd<>uid://b2hs2ntkap0sh::::res://Assets/Images/backpack.png<>uid://dsql475l10syn::::res://Inventory/hover_info.tscn
 item.gd::GDScript::-1::1719194875::0::1::::<>Node2D<>::
 item.tscn::PackedScene::5220632423001930039::1719194875::0::1::::<><>::res://Inventory/item.gd<>uid://dacx3dsr3ysl8::::res://Characters/hit_flash.tres
 slot.gd::GDScript::-1::1719194875::0::1::::<>TextureRect<>::
 slot.tscn::PackedScene::3976353318320087248::1719194875::0::1::::<><>::uid://c0k38wcn2trlw::::res://Assets/slot1.png<>res://Inventory/slot.gd
-::res://Menu/::1719195139
+::res://Menu/::1719195973
 Death.gd::GDScript::-1::1719194875::0::1::::<>Control<>::
 death.tscn::PackedScene::3832934885968145673::1719194930::0::1::::<><>::res://Menu/Death.gd<>uid://cq14qho0qlf1x::::res://Assets/Images/Menu Images/discord.png
 loading_screen.gd::GDScript::-1::1719194875::0::1::::LoadingScreen<>CanvasLayer<>::
 loading_screen.tscn::PackedScene::9043442816996412473::1719194875::0::1::::<><>::res://Menu/loading_screen.gd
 Menu.gd::GDScript::-1::1719194875::0::1::::<>Control<>::
-menu.tscn::PackedScene::7296551313000196917::1719195139::0::1::::<><>::res://Menu/Menu.gd<>uid://0c8gqiday546::::res://Assets/Images/title screen.png<>uid://db82p0hpb4y75::::res://Assets/Images/Menu Images/start_button.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3<>uid://b3521ylth6p68::::res://Assets/Images/Menu Images/settings_button.png<>uid://dndvx3hf77erj::::res://Assets/Images/Menu Images/quit_button.png<>uid://cq14qho0qlf1x::::res://Assets/Images/Menu Images/discord.png
+menu.tscn::PackedScene::7296551313000196917::1719195973::0::1::::<><>::res://Menu/Menu.gd<>uid://0c8gqiday546::::res://Assets/Images/title screen.png<>uid://db82p0hpb4y75::::res://Assets/Images/Menu Images/start_button.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3<>uid://b3521ylth6p68::::res://Assets/Images/Menu Images/settings_button.png<>uid://dndvx3hf77erj::::res://Assets/Images/Menu Images/quit_button.png<>uid://cq14qho0qlf1x::::res://Assets/Images/Menu Images/discord.png
 SceneManager.gd::GDScript::-1::1719194875::0::1::::<>Node<>::
 ::res://Menu/Pause/::1719194875
 PauseMenu.gd::GDScript::-1::1719194875::0::1::::<>CanvasLayer<>::
@@ -892,7 +892,7 @@ save.tscn::PackedScene::7187100633933306405::1719194875::0::1::::<><>::uid://duc
 ::res://Worlds/Hub World/::1719194875
 hubworld.gd::GDScript::-1::1719194875::0::1::::<>Node2D<>::
 hubworld.tscn::PackedScene::4016415103628302259::1719194875::0::1::::<><>::uid://duct1l4f25ios::::res://Assets/Images/TX Tileset Grass.png<>res://Worlds/Hub World/hubworld.gd<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>uid://08qrvu43ttcy::::res://Characters/Enemy/dummy.tscn<>uid://cinfijdsg7wv1::::res://Characters/abilities/ability_handler.tscn<>uid://ibyg1jtryeod::::res://Assets/Music/Winds Of The Valley.mp3
-::res://Worlds/Procedural  World/::1719195191
+::res://Worlds/Procedural  World/::1719195973
 Random-world.gd::GDScript::-1::1719194875::0::1::::<>Node2D<>::
-Random-world.tscn::PackedScene::714032672451450665::1719195191::0::1::::<><>::res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd<>res://Worlds/Procedural  World/Random-world.gd<>uid://clopaewqesprl::::res://Assets/Images/All the tilesets/wall_tilemap.png<>res://addons/gaea/generators/2D/walker_generator/walker_generator.gd<>res://addons/gaea/modifiers/2D/fill.gd<>res://addons/gaea/tile_info/tilemap_tile_info.gd<>res://addons/gaea/modifiers/2D/walls.gd<>res://addons/gaea/generators/2D/walker_generator/walker_generator_settings.gd<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>res://Worlds/Procedural  World/testing.gd<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd<>uid://dhg2xqrtvfpi6::::res://Characters/Enemy/skeleton.tscn<>uid://b003famhrqw17::::res://Characters/Enemy/ranged_mf.tscn<>uid://bhxvndxga32g0::::res://Assets/Images/Fantasy RPG (Toony) 32x32.png<>uid://cinfijdsg7wv1::::res://Characters/abilities/ability_handler.tscn<>uid://84gt8vrof23q::::res://Assets/light.png<>uid://vfyxjjc1h526::::res://Assets/Music/Tea House Echoes.mp3
+Random-world.tscn::PackedScene::714032672451450665::1719195973::0::1::::<><>::res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd<>res://Worlds/Procedural  World/Random-world.gd<>uid://clopaewqesprl::::res://Assets/Images/All the tilesets/wall_tilemap.png<>res://addons/gaea/generators/2D/walker_generator/walker_generator.gd<>res://addons/gaea/modifiers/2D/fill.gd<>res://addons/gaea/tile_info/tilemap_tile_info.gd<>res://addons/gaea/modifiers/2D/walls.gd<>res://addons/gaea/generators/2D/walker_generator/walker_generator_settings.gd<>uid://b5yppbmj6d2hq::::res://Characters/player_adolf.tscn<>res://Worlds/Procedural  World/testing.gd<>uid://btm4caichyfra::::res://Characters/Enemy/enemy_spawner.tscn<>uid://bh4vi84vnnpf5::::res://Characters/Enemy/slime.tscn<>res://spawn_info.gd<>uid://dhg2xqrtvfpi6::::res://Characters/Enemy/skeleton.tscn<>uid://b003famhrqw17::::res://Characters/Enemy/ranged_mf.tscn<>uid://bhxvndxga32g0::::res://Assets/Images/Fantasy RPG (Toony) 32x32.png<>uid://cinfijdsg7wv1::::res://Characters/abilities/ability_handler.tscn<>uid://84gt8vrof23q::::res://Assets/light.png<>uid://vfyxjjc1h526::::res://Assets/Music/Tea House Echoes.mp3
 testing.gd::GDScript::-1::1719194875::0::1::::<>AnimatedSprite2D<>::
