@@ -241,10 +241,7 @@ one_shot = true
 
 [node name="Snd" type="AudioStreamPlayer2D" parent="."]
 
-[connection signal="pressed" from="CanvasLayer/Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Background/MarginContainer/VBoxContainer/Header/Add_slot" to="." method="_on_add_slot_pressed"]
-[connection signal="pressed" from="CanvasLayer/Background2/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Background3/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
-[connection signal="pressed" from="CanvasLayer/Background3/MarginContainer/VBoxContainer/Header/Add_slot" to="." method="_on_add_slot_pressed"]
-[connection signal="pressed" from="CanvasLayer/Background4/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
+[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
+[connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Add_slot" to="." method="_on_add_slot_pressed"]
+[connection signal="pressed" from="Background2/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
