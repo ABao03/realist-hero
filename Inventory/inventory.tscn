@@ -14,12 +14,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jolrh")
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Snd" type="AudioStreamPlayer2D" parent="."]
+
 [node name="Background" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 129.0
-offset_top = 62.0
-offset_right = 549.0
-offset_bottom = 582.0
+offset_left = 107.0
+offset_top = 67.0
+offset_right = 527.0
+offset_bottom = 587.0
 color = Color(0.321569, 0.227451, 0.121569, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Background"]
@@ -75,7 +79,6 @@ texture = ExtResource("2_amuen")
 
 [node name="Background2" type="ColorRect" parent="."]
 visible = false
-layout_mode = 0
 offset_left = 700.0
 offset_top = 62.0
 offset_right = 1120.0
@@ -120,19 +123,13 @@ columns = 8
 
 [node name="hoverInfo" parent="." instance=ExtResource("3_hero3")]
 z_index = 1
-layout_mode = 0
-offset_left = 594.0
-offset_top = 248.0
-offset_right = 793.0
-offset_bottom = 398.0
+offset_left = 572.0
+offset_top = 253.0
+offset_right = 771.0
+offset_bottom = 403.0
 color = Color(0.321569, 0.152941, 0.0745098, 1)
 
-[node name="Timer" type="Timer" parent="."]
-one_shot = true
-
-[node name="Snd" type="AudioStreamPlayer2D" parent="."]
-
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Add_slot" to="." method="_on_add_slot_pressed"]
 [connection signal="pressed" from="Background2/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
