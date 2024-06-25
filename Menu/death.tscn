@@ -42,12 +42,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -424.0
-offset_top = -17.5
-offset_right = -384.0
-offset_bottom = 22.5
+offset_left = -298.0
+offset_top = -142.0
+offset_right = -198.0
+offset_bottom = 108.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+stretch_mode = 3
 
 [node name="GameOverLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -59,7 +61,6 @@ theme_override_font_sizes/normal_font_size = 80
 text = "GAME OVER"
 
 [node name="Background" type="ColorRect" parent="."]
-visible = false
 z_index = -2
 layout_mode = 1
 anchors_preset = 15
@@ -67,14 +68,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="ScoreLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 376.0
-offset_top = 263.0
-offset_right = 860.0
-offset_bottom = 394.0
+offset_left = 405.0
+offset_top = 273.0
+offset_right = 889.0
+offset_bottom = 404.0
 theme_override_font_sizes/normal_font_size = 80
 text = "0"
 text_direction = 2
@@ -97,6 +99,8 @@ offset_top = -5.0
 offset_right = 165.0
 offset_bottom = 130.0
 text = "https://discord.gg/f6gskUYUCB"
+
+[node name="Snd" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Discord/discord" to="." method="_on_discord_pressed"]

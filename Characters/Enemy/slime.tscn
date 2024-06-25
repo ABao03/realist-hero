@@ -136,6 +136,7 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_e5idd")
 
 [node name="Sprite2D" type="Sprite2D" parent="slime"]
+z_index = 2
 material = SubResource("ShaderMaterial_he13n")
 texture = ExtResource("2_li24n")
 hframes = 8

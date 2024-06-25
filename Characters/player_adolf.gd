@@ -354,12 +354,12 @@ func update_stats(data):
 func _on_button_pressed():
 
 	if acc > 0: #When the player levels up
+		acc -= 1
 		chest_sprite.play("Open") #Play the animation of the chest opening
 		await get_tree().create_timer(1).timeout #waits 0.65s 
 		chest_sprite.stop() #stop animation
 
 		inventory.open() #Open inventory menu
-		acc -= 1
 		levelup()
 		
 		# LEO add function to switch chest sprite to closed

@@ -52,12 +52,13 @@ func open():
 	snd.play()
 
 func close():
-	visible = false
-	is_open = false
-	player.playerPaused = false
-	snd.volume_db = 0
-	snd.stream = load("res://Assets/SoundEffects/inventoryClosed.mp3")
-	snd.play()
+	if animationTimer.is_stopped() == true:
+		visible = false
+		is_open = false
+		player.playerPaused = false
+		snd.volume_db = 0
+		snd.stream = load("res://Assets/SoundEffects/inventoryClosed.mp3")
+		snd.play()
 
 func _process(delta):
 	if item_held:
@@ -173,54 +174,56 @@ func clear_grid():
 		grid.set_color(grid.States.DEFAULT)
 
 func rotate_item():
-	item_held.rotate_item()
-	clear_grid()
-	if current_slot:
-		_on_slot_mouse_entered(current_slot)
+	if visible == true:
+		item_held.rotate_item()
+		clear_grid()
+		if current_slot:
+			_on_slot_mouse_entered(current_slot)
 
 # Handles the snapping of the item to the GUI grid as well as adding the stats to the player
 func place_item():
-	# For the purpose of wiping item info at the end (or not)
-	var createdCombo = false
-	
-	if not can_place or not current_slot: 
-		snd.stream = load("res://Assets/SoundEffects/itemFailedToPlace.wav")
-		snd.play()
-		return
+	if visible == true:
+		# For the purpose of wiping item info at the end (or not)
+		var createdCombo = false
 		
-	#for changing scene tree
-	item_held.get_parent().remove_child(item_held)
-	grid_container.add_child(item_held)
-	item_held.global_position = get_global_mouse_position()
+		if not can_place or not current_slot: 
+			snd.stream = load("res://Assets/SoundEffects/itemFailedToPlace.wav")
+			snd.play()
+			return
+			
+		#for changing scene tree
+		item_held.get_parent().remove_child(item_held)
+		grid_container.add_child(item_held)
+		item_held.global_position = get_global_mouse_position()
 
-	var calculated_grid_id = current_slot.slot_ID + icon_anchor.x * col_count + icon_anchor.y
-	
-	item_held._snap_to(grid_array[calculated_grid_id].global_position)
-	
-	# Creates the boxes that are used to snap to the grid
-	item_held.grid_anchor = current_slot
-	for grid in item_held.item_grids:
-		var grid_to_check = current_slot.slot_ID + grid[0] + grid[1] * col_count
-		grid_array[grid_to_check].state = grid_array[grid_to_check].States.TAKEN 
-		grid_array[grid_to_check].item_stored = item_held
-	
-	# Pass item stat data to the Player node so that stuff can get calculated
-	if not currentInventory.has(item_held):
-		# Place item into array that keeps track of which items are currently in inventory
-		currentInventory.append(item_held)
-		recalculateStats()
-		emit_signal("pass_upgrade", PlayerStatDataHandler.addedStats)
+		var calculated_grid_id = current_slot.slot_ID + icon_anchor.x * col_count + icon_anchor.y
 		
-		createdCombo = check_combos(item_held)
-	
-	# Needs a conditional, or else it'll auto-wipe the item at the end even if a new one was made via combo
-	if createdCombo == false:
-		item_held = null
-	
-	snd.stream = load("res://Assets/SoundEffects/itemPlaced.mp3")
-	snd.volume_db = 10
-	snd.play()
-	clear_grid()
+		item_held._snap_to(grid_array[calculated_grid_id].global_position)
+		
+		# Creates the boxes that are used to snap to the grid
+		item_held.grid_anchor = current_slot
+		for grid in item_held.item_grids:
+			var grid_to_check = current_slot.slot_ID + grid[0] + grid[1] * col_count
+			grid_array[grid_to_check].state = grid_array[grid_to_check].States.TAKEN 
+			grid_array[grid_to_check].item_stored = item_held
+		
+		# Pass item stat data to the Player node so that stuff can get calculated
+		if not currentInventory.has(item_held):
+			# Place item into array that keeps track of which items are currently in inventory
+			currentInventory.append(item_held)
+			recalculateStats()
+			emit_signal("pass_upgrade", PlayerStatDataHandler.addedStats)
+			
+			createdCombo = check_combos(item_held)
+		
+		# Needs a conditional, or else it'll auto-wipe the item at the end even if a new one was made via combo
+		if createdCombo == false:
+			item_held = null
+		
+		snd.stream = load("res://Assets/SoundEffects/itemPlaced.mp3")
+		snd.volume_db = 10
+		snd.play()
+		clear_grid()
 
 # Recalculate stats each time an item is placed in the grid
 func recalculateStats():
@@ -241,27 +244,28 @@ func recalculateStats():
 
 # Used when the item is picked up by the player
 func pick_item():
-	# Check if slot is empty
-	if not current_slot or not current_slot.item_stored: 
-		return
-	
-	# Assign item to item_held
-	item_held = current_slot.item_stored
-	item_held.selected = true
-	
-	# Move node in the scene tree
-	item_held.get_parent().remove_child(item_held)
-	add_child(item_held)
-	item_held.global_position = get_global_mouse_position()
-	
-	# Free up grid
-	for grid in item_held.item_grids:
-		var grid_to_check = item_held.grid_anchor.slot_ID + grid[0] + grid[1] * col_count # use grid anchor instead of current slot to prevent bug
-		grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE 
-		grid_array[grid_to_check].item_stored = null
-	
-	check_slot_availability(current_slot)
-	set_grids.call_deferred(current_slot)
+	if visible == true:
+		# Check if slot is empty
+		if not current_slot or not current_slot.item_stored: 
+			return
+		
+		# Assign item to item_held
+		item_held = current_slot.item_stored
+		item_held.selected = true
+		
+		# Move node in the scene tree
+		item_held.get_parent().remove_child(item_held)
+		add_child(item_held)
+		item_held.global_position = get_global_mouse_position()
+		
+		# Free up grid
+		for grid in item_held.item_grids:
+			var grid_to_check = item_held.grid_anchor.slot_ID + grid[0] + grid[1] * col_count # use grid anchor instead of current slot to prevent bug
+			grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE 
+			grid_array[grid_to_check].item_stored = null
+		
+		check_slot_availability(current_slot)
+		set_grids.call_deferred(current_slot)
 	
 # Debug
 func _on_add_slot_pressed():
@@ -269,19 +273,20 @@ func _on_add_slot_pressed():
 	
 # Deleting item from inventory (do not mix up with delete_item function in item scene)
 func delete_from_inventory(thisItem):
-	if currentInventory.has(thisItem):
-		# An attempt at clearing the slots occupied by thisItem in inventory
-		for grid in thisItem.item_grids:
-			var grid_to_check = thisItem.grid_anchor.slot_ID + grid[0] + grid[1] * col_count # use grid anchor instead of current slot to prevent bug
-			grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE 
-			grid_array[grid_to_check].item_stored = null
-			
-		# Wiping from currentInventory array
-		currentInventory.erase(thisItem)
-		thisItem.delete_item()
-			
-		# Update grid
-		#set_grids.call_deferred(current_slot)
+	if visible == true:
+		if currentInventory.has(thisItem):
+			# An attempt at clearing the slots occupied by thisItem in inventory
+			for grid in thisItem.item_grids:
+				var grid_to_check = thisItem.grid_anchor.slot_ID + grid[0] + grid[1] * col_count # use grid anchor instead of current slot to prevent bug
+				grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE 
+				grid_array[grid_to_check].item_stored = null
+				
+			# Wiping from currentInventory array
+			currentInventory.erase(thisItem)
+			thisItem.delete_item()
+				
+			# Update grid
+			#set_grids.call_deferred(current_slot)
 		
 # Check if a combo is present among the current items in inventory after adding in newItem
 func check_combos(newItem):
@@ -325,9 +330,6 @@ func combineItems(item1, item2):
 	# Play an animation on the item
 	item1.item_combine_animation()
 	item2.item_combine_animation()
-	snd.volume_db = 0
-	snd.stream = load("res://Assets/SoundEffects/itemCombine.wav")
-	snd.play()
 	animationTimer.start()
 
 # Adding item stats to a given Autoloaded database
@@ -379,6 +381,10 @@ func add_data(item, database):
 
 # Makes it so that items only get deleted after the animation finishes, not before
 func _on_timer_timeout():
+	snd.volume_db = 2
+	snd.stream = load("res://Assets/SoundEffects/itemCombine.wav")
+	snd.play()
+	
 	# Fetch the new item from the data handler dictionary.
 	var combinedItemID = DataHandler.component_product_data[[tempItem1.item_ID, tempItem2.item_ID]]
 	# Instantiate the new item into the scene. 

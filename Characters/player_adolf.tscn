@@ -277,6 +277,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fjfia")
+}
 tree_root = SubResource("AnimationNodeStateMachine_63fkr")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/idle = false
@@ -347,16 +350,17 @@ scale = Vector2(0.3, 0.3)
 texture_under = ExtResource("7_f0adl")
 texture_progress = ExtResource("8_2a1gi")
 
-[node name="LevelUp" type="Panel" parent="GUILayer/GUI"]
+[node name="CanvasLevelUp" type="CanvasLayer" parent="GUILayer/GUI"]
+
+[node name="LevelUp" type="Panel" parent="GUILayer/GUI/CanvasLevelUp"]
 unique_name_in_owner = true
 process_mode = 2
-layout_mode = 0
-offset_left = 1200.0
+offset_left = 1184.0
 offset_top = 190.0
-offset_right = 1400.0
+offset_right = 1384.0
 offset_bottom = 490.0
 
-[node name="lbl_levelUp" type="Label" parent="GUILayer/GUI/LevelUp"]
+[node name="lbl_levelUp" type="Label" parent="GUILayer/GUI/CanvasLevelUp/LevelUp"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_right = 200.0
@@ -365,7 +369,7 @@ text = "Level Up! "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UpgradeOptions" type="VBoxContainer" parent="GUILayer/GUI/LevelUp"]
+[node name="UpgradeOptions" type="VBoxContainer" parent="GUILayer/GUI/CanvasLevelUp/LevelUp"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_left = 10.0
@@ -373,7 +377,7 @@ offset_top = 50.0
 offset_right = 190.0
 offset_bottom = 100.0
 
-[node name="snd_levelUp" type="AudioStreamPlayer2D" parent="GUILayer/GUI/LevelUp"]
+[node name="snd_levelUp" type="AudioStreamPlayer2D" parent="GUILayer/GUI/CanvasLevelUp/LevelUp"]
 unique_name_in_owner = true
 stream = ExtResource("9_vrbu8")
 volume_db = -10.0

@@ -8,9 +8,19 @@ var score : int
 @onready var itemTimer = $ItemTimer
 @onready var button = $Button
 
+@onready var snd = $Snd
+
+func _ready():
+	button.visible = false
+
 func tallyInventory():
 	for item in deathInventory:
 		var file_name = DataHandler.item_data[str(item.item_ID)]["Name"]
+		if DataHandler.item_data[str(item.item_ID)]["Components"] != "":
+			snd.stream = load("res://Assets/SoundEffects/itemFailedToPlace.wav")
+		else:
+			snd.stream = load("res://Assets/SoundEffects/itemPlaced.mp3")
+		snd.play()
 		file_name = file_name.replace("'", "")
 		file_name = file_name.replace(" ", "_")
 		file_name = file_name.to_lower()
