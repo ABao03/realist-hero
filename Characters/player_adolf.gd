@@ -221,7 +221,8 @@ func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	if hpPercent <= 0 && playerDead == false:
 		playerPaused = true
 		playerDead = true
-		#get_tree().change_scene_to_file("res://Menu/death.tscn")
+		$dead.play() # death sound hear change dead to change death sound
+		await get_tree().create_timer(2.8).timeout
 		SceneManager.load_new_scene("res://Menu/death.tscn","fade_to_black")
 	set_healthbar(maxhp*hpPercent, maxhp)
 	if playerRecalling == true:

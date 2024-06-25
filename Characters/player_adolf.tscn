@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=48 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cuunt7l6tuwbf" path="res://Assets/Images/lightning button 2.png" id="17_3jc6o"]
 [ext_resource type="PackedScene" uid="uid://c6j6bswlesema" path="res://Characters/indicator.tscn" id="17_jwaba"]
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="23_36e71"]
+[ext_resource type="AudioStream" uid="uid://d1wv3yjw44dlg" path="res://Music/death.mp3" id="24_2egwl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4hegg"]
 radius = 4.54665
@@ -611,6 +612,9 @@ shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("23_36e71")
 texture_scale = 1.5
+
+[node name="dead" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_2egwl")
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
