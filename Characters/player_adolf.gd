@@ -253,14 +253,14 @@ func _on_collect_area_area_entered(area):
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
 	collected_experience += gem_exp
-	if experience + collected_experience >= exp_required: # when xp bar is full, reset it to 0
-		collected_experience -= exp_required-experience
-		experience_level += 1
-		
-		experience = 0
-		exp_required = calculate_experiencecap()
-		# LEO change chest to open sprite
+	if experience + collected_experience >= exp_required && acc == 0: # when xp bar is full, keep it at max. Reset when chest clicked
+		print("max")
+		experience = exp_required
+		expBar.modulate = Color(1, 0, 0.616, 1)
 		acc += 1
+		collected_experience = 0
+	elif experience == exp_required && acc > 0:
+		return
 	else:
 		experience += collected_experience
 		collected_experience = 0
@@ -282,6 +282,8 @@ func calculate_experiencecap():
 func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
+	print(expBar.value)
+	print(expBar.max_value, "\n")
 
 func set_recallbar(set_value = 0):
 	recallBar.value = set_value
@@ -362,6 +364,11 @@ func _on_button_pressed():
 
 		inventory.open() #Open inventory menu
 		levelup()
+		var exp_required = calculate_experiencecap()
+		experience = 0
+		experience_level += 1
+		exp_required = calculate_experiencecap()
+		expBar.modulate = Color(1,1,1,1)
 		
 		# LEO add function to switch chest sprite to closed
 		

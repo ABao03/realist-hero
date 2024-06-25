@@ -30,6 +30,7 @@ var player
 
 # Sound
 @onready var snd = $Snd
+@onready var combineSnd = $CombineSnd
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -381,9 +382,8 @@ func add_data(item, database):
 
 # Makes it so that items only get deleted after the animation finishes, not before
 func _on_timer_timeout():
-	snd.volume_db = 2
-	snd.stream = load("res://Assets/SoundEffects/itemCombine.wav")
-	snd.play()
+	combineSnd.stream = load("res://Assets/SoundEffects/itemCombine.wav")
+	combineSnd.play()
 	
 	# Fetch the new item from the data handler dictionary.
 	var combinedItemID = DataHandler.component_product_data[[tempItem1.item_ID, tempItem2.item_ID]]

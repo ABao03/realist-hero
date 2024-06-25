@@ -360,8 +360,8 @@ size = Vector2(73.5, 112.5)
 size = Vector2(57, 107.5)
 
 [node name="skeleton" type="CharacterBody2D"]
-collision_layer = 6
-collision_mask = 6
+collision_layer = 4
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_joy33")
 

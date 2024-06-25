@@ -19,6 +19,8 @@ one_shot = true
 
 [node name="Snd" type="AudioStreamPlayer2D" parent="."]
 
+[node name="CombineSnd" type="AudioStreamPlayer2D" parent="."]
+
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = 120.0
