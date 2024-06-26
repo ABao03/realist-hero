@@ -57,7 +57,6 @@ var upgrade_options = []
 @onready var inventoryGroup = get_tree().get_nodes_in_group("inventory")
 var inventory
 signal selected_upgrade(upgrade)
-signal stop_spawning()
 
 # ranged attack
 var bow_equipped = false
@@ -67,6 +66,7 @@ var arrow = preload("res://Characters/arrow.tscn")
 
 # Enemy Related
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
+signal despawn_enemies() 
 
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer
@@ -103,7 +103,7 @@ func _ready():
 			inventory = inven
 			
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
-	connect("stop_spawning",Callable(spawner,"stop_spawns"))
+	connect("despawn_enemies",Callable(spawner,"despawn_enemies"))
 
 func _exit_tree():
 	remove_from_group("player")
@@ -221,8 +221,6 @@ func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	if hpPercent <= 0 && playerDead == false:
 		playerPaused = true
 		playerDead = true
-		$dead.play() # death sound hear change dead to change death sound
-		await get_tree().create_timer(2.8).timeout
 		SceneManager.load_new_scene("res://Menu/death.tscn","fade_to_black")
 	set_healthbar(maxhp*hpPercent, maxhp)
 	if playerRecalling == true:
@@ -254,9 +252,8 @@ func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
 	collected_experience += gem_exp
 	if experience + collected_experience >= exp_required && acc == 0: # when xp bar is full, keep it at max. Reset when chest clicked
-		print("max")
 		experience = exp_required
-		expBar.modulate = Color(1, 0, 0.616, 1)
+		expBar.modulate = Color(0, 100, 0, 1)
 		acc += 1
 		collected_experience = 0
 	elif experience == exp_required && acc > 0:
@@ -282,17 +279,15 @@ func calculate_experiencecap():
 func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
-	print(expBar.value)
-	print(expBar.max_value, "\n")
 
 func set_recallbar(set_value = 0):
 	recallBar.value = set_value
 
 func levelup():
-	emit_signal("stop_spawning")
+	emit_signal("despawn_enemies")
 	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position",Vector2(442,150),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel,"position",Vector2(600,200),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
 	var options = 0

@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0p71vqc5gam8"]
+[gd_scene load_steps=2 format=3 uid="uid://d0p71vqc5gam8"]
 
 [ext_resource type="Script" path="res://TextureButton.gd" id="2_hvrfj"]
-[ext_resource type="FontFile" uid="uid://danb5bv0gm16j" path="res://Fonts/CAMBRIAZ.TTF" id="3_2b6b7"]
 
 [node name="TextureButton" type="TextureButton"]
 texture_filter = 1
@@ -35,7 +34,6 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 7
-theme_override_fonts/font = ExtResource("3_2b6b7")
 theme_override_font_sizes/font_size = 12
 text = "0.0"
 horizontal_alignment = 1

@@ -23,10 +23,10 @@ one_shot = true
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 0
-offset_left = 120.0
-offset_top = 67.0
-offset_right = 540.0
-offset_bottom = 587.0
+offset_left = 136.0
+offset_top = 82.0
+offset_right = 556.0
+offset_bottom = 602.0
 color = Color(0.321569, 0.227451, 0.121569, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Background"]
@@ -128,10 +128,10 @@ columns = 8
 [node name="hoverInfo" parent="." instance=ExtResource("3_hero3")]
 z_index = 1
 layout_mode = 0
-offset_left = 585.0
-offset_top = 253.0
-offset_right = 784.0
-offset_bottom = 403.0
+offset_left = 601.0
+offset_top = 268.0
+offset_right = 800.0
+offset_bottom = 418.0
 color = Color(0.321569, 0.152941, 0.0745098, 1)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -10,7 +10,7 @@ var chest_chance = 6
 var rare_chest_chance = 2
 
 var target = null
-var speed = 0
+var speed = 40
 
 @onready var sprite = $Sprite2D
 @onready var collision = $CollisionShape2D

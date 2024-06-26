@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var last_position = Vector2(0,0)
-@onready var sprite = $Sprite2D
+@onready var sprite = $Dragon
 @onready var hurtbox = $HurtBox
 @onready var damage_numbers_origin = $DamageNumbers
 

@@ -69,6 +69,8 @@ func get_random_position():
 	var y_spawn = randf_range(spawn_pos1.y,spawn_pos2.y)
 	return Vector2(x_spawn,y_spawn)
 
-func stop_spawns():
-	#timer.stop()
-	pass
+func despawn_enemies():
+	print("hi")
+	for enemy in get_children():
+		if enemy.is_in_group("enemy"):
+			enemy.queue_free()

@@ -20,7 +20,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Dragon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -32,7 +32,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/1/path = NodePath("Dragon:material:shader_parameter/enabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -49,7 +49,7 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/path = NodePath("Dragon:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -66,7 +66,7 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Dragon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -114,7 +114,7 @@ size = Vector2(61, 61)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v580"]
 radius = 201.487
 
-[node name="Ranged" type="Node2D"]
+[node name="Ranged" type="Node2D" groups=["enemy"]]
 
 [node name="Ranged" type="CharacterBody2D" parent="."]
 position = Vector2(-17, -28)
@@ -123,13 +123,14 @@ collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7vmal")
+experience = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2
 position = Vector2(17, 27)
 shape = SubResource("CapsuleShape2D_e5idd")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ranged"]
+[node name="Dragon" type="Sprite2D" parent="Ranged"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_he13n")
 position = Vector2(16, 20)

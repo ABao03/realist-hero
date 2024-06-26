@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=48 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://c4cv4tabmh56l" path="res://Assets/Images/skeleton-Sheet.png" id="2_ebvvm"]
@@ -243,22 +243,6 @@ size = Vector2(22, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yjlf"]
 size = Vector2(33, 59)
-
-[sub_resource type="FontFile" id="FontFile_2sj87"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-
-[sub_resource type="FontFile" id="FontFile_jpnil"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [node name="PlayerAdolf" type="CharacterBody2D" groups=["player"]]
 z_index = 2
@@ -634,19 +618,19 @@ texture_scale = 1.5
 stream = ExtResource("24_2egwl")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = 505.0
-offset_top = 293.0
-offset_right = 545.0
-offset_bottom = 333.0
-theme_override_fonts/normal_font = SubResource("FontFile_2sj87")
+offset_left = 499.0
+offset_top = 295.0
+offset_right = 539.0
+offset_bottom = 335.0
+theme_override_font_sizes/normal_font_size = 22
 text = "[E]"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="."]
-offset_left = 397.0
-offset_top = 287.0
-offset_right = 437.0
-offset_bottom = 327.0
-theme_override_fonts/normal_font = SubResource("FontFile_jpnil")
+offset_left = 396.0
+offset_top = 291.0
+offset_right = 436.0
+offset_bottom = 331.0
+theme_override_font_sizes/normal_font_size = 18
 text = "[Q]"
 
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]

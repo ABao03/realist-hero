@@ -359,9 +359,9 @@ size = Vector2(73.5, 112.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7vqme"]
 size = Vector2(57, 107.5)
 
-[node name="skeleton" type="CharacterBody2D"]
+[node name="skeleton" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_joy33")
 
