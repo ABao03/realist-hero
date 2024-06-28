@@ -1,0 +1,205 @@
+[gd_scene load_steps=20 format=3 uid="uid://5skxr7cfg85u"]
+
+[ext_resource type="Script" path="res://Characters/Enemy/ranged_boss.gd" id="1_gvf1h"]
+[ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_ro5v8"]
+[ext_resource type="Texture2D" uid="uid://bslq3vrrxnijx" path="res://Assets/AdultGreenDragon.png" id="3_6xsh1"]
+[ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="4_8rotw"]
+[ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="5_kjltm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e5idd"]
+radius = 108.0
+height = 216.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_he13n"]
+resource_local_to_scene = true
+shader = ExtResource("2_ro5v8")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_8kdsa"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dragon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Dragon:material:shader_parameter/enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_w7ovp"]
+resource_name = "hurt"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dragon:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_qbk7v"]
+resource_name = "idle"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Dragon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 2, 3, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i6kpg"]
+_data = {
+"RESET": SubResource("Animation_8kdsa"),
+"hurt": SubResource("Animation_w7ovp"),
+"move": SubResource("Animation_qbk7v")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ol6w"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ia5fa"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v76bw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xiuwx"]
+advance_mode = 2
+advance_condition = &"hurt"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ffldp"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"move"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sxs7k"]
+states/hurt/node = SubResource("AnimationNodeAnimation_0ol6w")
+states/hurt/position = Vector2(452, 100)
+states/move/node = SubResource("AnimationNodeAnimation_ia5fa")
+states/move/position = Vector2(323, 100)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_v76bw"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_xiuwx"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_ffldp")]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yey8l"]
+size = Vector2(217.75, 206.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5v580"]
+radius = 201.487
+
+[node name="Ranged" type="Node2D" groups=["enemy"]]
+
+[node name="Ranged" type="CharacterBody2D" parent="."]
+position = Vector2(-17, -28)
+collision_layer = 4
+collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_gvf1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
+z_index = 2
+position = Vector2(129.5, 130.5)
+shape = SubResource("CapsuleShape2D_e5idd")
+
+[node name="Dragon" type="Sprite2D" parent="Ranged"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_he13n")
+position = Vector2(137.5, 119.5)
+scale = Vector2(15.0625, 12.5625)
+texture = ExtResource("3_6xsh1")
+flip_h = true
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Ranged"]
+libraries = {
+"": SubResource("AnimationLibrary_i6kpg")
+}
+speed_scale = 0.5
+
+[node name="AnimationTree" type="AnimationTree" parent="Ranged"]
+libraries = {
+"": SubResource("AnimationLibrary_i6kpg")
+}
+tree_root = SubResource("AnimationNodeStateMachine_sxs7k")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/hurt = false
+parameters/conditions/move = false
+
+[node name="HurtBox" parent="Ranged" instance=ExtResource("4_8rotw")]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Ranged/HurtBox" index="0"]
+position = Vector2(125.875, 131.5)
+shape = SubResource("RectangleShape2D_yey8l")
+
+[node name="DisableTimer" parent="Ranged/HurtBox" index="1"]
+wait_time = 0.7
+
+[node name="DamageNumbers" parent="Ranged" instance=ExtResource("5_kjltm")]
+position = Vector2(1, -6)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Ranged"]
+
+[node name="Timer" type="Timer" parent="Ranged"]
+wait_time = 0.3
+autostart = true
+
+[node name="Snd" type="AudioStreamPlayer2D" parent="Ranged"]
+position = Vector2(16, 28)
+volume_db = -5.0
+
+[node name="Area2D" type="Area2D" parent="Ranged"]
+visible = false
+position = Vector2(-16, -12)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged/Area2D"]
+position = Vector2(32, 39)
+shape = SubResource("CircleShape2D_5v580")
+
+[node name="Marker2D" type="Marker2D" parent="Ranged"]
+position = Vector2(16, 29)
+
+[node name="SpawnTimer" type="Timer" parent="Ranged"]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="animation_finished" from="Ranged/AnimationTree" to="Ranged" method="_on_animation_tree_animation_finished"]
+[connection signal="hurt" from="Ranged/HurtBox" to="Ranged" method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="Ranged/Timer" to="Ranged" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Ranged/Area2D" to="Ranged" method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Ranged/Area2D" to="Ranged" method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="Ranged/SpawnTimer" to="Ranged" method="_on_spawn_timer_timeout"]
+
+[editable path="Ranged/HurtBox"]
