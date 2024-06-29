@@ -70,7 +70,12 @@ func get_random_position():
 	return Vector2(x_spawn,y_spawn)
 
 func despawn_enemies():
-	print("hi")
 	for enemy in get_children():
 		if enemy.is_in_group("enemy"):
 			enemy.queue_free()
+
+func pause_spawning():
+	timer.stop()
+
+func start_spawning():
+	timer.start()

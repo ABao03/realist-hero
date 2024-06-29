@@ -13,7 +13,7 @@ func _ready():
 		if thisPlayer != null:
 			player = thisPlayer
 	await player.ready
-	originalDamage = player.attackBox1.damage
+	originalDamage = player.weapon.get_physical()
 
 
 	newDamage = originalDamage*1.5
@@ -22,8 +22,7 @@ func _on_button_pressed():
 	if boost_ready == true:
 		#$Timer.start()
 		#boost_ready = false
-		player.attackBox1.damage = newDamage
-		player.attackBox2.damage = newDamage
+		player.player.weapon.set_physical(newDamage)
 		button_pressed = true
 
 func _input(event: InputEvent): # Show/hide pause menu
@@ -35,8 +34,7 @@ func _input(event: InputEvent): # Show/hide pause menu
 
 
 func _on_timer_timeout():
-	player.attackBox1.damage = originalDamage
-	player.attackBox2.damage = originalDamage
+	player.player.weapon.set_physical(originalDamage)
 	$CoolDown.start()
 	
 func _on_cool_down_timeout():

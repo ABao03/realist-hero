@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://b003famhrqw17" path="res://Characters/Enemy/ranged_mf.tscn" id="14_72ou5"]
 [ext_resource type="Texture2D" uid="uid://bhxvndxga32g0" path="res://Assets/Images/Fantasy RPG (Toony) 32x32.png" id="14_au8ri"]
 [ext_resource type="PackedScene" uid="uid://cinfijdsg7wv1" path="res://Characters/abilities/ability_handler.tscn" id="15_p4sve"]
-[ext_resource type="PackedScene" uid="uid://5skxr7cfg85u" path="res://Characters/Enemy/ranged_boss.tscn" id="15_y64lv"]
+[ext_resource type="PackedScene" path="res://Characters/Enemy/ranged_boss.tscn" id="15_y64lv"]
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="17_03wpv"]
 [ext_resource type="AudioStream" uid="uid://vfyxjjc1h526" path="res://Assets/Music/Tea House Echoes.mp3" id="17_thcus"]
 

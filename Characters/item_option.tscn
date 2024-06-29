@@ -7,6 +7,7 @@
 custom_minimum_size = Vector2(180, 50)
 offset_right = 180.0
 offset_bottom = 50.0
+scale = Vector2(1.5, 1.5)
 color = Color(0.454902, 0.454902, 0.454902, 1)
 script = ExtResource("1_86eoi")
 
@@ -27,6 +28,7 @@ texture = ExtResource("2_larh1")
 expand_mode = 1
 
 [node name="lbl_name" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 0
 offset_left = 39.0
 offset_top = 4.0
@@ -36,6 +38,7 @@ theme_override_font_sizes/font_size = 12
 text = "Name"
 
 [node name="lbl_description" type="Label" parent="."]
+texture_filter = 1
 layout_mode = 0
 offset_left = 4.0
 offset_top = 27.0

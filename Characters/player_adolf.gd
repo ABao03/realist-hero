@@ -21,6 +21,7 @@ var x = true
 
 # Movement
 @onready var axis = Vector2.ZERO
+var lastDirectionVector : Vector2
 
 #Represents paused state
 var playerPaused = false
@@ -31,9 +32,7 @@ var playerDead = false
 @onready var abilitySnd = $AbilitySnd
 
 # Attacks
-@onready var attackBox1 = $HitBox
-@onready var attackBox2 = $HitBox2
-var boxesFlipped = false
+@onready var weapon = $Weapon
 
 # Abilities
 @onready var damageAbility = $UltButton
@@ -66,11 +65,12 @@ var arrow = preload("res://Characters/arrow.tscn")
 
 # Enemy Related
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
-signal despawn_enemies() 
+signal despawn_enemies()
+signal pause_spawning()
 
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer
-@onready var animation_tree = $AnimationTree
+#@onready var animation_tree = $AnimationTree
 @onready var sprite = $Sprite2D
 
 # GUI
@@ -90,7 +90,7 @@ signal despawn_enemies()
 
 func _ready():
 	set_expbar(experience, calculate_experiencecap())
-	animation_tree.active = true
+	#animation_tree.active = true
 	set_healthbar(maxhp*hpPercent, maxhp)
 	#modulate = Color(1, 1, 1, 1)
 	
@@ -104,6 +104,7 @@ func _ready():
 			
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
 	connect("despawn_enemies",Callable(spawner,"despawn_enemies"))
+	connect("pause_spawning",Callable(spawner,"pause_spawning"))
 
 func _exit_tree():
 	remove_from_group("player")
@@ -117,7 +118,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("recall"):
 		if playerRecalling == true:
-			maxhp = 1
+			maxhp = 1 # debug
 			playerRecalling = false
 			cancel_recall()
 		else:
@@ -128,6 +129,7 @@ func _physics_process(delta):
 	
 	# Movement stuff
 	if playerPaused == false: # && playerRecalling == false
+		velocity.normalized()
 		if Input.is_action_just_pressed("switch"):
 			if bow_equipped == true:
 				bow_equipped = false
@@ -144,11 +146,13 @@ func _physics_process(delta):
 				indicator.visible = true
 				heldAbility = ultimateAbility
 		
+		# handle LMB. first, use ability
 		if Input.is_action_pressed("mouse_leftclick"):
 			if heldAbility != null && usingAbility == false:
 				player_ability_used(heldAbility)
 				usingAbility = true
-				
+			
+			# if no ability equipped, use arrow
 			elif bow_equipped and bow_cooldown:
 				bow_cooldown = false
 				var arrow_instance = arrow.instantiate()
@@ -158,58 +162,67 @@ func _physics_process(delta):
 				
 				await get_tree().create_timer(1).timeout
 				bow_cooldown = true
-				
+			
+			# if no bow equipped, use melee attack
 			elif bow_equipped == false:
-				if animation_tree.get("parameters/playback").get_current_node() != "attack":
+				if animation.current_animation != "attack":
 					playerSnd.stream = load("res://Assets/SoundEffects/swing.wav")
 					playerSnd.play()
-				animation_tree["parameters/conditions/swing"] = true
-		else:
-			animation_tree["parameters/conditions/swing"] = false
+				#animation_tree["parameters/conditions/swing"] = true
+				animation.play("attack")
+				weapon.attack()
+		#else:
+			#animation_tree["parameters/conditions/swing"] = false
 			
-			if velocity == Vector2.ZERO:
-				animation_tree["parameters/conditions/idle"] = true
-				animation_tree["parameters/conditions/is_moving"] = false
-			else:
-				animation_tree["parameters/conditions/idle"] = false
-				animation_tree["parameters/conditions/is_moving"] = true
-				if playerSnd.is_playing() == false:
-					playerSnd.stream = load("res://Assets/SoundEffects/footstep.mp3")
-					playerSnd.pitch_scale = 0.75
-					playerSnd.play()
-				
-			var mouse_pos = get_global_mouse_position()
-			$Marker2D.look_at(mouse_pos)
-		
-		if axis.x > 0:
-			sprite.flip_h = false
-		elif axis.x < 0:
-			sprite.flip_h = true
+		if velocity == Vector2.ZERO:
+			#animation_tree["parameters/conditions/idle"] = true
+			#animation_tree["parameters/conditions/is_moving"] = false
+			animation.play("idle")
 		else:
-			if sprite.flip_h == true:
-				sprite.flip_h = true
-			else:
-				sprite.flip_h = false
+			lastDirectionVector = velocity
+			#animation_tree["parameters/conditions/idle"] = false
+			#animation_tree["parameters/conditions/is_moving"] = true
+			if animation.current_animation != "walk":
+				animation.play("walk")
+			if playerSnd.is_playing() == false:
+				playerSnd.stream = load("res://Assets/SoundEffects/footstep.mp3")
+				playerSnd.pitch_scale = 0.75
+				playerSnd.play()
+			#sprite.flip_h = true
+		#else:
+			#if sprite.flip_h == true:
+				#sprite.flip_h = true
+			#else:
+				#sprite.flip_h = false
 		
-		if animation_tree.get("parameters/playback").get_current_node() == "attack":
-			velocity = velocity/3
+		var mouse_pos = get_global_mouse_position()
+		sprite.look_at(mouse_pos)
+		sprite.rotation += PI/2
+		#sprite.rotation = velocity.angle() + PI/2
+		
+		#if animation_tree.get("parameters/playback").get_current_node() == "":
+		#if animation.current_animation == "attack":
+			#velocity = velocity/3
 		
 		move_and_slide()
 		
-		if sprite.flip_h == true && boxesFlipped == false:
-			attackBox1.position -= Vector2(28,0)
-			attackBox2.position -= Vector2(58,0)
-			boxesFlipped = true
-		if sprite.flip_h == false && boxesFlipped == true:
-			attackBox1.position += Vector2(28,0)
-			attackBox2.position += Vector2(58,0)
-			boxesFlipped = false
+		# Old code for not-top-down view
+		#if sprite.flip_h == true && boxesFlipped == false:
+			#attackBox1.position -= Vector2(28,0)
+			#attackBox2.position -= Vector2(58,0)
+			#boxesFlipped = true
+		#if sprite.flip_h == false && boxesFlipped == true:
+			#attackBox1.position += Vector2(28,0)
+			#attackBox2.position += Vector2(58,0)
+			#boxesFlipped = false
 	
 	# Switch player to idle if not moving
 	if playerPaused == true:
-		animation_tree["parameters/conditions/idle"] = true
-		animation_tree["parameters/conditions/is_moving"] = false
-		animation_tree["parameters/conditions/swing"] = false
+		#animation_tree["parameters/conditions/idle"] = true
+		#animation_tree["parameters/conditions/is_moving"] = false
+		#animation_tree["parameters/conditions/swing"] = false
+		animation.stop()
+		animation.play("idle")
 	
 	# handle recall
 	if playerRecalling == true:
@@ -285,9 +298,10 @@ func set_recallbar(set_value = 0):
 
 func levelup():
 	emit_signal("despawn_enemies")
+	emit_signal("pause_spawning")
 	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position",Vector2(600,200),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel,"position",Vector2(600,100),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
 	var options = 0
@@ -323,20 +337,17 @@ func update_stats(data):
 		# NOTE: THESE SHOULD ALL BE CHANGED TO SETTERS, NOT ADDER/MULTIPLIER
 		# This logic is all being moved to recalculate stats in Inventory
 		if stat == "Physical":
-			attackBox1.damage = data.get(stat)
-			attackBox2.damage = data.get(stat)
+			weapon.set_physical(data.get(stat))
 			
 		if stat == "Magic":
-			attackBox1.magicDamage = data.get(stat)
-			attackBox2.magicDamage = data.get(stat)
+			weapon.set_magic(data.get(stat))
 			
 		if stat == "Attack Speed":
 			var currentSpeed = animation.speed_scale
 			animation.speed_scale = currentSpeed * data.get(stat)
 			
 		if stat == "Crit":
-			attackBox1.crit = data.get(stat) - 1
-			attackBox2.crit = data.get(stat) - 1
+			weapon.set_crit(data.get(stat) - 1)
 			
 		if stat == "Move Speed":
 			speed = data.get(stat)
@@ -379,12 +390,12 @@ func player_ability_used(ability):
 		abilitySnd.stream = load("res://Assets/SoundEffects/thunder.mp3")
 		abilitySnd.play()
 		abilityDuration.start()
-		abilityEffects.ability_used(get_global_mouse_position(), attackBox1.magicDamage + attackBox2.magicDamage)
+		abilityEffects.ability_used(get_global_mouse_position(), weapon.get_magic())
 		
 	elif ability.abilityType == "ult":
 		abilityDuration.wait_time = 2
 		abilityDuration.start()
-		abilityEffects.ult_used(global_position, attackBox1.magicDamage + attackBox2.magicDamage)
+		abilityEffects.ult_used(global_position, weapon.get_magic())
 		# ability effects handles the actual slash effect
 	
 	indicator.visible = false

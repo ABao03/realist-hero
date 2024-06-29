@@ -32,12 +32,17 @@ var player
 @onready var snd = $Snd
 @onready var combineSnd = $CombineSnd
 
+# Enemy spawner resume spawning
+@onready var spawner = get_tree().get_first_node_in_group("spawner")
+signal start_spawning()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for thisPlayer in players:
 		if thisPlayer != null:
 			player = thisPlayer
 	connect("pass_upgrade",Callable(player,"update_stats"))
+	connect("start_spawning",Callable(spawner,"start_spawning"))
 	for i in range(80):
 		create_slot()
 	visible = false
@@ -60,6 +65,7 @@ func close():
 		snd.volume_db = 0
 		snd.stream = load("res://Assets/SoundEffects/inventoryClosed.mp3")
 		snd.play()
+		emit_signal("start_spawning")
 
 func _process(delta):
 	if item_held:
