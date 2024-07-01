@@ -17,7 +17,6 @@ var experience_level = 1
 var collected_experience = 0
 var held_items = []
 var x = true
-@onready var button_clicked = get_node("Sprint")
 
 # Movement
 @onready var axis = Vector2.ZERO
@@ -44,7 +43,7 @@ var playerDead = false
 var abilityEffects
 
 var usingAbility = false
-var heldAbility = null
+var heldAbility
 
 # Recalling
 var playerRecalling = false
@@ -130,30 +129,29 @@ func _physics_process(delta):
 	# Movement stuff
 	if playerPaused == false: # && playerRecalling == false
 		velocity.normalized()
-		if Input.is_action_just_pressed("switch"):
-			if bow_equipped == true:
-				bow_equipped = false
-			else:
-				bow_equipped = true
+		#if Input.is_action_just_pressed("switch"):
+			#if bow_equipped == true:
+				#bow_equipped = false
+			#else:
+				#bow_equipped = true
 		
 	# Ability pressed stuff
 		if Input.is_action_just_pressed("damage_ability"):
 			if damageAbility.onCooldown == false:
 				indicator.visible = true
+				player_ability_used(damageAbility)
 				heldAbility = damageAbility
+				usingAbility = true
 		elif Input.is_action_just_pressed("ultimate_ability"):
 			if ultimateAbility.onCooldown == false:
 				indicator.visible = true
+				player_ability_used(ultimateAbility)
 				heldAbility = ultimateAbility
-		
-		# handle LMB. first, use ability
-		if Input.is_action_pressed("mouse_leftclick"):
-			if heldAbility != null && usingAbility == false:
-				player_ability_used(heldAbility)
 				usingAbility = true
-			
+		
+		if Input.is_action_pressed("mouse_leftclick"):
 			# if no ability equipped, use arrow
-			elif bow_equipped and bow_cooldown:
+			if bow_equipped and bow_cooldown:
 				bow_cooldown = false
 				var arrow_instance = arrow.instantiate()
 				arrow_instance.rotation = $Marker2D.rotation
@@ -169,7 +167,8 @@ func _physics_process(delta):
 					playerSnd.stream = load("res://Assets/SoundEffects/swing.wav")
 					playerSnd.play()
 				#animation_tree["parameters/conditions/swing"] = true
-				animation.play("attack")
+				if animation.current_animation != "attack":
+					animation.play("attack")
 				weapon.attack()
 		#else:
 			#animation_tree["parameters/conditions/swing"] = false
@@ -387,10 +386,10 @@ func _on_button_pressed():
 func player_ability_used(ability):
 	if ability.abilityType == "dmg":
 		abilityDuration.wait_time = 0.45
-		abilitySnd.stream = load("res://Assets/SoundEffects/thunder.mp3")
+		abilitySnd.stream = load("res://Assets/SoundEffects/fireball.wav")
 		abilitySnd.play()
 		abilityDuration.start()
-		abilityEffects.ability_used(get_global_mouse_position(), weapon.get_magic())
+		abilityEffects.ability_used(global_position, weapon.get_magic())
 		
 	elif ability.abilityType == "ult":
 		abilityDuration.wait_time = 2
@@ -401,6 +400,7 @@ func player_ability_used(ability):
 	indicator.visible = false
 
 func _on_ability_duration_timeout():
+	# activates the cooldown button
 	heldAbility.activated()
 	heldAbility = null
 	usingAbility = false

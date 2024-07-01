@@ -1,0 +1,31 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw5o81t1finai"]
+
+[ext_resource type="Script" path="res://Worlds/Tutorial World/TutorialWorld.gd" id="1_ohcay"]
+[ext_resource type="PackedScene" uid="uid://08qrvu43ttcy" path="res://Characters/Enemy/dummy.tscn" id="2_f32me"]
+[ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="3_32bfd"]
+[ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="4_nwlgj"]
+[ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="5_yi8pc"]
+[ext_resource type="Script" path="res://spawn_info.gd" id="6_hbc73"]
+[ext_resource type="PackedScene" uid="uid://cinfijdsg7wv1" path="res://Characters/abilities/ability_handler.tscn" id="7_gqisf"]
+
+[sub_resource type="Resource" id="Resource_cc22c"]
+script = ExtResource("6_hbc73")
+time_start = 0
+time_end = 10
+enemy = ExtResource("5_yi8pc")
+enemy_num = 6
+enemy_spawn_delay = 0
+
+[node name="TutorialWorld" type="Node2D"]
+script = ExtResource("1_ohcay")
+
+[node name="dummy" parent="." instance=ExtResource("2_f32me")]
+position = Vector2(237, -29)
+scale = Vector2(2, 2)
+
+[node name="PlayerAdolf" parent="." instance=ExtResource("3_32bfd")]
+
+[node name="EnemySpawner" parent="." instance=ExtResource("4_nwlgj")]
+spawns = Array[ExtResource("6_hbc73")]([SubResource("Resource_cc22c")])
+
+[node name="ability_handler" parent="." instance=ExtResource("7_gqisf")]

@@ -975,7 +975,7 @@ script = ExtResource("11_b3e8h")
 time_start = 0
 time_end = 10000
 enemy = ExtResource("14_72ou5")
-enemy_num = 5
+enemy_num = 1
 enemy_spawn_delay = 30
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iv2v8"]

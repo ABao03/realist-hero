@@ -1,6 +1,7 @@
 extends Node2D
 @onready var lightning = $Lightning
 @onready var lightningSlash = $LightningSlash
+@onready var fireball = $Fireball
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,8 +11,10 @@ func _exit_tree():
 	remove_from_group("ability")
 
 func ability_used(pos, magicDamage):
-	lightning.hitbox.magicDamage = int(magicDamage) + 10
-	lightning.play_animation(pos)
+	#lightning.hitbox.magicDamage = int(magicDamage) + 10
+	#lightning.play_animation(pos)
+	fireball.hitbox.magicDamage = int(magicDamage) + 10
+	fireball.play_animation(pos)
 
 func ult_used(pos, magicDamage):
 	lightningSlash.hitbox.magicDamage = int(magicDamage) * 5 + 8
