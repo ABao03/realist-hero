@@ -5,11 +5,14 @@ extends Node2D
 
 # Call player node from scene
 @onready var players = get_tree().get_nodes_in_group("player")
+@onready var enemy = preload("res://Characters/Enemy/ranged_boss.tscn")
+
 var player
 
 # Delay between spawns (I think)
 @export var time = 0
 @onready var timer = $Timer
+@onready var timer_2 = $Dragon_Timer
 
 #signal changetime(time)
 
@@ -39,6 +42,15 @@ func _on_timer_timeout():
 					add_child(enemy_spawn)
 					counter += 1
 	#emit_signal("changetime",time)
+
+func _on_dragon_timer_timeout():
+	if player.experience_level >= 2:
+		timer.stop()
+			#print(player.experience_level)
+		var enemy_instance = enemy.instantiate()
+		enemy_instance.global_position =Vector2(10,200)
+		add_child(enemy_instance)
+			
 
 # Randomly generate the enemy's position based on where the player is at 
 func get_random_position():
@@ -79,3 +91,8 @@ func pause_spawning():
 
 func start_spawning():
 	timer.start()
+	timer_2.start()
+	
+func start_spawn_minions():
+	timer.start()
+

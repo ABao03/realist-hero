@@ -24,10 +24,15 @@ var bow_cooldown = true
 var arrow_shot = false
 var arrow = preload("res://Characters/Enemy/fireball.tscn")
 
+@onready var spawner = get_tree().get_first_node_in_group("spawner")
+
+signal died()
+
 func _ready():
 	sprite.visible = false
 	#if just_spawned == true:
 	$SpawnTimer.start()
+	connect("died",Callable(spawner,"start_spawn_minions"))
 
 # Moving slime around 
 func _physics_process(_delta):
@@ -91,7 +96,10 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
+	emit_signal("died")
 	queue_free()
+	
+	
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	if isCrit == true:
