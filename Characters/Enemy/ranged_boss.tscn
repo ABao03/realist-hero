@@ -120,7 +120,7 @@ radius = 801.001
 [node name="Ranged" type="CharacterBody2D" parent="."]
 position = Vector2(-17, -28)
 collision_layer = 4
-collision_mask = 7
+collision_mask = 6
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_gvf1h")
