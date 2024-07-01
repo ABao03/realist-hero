@@ -19,14 +19,18 @@
 [ext_resource type="PackedScene" uid="uid://bpfd543m6nv6n" path="res://Characters/abilities/heal.tscn" id="14_qufa4"]
 [ext_resource type="PackedScene" uid="uid://tch3uejinpj0" path="res://Characters/abilities/strike.tscn" id="15_w1d75"]
 [ext_resource type="PackedScene" uid="uid://clegbepd3k4ex" path="res://Characters/abilities/slow.tscn" id="16_axbap"]
-[ext_resource type="Texture2D" uid="uid://btdasfk1thwvm" path="res://Assets/Images/lightning button.png" id="16_wcilh"]
 [ext_resource type="Texture2D" uid="uid://cuunt7l6tuwbf" path="res://Assets/Images/lightning button 2.png" id="17_3jc6o"]
 [ext_resource type="PackedScene" uid="uid://c6j6bswlesema" path="res://Characters/indicator.tscn" id="17_jwaba"]
+[ext_resource type="Texture2D" uid="uid://dakplae45nc0h" path="res://Assets/Images/fire button.png" id="20_kiqlo"]
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="23_36e71"]
 [ext_resource type="AudioStream" uid="uid://d1wv3yjw44dlg" path="res://Music/death.mp3" id="24_2egwl"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sva7"]
+size = Vector2(46, 18)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4hegg"]
-radius = 4.54665
+radius = 7.1582
+height = 16.1059
 
 [sub_resource type="Animation" id="Animation_q5tuw"]
 length = 0.001
@@ -119,9 +123,6 @@ _data = {
 "walk": SubResource("Animation_sojb0")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sva7"]
-size = Vector2(23, 47)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_tc7j7"]
 radius = 90.0
 
@@ -142,6 +143,19 @@ texture = ExtResource("2_1hl8m")
 flip_v = true
 hframes = 16
 
+[node name="HurtBox" parent="Sprite2D" instance=ExtResource("3_5wu8m")]
+unique_name_in_owner = true
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" parent="Sprite2D/HurtBox" index="0"]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_7sva7")
+
+[node name="DisableTimer" parent="Sprite2D/HurtBox" index="1"]
+wait_time = 1.0
+
 [node name="Weapon" parent="." instance=ExtResource("3_400ao")]
 
 [node name="Recall" type="Sprite2D" parent="."]
@@ -154,7 +168,7 @@ texture = ExtResource("3_a0sxw")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1, -2)
+position = Vector2(2, 2)
 scale = Vector2(1.09971, 1.1176)
 shape = SubResource("CapsuleShape2D_4hegg")
 
@@ -163,18 +177,6 @@ deterministic = true
 libraries = {
 "": SubResource("AnimationLibrary_fjfia")
 }
-
-[node name="HurtBox" parent="." instance=ExtResource("3_5wu8m")]
-unique_name_in_owner = true
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" parent="HurtBox" index="0"]
-position = Vector2(-1.5, -2.5)
-shape = SubResource("RectangleShape2D_7sva7")
-
-[node name="DisableTimer" parent="HurtBox" index="1"]
-wait_time = 1.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -186,6 +188,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_tc7j7")
 
 [node name="CollectArea" type="Area2D" parent="."]
+position = Vector2(2, 9)
 collision_layer = 0
 collision_mask = 8
 
@@ -399,15 +402,12 @@ offset_bottom = -333.0
 
 [node name="Sprint" parent="." instance=ExtResource("13_qhlup")]
 unique_name_in_owner = true
-visible = false
-position = Vector2(-368, 291)
+position = Vector2(516, 114)
 
 [node name="Strike" parent="." instance=ExtResource("15_w1d75")]
-visible = false
 position = Vector2(295, 288)
 
 [node name="Heal" parent="." instance=ExtResource("14_qufa4")]
-visible = false
 position = Vector2(-12, 298)
 
 [node name="UltButton" parent="." instance=ExtResource("14_1lfu3")]
@@ -424,7 +424,7 @@ offset_left = 371.0
 offset_top = 217.0
 offset_right = 446.0
 offset_bottom = 292.0
-texture_normal = ExtResource("16_wcilh")
+texture_normal = ExtResource("20_kiqlo")
 abilityType = "dmg"
 cooldownTime = 3
 
@@ -493,7 +493,7 @@ offset_bottom = 331.0
 theme_override_font_sizes/normal_font_size = 18
 text = "[Q]"
 
-[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="hurt" from="Sprite2D/HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="hidden" from="GUILayer/Pausescreen/Menu" to="." method="_on_menu_hidden"]
@@ -509,4 +509,4 @@ text = "[Q]"
 [connection signal="timeout" from="AbilityDuration" to="." method="_on_ability_duration_timeout"]
 [connection signal="timeout" from="RecallDuration" to="." method="_on_recall_duration_timeout"]
 
-[editable path="HurtBox"]
+[editable path="Sprite2D/HurtBox"]

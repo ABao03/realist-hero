@@ -1,25 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://cynh3whul4t8n"]
+[gd_scene load_steps=5 format=3 uid="uid://cynh3whul4t8n"]
 
 [ext_resource type="Script" path="res://Characters/abilities/sprint.gd" id="1_phm64"]
+[ext_resource type="PackedScene" uid="uid://binnn2ijqbcl1" path="res://Characters/player_ghost.tscn" id="2_a0te0"]
+[ext_resource type="PackedScene" uid="uid://d0p71vqc5gam8" path="res://Characters/abilities/cooldown_button.tscn" id="3_3hs8o"]
+[ext_resource type="Texture2D" uid="uid://c2i0jn7g88ft5" path="res://Assets/Images/sprint button.png" id="4_kle6h"]
 
 [node name="Sprint" type="Node2D"]
 script = ExtResource("1_phm64")
+ghost_node = ExtResource("2_a0te0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-offset_right = 177.0
-offset_bottom = 32.0
+[node name="SprintButton" parent="." instance=ExtResource("3_3hs8o")]
+texture_normal = ExtResource("4_kle6h")
+cooldownTime = 2
 
-[node name="Sprint_button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Sprint
-"
-
-[node name="Timer" type="Timer" parent="."]
+[node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.1
 
 [node name="CooldownTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 
-[connection signal="pressed" from="VBoxContainer/Sprint_button" to="." method="_on_sprint_button_pressed"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="GhostTimer" type="Timer" parent="."]
+wait_time = 0.01
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
