@@ -8,7 +8,7 @@ var player
 @export var ghost_node : PackedScene
 @onready var ghost_timer = $GhostTimer
 
-@onready var sprintSpeed = 1000
+@onready var sprintSpeed = 600
 @onready var buttonclicked: bool = false
 var isReady : bool = true
 var isPressed : bool = false

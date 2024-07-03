@@ -1,0 +1,19 @@
+Left click - Attack\
+Q - Normal Ability (3 sec cooldown)\
+E - Ultimate Ability (90 sec cooldown)
+Try it now!
+[wait time="4.0" hide_text="false"]
+White numbers are for physical damage. \
+Blue numbers are for magic damage. \
+Red numbers indicate a crit! (magic damage can't crit)
+Certain enemies will be resistant to either physical or magic damage, so be aware!
+press 1 - switch to projectile (currently disabled)\
+B - recall to hub world (currently useless)\
+Shift - Dodge (2 sec cooldown)
+1. Kill enemies and pick up EXP\
+2. Once purple bar is full, the level-up menu will display\
+3. choose an item and place it in your inventory. \
+press I to close inventory\
+4. Repeat step 1
+Try fighting these enemies!
+[signal arg="tutorial_enemies"]

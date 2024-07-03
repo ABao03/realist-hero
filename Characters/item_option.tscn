@@ -4,10 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://n2boiufo6bon" path="res://Assets/Images/pickaxe_mini.png" id="2_larh1"]
 
 [node name="itemOption" type="ColorRect"]
-custom_minimum_size = Vector2(180, 50)
+custom_minimum_size = Vector2(240, 60)
 offset_right = 180.0
 offset_bottom = 50.0
-scale = Vector2(1.5, 1.5)
 color = Color(0.454902, 0.454902, 0.454902, 1)
 script = ExtResource("1_86eoi")
 
@@ -30,21 +29,21 @@ expand_mode = 1
 [node name="lbl_name" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 39.0
-offset_top = 4.0
-offset_right = 79.0
-offset_bottom = 24.0
-theme_override_font_sizes/font_size = 12
+offset_left = 35.3333
+offset_top = 0.666667
+offset_right = 87.3333
+offset_bottom = 25.6667
+theme_override_font_sizes/font_size = 20
 text = "Name"
 
 [node name="lbl_description" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
 offset_left = 4.0
-offset_top = 27.0
+offset_top = 32.0
 offset_right = 170.0
-offset_bottom = 50.0
-theme_override_font_sizes/font_size = 7
+offset_bottom = 55.0
+theme_override_font_sizes/font_size = 12
 text = "Item Description"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

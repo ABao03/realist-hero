@@ -64,7 +64,7 @@ func _physics_process(_delta):
 			arrow_instance.rotation = $Marker2D.rotation
 			arrow_instance.global_position = $Marker2D.global_position
 			add_child(arrow_instance)
-				
+			
 			await get_tree().create_timer(20).timeout # Delay between projectile atacks
 			bow_cooldown = true
 		
@@ -98,8 +98,6 @@ func death():
 	loot_base.call_deferred("add_child", new_gem)
 	emit_signal("died")
 	queue_free()
-	
-	
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	if isCrit == true:
