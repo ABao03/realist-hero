@@ -44,8 +44,11 @@ func _on_timer_timeout():
 	#emit_signal("changetime",time)
 
 func _on_dragon_timer_timeout():
-	if player.experience_level >= 2:
+	if player.experience_level == 2:
 		timer.stop()
+		for enemy in get_children():
+			if enemy.is_in_group("enemy"):
+				enemy.queue_free()
 			#print(player.experience_level)
 		var enemy_instance = enemy.instantiate()
 		enemy_instance.global_position =Vector2(10,200)

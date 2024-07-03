@@ -115,7 +115,7 @@ size = Vector2(217.75, 206.5)
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v580"]
 radius = 801.001
 
-[node name="Ranged" type="Node2D" groups=["enemy"]]
+[node name="Ranged" type="Node2D" groups=["boss"]]
 
 [node name="Ranged" type="CharacterBody2D" parent="."]
 position = Vector2(-17, -28)
@@ -188,7 +188,7 @@ position = Vector2(144, 143)
 shape = SubResource("CircleShape2D_5v580")
 
 [node name="Marker2D" type="Marker2D" parent="Ranged"]
-position = Vector2(16, 29)
+position = Vector2(94, 117)
 
 [node name="SpawnTimer" type="Timer" parent="Ranged"]
 wait_time = 3.0
