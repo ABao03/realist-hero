@@ -4,7 +4,7 @@ extends CharacterBody2D
 # Stats in data/playerdata to be done
 @export var speed : float = 150
 @onready var collision = $CollisionShape2D
-@onready var chest_sprite = get_tree().get_first_node_in_group("chest")
+#@onready var chest_sprite = get_tree().get_first_node_in_group("chest")
 @onready var animation_player: bool = true
 
 
@@ -71,6 +71,7 @@ signal pause_spawning()
 @onready var animation = $AnimationPlayer
 #@onready var animation_tree = $AnimationTree
 @onready var sprite = $Sprite2D
+var signal_emitted = false
 
 # GUI
 @onready var recallBar = get_node('%RecallBar')
@@ -164,12 +165,9 @@ func _physics_process(delta):
 			# if no bow equipped, use melee attack
 			elif bow_equipped == false:
 				if animation.current_animation != "attack":
-					playerSnd.stream = load("res://Assets/SoundEffects/swing.wav")
-					playerSnd.play()
 				#animation_tree["parameters/conditions/swing"] = true
-				if animation.current_animation != "attack":
 					animation.play("attack")
-				weapon.attack()
+					weapon.attack()
 		#else:
 			#animation_tree["parameters/conditions/swing"] = false
 			
@@ -266,7 +264,8 @@ func calculate_experience(gem_exp):
 	if experience + collected_experience >= exp_required && acc == 0: # when xp bar is full, keep it at max. Reset when chest clicked
 		experience = exp_required
 		expBar.modulate = Color(0, 100, 0, 1)
-		acc += 1
+		#acc += 1
+		levelup()
 		collected_experience = 0
 	elif experience == exp_required && acc > 0:
 		return
@@ -296,6 +295,16 @@ func set_recallbar(set_value = 0):
 	recallBar.value = set_value
 
 func levelup():
+	# level up right away code
+	inventory.open() #Open inventory menu
+	var exp_required = calculate_experiencecap()
+	experience = 0
+	experience_level += 1
+	exp_required = calculate_experiencecap()
+	expBar.modulate = Color(1,1,1,1)
+	
+	# code that exists outside of levelling up right away
+	signal_emitted = true
 	emit_signal("despawn_enemies")
 	emit_signal("pause_spawning")
 	sndLevelUp.play()
@@ -359,28 +368,28 @@ func update_stats(data):
 			pass
 
 # Make it so chest is only openable when you level up
-func _on_button_pressed():
-
-	if acc > 0: #When the player levels up
-		acc -= 1
-		chest_sprite.play("Open") #Play the animation of the chest opening
-		await get_tree().create_timer(1).timeout #waits 0.65s 
-		chest_sprite.stop() #stop animation
-
-		inventory.open() #Open inventory menu
-		levelup()
-		var exp_required = calculate_experiencecap()
-		experience = 0
-		experience_level += 1
-		exp_required = calculate_experiencecap()
-		expBar.modulate = Color(1,1,1,1)
-		
-		# LEO add function to switch chest sprite to closed
-		
-	else: #When the player did not level up
-		chest_sprite.play("Idle_clicked") #Play the idle animation
-		await get_tree().create_timer(1).timeout
-		chest_sprite.stop()
+#func _on_button_pressed():
+#
+	#if acc > 0: #When the player levels up
+		#acc -= 1
+		#chest_sprite.play("Open") #Play the animation of the chest opening
+		#await get_tree().create_timer(1).timeout #waits 0.65s 
+		#chest_sprite.stop() #stop animation
+#
+		#inventory.open() #Open inventory menu
+		#levelup()
+		#var exp_required = calculate_experiencecap()
+		#experience = 0
+		#experience_level += 1
+		#exp_required = calculate_experiencecap()
+		#expBar.modulate = Color(1,1,1,1)
+		#
+		## LEO add function to switch chest sprite to closed
+		#
+	#else: #When the player did not level up
+		#chest_sprite.play("Idle_clicked") #Play the idle animation
+		#await get_tree().create_timer(1).timeout
+		#chest_sprite.stop()
 		
 	
 func player_ability_used(ability):

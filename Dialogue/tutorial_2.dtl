@@ -1,0 +1,10 @@
+Inventory will open automatically on level-up. You can also press 'I'.\
+Left click to place an item in inventory. Right click to rotate.\
+Items in your inventory will provide stats that make your attacks stronger.
+[wait time="5.0" hide_text="false"]
+Item stats\: Physical, Magic, Attack Speed, Crit, Move Speed, \
+Max Health, Defense\
+Some items will combine with each other to form a stronger item!
+When you die, all the items in your inventory will be tallied to get your score.
+Walk on red square to start!
+[signal arg="tutorial_ended"]

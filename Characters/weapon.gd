@@ -6,6 +6,7 @@ var player
 @onready var animation = $Sprite2D/AnimationPlayer
 @onready var hitbox1 = $Sprite2D/HitBox
 @onready var hitbox2 = $Sprite2D/HitBox2
+@onready var weaponSnd = $Snd
 
 # Animation speed variables (for attack speed)
 var rotationSpeed = 1
@@ -18,6 +19,8 @@ func _ready():
 	visible = false
 
 func attack():
+	weaponSnd.stream = load("res://Assets/SoundEffects/swing.wav")
+	weaponSnd.play()
 	visible = true
 	animation.play("attack")
 
@@ -27,15 +30,16 @@ func _process(delta):
 	var direction = (player.global_position - global_position)
 	
 	# Hold sword in place while attack animation plays 
-	if animation.is_playing() == false:
-		var mouseDirection = get_global_mouse_position() - global_position
+	#if animation.is_playing() == false:
+		#var mouseDirection = get_global_mouse_position() - global_position
 		#look_at(get_global_mouse_position())
-		var mouseAngle = mouseDirection.angle()
-		var r = global_rotation
-		global_rotation = lerp_angle(r, mouseAngle, rotationSpeed)
+		#var mouseAngle = mouseDirection.angle()
+		#var r = global_rotation
+		#global_rotation = lerp_angle(r, mouseAngle, rotationSpeed)
 		
 	# Move the follower towards the player
 	global_position += direction * player.speed * delta
+	rotation = player.sprite.rotation - PI/2
 
 func set_physical(val):
 	hitbox1.damage = val

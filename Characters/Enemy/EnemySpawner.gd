@@ -44,7 +44,7 @@ func _on_timer_timeout():
 	#emit_signal("changetime",time)
 
 func _on_dragon_timer_timeout():
-	if player.experience_level >= 2:
+	if player.experience_level >= 2 && get_tree().current_scene.name != "Tutorial_World":
 		timer.stop()
 			#print(player.experience_level)
 		var enemy_instance = enemy.instantiate()

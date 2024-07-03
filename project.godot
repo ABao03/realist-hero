@@ -25,13 +25,17 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
-directories/dch_directory={}
+directories/dch_directory={
+"girl": "res://Dialogue/girl.dch"
+}
 directories/dtl_directory={
-"timeline": "res://Dialogue/timeline.dtl"
+"tutorial": "res://Dialogue/tutorial.dtl",
+"tutorial_2": "res://Dialogue/tutorial_2.dtl"
 }
 layout/style_list=["res://Dialogue/style.tres"]
 layout/default_style="res://Dialogue/style.tres"
 variables={}
+glossary/default_case_sensitive=true
 
 [display]
 
