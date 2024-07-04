@@ -56,7 +56,7 @@ func dragon_spawn():
 			bruh.queue_free()
 			#print(player.experience_level)
 	var enemy_instance = enemy.instantiate()
-	enemy_instance.global_position =Vector2(10,200)
+	enemy_instance.global_position =Vector2(-450,-212)
 	add_child(enemy_instance)
 
 #func _on_dragon_timer_timeout():
