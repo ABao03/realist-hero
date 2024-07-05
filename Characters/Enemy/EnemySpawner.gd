@@ -14,6 +14,8 @@ var player
 @onready var timer = $Timer
 @onready var timer_2 = $Dragon_Timer
 
+@onready var enemy_num = 0
+
 @onready var dragon_spawned: bool = false
 
 #signal changetime(time)
@@ -47,6 +49,7 @@ func _on_timer_timeout():
 					enemy_spawn.global_position = get_random_position()
 					add_child(enemy_spawn)
 					counter += 1
+					enemy_num += 1
 	#emit_signal("changetime",time)
 
 func dragon_spawn():
