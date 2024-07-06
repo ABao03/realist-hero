@@ -31,7 +31,7 @@ func _on_timer_timeout():
 	time += 1
 	var enemy_spawns = spawns
 	
-	if player.experience_level == 2 and get_tree().current_scene.name != "Tutorial_World" and dragon_spawned == false:
+	if player.experience_level == 5 and get_tree().current_scene.name != "Tutorial_World" and dragon_spawned == false:
 		dragon_spawned = true
 		dragon_spawn()
 	

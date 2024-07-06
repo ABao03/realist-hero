@@ -3,7 +3,7 @@
 		"ID": "1",
 		"Name": "Pickaxe",
 		"Grid": "0,0/0,1/0,2/-1,0/1,0",
-		"Physical": "15.00",
+		"Physical": "5.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
@@ -12,7 +12,7 @@
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "100",
-		"Info": "15 physical damage"
+		"Info": "5 physical damage"
 	},
 	"2": {
 		"ID": "2",
@@ -20,29 +20,29 @@
 		"Grid": "0,0/0,1",
 		"Physical": "0.00",
 		"Magic": "0.00",
-		"Attack Speed": "1.12",
+		"Attack Speed": "1.10",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "100",
-		"Info": "12% attack speed"
+		"Info": "10% attack speed"
 	},
 	"3": {
 		"ID": "3",
 		"Name": "Wand",
 		"Grid": "0,0/1,0",
 		"Physical": "0.00",
-		"Magic": "10.00",
-		"Attack Speed": "1.08",
+		"Magic": "5.00",
+		"Attack Speed": "1.05",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "100",
-		"Info": "10 magic damage and 8% attack speed"
+		"Info": "10 magic damage and 5% attack speed"
 	},
 	"4": {
 		"ID": "4",
@@ -57,7 +57,7 @@
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "100",
-		"Info": "20 max health"
+		"Info": "50 max health"
 	},
 	"5": {
 		"ID": "5",
@@ -67,12 +67,12 @@
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
-		"Move Speed": "1.15",
-		"Max Health": "0.00",
+		"Move Speed": "0.00",
+		"Max Health": "20.00",
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "100",
-		"Info": "5 physical damage and 15% move speed"
+		"Info": "2 physical damage and 20 max health"
 	},
 	"6": {
 		"ID": "6",
@@ -96,20 +96,20 @@
 		"Physical": "0.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
-		"Crit": "1.09",
-		"Move Speed": "1.13",
+		"Crit": "1.10",
+		"Move Speed": "1.10",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "",
 		"Points": "100",
-		"Info": "9% crit and 13% move speed"
+		"Info": "10% crit and 10% move speed"
 	},
 	"8": {
 		"ID": "8",
 		"Name": "Suspicious Seal",
 		"Grid": "0,0/0,1/1,0/1,1",
 		"Physical": "0.00",
-		"Magic": "7.00",
+		"Magic": "5.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
@@ -117,14 +117,14 @@
 		"Defense": "15.00",
 		"Components": "",
 		"Points": "100",
-		"Info": "7 magic and 15 defense"
+		"Info": "5 magic and 15 defense"
 	},
 	"9": {
 		"ID": "9",
 		"Name": "Cloak",
 		"Grid": "-1,-1/-1,0/0,-1/0,0/1,0/2,0",
 		"Physical": "0.00",
-		"Magic": "1.15",
+		"Magic": "1.20",
 		"Attack Speed": "0.00",
 		"Crit": "1.15",
 		"Move Speed": "1.15",
@@ -132,13 +132,13 @@
 		"Defense": "0.00",
 		"Components": "3,7",
 		"Points": "500",
-		"Info": "15% magic, crit and move speed"
+		"Info": "20% magic, crit and move speed"
 	},
 	"10": {
 		"ID": "10",
 		"Name": "Armoured Gauntlets",
 		"Grid": "-1,0/-1,1/0,1/1,1",
-		"Physical": "25.00",
+		"Physical": "20.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
@@ -147,7 +147,7 @@
 		"Defense": "20.00",
 		"Components": "5,6",
 		"Points": "500",
-		"Info": "25 physical and 20 defense"
+		"Info": "20 physical and 20 defense"
 	},
 	"11": {
 		"ID": "11",
@@ -155,14 +155,14 @@
 		"Grid": "-1,1/0,1/0,0/1,1",
 		"Physical": "0.00",
 		"Magic": "1.15",
-		"Attack Speed": "1.17",
+		"Attack Speed": "1.15",
 		"Crit": "0.00",
-		"Move Speed": "0.00",
+		"Move Speed": "1.10",
 		"Max Health": "0.00",
 		"Defense": "0.00",
 		"Components": "2,8",
 		"Points": "500",
-		"Info": "15% magic and 17% attack speed"
+		"Info": "15% magic and 15% attack speed and 10% move speed"
 	},
 	"12": {
 		"ID": "12",
@@ -171,13 +171,13 @@
 		"Physical": "0.00",
 		"Magic": "0.00",
 		"Attack Speed": "0.00",
-		"Crit": "1.16",
+		"Crit": "1.3",
 		"Move Speed": "0.00",
-		"Max Health": "30.00",
-		"Defense": "1.16",
+		"Max Health": "0.00",
+		"Defense": "0.00",
 		"Components": "4,7",
 		"Points": "500",
-		"Info": "30 max health, 16% crit and defense"
+		"Info": "30% crit and 10 damage"
 	},
 	"13": {
 		"ID": "13",
@@ -188,10 +188,10 @@
 		"Attack Speed": "0.00",
 		"Crit": "0.00",
 		"Move Speed": "0.00",
-		"Max Health": "1.12",
+		"Max Health": "1.15",
 		"Defense": "0.00",
 		"Components": "4,5",
 		"Points": "500",
-		"Info": "20 physical damage and 12% max health"
+		"Info": "20 physical damage and 15% max health"
 	}
 }

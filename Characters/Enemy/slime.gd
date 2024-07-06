@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var movement_speed = 70.0
-@export var hp = 60
+@export var movement_speed = 100.0
+@export var hp = 100
 @export var experience = 1
 @export var knockback = -5
 
@@ -60,7 +60,7 @@ func death():
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	if isCrit == true:
-		damage = damage * 2
+		damage = damage * 1.5
 	hp -= damage
 	hp -= magicDamage
 	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)

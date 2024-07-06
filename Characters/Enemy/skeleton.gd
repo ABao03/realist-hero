@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-@export var movement_speed = 30.0
+@export var movement_speed = 25.0
 
-var maxHealth = 150
+var maxHealth = 1000
 @export var health = maxHealth
 
 @export var experience = 3
@@ -37,7 +37,7 @@ func death():
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	if isCrit == true:
-		damage = damage * 2
+		damage = damage * 1.5
 	health -= damage
 	health -= magicDamage
 	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)

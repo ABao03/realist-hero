@@ -2,7 +2,7 @@
 extends CharacterBody2D
 
 # Stats in data/playerdata to be done
-@export var speed : float = 150
+@export var speed : float = 125
 @onready var collision = $CollisionShape2D
 #@onready var chest_sprite = get_tree().get_first_node_in_group("chest")
 @onready var animation_player: bool = true
