@@ -14,7 +14,7 @@ size = Vector2(190, 76.6563)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4rnnk"]
 size = Vector2(26.5, 83)
 
-[node name="Arrow" type="Area2D"]
+[node name="Arrow2" type="Area2D"]
 script = ExtResource("1_0hqmt")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

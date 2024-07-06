@@ -12,6 +12,7 @@ extends CharacterBody2D
 @onready var sprite = $Slime
 @onready var hurtbox = $HurtBox
 @onready var damage_numbers_origin = $DamageNumbers
+@onready var damage = $HitBox.damage
 
 @onready var snd = $Snd
 @onready var animation_tree = $AnimationTree
@@ -19,8 +20,12 @@ extends CharacterBody2D
 
 var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 
+@onready var spawner = get_tree().get_first_node_in_group("spawner")
+signal died()
+
 func _ready():
 	sprite.visible = false
+	connect("died",Callable(spawner,"on_enemy_death"))
 
 # Moving slime around 
 func _physics_process(_delta):
@@ -43,7 +48,8 @@ func _physics_process(_delta):
 func make_path():
 	nav_agent.target_position = player.global_position
 	print(to_local(nav_agent.get_next_path_position()))
-	if last_position == nav_agent.get_next_path_position(): 
+	if last_position == nav_agent.get_next_path_position():
+		emit_signal("died") 
 		queue_free()
 	if last_position != Vector2(0,0):
 		sprite.visible = true
@@ -56,6 +62,7 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
+	emit_signal("died")
 	queue_free()
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):

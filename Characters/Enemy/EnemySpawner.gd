@@ -7,17 +7,19 @@ extends Node2D
 @onready var players = get_tree().get_nodes_in_group("player")
 @onready var enemy = preload("res://Characters/Enemy/ranged_boss.tscn")
 
-var player
+@onready var player
 
 # Delay between spawns (I think)
 @export var time = 0
 @onready var timer = $Timer
 @onready var timer_2 = $Dragon_Timer
 
-@onready var enemy_num = 0
+@onready var enemy_cap
 
 @onready var dragon_spawned: bool = false
 
+#keeps track of number of enemies
+@onready var enemy_counter = 0
 #signal changetime(time)
 
 func _ready():
@@ -28,6 +30,17 @@ func _ready():
 
 # When timer hits 0, run this code
 func _on_timer_timeout():
+	var player_level = player.experience_level
+	#enemy_cap = 7 + player_level*2 #max number of enemies per level
+	if player_level == 1:
+		enemy_cap = 7
+	elif player_level == 2:
+		enemy_cap = 14
+	elif player_level == 3:
+		enemy_cap = 20
+	elif player_level == 4:
+		enemy_cap = 30
+		
 	time += 1
 	var enemy_spawns = spawns
 	
@@ -37,19 +50,24 @@ func _on_timer_timeout():
 	
 	# Basically, every time the timer hits zero, load the enemy 
 	for i in enemy_spawns:
-		if time >= i.time_start and time <= i.time_end:
-			if i.spawn_delay_counter < i.enemy_spawn_delay:
-				i.spawn_delay_counter += 1
-			else:
-				i.spawn_delay_counter = 0
-				var new_enemy = i.enemy
-				var counter = 0
-				while counter < i.enemy_num:
-					var enemy_spawn = new_enemy.instantiate()
-					enemy_spawn.global_position = get_random_position()
-					add_child(enemy_spawn)
-					counter += 1
-					enemy_num += 1
+		#print("bro ", enemy_counter)
+		#print("habibi ", enemy_cap)
+		if enemy_counter < enemy_cap:  #when the number of enemies is smaller than the enemy cap
+			if time >= i.time_start and time <= i.time_end:
+				if i.spawn_delay_counter < i.enemy_spawn_delay:
+					i.spawn_delay_counter += 1
+				else:
+					i.spawn_delay_counter = 0
+					var new_enemy = i.enemy
+					var counter = 0
+					while counter < i.enemy_num:
+						var enemy_spawn = new_enemy.instantiate()
+						enemy_spawn.global_position = get_random_position()
+						add_child(enemy_spawn)
+						counter += 1
+						enemy_counter += 1 #number of events gets incremeneted
+		elif enemy_counter >= enemy_cap:
+			pass
 	#emit_signal("changetime",time)
 
 func dragon_spawn():
@@ -107,6 +125,7 @@ func despawn_enemies():
 	for enemy in get_children():
 		if enemy.is_in_group("enemy"):
 			enemy.queue_free()
+	#counter = 0
 
 func pause_spawning():
 	timer.stop()
@@ -118,3 +137,6 @@ func start_spawning():
 func start_spawn_minions():
 	timer.start()
 
+func on_enemy_death():
+	enemy_counter = enemy_counter - 1
+	print("hi", enemy_counter)

@@ -16,6 +16,12 @@ var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 var player_chase = false
 var player_presence = null
 
+@onready var spawner = get_tree().get_first_node_in_group("spawner")
+signal died()
+
+func _ready():
+	connect("died",Callable(spawner,"on_enemy_death"))
+
 func _physics_process(_delta):
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction*movement_speed
@@ -33,6 +39,7 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
+	emit_signal("died") 
 	queue_free()
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):

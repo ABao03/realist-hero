@@ -24,10 +24,14 @@ var bow_cooldown = true
 var arrow_shot = false
 var arrow = preload("res://Characters/Enemy/throw.tscn")
 
+@onready var spawner = get_tree().get_first_node_in_group("spawner")
+signal died()
+
 func _ready():
 	sprite.visible = false
 	#if just_spawned == true:
 	$SpawnTimer.start()
+	connect("died",Callable(spawner,"on_enemy_death"))
 
 # Moving slime around 
 func _physics_process(_delta):
@@ -79,6 +83,7 @@ func _physics_process(_delta):
 func make_path():
 	nav_agent.target_position = player.global_position
 	if last_position == to_local(nav_agent.get_next_path_position()): 
+		emit_signal("died") 
 		queue_free()
 	if last_position != Vector2(0,0):
 		sprite.visible = true
@@ -91,6 +96,7 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
+	emit_signal("died") 
 	queue_free()
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):

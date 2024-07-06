@@ -12,8 +12,8 @@ extends CharacterBody2D
 @onready var hpPercent = 1.00
 @onready var acc: int = 0
 
-var experience = 0
-var experience_level = 1
+@onready var experience = 0
+@onready var experience_level = 1
 var collected_experience = 0
 var held_items = []
 var x = true
