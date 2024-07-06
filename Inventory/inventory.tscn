@@ -125,14 +125,20 @@ theme_override_constants/h_separation = 1
 theme_override_constants/v_separation = 1
 columns = 8
 
-[node name="hoverInfo" parent="." instance=ExtResource("3_hero3")]
+[node name="HoverCanvas" type="CanvasLayer" parent="."]
+
+[node name="hoverInfo" parent="HoverCanvas" instance=ExtResource("3_hero3")]
 z_index = 1
-layout_mode = 0
 offset_left = 601.0
 offset_top = 268.0
-offset_right = 800.0
+offset_right = 831.0
 offset_bottom = 418.0
 color = Color(0.321569, 0.152941, 0.0745098, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="HoverCanvas/hoverInfo"]
+position = Vector2(115, 76)
+scale = Vector2(0.574, 0.316667)
+texture = ExtResource("2_amuen")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]

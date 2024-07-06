@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqpb3ie51rwl5"]
+
+[ext_resource type="Script" path="res://Dialogue/CustomGirlStyle/default_layout_base.gd" id="1_ifsho"]
+[ext_resource type="PackedScene" uid="uid://cy1y14inwkplb" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Portraits/vn_portrait_layer.tscn" id="2_busxj"]
+[ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="4_rc2v5"]
+
+[node name="Custom" type="CanvasLayer"]
+script = ExtResource("1_ifsho")
+
+[node name="VN_PortraitLayer" parent="." instance=ExtResource("2_busxj")]
+apply_overrides_on_ready = true
+
+[node name="DialogicNode_PortraitContainer1" parent="VN_PortraitLayer/Portraits" index="0"]
+anchor_left = -0.0208333
+anchor_top = 0.00462963
+anchor_right = 0.210938
+anchor_bottom = 1.00463
+offset_left = 25.0
+offset_top = 257.0
+offset_right = 25.0
+offset_bottom = 257.0
+grow_vertical = 0
+scale = Vector2(0.6, 0.6)
+
+[node name="VN_TextboxLayer" parent="." instance=ExtResource("4_rc2v5")]
+apply_overrides_on_ready = true
+
+[node name="Anchor" parent="VN_TextboxLayer" index="1"]
+offset_left = -277.0
+offset_top = -8.0
+offset_right = -277.0
+offset_bottom = -8.0
+
+[node name="Sizer" parent="VN_TextboxLayer/Anchor/AnimationParent" index="0"]
+offset_right = 7.0
+
+[node name="DialogTextPanel" parent="VN_TextboxLayer/Anchor/AnimationParent/Sizer" index="0"]
+custom_minimum_size = Vector2(100, 50)
+offset_left = -1.0
+
+[node name="NextIndicator" parent="VN_TextboxLayer/Anchor/AnimationParent/Sizer/DialogTextPanel" index="1"]
+texture_size = Vector2(16, 16)
+
+[editable path="VN_PortraitLayer"]
+[editable path="VN_TextboxLayer"]

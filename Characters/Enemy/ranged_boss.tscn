@@ -120,10 +120,11 @@ radius = 801.001
 [node name="Ranged" type="CharacterBody2D" parent="."]
 position = Vector2(-17, -28)
 collision_layer = 4
-collision_mask = 6
+collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_gvf1h")
+hp = 500
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2
@@ -188,7 +189,7 @@ position = Vector2(144, 143)
 shape = SubResource("CircleShape2D_5v580")
 
 [node name="Marker2D" type="Marker2D" parent="Ranged"]
-position = Vector2(94, 117)
+position = Vector2(16, 29)
 
 [node name="SpawnTimer" type="Timer" parent="Ranged"]
 wait_time = 3.0

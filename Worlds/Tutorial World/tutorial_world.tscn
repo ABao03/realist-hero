@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://c8yuyo0tuglxf"]
+[gd_scene load_steps=47 format=3 uid="uid://c8yuyo0tuglxf"]
 
 [ext_resource type="Script" path="res://Worlds/Tutorial World/tutorial_world.gd" id="1_8m2i4"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="2_iodjk"]
@@ -7,14 +7,12 @@
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="4_dsdcn"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="4_nwlgj"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/fill.gd" id="5_mjvyc"]
+[ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="5_yi8pc"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="6_427l5"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="6_hbc73"]
 [ext_resource type="PackedScene" uid="uid://cinfijdsg7wv1" path="res://Characters/abilities/ability_handler.tscn" id="7_gqisf"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/walls.gd" id="7_k1lmw"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator_settings.gd" id="8_yock6"]
-[ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/skeleton.tscn" id="13_vv8u0"]
-[ext_resource type="Texture2D" uid="uid://bhxvndxga32g0" path="res://Assets/Images/Fantasy RPG (Toony) 32x32.png" id="16_nii0q"]
-[ext_resource type="Script" path="res://Worlds/Procedural  World/testing.gd" id="17_cj7ct"]
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="18_fvkx3"]
 [ext_resource type="AudioStream" uid="uid://vfyxjjc1h526" path="res://Assets/Music/Tea House Echoes.mp3" id="19_ss23x"]
 
@@ -955,74 +953,10 @@ modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([Su
 [sub_resource type="Resource" id="Resource_gw6rq"]
 script = ExtResource("6_hbc73")
 time_start = 0
-time_end = 2
-enemy = ExtResource("13_vv8u0")
-enemy_num = 6
+time_end = 60
+enemy = ExtResource("5_yi8pc")
+enemy_num = 1
 enemy_spawn_delay = 0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iv2v8"]
-atlas = ExtResource("16_nii0q")
-region = Rect2(96, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0rp7s"]
-atlas = ExtResource("16_nii0q")
-region = Rect2(96, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_my7pd"]
-atlas = ExtResource("16_nii0q")
-region = Rect2(96, 128, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_65ya1"]
-atlas = ExtResource("16_nii0q")
-region = Rect2(96, 160, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jhon6"]
-atlas = ExtResource("16_nii0q")
-region = Rect2(96, 192, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3eygy"]
-atlas = ExtResource("16_nii0q")
-region = Rect2(96, 224, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_rr0ji"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iv2v8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0rp7s")
-}],
-"loop": true,
-"name": &"Idle_clicked",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_my7pd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_65ya1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jhon6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3eygy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3eygy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_3eygy")
-}],
-"loop": true,
-"name": &"Open",
-"speed": 6.0
-}]
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wyhws"]
-polygon = PackedVector2Array(-11.2593, 13.2, -12.0494, -8.8, 13.2346, -8, 10.8642, 13.6)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7e6ub"]
 size = Vector2(58, 53)
@@ -1061,26 +995,6 @@ process_mode = 1
 
 [node name="ability_handler" parent="." instance=ExtResource("7_gqisf")]
 
-[node name="chest" type="AnimatedSprite2D" parent="." groups=["chest"]]
-unique_name_in_owner = true
-texture_filter = 1
-position = Vector2(8.5, 202)
-scale = Vector2(2.53125, 2.5)
-sprite_frames = SubResource("SpriteFrames_rr0ji")
-animation = &"Open"
-script = ExtResource("17_cj7ct")
-
-[node name="Level up chest" type="Button" parent="chest"]
-modulate = Color(1, 1, 1, 0)
-offset_left = -15.0
-offset_top = -11.0
-offset_right = 16.0
-offset_bottom = 17.0
-metadata/_edit_use_anchors_ = true
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="chest"]
-occluder = SubResource("OccluderPolygon2D_wyhws")
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(1, 199)
 collision_mask = 0
@@ -1105,5 +1019,3 @@ process_mode = 3
 stream = ExtResource("19_ss23x")
 volume_db = -10.0
 autoplay = true
-
-[connection signal="pressed" from="chest/Level up chest" to="PlayerAdolf" method="_on_button_pressed"]

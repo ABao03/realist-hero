@@ -76,6 +76,7 @@ var signal_emitted = false
 # GUI
 @onready var recallBar = get_node('%RecallBar')
 @onready var expBar = get_node('%ExperienceBar')
+@onready var expLabel = get_node('%ExpLabel')
 @onready var healthBar = get_node('%HealthBar')
 @onready var lblLevel = get_node('%lbl_levelUp')
 @onready var levelPanel = get_node('%LevelUp')
@@ -300,6 +301,7 @@ func levelup():
 	var exp_required = calculate_experiencecap()
 	experience = 0
 	experience_level += 1
+	expLabel.text = "Level: " + str(experience_level)
 	exp_required = calculate_experiencecap()
 	expBar.modulate = Color(1,1,1,1)
 	
@@ -426,3 +428,4 @@ func cancel_recall():
 
 func disable_light():
 	pointLight.visible = false
+	ambientLight.visible = false

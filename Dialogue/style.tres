@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://c1k5m0w3r40xf" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_FullBackground/full_background_layer.tscn" id="1_4upkr"]
 [ext_resource type="Script" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_xfs27"]
-[ext_resource type="PackedScene" uid="uid://cy1y14inwkplb" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Portraits/vn_portrait_layer.tscn" id="3_1g3mf"]
-[ext_resource type="PackedScene" uid="uid://bquja8jyk8kbr" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Textbox/vn_textbox_layer.tscn" id="4_pmyri"]
+[ext_resource type="PackedScene" uid="uid://rdi8v2ph72vw" path="res://Dialogue/5Portraits/custom_vn_portrait_layer.tscn" id="3_f2rwb"]
+[ext_resource type="PackedScene" uid="uid://btof8avjbtuco" path="res://Dialogue/VisualNovelTextbox/custom_vn_textbox_layer.tscn" id="4_crjfn"]
 [ext_resource type="PackedScene" uid="uid://cn674foxwedqu" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Input/full_advance_input_layer.tscn" id="5_ypvkd"]
 [ext_resource type="PackedScene" uid="uid://dsbwnp5hegnu3" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Glossary/glossary_popup_layer.tscn" id="6_7c4cn"]
 [ext_resource type="PackedScene" uid="uid://dhk6j6eb6e3q" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_VN_Choices/vn_choice_layer.tscn" id="7_rxa6r"]
@@ -20,13 +20,16 @@ overrides = {
 
 [sub_resource type="Resource" id="Resource_yvau7"]
 script = ExtResource("2_xfs27")
-scene = ExtResource("3_1g3mf")
+scene = ExtResource("3_f2rwb")
 overrides = {}
 
 [sub_resource type="Resource" id="Resource_52eld"]
 script = ExtResource("2_xfs27")
-scene = ExtResource("4_pmyri")
-overrides = {}
+scene = ExtResource("4_crjfn")
+overrides = {
+"normal_font": "\"res://Dialogue/PixelifySans-VariableFont_wght.ttf\"",
+"text_use_global_font": "false"
+}
 
 [sub_resource type="Resource" id="Resource_i3qr4"]
 script = ExtResource("2_xfs27")
@@ -58,4 +61,4 @@ script = ExtResource("10_s7eeh")
 name = "style"
 base_overrides = {}
 layers = Array[ExtResource("2_xfs27")]([SubResource("Resource_fiy5u"), SubResource("Resource_yvau7"), SubResource("Resource_52eld"), SubResource("Resource_i3qr4"), SubResource("Resource_d6u6v"), SubResource("Resource_aaa7e"), SubResource("Resource_a33hi"), SubResource("Resource_bu4wa")])
-metadata/_latest_layer = 0
+metadata/_latest_layer = 1

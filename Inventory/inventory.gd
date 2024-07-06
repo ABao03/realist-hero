@@ -36,6 +36,10 @@ var player
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
 signal start_spawning()
 
+# DEBUG
+@onready var itemArray = [3,7]
+@onready var index = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for thisPlayer in players:
@@ -122,7 +126,9 @@ func _on_button_spawn_pressed():
 	# These three lines handle all the instantiation
 	var new_item = item_scene.instantiate()
 	add_child(new_item)
-	new_item.load_item(randi_range(1,8))    #randomize this for different items to spawn
+	#new_item.load_item(randi_range(1,8))    #randomize this for different items to spawn
+	new_item.load_item(itemArray[index])
+	index += 1
 	
 	# This places the item into the player's hand
 	new_item.selected = true
@@ -237,7 +243,8 @@ func recalculateStats():
 	# Set to default each time
 	for stat in PlayerStatDataHandler.addedStats:
 		# Add the component items if they exist (the default is at base, meaning they'll only exist if it's bigger)
-		if PlayerStatDataHandler.addedStats[stat] < PlayerStatDataHandler.combinedComponentStats[stat]:
+
+		if PlayerStatDataHandler.addedStats[stat] <= PlayerStatDataHandler.combinedComponentStats[stat]:
 			PlayerStatDataHandler.addedStats[stat] = PlayerStatDataHandler.combinedComponentStats[stat]
 		
 		# Add the base stats if there are no component items

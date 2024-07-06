@@ -6,14 +6,24 @@
 "custom_info": {
 "sound_mood_default": "",
 "sound_moods": {},
-"style": ""
+"style": "girl_style"
 },
-"default_portrait": "",
+"default_portrait": "Test",
 "description": "",
 "display_name": "girl",
-"mirror": false,
+"mirror": true,
 "nicknames": [""],
 "offset": Vector2(0, 0),
-"portraits": {},
+"portraits": {
+"Test": {
+"export_overrides": {
+"image": "\"res://Assets/Images/test_girl.jpg\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1.0,
+"scene": ""
+}
+},
 "scale": 1.0
 }

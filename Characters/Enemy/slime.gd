@@ -10,13 +10,15 @@ extends CharacterBody2D
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var last_position
 @onready var sprite = $Slime
-@onready var hurtbox = $HurtBox
 @onready var damage_numbers_origin = $DamageNumbers
 @onready var damage = $HitBox.damage
 
 @onready var snd = $Snd
 @onready var animation_tree = $AnimationTree
 @onready var hurtAnimationPlaying = false
+
+var dead = false
+@onready var hitbox = $HitBox/CollisionShape2D
 
 var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 
@@ -30,6 +32,8 @@ func _ready():
 # Moving slime around 
 func _physics_process(_delta):
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
+	sprite.look_at(player.global_position)
+	sprite.rotation -= PI / 2
 	
 	velocity = direction * movement_speed
 	if hurtAnimationPlaying == true:
@@ -50,8 +54,9 @@ func make_path():
 	print(to_local(nav_agent.get_next_path_position()))
 	if last_position == nav_agent.get_next_path_position():
 		emit_signal("died") 
+	if last_position == to_local(nav_agent.get_next_path_position()): 
 		queue_free()
-	if last_position != Vector2(0,0):
+	if last_position != Vector2(0,0) && dead == false:
 		sprite.visible = true
 	
 	last_position = to_local(nav_agent.get_next_path_position())
@@ -64,6 +69,14 @@ func death():
 	loot_base.call_deferred("add_child", new_gem)
 	emit_signal("died")
 	queue_free()
+	
+	# Slime died but don't queue free yet because we need to play the sound
+	dead = true
+	hitbox.disabled = true
+	sprite.visible = false
+	
+	snd.stream = load("res://Assets/SoundEffects/slime_death.mp3")
+	snd.play()
 
 func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	if isCrit == true:
@@ -72,7 +85,7 @@ func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 	hp -= magicDamage
 	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
 	
-	if magicDamage == 0 && isCrit == false:
+	if isCrit == false:
 		snd.stream = load("res://Assets/SoundEffects/hit.wav")
 		snd.play()
 	if isCrit == true:
@@ -98,3 +111,8 @@ func _on_timer_timeout():
 func _on_area_2d_body_entered(body):
 	#print(player.global_position)
 	pass
+
+# Wait for sound to finish before queue freeing
+func _on_snd_finished():
+	if dead == true:
+		queue_free()

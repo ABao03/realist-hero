@@ -399,7 +399,10 @@ magicDamage = 25
 position = Vector2(50.5, 49.75)
 shape = SubResource("RectangleShape2D_7vqme")
 
+[node name="Snd" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="finished" from="Snd" to="." method="_on_snd_finished"]
 
 [editable path="HurtBox"]
 [editable path="HitBox"]

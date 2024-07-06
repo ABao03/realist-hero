@@ -11,13 +11,13 @@ func _ready():
 	visible = false
 	
 	nameInfo.label_settings = LabelSettings.new()
-	nameInfo.label_settings.font_size = 11
+	nameInfo.label_settings.font_size = 20
 	nameInfo.z_index = 6
 	hoverGrid.add_child(nameInfo)
 	
 	statInfo.label_settings = LabelSettings.new()
 	statInfo.z_index = 6
-	statInfo.label_settings.font_size = 9
+	statInfo.label_settings.font_size = 16
 	hoverGrid.add_child(statInfo)
 
 func create_info(selectedItem):

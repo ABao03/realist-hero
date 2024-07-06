@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cinfijdsg7wv1"]
+[gd_scene load_steps=6 format=3 uid="uid://cinfijdsg7wv1"]
 
 [ext_resource type="Script" path="res://Characters/abilities/ability_handler.gd" id="1_mp48g"]
 [ext_resource type="PackedScene" uid="uid://cx0gccuktsqtu" path="res://Characters/abilities/lightning.tscn" id="2_212kp"]
 [ext_resource type="PackedScene" uid="uid://d2qw82nur8cno" path="res://Characters/abilities/lightning_slash.tscn" id="3_cabjd"]
 [ext_resource type="PackedScene" uid="uid://y505ho3rstv4" path="res://Characters/abilities/fireball.tscn" id="4_3r2au"]
+[ext_resource type="Texture2D" path="res://Assets/Images/test_girl.jpg" id="5_u4e11"]
 
 [node name="ability_handler" type="Node2D" groups=["ability"]]
 script = ExtResource("1_mp48g")
@@ -16,6 +17,47 @@ script = ExtResource("1_mp48g")
 damage = 15
 
 [node name="Fireball" parent="." instance=ExtResource("4_3r2au")]
+
+[node name="GirlCanvas" type="CanvasLayer" parent="."]
+visible = false
+offset = Vector2(-500, 0)
+transform = Transform2D(1, 0, 0, 1, -500, 0)
+
+[node name="GirlProfile" type="TextureRect" parent="GirlCanvas"]
+custom_minimum_size = Vector2(250, 350)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -350.0
+offset_right = 250.0
+grow_vertical = 0
+texture = ExtResource("5_u4e11")
+flip_h = true
+
+[node name="TextBox" type="Panel" parent="GirlCanvas"]
+visible = false
+custom_minimum_size = Vector2(350, 100)
+offset_left = 51.0
+offset_top = 534.0
+offset_right = 401.0
+offset_bottom = 634.0
+
+[node name="Text" type="RichTextLabel" parent="GirlCanvas/TextBox"]
+visible = false
+custom_minimum_size = Vector2(325, 75)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "pogchamp"
 
 [editable path="Lightning"]
 [editable path="Lightning/HitBox"]

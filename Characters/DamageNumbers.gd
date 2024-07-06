@@ -34,16 +34,18 @@ func display_number(damage: int, position: Vector2, magicDamage: int, is_critica
 	number.label_settings.font_color = color
 	magic_number.label_settings.font_color = magicColor
 	
-	number.label_settings.font_size = 18
-	magic_number.label_settings.font_size = 18
+	number.label_settings.font_size = 20
+	magic_number.label_settings.font_size = 20
 	
 	if damage != 0:
 		number.label_settings.outline_color = "#000"
 	if magicDamage != 0:
 		magic_number.label_settings.outline_color = "#000"
 	
-	number.label_settings.outline_size = 1
-	magic_number.label_settings.outline_size = 1
+	if damage > 0:
+		number.label_settings.outline_size = 4
+	if magicDamage > 0:
+		magic_number.label_settings.outline_size = 4
 		
 	call_deferred("add_child", magic_number)
 	call_deferred("add_child", number)
