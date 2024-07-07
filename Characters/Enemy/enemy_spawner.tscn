@@ -10,6 +10,7 @@ autostart = true
 
 [node name="Dragon_Timer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Dragon_Timer" to="." method="_on_dragon_timer_timeout"]

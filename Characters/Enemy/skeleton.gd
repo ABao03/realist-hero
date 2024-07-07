@@ -12,6 +12,7 @@ var dead = false
 @onready var sprite = $Skeleton
 @onready var damage_numbers_origin = $DamageNumbers
 @onready var hitbox = $HitBox/CollisionShape2D
+@onready var damage = $HitBox.Damage
 
 @onready var snd = $Snd
 
@@ -27,6 +28,7 @@ func _ready():
 	connect("died",Callable(spawner,"on_enemy_death"))
 
 func _physics_process(_delta):
+	$HitBox.Damage = damage
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction*movement_speed
 	move_and_slide()

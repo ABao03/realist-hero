@@ -31,6 +31,8 @@ func _ready():
 
 # Moving slime around 
 func _physics_process(_delta):
+	$HitBox.damage = damage
+	
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	sprite.look_at(player.global_position)
 	sprite.rotation -= PI / 2

@@ -64,8 +64,10 @@ var arrow = preload("res://Characters/arrow.tscn")
 
 # Enemy Related
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
+@onready var slime = get_tree().get_first_node_in_group("slime")
 signal despawn_enemies()
 signal pause_spawning()
+signal player_level_up()
 
 @export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer
@@ -106,6 +108,8 @@ func _ready():
 	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
 	connect("despawn_enemies",Callable(spawner,"despawn_enemies"))
 	connect("pause_spawning",Callable(spawner,"pause_spawning"))
+	
+	connect("player_level_up",Callable(spawner,"player_level_up"))
 
 func _exit_tree():
 	remove_from_group("player")
@@ -309,6 +313,7 @@ func levelup():
 	signal_emitted = true
 	emit_signal("despawn_enemies")
 	emit_signal("pause_spawning")
+	emit_signal("player_level_up")
 	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
 	tween.tween_property(levelPanel,"position",Vector2(600,100),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)

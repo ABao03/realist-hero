@@ -7,6 +7,10 @@ extends Node2D
 @onready var players = get_tree().get_nodes_in_group("player")
 @onready var enemy = preload("res://Characters/Enemy/ranged_boss.tscn")
 
+#Get enemy nodes
+#@onready var slime = get_tree().get_first_node_in_group("slime")
+@onready var skeleton = get_tree().get_first_node_in_group("skeleton")
+
 @onready var player
 
 # Delay between spawns (I think)
@@ -21,6 +25,9 @@ extends Node2D
 #keeps track of number of enemies
 @onready var enemy_counter = 0
 #signal changetime(time)
+
+#Keeps track of scaling
+@onready var leveled_up: bool = false
 
 func _ready():
 	#connect("changetime",Callable(player,"change_time"))
@@ -64,6 +71,14 @@ func _on_timer_timeout():
 						var enemy_spawn = new_enemy.instantiate()
 						enemy_spawn.global_position = get_random_position()
 						add_child(enemy_spawn)
+						
+						var slime = get_tree().get_first_node_in_group("slime")
+						print(slime)
+						scaling(slime)
+						
+						var skeleton = get_tree().get_first_node_in_group("skeleton")
+						scaling(skeleton)
+
 						counter += 1
 						enemy_counter += 1 #number of events gets incremeneted
 		elif enemy_counter >= enemy_cap:
@@ -125,6 +140,7 @@ func despawn_enemies():
 	for enemy in get_children():
 		if enemy.is_in_group("enemy"):
 			enemy.queue_free()
+			enemy_counter -= 1
 	#counter = 0
 
 func pause_spawning():
@@ -139,4 +155,24 @@ func start_spawn_minions():
 
 func on_enemy_death():
 	enemy_counter = enemy_counter - 1
-	print("hi", enemy_counter)
+	#print("hi", enemy_counter)
+
+func player_level_up():
+	leveled_up = true
+	
+func scaling(body):
+	if leveled_up == true:
+		if body == null:
+			pass
+		else:
+			if body.is_in_group("slime"):
+				body.hp += 0.1225*body.hp
+				body.damage += 0.1*body.damage
+			
+			elif body.is_in_group("skeleton"):
+				body.maxHealth += 0.15*body.maxHealth
+				body.damage += 0.05*body.damage
+			
+		
+			#body.hp = body.hp + (player.experience_level-1)*body.hp*0.1225
+
