@@ -124,6 +124,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7vmal")
 experience = 3
+alpha = 5.045
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2
@@ -195,11 +196,16 @@ position = Vector2(1, 5)
 wait_time = 3.0
 one_shot = true
 
+[node name="Speed" type="Timer" parent="Ranged"]
+wait_time = 0.05
+autostart = true
+
 [connection signal="animation_finished" from="Ranged/AnimationTree" to="Ranged" method="_on_animation_tree_animation_finished"]
 [connection signal="hurt" from="Ranged/HurtBox" to="Ranged" method="_on_hurt_box_hurt"]
 [connection signal="timeout" from="Ranged/Timer" to="Ranged" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Ranged/Area2D" to="Ranged" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Ranged/Area2D" to="Ranged" method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Ranged/SpawnTimer" to="Ranged" method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Ranged/Speed" to="Ranged" method="_on_speed_timeout"]
 
 [editable path="Ranged/HurtBox"]

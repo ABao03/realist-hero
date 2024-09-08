@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsn1gco0qhsd2"]
+[gd_scene load_steps=7 format=3 uid="uid://dmu7lx4heouiv"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/fireball.gd" id="1_0hqmt"]
 [ext_resource type="Texture2D" uid="uid://cy2vl6y1wv6ro" path="res://Assets/Images/fireball.png" id="2_fj7sw"]

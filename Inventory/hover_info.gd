@@ -24,8 +24,9 @@ func create_info(selectedItem):
 	z_index = 5
 	nameInfo.text = selectedItem.item_name
 	
-	for stat in selectedItem.stats_data:
-		statInfo.text += stat + ": " + str(selectedItem.stats_data[stat]) + "\n"
+	# old code for stats_data
+	#for stat in selectedItem.stats_data:
+		#statInfo.text += stat + ": " + str(selectedItem.stats_data[stat]) + "\n"
 
 func mouse_entered(selectedItem):
 	create_info(selectedItem)

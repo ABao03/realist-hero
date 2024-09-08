@@ -1,18 +1,18 @@
 extends CharacterBody2D
 
-@export var movement_speed = 25.0
+var movement_speed = 25.0
 
-var maxHealth = 1000
-@export var health = maxHealth
+var maxHealth = 200
+var health = maxHealth
 var dead = false
 
-@export var experience = 3
+var experience = 3
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var sprite = $Skeleton
 @onready var damage_numbers_origin = $DamageNumbers
 @onready var hitbox = $HitBox/CollisionShape2D
-@onready var damage = $HitBox.Damage
+@onready var damage = $HitBox.damage
 
 @onready var snd = $Snd
 
@@ -28,7 +28,7 @@ func _ready():
 	connect("died",Callable(spawner,"on_enemy_death"))
 
 func _physics_process(_delta):
-	$HitBox.Damage = damage
+	$HitBox.damage = damage
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction*movement_speed
 	move_and_slide()
@@ -46,7 +46,6 @@ func death():
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
 	emit_signal("died") 
-	queue_free()
 	
 	# Skeleton died but don't queue free yet because we need to play the sound
 	dead = true
@@ -56,16 +55,11 @@ func death():
 	snd.stream = load("res://Assets/SoundEffects/skeleton_death.wav")
 	snd.play()
 
-func _on_hurt_box_hurt(damage, magicDamage, isCrit):
-	if isCrit == true:
-		damage = damage * 1.5
-		snd.stream = load("res://Assets/SoundEffects/crit_hit.mp3")
-	else:
-		snd.stream = load("res://Assets/SoundEffects/skeleton_hit.mp3")
+func _on_hurt_box_hurt(damage):
+	snd.stream = load("res://Assets/SoundEffects/skeleton_hit.mp3")
 	snd.play()
 	health -= damage
-	health -= magicDamage
-	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position)
 	if health <= 0:
 		death()
 

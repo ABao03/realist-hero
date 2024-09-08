@@ -5,7 +5,8 @@ extends CharacterBody2D
 @export var experience = 1
 @export var knockback = -5
 
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var players = get_tree().get_nodes_in_group("player")
+var player
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var last_position = Vector2(0,0)
@@ -20,15 +21,23 @@ extends CharacterBody2D
 @onready var just_spawned = true
 var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 @onready var in_range : bool = false
-var bow_cooldown = true
-var arrow_shot = false
-var arrow = preload("res://Characters/Enemy/throw.tscn")
+#var bow_cooldown = true
+#var arrow_shot = false
+#var arrow = preload("res://Characters/Enemy/throw.tscn")
+var theta : float = 0.0
+@export_range(0,2*PI) var alpha : float = 0.0
+var bullet_node = preload("res://Characters/Enemy/enemy_bullet.tscn")
+var yinBullet = false
 
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
 signal died()
 
 func _ready():
-	sprite.visible = false
+	for thisPlayer in players:
+		if thisPlayer != null:
+			player = thisPlayer
+	
+	#sprite.visible = false
 	#if just_spawned == true:
 	$SpawnTimer.start()
 	connect("died",Callable(spawner,"on_enemy_death"))
@@ -52,20 +61,20 @@ func _physics_process(_delta):
 	if in_range == true and just_spawned == false:
 		velocity = Vector2(0.01,0.01)
 		
-		if bow_cooldown == true:
-			bow_cooldown = false
-			
-			var player_pos = player.global_position
-			$Marker2D.look_at(player_pos)
-			
-			var arrow_instance = arrow.instantiate()
-			
-			arrow_instance.rotation = $Marker2D.rotation
-			arrow_instance.global_position = $Marker2D.global_position
-			add_child(arrow_instance)
+		#if bow_cooldown == true:
+			#bow_cooldown = false
+			#
+			#var player_pos = player.global_position
+			#$Marker2D.look_at(player_pos)
+			#
+			#var arrow_instance = arrow.instantiate()
+			#
+			#arrow_instance.rotation = $Marker2D.rotation
+			#arrow_instance.global_position = $Marker2D.global_position
+			#add_child(arrow_instance)
 				
-			await get_tree().create_timer(5).timeout # Delay between projectile atacks
-			bow_cooldown = true
+	await get_tree().create_timer(5).timeout # Delay between projectile atacks
+			#bow_cooldown = true
 		
 	if hurtAnimationPlaying == true:
 		velocity *= knockback
@@ -80,15 +89,15 @@ func _physics_process(_delta):
 	elif direction.x < -0.1:
 		sprite.flip_h = true
 
-func make_path():
-	nav_agent.target_position = player.global_position
-	if last_position == to_local(nav_agent.get_next_path_position()): 
-		emit_signal("died") 
-		queue_free()
-	if last_position != Vector2(0,0):
-		sprite.visible = true
-	
-	last_position = to_local(nav_agent.get_next_path_position())
+#func make_path():
+	#nav_agent.target_position = player.global_position
+	#if last_position == to_local(nav_agent.get_next_path_position()): 
+		#emit_signal("died") 
+		#queue_free()
+	#if last_position != Vector2(0,0):
+		#sprite.visible = true
+	#
+	#last_position = to_local(nav_agent.get_next_path_position())
 
 # Slime is killed by damage
 func death():
@@ -99,19 +108,12 @@ func death():
 	emit_signal("died") 
 	queue_free()
 
-func _on_hurt_box_hurt(damage, magicDamage, isCrit):
-	if isCrit == true:
-		damage = damage * 2
+func _on_hurt_box_hurt(damage):
 	hp -= damage
-	hp -= magicDamage
-	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position)
 	
-	if magicDamage == 0 && isCrit == false:
-		snd.stream = load("res://Assets/SoundEffects/hit.wav")
-		snd.play()
-	if isCrit == true:
-		snd.stream = load("res://Assets/SoundEffects/crit_hit.mp3")
-		snd.play()
+	snd.stream = load("res://Assets/SoundEffects/hit.wav")
+	snd.play()
 	
 	if hp <= 0:
 		death()
@@ -119,24 +121,40 @@ func _on_hurt_box_hurt(damage, magicDamage, isCrit):
 		animation_tree["parameters/conditions/hurt"] = true
 		hurtAnimationPlaying = true
 
-
 func _on_animation_tree_animation_finished(anim_name):
 	if anim_name == "hurt":
 		hurtAnimationPlaying = false
 
-func _on_timer_timeout():
-	make_path()
+#func _on_timer_timeout():
+	#make_path()
 
 func _on_area_2d_body_entered(body):
 	in_range = true
-	
 	#$Marker2D.look_at(player_pos)
 
 func _on_area_2d_body_exited(body):
 	in_range = false
 
 func _on_spawn_timer_timeout():
-	#print("bro")
 	just_spawned = false
+
+func get_vector(angle):
+	theta = angle + alpha
+	return Vector2(cos(theta),sin(theta))
+
+func shoot(angle):
+	var bullet = bullet_node.instantiate()
 	
-#first ranged attack is very inaccurate
+	bullet.position = global_position
+	bullet.direction = get_vector(angle)
+	if yinBullet == false:
+		yinBullet = true
+		bullet.type = 0
+	else:
+		yinBullet = false
+		bullet.type = 1
+	
+	get_tree().current_scene.call_deferred("add_child", bullet)
+
+func _on_speed_timeout():
+	shoot(theta)

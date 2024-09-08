@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
-@onready var last_position
+@onready var last_position = Vector2(0,0)
 @onready var sprite = $Slime
 @onready var damage_numbers_origin = $DamageNumbers
 @onready var damage = $HitBox.damage
@@ -53,10 +53,8 @@ func _physics_process(_delta):
 
 func make_path():
 	nav_agent.target_position = player.global_position
-	print(to_local(nav_agent.get_next_path_position()))
-	if last_position == nav_agent.get_next_path_position():
-		emit_signal("died") 
 	if last_position == to_local(nav_agent.get_next_path_position()): 
+		emit_signal("died")
 		queue_free()
 	if last_position != Vector2(0,0) && dead == false:
 		sprite.visible = true
@@ -80,19 +78,12 @@ func death():
 	snd.stream = load("res://Assets/SoundEffects/slime_death.mp3")
 	snd.play()
 
-func _on_hurt_box_hurt(damage, magicDamage, isCrit):
-	if isCrit == true:
-		damage = damage * 1.5
+func _on_hurt_box_hurt(damage):
 	hp -= damage
-	hp -= magicDamage
-	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position)
 	
-	if isCrit == false:
-		snd.stream = load("res://Assets/SoundEffects/hit.wav")
-		snd.play()
-	if isCrit == true:
-		snd.stream = load("res://Assets/SoundEffects/crit_hit.mp3")
-		snd.play()
+	snd.stream = load("res://Assets/SoundEffects/hit.wav")
+	snd.play()
 	
 	if hp <= 0:
 		death()

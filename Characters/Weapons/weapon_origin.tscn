@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw5j0jbfrv4r"]
+
+[ext_resource type="Script" path="res://Characters/Weapons/weapon_origin.gd" id="1_3tu7l"]
+
+[node name="weapon_origin" type="Marker2D" groups=["weapon_origin"]]
+script = ExtResource("1_3tu7l")

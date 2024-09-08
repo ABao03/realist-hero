@@ -25,14 +25,8 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
-directories/dch_directory={
-"girl": "res://Dialogue/girl.dch"
-}
-directories/dtl_directory={
-"girl_test": "res://Dialogue/girl_test.dtl",
-"tutorial": "res://Dialogue/tutorial.dtl",
-"tutorial_2": "res://Dialogue/tutorial_2.dtl"
-}
+directories/dch_directory={}
+directories/dtl_directory={}
 layout/style_list=["res://Dialogue/style.tres", "res://Dialogue/girl_style.tres"]
 layout/default_style="res://Dialogue/style.tres"
 variables={}
@@ -63,10 +57,6 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/gaea/plugin.cfg")
-
-[gui]
-
-theme/custom_font="res://Dialogue/PixelifySans-VariableFont_wght.ttf"
 
 [input]
 
@@ -153,9 +143,10 @@ switch={
 [layer_names]
 
 2d_physics/layer_1="World"
-2d_physics/layer_2="Player"
+2d_physics/layer_2="PlayerYin"
 2d_physics/layer_3="Enemy"
 2d_physics/layer_4="Loot"
+2d_physics/layer_5="PlayerYang"
 
 [rendering]
 

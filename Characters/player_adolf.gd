@@ -31,12 +31,12 @@ var playerDead = false
 @onready var abilitySnd = $AbilitySnd
 
 # Attacks
-@onready var weapon = $Weapon
+#@onready var weapon = $Weapon
 
 # Abilities
-@onready var damageAbility = $UltButton
-@onready var ultimateAbility = $AbilityButton
-@onready var abilityDuration = $AbilityDuration
+#@onready var damageAbility = $UltButton
+#@onready var ultimateAbility = $AbilityButton
+#@onready var abilityDuration = $AbilityDuration
 @onready var indicator = $Indicator
 
 @onready var abilityEffectsGroup = get_tree().get_nodes_in_group("ability")
@@ -46,9 +46,9 @@ var usingAbility = false
 var heldAbility
 
 # Recalling
-var playerRecalling = false
-@onready var recallDuration = $RecallDuration
-@onready var recall = $Recall
+#var playerRecalling = false
+#@onready var recallDuration = $RecallDuration
+#@onready var recall = $Recall
 
 # Upgrades
 var upgrade_options = []
@@ -57,10 +57,10 @@ var inventory
 signal selected_upgrade(upgrade)
 
 # ranged attack
-var bow_equipped = false
-var bow_cooldown = true
-var arrow_shot = false
-var arrow = preload("res://Characters/arrow.tscn")
+#var bow_equipped = false
+#var bow_cooldown = true
+#var arrow_shot = false
+#var arrow = preload("res://Characters/arrow.tscn")
 
 # Enemy Related
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
@@ -89,7 +89,8 @@ var signal_emitted = false
 # Light stuff
 @onready var pointLight = $PointLight2D
 @onready var ambientLight = $PointLight2D3
-@onready var shadow = $PointLight2D2
+@onready var shader : Shader = load("res://Characters/player_adolf.gdshader")
+var shaderEnabled : bool = false
 
 func _ready():
 	set_expbar(experience, calculate_experiencecap())
@@ -119,69 +120,79 @@ func _physics_process(delta):
 	velocity = delta * thisSpeed * axis
 	
 	axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
-	axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up")) 
+	axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
 	
-	if Input.is_action_just_pressed("recall"):
-		if playerRecalling == true:
-			maxhp = 1 # debug
-			playerRecalling = false
-			cancel_recall()
-		else:
-			playerRecalling = true
+	if axis.x < 0 && velocity != Vector2(0,0):
+		sprite.flip_h = true
+	elif axis.x > 0 && velocity != Vector2(0,0):
+		sprite.flip_h = false 
+	
+	#Recall code
+	#if Input.is_action_just_pressed("recall"):
+		#if playerRecalling == true:
+			#maxhp = 1 # debug
+			#playerRecalling = false
+			#cancel_recall()
+		#else:
+			#playerRecalling = true
 			#recallBar.visible = true
-			recallDuration.start()
+			#recallDuration.start()
 			#recall.visible = true
 	
 	# Movement stuff
 	if playerPaused == false: # && playerRecalling == false
 		velocity.normalized()
+		# bow code
 		#if Input.is_action_just_pressed("switch"):
 			#if bow_equipped == true:
 				#bow_equipped = false
 			#else:
 				#bow_equipped = true
 		
+	# ability pressed code
+	
 	# Ability pressed stuff
-		if Input.is_action_just_pressed("damage_ability"):
-			if damageAbility.onCooldown == false:
-				indicator.visible = true
-				player_ability_used(damageAbility)
-				heldAbility = damageAbility
-				usingAbility = true
-		elif Input.is_action_just_pressed("ultimate_ability"):
-			if ultimateAbility.onCooldown == false:
-				indicator.visible = true
-				player_ability_used(ultimateAbility)
-				heldAbility = ultimateAbility
-				usingAbility = true
-		
-		if Input.is_action_pressed("mouse_leftclick"):
+		#if Input.is_action_just_pressed("damage_ability"):
+			#if damageAbility.onCooldown == false:
+				#indicator.visible = true
+				#player_ability_used(damageAbility)
+				#heldAbility = damageAbility
+				#usingAbility = true
+		#elif Input.is_action_just_pressed("ultimate_ability"):
+			#if ultimateAbility.onCooldown == false:
+				#indicator.visible = true
+				#player_ability_used(ultimateAbility)
+				#heldAbility = ultimateAbility
+				#usingAbility = true
+		# left click code
+		#if Input.is_action_pressed("mouse_leftclick"):
 			# if no ability equipped, use arrow
-			if bow_equipped and bow_cooldown:
-				bow_cooldown = false
-				var arrow_instance = arrow.instantiate()
-				arrow_instance.rotation = $Marker2D.rotation
-				arrow_instance.global_position = $Marker2D.global_position
-				add_child(arrow_instance)
-				
-				await get_tree().create_timer(1).timeout
-				bow_cooldown = true
-			
+			#if bow_equipped and bow_cooldown:
+				#bow_cooldown = false
+				#var arrow_instance = arrow.instantiate()
+				#arrow_instance.rotation = $Marker2D.rotation
+				#arrow_instance.global_position = $Marker2D.global_position
+				#add_child(arrow_instance)
+				#
+				#await get_tree().create_timer(1).timeout
+				#bow_cooldown = true
 			# if no bow equipped, use melee attack
-			elif bow_equipped == false:
-				if animation.current_animation != "attack":
-				#animation_tree["parameters/conditions/swing"] = true
-					animation.play("attack")
-					weapon.attack()
+			#elif bow_equipped == false:
+				#if animation.current_animation != "attack":
+				##animation_tree["parameters/conditions/swing"] = true
+					#animation.play("attack")
+					#weapon.attack()
 		#else:
 			#animation_tree["parameters/conditions/swing"] = false
 			
 		if velocity == Vector2.ZERO:
+			# animation tree code
 			#animation_tree["parameters/conditions/idle"] = true
 			#animation_tree["parameters/conditions/is_moving"] = false
 			animation.play("idle")
 		else:
 			lastDirectionVector = velocity
+			# animation tree code
 			#animation_tree["parameters/conditions/idle"] = false
 			#animation_tree["parameters/conditions/is_moving"] = true
 			if animation.current_animation != "walk":
@@ -190,18 +201,8 @@ func _physics_process(delta):
 				playerSnd.stream = load("res://Assets/SoundEffects/footstep.mp3")
 				playerSnd.pitch_scale = 0.75
 				playerSnd.play()
-			#sprite.flip_h = true
-		#else:
-			#if sprite.flip_h == true:
-				#sprite.flip_h = true
-			#else:
-				#sprite.flip_h = false
 		
-		var mouse_pos = get_global_mouse_position()
-		sprite.look_at(mouse_pos)
-		sprite.rotation += PI/2
-		#sprite.rotation = velocity.angle() + PI/2
-		
+		# attack animation slowdown code
 		#if animation_tree.get("parameters/playback").get_current_node() == "":
 		#if animation.current_animation == "attack":
 			#velocity = velocity/3
@@ -220,17 +221,27 @@ func _physics_process(delta):
 	
 	# Switch player to idle if not moving
 	if playerPaused == true:
+		# animation tree code
 		#animation_tree["parameters/conditions/idle"] = true
 		#animation_tree["parameters/conditions/is_moving"] = false
 		#animation_tree["parameters/conditions/swing"] = false
 		animation.stop()
 		animation.play("idle")
 	
-	# handle recall
-	if playerRecalling == true:
-		set_recallbar(5-recallDuration.time_left)
-
-func _on_hurt_box_hurt(damage, isMagic, isCrit):
+	# toggle shader
+	if Input.is_action_just_pressed("shift"):
+		if shaderEnabled:
+			sprite.material.set_shader_parameter("onoff",0)
+			shaderEnabled = false
+			%HurtBox.collision_layer = 2
+			%HurtBox.collision_mask = 2
+		else:
+			sprite.material.set_shader_parameter("onoff",1)
+			shaderEnabled = true
+			%HurtBox.collision_layer = 16
+			%HurtBox.collision_mask = 16
+	
+func _on_hurt_box_hurt(damage):
 	var percentDamageTaken = float(damage)/float(maxhp)
 	hpPercent -= percentDamageTaken
 	if hpPercent <= 0 && playerDead == false:
@@ -238,8 +249,6 @@ func _on_hurt_box_hurt(damage, isMagic, isCrit):
 		playerDead = true
 		SceneManager.load_new_scene("res://Menu/death.tscn","fade_to_black")
 	set_healthbar(maxhp*hpPercent, maxhp)
-	if playerRecalling == true:
-		cancel_recall()
 
 # Changes the target variable inside of the xp drop from null to the player. 
 # So, the xp drop is pulled towards the player. 
@@ -319,13 +328,22 @@ func levelup():
 	tween.tween_property(levelPanel,"position",Vector2(600,100),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
-	var options = 0
 	var optionsmax = 4
-	while options < optionsmax:
+	var currentOptions = []
+	while currentOptions.size() < optionsmax:
+		var foundDupe = false
 		var option_choice = itemOptions.instantiate()
 		option_choice.item = get_random_item()
-		upgradeOptions.add_child(option_choice)
-		options += 1
+		for choice in currentOptions:
+			#print(option_choice.item.get("Name"))
+			#print(choice.item.get("Name"))
+			#print('\n')
+			if option_choice.item.get("Name") == choice.item.get("Name"):
+				foundDupe = true
+		if foundDupe == false:
+			upgradeOptions.add_child(option_choice)
+			currentOptions.append(option_choice)
+		
 	get_tree().paused = true
 	
 
@@ -348,31 +366,34 @@ func get_random_item():
 	return randomItem
 
 func update_stats(data):
-	for stat in data:
-		# NOTE: THESE SHOULD ALL BE CHANGED TO SETTERS, NOT ADDER/MULTIPLIER
-		# This logic is all being moved to recalculate stats in Inventory
-		if stat == "Physical":
-			weapon.set_physical(data.get(stat))
-			
-		if stat == "Magic":
-			weapon.set_magic(data.get(stat))
-			
-		if stat == "Attack Speed":
-			var currentSpeed = animation.speed_scale
-			animation.speed_scale = currentSpeed * data.get(stat)
-			
-		if stat == "Crit":
-			weapon.set_crit(data.get(stat) - 1)
-			
-		if stat == "Move Speed":
-			speed = data.get(stat)
-				
-		if stat == "Max Health":
-			maxhp = data.get(stat)
-			set_healthbar(maxhp*hpPercent, maxhp)
-			
-		if stat == "Defense":
-			pass
+	pass
+	
+	# code that checked a bunch of stats and updated the player's stats
+	#for stat in data:
+		## NOTE: THESE SHOULD ALL BE CHANGED TO SETTERS, NOT ADDER/MULTIPLIER
+		## This logic is all being moved to recalculate stats in Inventory
+		#if stat == "Physical":
+			#weapon.set_physical(data.get(stat))
+			#
+		#if stat == "Magic":
+			#weapon.set_magic(data.get(stat))
+			#
+		#if stat == "Attack Speed":
+			#var currentSpeed = animation.speed_scale
+			#animation.speed_scale = currentSpeed * data.get(stat)
+			#
+		#if stat == "Crit":
+			#weapon.set_crit(data.get(stat) - 1)
+			#
+		#if stat == "Move Speed":
+			#speed = data.get(stat)
+				#
+		#if stat == "Max Health":
+			#maxhp = data.get(stat)
+			#set_healthbar(maxhp*hpPercent, maxhp)
+			#
+		#if stat == "Defense":
+			#pass
 
 # Make it so chest is only openable when you level up
 #func _on_button_pressed():
@@ -397,40 +418,42 @@ func update_stats(data):
 		#chest_sprite.play("Idle_clicked") #Play the idle animation
 		#await get_tree().create_timer(1).timeout
 		#chest_sprite.stop()
-		
-	
-func player_ability_used(ability):
-	if ability.abilityType == "dmg":
-		abilityDuration.wait_time = 0.45
-		abilitySnd.stream = load("res://Assets/SoundEffects/fireball.wav")
-		abilitySnd.play()
-		abilityDuration.start()
-		abilityEffects.ability_used(global_position, weapon.get_magic())
-		
-	elif ability.abilityType == "ult":
-		abilityDuration.wait_time = 2
-		abilityDuration.start()
-		abilityEffects.ult_used(global_position, weapon.get_magic())
-		# ability effects handles the actual slash effect
-	
-	indicator.visible = false
 
-func _on_ability_duration_timeout():
-	# activates the cooldown button
-	heldAbility.activated()
-	heldAbility = null
-	usingAbility = false
+#func player_ability_used(ability):
+	#if ability.abilityType == "dmg":
+		#abilityDuration.wait_time = 0.45
+		#abilitySnd.stream = load("res://Assets/SoundEffects/fireball.wav")
+		#abilitySnd.play()
+		#abilityDuration.start()
+		#abilityEffects.ability_used(global_position, weapon.get_magic())
+		#
+	#elif ability.abilityType == "ult":
+		#abilityDuration.wait_time = 2
+		#abilityDuration.start()
+		#abilityEffects.ult_used(global_position, weapon.get_magic())
+		## ability effects handles the actual slash effect
+	#
+	#indicator.visible = false
 
-func _on_recall_duration_timeout():
-	get_tree().change_scene_to_file("res://Worlds/Hub World/hubworld.tscn")
-	cancel_recall()
-
-func cancel_recall():
-	playerRecalling = false
-	recall.visible = false
-	recallBar.visible = false
-	recallDuration.stop()
+#func _on_ability_duration_timeout():
+	## activates the cooldown button
+	#heldAbility.activated()
+	#heldAbility = null
+	#usingAbility = false
+#
+#func _on_recall_duration_timeout():
+	#get_tree().change_scene_to_file("res://Worlds/Hub World/hubworld.tscn")
+	#cancel_recall()
+#
+#func cancel_recall():
+	#playerRecalling = false
+	#recall.visible = false
+	#recallBar.visible = false
+	#recallDuration.stop()
 
 func disable_light():
 	pointLight.visible = false
 	ambientLight.visible = false
+
+func _on_level_up_debug_button_pressed():
+	calculate_experience(calculate_experiencecap())

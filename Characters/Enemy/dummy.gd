@@ -14,7 +14,7 @@ extends CharacterBody2D
 func _on_hurt_box_hurt(damage, isMagic, isCrit):
 	if isCrit == true:
 		damage = damage * 2
-	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, isMagic, isCrit)
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position)
 	
 	if isMagic == 0 && isCrit == false:
 		snd.stream = load("res://Assets/SoundEffects/hit.wav")

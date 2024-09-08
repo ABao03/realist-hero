@@ -7,7 +7,13 @@ extends Node2D
 var item_ID : String
 var item_name : String
 var item_grids := []
-var stats_data := {}
+#var stats_data := {}
+var item_damage : int
+var item_type : String
+var item_class : String
+var item_fire_rate : float
+var item_stat : String
+var item_stat_amount # can't declare type because it can be null
 var item_info : String
 var item_score : String
 var selected = false
@@ -52,18 +58,37 @@ func load_item(a_ItemID : int) -> void:
 	
 	# Andrew wuz here
 	# Extra functionality to load in all the data for an item
-	for stat in DataHandler.item_data[str(a_ItemID)]:
-		var thisValue = DataHandler.item_data[str(a_ItemID)][stat]
-		var intValue = float(thisValue)
+	#for stat in DataHandler.item_data[str(a_ItemID)]:
+		#var thisValue = DataHandler.item_data[str(a_ItemID)][stat]
+		#var intValue = float(thisValue)
+#
+		#if str("%.2f" % intValue) == str(thisValue) || str("%.3f" % intValue) == str(thisValue) && stat != "ID":
+			#if intValue != 0:
+				#stats_data[stat] = intValue
 
-		if str("%.2f" % intValue) == str(thisValue) || str("%.3f" % intValue) == str(thisValue) && stat != "ID":
-			if intValue != 0:
-				stats_data[stat] = intValue
-
-	item_ID = DataHandler.item_data[str(a_ItemID)]["ID"]
+	# there has to be a better way to do this but I ain't tryna find it
+	item_ID = str(DataHandler.item_data[str(a_ItemID)]["ID"])
 	item_name = DataHandler.item_data[str(a_ItemID)]["Name"]
+	item_damage = DataHandler.item_data[str(a_ItemID)]["Damage"]
+	item_type = DataHandler.item_data[str(a_ItemID)]["Type"]
+	item_class = DataHandler.item_data[str(a_ItemID)]["Class"]
+	item_fire_rate = DataHandler.item_data[str(a_ItemID)]["FireRate"]
+	item_stat = DataHandler.item_data[str(a_ItemID)]["Stat"]
+	item_stat_amount = DataHandler.item_data[str(a_ItemID)]["Amount"]
+	item_score = str(DataHandler.item_data[str(a_ItemID)]["Points"])
 	item_info = DataHandler.item_data[str(a_ItemID)]["Info"]
-	item_score = DataHandler.item_data[str(a_ItemID)]["Points"]
+	
+	# excessively inefficient debug log
+	#print(item_ID)
+	#print(item_name)
+	#print(item_damage)
+	#print(item_type)
+	#print(item_class)
+	#print(item_fire_rate)
+	#print(item_stat)
+	#print(item_stat_amount)
+	#print(item_score)
+	#print(item_info)
 
 func delete_item():
 	queue_free()

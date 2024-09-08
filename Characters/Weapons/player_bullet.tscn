@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://84uroj3gdqvp"]
+
+[ext_resource type="Texture2D" uid="uid://coitcp8ngfe7a" path="res://Assets/pickaxe_weapon.png" id="1_rqqt0"]
+[ext_resource type="Script" path="res://Characters/Weapons/player_bullet.gd" id="2_w0miv"]
+[ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="3_mn8vp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3w3s2"]
+radius = 15.0
+
+[sub_resource type="Animation" id="Animation_ya238"]
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_suivc"]
+resource_name = "idle"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_djckb"]
+_data = {
+"RESET": SubResource("Animation_ya238"),
+"idle": SubResource("Animation_suivc")
+}
+
+[node name="player_bullet" type="Sprite2D"]
+texture_filter = 1
+texture = ExtResource("1_rqqt0")
+script = ExtResource("2_w0miv")
+
+[node name="HitBox" parent="." instance=ExtResource("3_mn8vp")]
+collision_layer = 4
+
+[node name="CollisionShape2D" parent="HitBox" index="0"]
+shape = SubResource("CircleShape2D_3w3s2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_djckb")
+}
+
+[editable path="HitBox"]

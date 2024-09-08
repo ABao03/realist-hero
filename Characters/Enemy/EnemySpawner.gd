@@ -73,7 +73,7 @@ func _on_timer_timeout():
 						add_child(enemy_spawn)
 						
 						var slime = get_tree().get_first_node_in_group("slime")
-						print(slime)
+						#print(slime)
 						scaling(slime)
 						
 						var skeleton = get_tree().get_first_node_in_group("skeleton")

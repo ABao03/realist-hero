@@ -3,8 +3,6 @@ extends Area2D
 @export var isChest = false
 @export var chestRarity = 0    # 1 is common, 2 is rare
 var star_sprite = preload("res://Assets/Images/Star Stage 1.png")
-var chest_sprite = preload("res://Assets/Images/ComfyUI_00355_.png")
-var rare_chest_sprite = preload("res://Assets/Images/ComfyUI_00364_.png")
 
 var chest_chance = 6
 var rare_chest_chance = 2

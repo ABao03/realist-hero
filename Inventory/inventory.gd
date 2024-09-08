@@ -36,8 +36,11 @@ var player
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
 signal start_spawning()
 
+# Fire player bullets
+@onready var weapon_origin = get_tree().get_first_node_in_group("weapon_origin")
+
 # DEBUG
-@onready var itemArray = [3,7]
+@onready var itemArray = [1,1,2]
 @onready var index = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -227,6 +230,8 @@ func place_item():
 			recalculateStats()
 			emit_signal("pass_upgrade", PlayerStatDataHandler.addedStats)
 			
+			weapon_origin.create_timer(item_held.item_fire_rate, item_held.item_name)
+			
 			createdCombo = check_combos(item_held)
 		
 		# Needs a conditional, or else it'll auto-wipe the item at the end even if a new one was made via combo
@@ -240,18 +245,16 @@ func place_item():
 
 # Recalculate stats each time an item is placed in the grid
 func recalculateStats():
+	# old code with number stats
 	# Set to default each time
 	for stat in PlayerStatDataHandler.addedStats:
 		# Add the component items if they exist (the default is at base, meaning they'll only exist if it's bigger)
-
 		if PlayerStatDataHandler.addedStats[stat] <= PlayerStatDataHandler.combinedComponentStats[stat]:
 			PlayerStatDataHandler.addedStats[stat] = PlayerStatDataHandler.combinedComponentStats[stat]
-		
 		# Add the base stats if there are no component items
 		# (do base stats need to be separate from combined stats? yes, they do need to be separate.)
 		else:
 			PlayerStatDataHandler.addedStats[stat] = PlayerStatDataHandler.baseStats[stat]
-	
 	# Add the data of each item in the inventory to the Autoloaded file
 	for item in currentInventory:
 		add_data(item, PlayerStatDataHandler.addedStats)
@@ -348,50 +351,60 @@ func combineItems(item1, item2):
 
 # Adding item stats to a given Autoloaded database
 func add_data(item, database):
-	var data = item.stats_data
-	for stat in data:
-		if stat == "Physical":
-			var damage = data.get(stat)
-			if damage > 2:
-				damage = int(damage)
-				database[stat] += damage
-			else:
-				database[stat] *= damage
+	var stat = item.item_stat
+	# don't need to loop one variable
+	#for stat in data:
+		# old stats
+		#if stat == "Physical":
+			#var damage = data.get(stat)
+			#if damage > 2:
+				#damage = int(damage)
+				#database[stat] += damage
+			#else:
+				#database[stat] *= damage
+			#
+		#if stat == "Magic":
+			#var damage = data.get(stat)
+			#if damage > 2:
+				#damage = int(damage)
+				#database[stat] += damage
+			#else:
+				#database[stat] *= damage
+				#
+		#if stat == "Attack Speed":
+			#database[stat] *= data.get(stat)
+			#
+		#if stat == "Crit":
+			#database[stat] *= data.get(stat)
 			
-		if stat == "Magic":
-			var damage = data.get(stat)
-			if damage > 2:
-				damage = int(damage)
-				database[stat] += damage
-			else:
-				database[stat] *= damage
-				
-		if stat == "Attack Speed":
-			database[stat] *= data.get(stat)
+	if stat == "Move Speed":
+		# if float(data.get(stat)) > 2:
+		if float(stat) > 2:
+			#database[stat] += data.get(stat)
+			database[stat] += item.item_stat_amount
+		else:
+			#database[stat] *= data.get(stat)
+			database[stat] *= item.item_stat_amount
 			
-		if stat == "Crit":
-			database[stat] *= data.get(stat)
+	if stat == "Max Health":
+		# if float(data.get(stat)) > 2:
+		if float(stat) > 2:
+			#database[stat] += data.get(stat)
+			database[stat] += item.item_stat_amount
+		else:
+			#database[stat] *= data.get(stat)
+			database[stat] *= item.item_stat_amount
+		
+		# old stat
+		#if stat == "Defense":
+			#if float(data.get(stat)) > 2:
+				#database[stat] += data.get(stat)
+			#else:
+				#database[stat] *= data.get(stat)
 			
-		if stat == "Move Speed":
-			if float(stat) > 2:
-				database[stat] += data.get(stat)
-			else:
-				database[stat] *= data.get(stat)
-				
-		if stat == "Max Health":
-			if float(data.get(stat)) > 2:
-				database[stat] += data.get(stat)
-			else:
-				database[stat] *= data.get(stat)
-			
-		if stat == "Defense":
-			if float(data.get(stat)) > 2:
-				database[stat] += data.get(stat)
-			else:
-				database[stat] *= data.get(stat)
-			
-		if stat == "Points":
-			database[stat] += data.get(stat)
+	if stat == "Points":
+		#database[stat] += data.get(stat)
+		database[stat] += item.item_stat_amount
 
 # Makes it so that items only get deleted after the animation finishes, not before
 func _on_timer_timeout():

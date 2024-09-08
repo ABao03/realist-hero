@@ -1,10 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxht1gcfp034r"]
+[gd_scene load_steps=15 format=3 uid="uid://bxht1gcfp034r"]
 
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Assets/Images/TX Tileset Grass.png" id="1_6ie46"]
 [ext_resource type="Script" path="res://Worlds/Hub World/hubworld.gd" id="1_ubf4m"]
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="2_qe1pk"]
 [ext_resource type="PackedScene" uid="uid://08qrvu43ttcy" path="res://Characters/Enemy/dummy.tscn" id="4_jcoi0"]
-[ext_resource type="PackedScene" uid="uid://cinfijdsg7wv1" path="res://Characters/abilities/ability_handler.tscn" id="5_vptm2"]
 [ext_resource type="AudioStream" uid="uid://ibyg1jtryeod" path="res://Assets/Music/Winds Of The Valley.mp3" id="6_jpwi4"]
 [ext_resource type="Texture2D" uid="uid://d4jjwyunb0g4n" path="res://Assets/Images/portal.png" id="6_rcl1u"]
 
@@ -342,8 +341,6 @@ shape = SubResource("RectangleShape2D_licmy")
 [node name="dummy" parent="." instance=ExtResource("4_jcoi0")]
 position = Vector2(162, 57)
 scale = Vector2(2, 2)
-
-[node name="ability_handler" parent="." instance=ExtResource("5_vptm2")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 445.0

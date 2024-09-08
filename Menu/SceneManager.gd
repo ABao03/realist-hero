@@ -53,7 +53,6 @@ func on_content_finished_loading(content) -> void:
 	var duplicateInventory = []
 	
 	# If we're moving between Levels, pass LevelDataHandoff here
-	print("This scene transfer: ", outgoing_scene, " and ", content)
 	#incoming_data = get_tree().current_scene.data as LevelDataHandoff
 	#
 	#if content is Level:
@@ -80,5 +79,4 @@ func on_content_finished_loading(content) -> void:
 		
 		if content.name == "Death":
 			content.deathInventory = duplicateInventory
-			print(content.deathInventory)
 			content.tallyInventory()

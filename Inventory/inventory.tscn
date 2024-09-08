@@ -6,6 +6,7 @@
 
 [node name="Inventory" type="Control"]
 process_mode = 3
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -42,7 +43,6 @@ z_index = 1
 layout_mode = 2
 
 [node name="Header" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 2
@@ -126,6 +126,7 @@ theme_override_constants/v_separation = 1
 columns = 8
 
 [node name="HoverCanvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="hoverInfo" parent="HoverCanvas" instance=ExtResource("3_hero3")]
 z_index = 1

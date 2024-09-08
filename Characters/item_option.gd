@@ -16,7 +16,7 @@ func _ready():
 		#item = "food"
 	lblName.text = item["Name"]
 	lblDescription.text = item["Info"]
-	var file_name = DataHandler.item_data[item["ID"]]["Name"]
+	var file_name = DataHandler.item_data[str(item["ID"])]["Name"]
 	file_name = file_name.replace("'", "")
 	file_name = file_name.replace(" ", "_")
 	file_name = file_name.to_lower()
