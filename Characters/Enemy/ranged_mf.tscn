@@ -117,9 +117,8 @@ radius = 201.487
 [node name="Ranged" type="Node2D" groups=["enemy"]]
 
 [node name="Ranged" type="CharacterBody2D" parent="."]
-position = Vector2(-17, -28)
 collision_layer = 4
-collision_mask = 7
+collision_mask = 23
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7vmal")
@@ -128,13 +127,12 @@ alpha = 5.045
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2
-position = Vector2(17, 27)
+position = Vector2(-1, 9)
 shape = SubResource("CapsuleShape2D_e5idd")
 
 [node name="Dragon" type="Sprite2D" parent="Ranged"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_he13n")
-position = Vector2(16, 20)
 scale = Vector2(4, 4)
 texture = ExtResource("3_v6fps")
 flip_h = true
@@ -157,17 +155,13 @@ parameters/conditions/move = false
 
 [node name="HurtBox" parent="Ranged" instance=ExtResource("4_pwb1q")]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" parent="Ranged/HurtBox" index="0"]
-position = Vector2(17, 28)
+position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_yey8l")
 
-[node name="DisableTimer" parent="Ranged/HurtBox" index="1"]
-wait_time = 0.7
-
 [node name="DamageNumbers" parent="Ranged" instance=ExtResource("6_84v5k")]
-position = Vector2(1, -6)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Ranged"]
 
@@ -176,7 +170,6 @@ wait_time = 0.3
 autostart = true
 
 [node name="Snd" type="AudioStreamPlayer2D" parent="Ranged"]
-position = Vector2(16, 28)
 volume_db = -5.0
 
 [node name="Area2D" type="Area2D" parent="Ranged"]
@@ -190,14 +183,13 @@ position = Vector2(32, 39)
 shape = SubResource("CircleShape2D_5v580")
 
 [node name="Marker2D" type="Marker2D" parent="Ranged"]
-position = Vector2(1, 5)
 
 [node name="SpawnTimer" type="Timer" parent="Ranged"]
 wait_time = 3.0
 one_shot = true
 
 [node name="Speed" type="Timer" parent="Ranged"]
-wait_time = 0.05
+wait_time = 0.1
 autostart = true
 
 [connection signal="animation_finished" from="Ranged/AnimationTree" to="Ranged" method="_on_animation_tree_animation_finished"]

@@ -93,7 +93,6 @@ radius = 18.0
 [node name="PlayerAdolf" type="CharacterBody2D" groups=["player"]]
 z_index = 2
 collision_layer = 2
-collision_mask = 3
 script = ExtResource("1_qvw2t")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -107,13 +106,10 @@ hframes = 7
 unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" parent="Sprite2D/HurtBox" index="0"]
 shape = SubResource("RectangleShape2D_7sva7")
-
-[node name="DisableTimer" parent="Sprite2D/HurtBox" index="1"]
-wait_time = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -148,7 +144,6 @@ shape = SubResource("CircleShape2D_0rg43")
 [node name="GUILayer" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 0
-visible = false
 
 [node name="GUI" type="Control" parent="GUILayer"]
 layout_mode = 3
@@ -370,6 +365,7 @@ text = "Load
 "
 
 [node name="Indicator" parent="." instance=ExtResource("17_jwaba")]
+z_index = 2
 position = Vector2(217, 150)
 
 [node name="Snd" type="AudioStreamPlayer2D" parent="."]

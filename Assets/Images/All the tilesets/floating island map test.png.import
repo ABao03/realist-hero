@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8g3b4cuhj4og"
-path="res://.godot/imported/recall_circle.png-f682ed17d221bb1f92c6ebbdbc92648f.ctex"
+uid="uid://bgc3a2dgis01h"
+path="res://.godot/imported/floating island map test.png-f2a0ea1fef5a796ce38fb20783bc74a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/recall_circle.png"
-dest_files=["res://.godot/imported/recall_circle.png-f682ed17d221bb1f92c6ebbdbc92648f.ctex"]
+source_file="res://Assets/Images/All the tilesets/floating island map test.png"
+dest_files=["res://.godot/imported/floating island map test.png-f2a0ea1fef5a796ce38fb20783bc74a6.ctex"]
 
 [params]
 

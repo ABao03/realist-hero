@@ -49,6 +49,8 @@ func _on_timer_timeout(timer_id: String) -> void:
 	# Perform any action based on the specific timer
 	var imageFilePath
 	var thisBullet = bullet.instantiate()
+	thisBullet.scale.x = 1.5
+	thisBullet.scale.y = 1.5
 	var thisItem
 	match timer_id:
 		"Pickaxe":
@@ -56,17 +58,39 @@ func _on_timer_timeout(timer_id: String) -> void:
 			thisItem = DataHandler.item_data["1"]
 			
 			get_parent().add_child(thisBullet)
-			thisBullet.setup(imageFilePath, thisItem["Damage"])
+			thisBullet.setup(imageFilePath, thisItem["Damage"], true)
 		"Dagger":
 			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
 			thisItem = DataHandler.item_data["2"]
 			
 			get_parent().add_child(thisBullet)
-			thisBullet.setup(imageFilePath, thisItem["Damage"])
+			thisBullet.setup(imageFilePath, thisItem["Damage"], true)
 			thisBullet.scale.x = 0.75
 			thisBullet.scale.y = 0.75
-		"timer_3":
-			print("Do something specific for timer 3")
+		"Wand":
+			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			thisItem = DataHandler.item_data["3"]
+			
+			get_parent().add_child(thisBullet)
+			thisBullet.setup(imageFilePath, thisItem["Damage"], false)
+			thisBullet.scale.x = 1.5
+			thisBullet.scale.y = 1.5
+		"Longsword":
+			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			thisItem = DataHandler.item_data["4"]
+			
+			get_parent().add_child(thisBullet)
+			thisBullet.setup(imageFilePath, thisItem["Damage"], false)
+			thisBullet.scale.x = 1.5
+			thisBullet.scale.y = 1.5
+		"Bulwark":
+			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			thisItem = DataHandler.item_data["5"]
+			
+			get_parent().add_child(thisBullet)
+			thisBullet.setup(imageFilePath, thisItem["Damage"], false)
+			thisBullet.scale.x = 1.5
+			thisBullet.scale.y = 1.5
 
 func _process(delta):
 	position = player.position

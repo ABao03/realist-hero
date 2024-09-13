@@ -26,14 +26,15 @@ var loot = preload("res://Characters/Enemy/Drops/loot_drop.tscn")
 signal died()
 
 func _ready():
-	sprite.visible = false
+	#sprite.visible = false
 	connect("died",Callable(spawner,"on_enemy_death"))
 
 # Moving slime around 
 func _physics_process(_delta):
 	$HitBox.damage = damage
 	
-	var direction = to_local(nav_agent.get_next_path_position()).normalized()
+	#var direction = to_local(nav_agent.get_next_path_position()).normalized()
+	var direction = global_position.direction_to(player.global_position)
 	sprite.look_at(player.global_position)
 	sprite.rotation -= PI / 2
 	
@@ -53,11 +54,11 @@ func _physics_process(_delta):
 
 func make_path():
 	nav_agent.target_position = player.global_position
-	if last_position == to_local(nav_agent.get_next_path_position()): 
-		emit_signal("died")
-		queue_free()
-	if last_position != Vector2(0,0) && dead == false:
-		sprite.visible = true
+	#if last_position == to_local(nav_agent.get_next_path_position()): 
+		#emit_signal("died")
+		#queue_free()
+	#if last_position != Vector2(0,0) && dead == false:
+		#sprite.visible = true
 	
 	last_position = to_local(nav_agent.get_next_path_position())
 

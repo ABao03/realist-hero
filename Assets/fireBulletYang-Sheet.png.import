@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ct741cugcv00f"
-path="res://.godot/imported/YOU_DIED.webp-59be585f9c6b37812cc3281221a10263.ctex"
+uid="uid://bxv135kotjjpy"
+path="res://.godot/imported/fireBulletYang-Sheet.png-c376e479297daec378ad14f530f76832.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/YOU_DIED.webp"
-dest_files=["res://.godot/imported/YOU_DIED.webp-59be585f9c6b37812cc3281221a10263.ctex"]
+source_file="res://Assets/fireBulletYang-Sheet.png"
+dest_files=["res://.godot/imported/fireBulletYang-Sheet.png-c376e479297daec378ad14f530f76832.ctex"]
 
 [params]
 

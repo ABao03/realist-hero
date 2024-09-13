@@ -39,16 +39,6 @@ func _physics_process(_delta):
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	
 	velocity = direction * movement_speed
-	
-	#if just_spawned == true:
-		#await get_tree().create_timer(3).timeout
-		#just_spawned = false
-	#else:
-	
-	#if in_range == false or just_spawned == true:
-		#velocity = direction * movement_speed
-		#await get_tree().create_timer(3).timeout
-		#just_spawned = false
 		
 	if in_range == true and just_spawned == false:
 		velocity = Vector2(0.01,0.01)
@@ -99,19 +89,12 @@ func death():
 	emit_signal("died")
 	queue_free()
 
-func _on_hurt_box_hurt(damage, magicDamage, isCrit):
-	if isCrit == true:
-		damage = damage * 2
+func _on_hurt_box_hurt(damage):
 	hp -= damage
-	hp -= magicDamage
-	DamageNumbers.display_number(damage, damage_numbers_origin.global_position, magicDamage, isCrit)
+	DamageNumbers.display_number(damage, damage_numbers_origin.global_position)
 	
-	if magicDamage == 0 && isCrit == false:
-		snd.stream = load("res://Assets/SoundEffects/hit.wav")
-		snd.play()
-	if isCrit == true:
-		snd.stream = load("res://Assets/SoundEffects/crit_hit.mp3")
-		snd.play()
+	snd.stream = load("res://Assets/SoundEffects/hit.wav")
+	snd.play()
 	
 	if hp <= 0:
 		death()

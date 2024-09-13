@@ -120,7 +120,7 @@ radius = 801.001
 [node name="Ranged" type="CharacterBody2D" parent="."]
 position = Vector2(-17, -28)
 collision_layer = 4
-collision_mask = 6
+collision_mask = 30
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_gvf1h")
@@ -156,14 +156,11 @@ parameters/conditions/move = false
 
 [node name="HurtBox" parent="Ranged" instance=ExtResource("4_8rotw")]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" parent="Ranged/HurtBox" index="0"]
 position = Vector2(125.875, 131.5)
 shape = SubResource("RectangleShape2D_yey8l")
-
-[node name="DisableTimer" parent="Ranged/HurtBox" index="1"]
-wait_time = 0.7
 
 [node name="DamageNumbers" parent="Ranged" instance=ExtResource("5_kjltm")]
 position = Vector2(1, -6)

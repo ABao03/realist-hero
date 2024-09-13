@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyceolqi0ootm"
-path="res://.godot/imported/ComfyUI_00364_.png-df70f79af1076bc8bc98880274d5b1e6.ctex"
+uid="uid://dliuko6drakhv"
+path="res://.godot/imported/fireBulletYin-Sheet.png-a32af516583b4bc111e32c43674457ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/ComfyUI_00364_.png"
-dest_files=["res://.godot/imported/ComfyUI_00364_.png-df70f79af1076bc8bc98880274d5b1e6.ctex"]
+source_file="res://Assets/fireBulletYin-Sheet.png"
+dest_files=["res://.godot/imported/fireBulletYin-Sheet.png-a32af516583b4bc111e32c43674457ff.ctex"]
 
 [params]
 

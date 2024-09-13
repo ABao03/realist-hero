@@ -37,10 +37,11 @@ var player
 signal start_spawning()
 
 # Fire player bullets
-@onready var weapon_origin = get_tree().get_first_node_in_group("weapon_origin")
+@onready var origins = get_tree().get_nodes_in_group("weapon_origin")
+var weapon_origin
 
 # DEBUG
-@onready var itemArray = [1,1,2]
+@onready var itemArray = [3, 1]
 @onready var index = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -48,6 +49,10 @@ func _ready():
 	for thisPlayer in players:
 		if thisPlayer != null:
 			player = thisPlayer
+	
+	for thisOrigin in origins:
+		if thisOrigin != null:
+			weapon_origin = thisOrigin
 	connect("pass_upgrade",Callable(player,"update_stats"))
 	connect("start_spawning",Callable(spawner,"start_spawning"))
 	for i in range(80):
@@ -255,9 +260,10 @@ func recalculateStats():
 		# (do base stats need to be separate from combined stats? yes, they do need to be separate.)
 		else:
 			PlayerStatDataHandler.addedStats[stat] = PlayerStatDataHandler.baseStats[stat]
+	
 	# Add the data of each item in the inventory to the Autoloaded file
-	for item in currentInventory:
-		add_data(item, PlayerStatDataHandler.addedStats)
+	#for item in currentInventory:
+		#add_data(item, PlayerStatDataHandler.addedStats)
 
 # Used when the item is picked up by the player
 func pick_item():
@@ -351,7 +357,8 @@ func combineItems(item1, item2):
 
 # Adding item stats to a given Autoloaded database
 func add_data(item, database):
-	var stat = item.item_stat
+	pass
+	#var stat = item.item_stat
 	# don't need to loop one variable
 	#for stat in data:
 		# old stats
@@ -377,23 +384,23 @@ func add_data(item, database):
 		#if stat == "Crit":
 			#database[stat] *= data.get(stat)
 			
-	if stat == "Move Speed":
-		# if float(data.get(stat)) > 2:
-		if float(stat) > 2:
-			#database[stat] += data.get(stat)
-			database[stat] += item.item_stat_amount
-		else:
-			#database[stat] *= data.get(stat)
-			database[stat] *= item.item_stat_amount
-			
-	if stat == "Max Health":
-		# if float(data.get(stat)) > 2:
-		if float(stat) > 2:
-			#database[stat] += data.get(stat)
-			database[stat] += item.item_stat_amount
-		else:
-			#database[stat] *= data.get(stat)
-			database[stat] *= item.item_stat_amount
+	#if stat == "Move Speed":
+		## if float(data.get(stat)) > 2:
+		#if float(stat) > 2:
+			##database[stat] += data.get(stat)
+			#database[stat] += item.item_stat_amount
+		#else:
+			##database[stat] *= data.get(stat)
+			#database[stat] *= item.item_stat_amount
+			#
+	#if stat == "Max Health":
+		## if float(data.get(stat)) > 2:
+		#if float(stat) > 2:
+			##database[stat] += data.get(stat)
+			#database[stat] += item.item_stat_amount
+		#else:
+			##database[stat] *= data.get(stat)
+			#database[stat] *= item.item_stat_amount
 		
 		# old stat
 		#if stat == "Defense":
@@ -402,9 +409,9 @@ func add_data(item, database):
 			#else:
 				#database[stat] *= data.get(stat)
 			
-	if stat == "Points":
-		#database[stat] += data.get(stat)
-		database[stat] += item.item_stat_amount
+	#if stat == "Points":
+		##database[stat] += data.get(stat)
+		#database[stat] += item.item_stat_amount
 
 # Makes it so that items only get deleted after the animation finishes, not before
 func _on_timer_timeout():

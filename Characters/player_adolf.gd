@@ -93,6 +93,7 @@ var signal_emitted = false
 var shaderEnabled : bool = false
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	set_expbar(experience, calculate_experiencecap())
 	#animation_tree.active = true
 	set_healthbar(maxhp*hpPercent, maxhp)
@@ -127,74 +128,14 @@ func _physics_process(delta):
 	elif axis.x > 0 && velocity != Vector2(0,0):
 		sprite.flip_h = false 
 	
-	#Recall code
-	#if Input.is_action_just_pressed("recall"):
-		#if playerRecalling == true:
-			#maxhp = 1 # debug
-			#playerRecalling = false
-			#cancel_recall()
-		#else:
-			#playerRecalling = true
-			#recallBar.visible = true
-			#recallDuration.start()
-			#recall.visible = true
-	
 	# Movement stuff
-	if playerPaused == false: # && playerRecalling == false
+	if playerPaused == false:
 		velocity.normalized()
-		# bow code
-		#if Input.is_action_just_pressed("switch"):
-			#if bow_equipped == true:
-				#bow_equipped = false
-			#else:
-				#bow_equipped = true
-		
-	# ability pressed code
-	
-	# Ability pressed stuff
-		#if Input.is_action_just_pressed("damage_ability"):
-			#if damageAbility.onCooldown == false:
-				#indicator.visible = true
-				#player_ability_used(damageAbility)
-				#heldAbility = damageAbility
-				#usingAbility = true
-		#elif Input.is_action_just_pressed("ultimate_ability"):
-			#if ultimateAbility.onCooldown == false:
-				#indicator.visible = true
-				#player_ability_used(ultimateAbility)
-				#heldAbility = ultimateAbility
-				#usingAbility = true
-		# left click code
-		#if Input.is_action_pressed("mouse_leftclick"):
-			# if no ability equipped, use arrow
-			#if bow_equipped and bow_cooldown:
-				#bow_cooldown = false
-				#var arrow_instance = arrow.instantiate()
-				#arrow_instance.rotation = $Marker2D.rotation
-				#arrow_instance.global_position = $Marker2D.global_position
-				#add_child(arrow_instance)
-				#
-				#await get_tree().create_timer(1).timeout
-				#bow_cooldown = true
-			# if no bow equipped, use melee attack
-			#elif bow_equipped == false:
-				#if animation.current_animation != "attack":
-				##animation_tree["parameters/conditions/swing"] = true
-					#animation.play("attack")
-					#weapon.attack()
-		#else:
-			#animation_tree["parameters/conditions/swing"] = false
 			
 		if velocity == Vector2.ZERO:
-			# animation tree code
-			#animation_tree["parameters/conditions/idle"] = true
-			#animation_tree["parameters/conditions/is_moving"] = false
 			animation.play("idle")
 		else:
 			lastDirectionVector = velocity
-			# animation tree code
-			#animation_tree["parameters/conditions/idle"] = false
-			#animation_tree["parameters/conditions/is_moving"] = true
 			if animation.current_animation != "walk":
 				animation.play("walk")
 			if playerSnd.is_playing() == false:
@@ -202,29 +143,9 @@ func _physics_process(delta):
 				playerSnd.pitch_scale = 0.75
 				playerSnd.play()
 		
-		# attack animation slowdown code
-		#if animation_tree.get("parameters/playback").get_current_node() == "":
-		#if animation.current_animation == "attack":
-			#velocity = velocity/3
-		
 		move_and_slide()
 		
-		# Old code for not-top-down view
-		#if sprite.flip_h == true && boxesFlipped == false:
-			#attackBox1.position -= Vector2(28,0)
-			#attackBox2.position -= Vector2(58,0)
-			#boxesFlipped = true
-		#if sprite.flip_h == false && boxesFlipped == true:
-			#attackBox1.position += Vector2(28,0)
-			#attackBox2.position += Vector2(58,0)
-			#boxesFlipped = false
-	
-	# Switch player to idle if not moving
 	if playerPaused == true:
-		# animation tree code
-		#animation_tree["parameters/conditions/idle"] = true
-		#animation_tree["parameters/conditions/is_moving"] = false
-		#animation_tree["parameters/conditions/swing"] = false
 		animation.stop()
 		animation.play("idle")
 	
@@ -234,12 +155,10 @@ func _physics_process(delta):
 			sprite.material.set_shader_parameter("onoff",0)
 			shaderEnabled = false
 			%HurtBox.collision_layer = 2
-			%HurtBox.collision_mask = 2
 		else:
 			sprite.material.set_shader_parameter("onoff",1)
 			shaderEnabled = true
 			%HurtBox.collision_layer = 16
-			%HurtBox.collision_mask = 16
 	
 func _on_hurt_box_hurt(damage):
 	var percentDamageTaken = float(damage)/float(maxhp)
@@ -367,89 +286,6 @@ func get_random_item():
 
 func update_stats(data):
 	pass
-	
-	# code that checked a bunch of stats and updated the player's stats
-	#for stat in data:
-		## NOTE: THESE SHOULD ALL BE CHANGED TO SETTERS, NOT ADDER/MULTIPLIER
-		## This logic is all being moved to recalculate stats in Inventory
-		#if stat == "Physical":
-			#weapon.set_physical(data.get(stat))
-			#
-		#if stat == "Magic":
-			#weapon.set_magic(data.get(stat))
-			#
-		#if stat == "Attack Speed":
-			#var currentSpeed = animation.speed_scale
-			#animation.speed_scale = currentSpeed * data.get(stat)
-			#
-		#if stat == "Crit":
-			#weapon.set_crit(data.get(stat) - 1)
-			#
-		#if stat == "Move Speed":
-			#speed = data.get(stat)
-				#
-		#if stat == "Max Health":
-			#maxhp = data.get(stat)
-			#set_healthbar(maxhp*hpPercent, maxhp)
-			#
-		#if stat == "Defense":
-			#pass
-
-# Make it so chest is only openable when you level up
-#func _on_button_pressed():
-#
-	#if acc > 0: #When the player levels up
-		#acc -= 1
-		#chest_sprite.play("Open") #Play the animation of the chest opening
-		#await get_tree().create_timer(1).timeout #waits 0.65s 
-		#chest_sprite.stop() #stop animation
-#
-		#inventory.open() #Open inventory menu
-		#levelup()
-		#var exp_required = calculate_experiencecap()
-		#experience = 0
-		#experience_level += 1
-		#exp_required = calculate_experiencecap()
-		#expBar.modulate = Color(1,1,1,1)
-		#
-		## LEO add function to switch chest sprite to closed
-		#
-	#else: #When the player did not level up
-		#chest_sprite.play("Idle_clicked") #Play the idle animation
-		#await get_tree().create_timer(1).timeout
-		#chest_sprite.stop()
-
-#func player_ability_used(ability):
-	#if ability.abilityType == "dmg":
-		#abilityDuration.wait_time = 0.45
-		#abilitySnd.stream = load("res://Assets/SoundEffects/fireball.wav")
-		#abilitySnd.play()
-		#abilityDuration.start()
-		#abilityEffects.ability_used(global_position, weapon.get_magic())
-		#
-	#elif ability.abilityType == "ult":
-		#abilityDuration.wait_time = 2
-		#abilityDuration.start()
-		#abilityEffects.ult_used(global_position, weapon.get_magic())
-		## ability effects handles the actual slash effect
-	#
-	#indicator.visible = false
-
-#func _on_ability_duration_timeout():
-	## activates the cooldown button
-	#heldAbility.activated()
-	#heldAbility = null
-	#usingAbility = false
-#
-#func _on_recall_duration_timeout():
-	#get_tree().change_scene_to_file("res://Worlds/Hub World/hubworld.tscn")
-	#cancel_recall()
-#
-#func cancel_recall():
-	#playerRecalling = false
-	#recall.visible = false
-	#recallBar.visible = false
-	#recallDuration.stop()
 
 func disable_light():
 	pointLight.visible = false

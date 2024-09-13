@@ -147,6 +147,7 @@ func shoot(angle):
 	
 	bullet.position = global_position
 	bullet.direction = get_vector(angle)
+	
 	if yinBullet == false:
 		yinBullet = true
 		bullet.type = 0

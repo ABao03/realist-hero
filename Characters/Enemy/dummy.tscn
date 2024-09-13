@@ -14,8 +14,8 @@ radius = 14.5
 height = 35.0
 
 [node name="dummy" type="CharacterBody2D"]
-collision_layer = 6
-collision_mask = 7
+collision_layer = 4
+collision_mask = 23
 script = ExtResource("1_6u6en")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -31,7 +31,7 @@ vframes = 3
 
 [node name="HurtBox" parent="." instance=ExtResource("3_xh2pi")]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 8
 
 [node name="CollisionShape2D" parent="HurtBox" index="0"]
 position = Vector2(0.5, -0.5)

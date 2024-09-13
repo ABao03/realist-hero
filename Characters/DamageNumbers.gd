@@ -6,6 +6,7 @@ func _ready():
 
 
 func display_number(damage: int, position: Vector2):
+	print("hi")
 	var number = Label.new()
 	number.global_position = position
 	number.text = str(damage)
@@ -33,10 +34,8 @@ func display_number(damage: int, position: Vector2):
 	number.pivot_offset = Vector2(number.size / 2)
 	
 	var tween = get_tree().create_tween()
-	var magic_tween = get_tree().create_tween()
 	
 	tween.set_parallel(true)
-	magic_tween.set_parallel(true)
 	
 	tween.tween_property(
 		number, "position:y", number.position.y - 24, 0.25

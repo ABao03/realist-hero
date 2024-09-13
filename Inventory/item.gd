@@ -12,8 +12,8 @@ var item_damage : int
 var item_type : String
 var item_class : String
 var item_fire_rate : float
-var item_stat : String
-var item_stat_amount # can't declare type because it can be null
+var item_speed : int
+var item_bullet_type : String
 var item_info : String
 var item_score : String
 var selected = false
@@ -73,8 +73,8 @@ func load_item(a_ItemID : int) -> void:
 	item_type = DataHandler.item_data[str(a_ItemID)]["Type"]
 	item_class = DataHandler.item_data[str(a_ItemID)]["Class"]
 	item_fire_rate = DataHandler.item_data[str(a_ItemID)]["FireRate"]
-	item_stat = DataHandler.item_data[str(a_ItemID)]["Stat"]
-	item_stat_amount = DataHandler.item_data[str(a_ItemID)]["Amount"]
+	item_speed = DataHandler.item_data[str(a_ItemID)]["Speed"]
+	item_bullet_type = DataHandler.item_data[str(a_ItemID)]["BulletType"]
 	item_score = str(DataHandler.item_data[str(a_ItemID)]["Points"])
 	item_info = DataHandler.item_data[str(a_ItemID)]["Info"]
 	
