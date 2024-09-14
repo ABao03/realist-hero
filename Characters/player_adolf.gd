@@ -4,9 +4,8 @@ extends CharacterBody2D
 # Stats in data/playerdata to be done
 @export var speed : float = 125
 @onready var collision = $CollisionShape2D
-#@onready var chest_sprite = get_tree().get_first_node_in_group("chest")
 @onready var animation_player: bool = true
-
+@onready var graze_area = $GrazeArea
 
 @onready var maxhp = 100
 @onready var hpPercent = 1.00
@@ -22,7 +21,7 @@ var x = true
 @onready var axis = Vector2.ZERO
 var lastDirectionVector : Vector2
 
-#Represents paused state
+# Represents paused state
 var playerPaused = false
 var playerDead = false
 
@@ -30,13 +29,6 @@ var playerDead = false
 @onready var playerSnd = $Snd
 @onready var abilitySnd = $AbilitySnd
 
-# Attacks
-#@onready var weapon = $Weapon
-
-# Abilities
-#@onready var damageAbility = $UltButton
-#@onready var ultimateAbility = $AbilityButton
-#@onready var abilityDuration = $AbilityDuration
 @onready var indicator = $Indicator
 
 @onready var abilityEffectsGroup = get_tree().get_nodes_in_group("ability")
@@ -45,22 +37,11 @@ var abilityEffects
 var usingAbility = false
 var heldAbility
 
-# Recalling
-#var playerRecalling = false
-#@onready var recallDuration = $RecallDuration
-#@onready var recall = $Recall
-
 # Upgrades
 var upgrade_options = []
 @onready var inventoryGroup = get_tree().get_nodes_in_group("inventory")
 var inventory
 signal selected_upgrade(upgrade)
-
-# ranged attack
-#var bow_equipped = false
-#var bow_cooldown = true
-#var arrow_shot = false
-#var arrow = preload("res://Characters/arrow.tscn")
 
 # Enemy Related
 @onready var spawner = get_tree().get_first_node_in_group("spawner")
@@ -78,7 +59,6 @@ var signal_emitted = false
 # GUI
 @onready var recallBar = get_node('%RecallBar')
 @onready var expBar = get_node('%ExperienceBar')
-@onready var expLabel = get_node('%ExpLabel')
 @onready var healthBar = get_node('%HealthBar')
 @onready var lblLevel = get_node('%lbl_levelUp')
 @onready var levelPanel = get_node('%LevelUp')
@@ -149,17 +129,6 @@ func _physics_process(delta):
 		animation.stop()
 		animation.play("idle")
 	
-	# toggle shader
-	if Input.is_action_just_pressed("shift"):
-		if shaderEnabled:
-			sprite.material.set_shader_parameter("onoff",0)
-			shaderEnabled = false
-			%HurtBox.collision_layer = 2
-		else:
-			sprite.material.set_shader_parameter("onoff",1)
-			shaderEnabled = true
-			%HurtBox.collision_layer = 16
-	
 func _on_hurt_box_hurt(damage):
 	var percentDamageTaken = float(damage)/float(maxhp)
 	hpPercent -= percentDamageTaken
@@ -190,6 +159,13 @@ func _on_collect_area_area_entered(area):
 		# Otherwise, add to EXP bar
 		else:
 			calculate_experience(collected_item)
+
+# When bullets (and only bullets) graze, add xp
+# if you want enemy graze, you have to get_overlapping_bodies
+func check_graze_area():
+	var overlapping_areas = graze_area.get_overlapping_areas()
+	if overlapping_areas.size() > 0:
+		calculate_experience(calculate_experiencecap()*0.02)
 
 func calculate_experience(gem_exp):
 	var exp_required = calculate_experiencecap()
@@ -233,7 +209,6 @@ func levelup():
 	var exp_required = calculate_experiencecap()
 	experience = 0
 	experience_level += 1
-	expLabel.text = "Level: " + str(experience_level)
 	exp_required = calculate_experiencecap()
 	expBar.modulate = Color(1,1,1,1)
 	
@@ -293,3 +268,6 @@ func disable_light():
 
 func _on_level_up_debug_button_pressed():
 	calculate_experience(calculate_experiencecap())
+
+func _on_graze_detect_timer_timeout():
+	check_graze_area()

@@ -1,8 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=25 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://cncqgi38r3poe" path="res://Assets/Images/girl_skeleton-Sheet.png" id="2_1nalt"]
-[ext_resource type="Shader" path="res://Characters/player_adolf.gdshader" id="2_dj6ao"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
 [ext_resource type="Texture2D" uid="uid://dpgjiwepnvy5b" path="res://Assets/Images/recall_progress.png" id="6_pc3d2"]
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
@@ -17,15 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="23_36e71"]
 [ext_resource type="AudioStream" uid="uid://d1wv3yjw44dlg" path="res://Music/death.mp3" id="24_2egwl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vto1f"]
-shader = ExtResource("2_dj6ao")
-shader_parameter/onoff = 0.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7sva7"]
-size = Vector2(20, 64)
+size = Vector2(12, 12)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4hegg"]
-radius = 6.36531
+radius = 3.63732
 height = 32.2119
 
 [sub_resource type="Animation" id="Animation_q5tuw"]
@@ -90,6 +85,9 @@ radius = 90.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_0rg43"]
 radius = 18.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lbryr"]
+height = 47.0
+
 [node name="PlayerAdolf" type="CharacterBody2D" groups=["player"]]
 z_index = 2
 collision_layer = 2
@@ -98,7 +96,6 @@ script = ExtResource("1_qvw2t")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture_filter = 1
-material = SubResource("ShaderMaterial_vto1f")
 texture = ExtResource("2_1nalt")
 hframes = 7
 
@@ -106,7 +103,7 @@ hframes = 7
 unique_name_in_owner = true
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
-collision_mask = 4
+collision_mask = 20
 
 [node name="CollisionShape2D" parent="Sprite2D/HurtBox" index="0"]
 shape = SubResource("RectangleShape2D_7sva7")
@@ -126,6 +123,7 @@ libraries = {
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GrabArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -133,6 +131,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_tc7j7")
 
 [node name="CollectArea" type="Area2D" parent="."]
+visible = false
 position = Vector2(2, 9)
 collision_layer = 0
 collision_mask = 8
@@ -140,6 +139,16 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 position = Vector2(-2, -9)
 shape = SubResource("CircleShape2D_0rg43")
+
+[node name="GrazeArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrazeArea"]
+position = Vector2(0, 0.5)
+shape = SubResource("CapsuleShape2D_lbryr")
+
+[node name="Sprite2D" type="Sprite2D" parent="GrazeArea"]
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -230,18 +239,10 @@ offset_top = 17.0
 offset_right = 677.0
 offset_bottom = 47.0
 scale = Vector2(1.25, 1.25)
+step = 0.01
 value = 20.0
 texture_under = ExtResource("7_hfoo5")
 texture_progress = ExtResource("8_myf4k")
-
-[node name="ExpLabel" type="RichTextLabel" parent="GUILayer/GUI/ExperienceBar"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 9.0
-offset_right = 157.0
-offset_bottom = 20.0
-text = "Level: 1"
-scroll_active = false
 
 [node name="Pausescreen" type="CanvasLayer" parent="GUILayer"]
 process_mode = 1
@@ -406,6 +407,10 @@ offset_right = -485.0
 offset_bottom = 200.0
 text = "LEVEL UP"
 
+[node name="GrazeDetectTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
 [connection signal="hurt" from="Sprite2D/HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
@@ -420,5 +425,6 @@ text = "LEVEL UP"
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Save" to="GUILayer/Pausescreen" method="_on_save_pressed"]
 [connection signal="pressed" from="GUILayer/Pausescreen/Menu/Load" to="GUILayer/Pausescreen" method="_on_load_pressed"]
 [connection signal="pressed" from="LevelUpDebugButton" to="." method="_on_level_up_debug_button_pressed"]
+[connection signal="timeout" from="GrazeDetectTimer" to="." method="_on_graze_detect_timer_timeout"]
 
 [editable path="Sprite2D/HurtBox"]

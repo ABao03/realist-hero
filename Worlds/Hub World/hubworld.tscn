@@ -300,8 +300,7 @@ layer_0/tile_data = PackedInt32Array(-131074, 393216, 2, -65538, 0, 0, -2, 0, 0,
 
 [node name="Door1" type="Area2D" parent="."]
 position = Vector2(540, 227)
-collision_layer = 7
-collision_mask = 7
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Door1"]
 position = Vector2(17, 58)

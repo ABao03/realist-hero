@@ -1,13 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://wu71ryws3umf"]
+[gd_scene load_steps=8 format=3 uid="uid://wu71ryws3umf"]
 
 [ext_resource type="Texture2D" uid="uid://bxv135kotjjpy" path="res://Assets/fireBulletYang-Sheet.png" id="1_vhla8"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="2_atwqf"]
 [ext_resource type="Script" path="res://Characters/Enemy/enemy_bullet.gd" id="2_c27tt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63el5"]
-radius = 9.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sq7gw"]
 radius = 9.0
 
 [sub_resource type="Animation" id="Animation_mu0er"]
@@ -48,30 +45,22 @@ _data = {
 "idle": SubResource("Animation_5i1jb")
 }
 
-[node name="Sprite2D" type="Sprite2D" groups=["bullet"]]
+[node name="enemy_bullet" type="Sprite2D" groups=["bullet"]]
 texture_filter = 1
 texture = ExtResource("1_vhla8")
 hframes = 3
 script = ExtResource("2_c27tt")
 
-[node name="YinHitBox" parent="." instance=ExtResource("2_atwqf")]
+[node name="HitBox" parent="." instance=ExtResource("2_atwqf")]
 collision_layer = 16
 damage = 5
 
-[node name="CollisionShape2D" parent="YinHitBox" index="0"]
+[node name="CollisionShape2D" parent="HitBox" index="0"]
 shape = SubResource("CircleShape2D_63el5")
-
-[node name="YangHitBox" parent="." instance=ExtResource("2_atwqf")]
-collision_layer = 2
-damage = 5
-
-[node name="CollisionShape2D" parent="YangHitBox" index="0"]
-shape = SubResource("CircleShape2D_sq7gw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_tewj7")
 }
 
-[editable path="YinHitBox"]
-[editable path="YangHitBox"]
+[editable path="HitBox"]

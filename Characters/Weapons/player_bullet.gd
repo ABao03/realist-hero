@@ -9,14 +9,15 @@ var spinning : bool = false
 
 # unchangeable stats
 var type : String
+var bulletType : String
 var bulletClass : String
 var direction : Vector2
-var bulletType : String
 var duration : int = 500
 
 # nodes
 @onready var animation = $AnimationPlayer
 @onready var hitbox = $SpinningHitBox 
+# connect player node so that you can check if they're currently in yin or yang mode
 
 # origin
 @onready var weapon_origin = get_tree().get_first_node_in_group("weapon_origin")
