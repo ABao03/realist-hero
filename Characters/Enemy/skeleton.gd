@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var movement_speed = 25.0
+var enemy_type = 0
 
 var maxHealth = 200
 var health = maxHealth

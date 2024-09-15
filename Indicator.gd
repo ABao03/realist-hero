@@ -1,6 +1,6 @@
 extends Sprite2D
 
-@onready var reticle = load("res://Assets/Images/reticle.png")
+@onready var reticle = load("res://Assets/Images/Menus/reticle.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

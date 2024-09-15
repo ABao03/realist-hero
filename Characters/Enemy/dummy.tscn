@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://08qrvu43ttcy"]
 
 [ext_resource type="Script" path="res://Characters/Enemy/dummy.gd" id="1_6u6en"]
-[ext_resource type="Texture2D" uid="uid://cph5lko3tokyy" path="res://Assets/Images/Training Dummy Sprite Sheet.png" id="2_0vor3"]
+[ext_resource type="Texture2D" uid="uid://cph5lko3tokyy" path="res://Assets/Images/Characters/Training Dummy Sprite Sheet.png" id="2_0vor3"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_xh2pi"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_55m6p"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="4_64m23"]

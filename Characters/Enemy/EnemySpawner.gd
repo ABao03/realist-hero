@@ -160,13 +160,11 @@ func get_random_position():
 func despawn_enemies():
 	for enemy in get_children():
 		if enemy.is_in_group("enemy"):
-			if enemy.enemy_type == 0:
-				basic_enemy_counter -= 1
-			elif enemy.enemy_type == 1:
-				ranged_enemy_counter -= 1
 			enemy.queue_free()
 			#enemy_counter -= 1
 	#counter = 0
+	basic_enemy_counter = 0
+	ranged_enemy_counter = 0
 
 func pause_spawning():
 	timer.stop()

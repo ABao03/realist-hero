@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://buux43qer5pgb"]
 
 [ext_resource type="Script" path="res://Menu/Death.gd" id="1_x0v5c"]
-[ext_resource type="Texture2D" uid="uid://cq14qho0qlf1x" path="res://Assets/Images/Menu Images/discord.png" id="2_67lne"]
+[ext_resource type="Texture2D" uid="uid://cq14qho0qlf1x" path="res://Assets/Images/Menus/discord.png" id="2_67lne"]
 
 [node name="Death" type="Control"]
 layout_mode = 3

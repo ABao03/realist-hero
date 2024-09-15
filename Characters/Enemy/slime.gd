@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var hp = 100
 @export var experience = 1
 @export var knockback = -5
+var enemy_type = 0
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var loot_base = get_tree().get_first_node_in_group("loot")

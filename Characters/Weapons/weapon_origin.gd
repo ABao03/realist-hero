@@ -54,13 +54,13 @@ func _on_timer_timeout(timer_id: String) -> void:
 	var thisItem
 	match timer_id:
 		"Pickaxe":
-			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
 			thisItem = DataHandler.item_data["1"]
 			
 			get_parent().add_child(thisBullet)
 			thisBullet.setup(imageFilePath, thisItem["Damage"], true)
 		"Dagger":
-			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
 			thisItem = DataHandler.item_data["2"]
 			
 			get_parent().add_child(thisBullet)
@@ -68,7 +68,7 @@ func _on_timer_timeout(timer_id: String) -> void:
 			thisBullet.scale.x = 0.75
 			thisBullet.scale.y = 0.75
 		"Wand":
-			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
 			thisItem = DataHandler.item_data["3"]
 			
 			get_parent().add_child(thisBullet)
@@ -76,7 +76,7 @@ func _on_timer_timeout(timer_id: String) -> void:
 			thisBullet.scale.x = 1.5
 			thisBullet.scale.y = 1.5
 		"Longsword":
-			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
 			thisItem = DataHandler.item_data["4"]
 			
 			get_parent().add_child(thisBullet)
@@ -84,7 +84,7 @@ func _on_timer_timeout(timer_id: String) -> void:
 			thisBullet.scale.x = 1.5
 			thisBullet.scale.y = 1.5
 		"Bulwark":
-			imageFilePath = "res://Assets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
+			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
 			thisItem = DataHandler.item_data["5"]
 			
 			get_parent().add_child(thisBullet)

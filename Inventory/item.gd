@@ -45,7 +45,7 @@ func load_item(a_ItemID : int) -> void:
 	file_name = file_name.replace("'", "")
 	file_name = file_name.replace(" ", "_")
 	file_name = file_name.to_lower()
-	var Icon_path = "res://Assets/" + file_name + ".png"
+	var Icon_path = "res://Assets/Images/Weapons/" + file_name + ".png"
 	IconRect_path.texture = ResourceLoader.load(Icon_path)
 	whiteIcon.texture = ResourceLoader.load(Icon_path)
 	

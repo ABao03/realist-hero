@@ -13,7 +13,7 @@ config_version=5
 config/name="Realist Hero"
 run/main_scene="res://Menu/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://Assets/Images/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png"
+config/icon="res://Assets/Images/World/d515mo1-542e7751-ee0a-461a-a383-bd1a90824873.png"
 
 [autoload]
 

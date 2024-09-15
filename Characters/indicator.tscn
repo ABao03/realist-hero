@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6j6bswlesema"]
 
-[ext_resource type="Texture2D" uid="uid://cwtop0b6iqkcy" path="res://Assets/Images/reticle.png" id="1_g1msk"]
+[ext_resource type="Texture2D" uid="uid://cwtop0b6iqkcy" path="res://Assets/Images/Menus/reticle.png" id="1_y7inf"]
 [ext_resource type="Script" path="res://Indicator.gd" id="2_6b8xe"]
 
 [node name="Indicator" type="Sprite2D"]
-texture = ExtResource("1_g1msk")
+texture = ExtResource("1_y7inf")
 script = ExtResource("2_6b8xe")

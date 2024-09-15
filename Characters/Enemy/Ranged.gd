@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var hp = 60
 @export var experience = 1
 @export var knockback = -5
+var enemy_type = 1
 
 @onready var players = get_tree().get_nodes_in_group("player")
 var player

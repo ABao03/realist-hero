@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://wu71ryws3umf"]
 
-[ext_resource type="Texture2D" uid="uid://bxv135kotjjpy" path="res://Assets/fireBulletYang-Sheet.png" id="1_vhla8"]
+[ext_resource type="Texture2D" uid="uid://bxv135kotjjpy" path="res://Assets/Images/Bullets/fireBulletYang-Sheet.png" id="1_vhla8"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="2_atwqf"]
 [ext_resource type="Script" path="res://Characters/Enemy/enemy_bullet.gd" id="2_c27tt"]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://0nqqxacxuayc"]
 
 [ext_resource type="Script" path="res://Inventory/inventory.gd" id="1_jolrh"]
-[ext_resource type="Texture2D" uid="uid://b2hs2ntkap0sh" path="res://Assets/Images/backpack.png" id="2_amuen"]
+[ext_resource type="Texture2D" uid="uid://b2hs2ntkap0sh" path="res://Assets/Images/Menus/backpack.png" id="2_8cmgb"]
 [ext_resource type="PackedScene" uid="uid://dsql475l10syn" path="res://Inventory/hover_info.tscn" id="3_hero3"]
 
 [node name="Inventory" type="Control"]
@@ -77,7 +77,7 @@ columns = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Background/MarginContainer"]
 position = Vector2(210, 262)
-texture = ExtResource("2_amuen")
+texture = ExtResource("2_8cmgb")
 
 [node name="Background2" type="ColorRect" parent="."]
 visible = false
@@ -138,7 +138,7 @@ color = Color(0.321569, 0.152941, 0.0745098, 1)
 [node name="Sprite2D" type="Sprite2D" parent="HoverCanvas/hoverInfo"]
 position = Vector2(115, 76)
 scale = Vector2(0.574, 0.316667)
-texture = ExtResource("2_amuen")
+texture = ExtResource("2_8cmgb")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]

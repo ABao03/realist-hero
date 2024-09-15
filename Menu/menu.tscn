@@ -1,13 +1,13 @@
 [gd_scene load_steps=27 format=3 uid="uid://db7retadphrg4"]
 
 [ext_resource type="Script" path="res://Menu/Menu.gd" id="1_fcwrb"]
-[ext_resource type="Texture2D" uid="uid://0c8gqiday546" path="res://Assets/Images/title screen.png" id="2_fmkbu"]
-[ext_resource type="Texture2D" uid="uid://db82p0hpb4y75" path="res://Assets/Images/Menu Images/start_button.png" id="3_bpjap"]
+[ext_resource type="Texture2D" uid="uid://0c8gqiday546" path="res://Assets/Images/Menus/title screen.png" id="2_fmkbu"]
+[ext_resource type="Texture2D" uid="uid://db82p0hpb4y75" path="res://Assets/Images/Menus/start_button.png" id="3_bpjap"]
 [ext_resource type="FontFile" uid="uid://csxxuldqoa2f" path="res://Fonts/CAMBRIA.TTC" id="3_j50ea"]
 [ext_resource type="AudioStream" uid="uid://crugsjevjtoqc" path="res://Music/the-white-lion-10379.mp3" id="4_1e7ud"]
-[ext_resource type="Texture2D" uid="uid://b3521ylth6p68" path="res://Assets/Images/Menu Images/settings_button.png" id="4_1jy2b"]
-[ext_resource type="Texture2D" uid="uid://dndvx3hf77erj" path="res://Assets/Images/Menu Images/quit_button.png" id="5_wwjc8"]
-[ext_resource type="Texture2D" uid="uid://cq14qho0qlf1x" path="res://Assets/Images/Menu Images/discord.png" id="7_13g8u"]
+[ext_resource type="Texture2D" uid="uid://b3521ylth6p68" path="res://Assets/Images/Menus/settings_button.png" id="4_1jy2b"]
+[ext_resource type="Texture2D" uid="uid://dndvx3hf77erj" path="res://Assets/Images/Menus/quit_button.png" id="5_wwjc8"]
+[ext_resource type="Texture2D" uid="uid://cq14qho0qlf1x" path="res://Assets/Images/Menus/discord.png" id="7_13g8u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w83ka"]
 content_margin_left = 4.0

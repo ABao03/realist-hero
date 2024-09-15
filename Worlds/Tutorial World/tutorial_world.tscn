@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Worlds/Tutorial World/tutorial_world.gd" id="1_8m2i4"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="2_iodjk"]
-[ext_resource type="Texture2D" uid="uid://clopaewqesprl" path="res://Assets/Images/All the tilesets/wall_tilemap.png" id="3_3ex3p"]
+[ext_resource type="Texture2D" uid="uid://clopaewqesprl" path="res://Assets/Images/Tilesets/wall_tilemap.png" id="3_3ex3p"]
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player.tscn" id="3_32bfd"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="4_dsdcn"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="4_nwlgj"]

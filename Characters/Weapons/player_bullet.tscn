@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://84uroj3gdqvp"]
 
-[ext_resource type="Texture2D" uid="uid://domfyg75mfgs0" path="res://Assets/wand_weapon.png" id="1_j7te5"]
+[ext_resource type="Texture2D" uid="uid://domfyg75mfgs0" path="res://Assets/Images/Bullets/wand_weapon.png" id="1_vsjhm"]
 [ext_resource type="Script" path="res://Characters/Weapons/player_bullet.gd" id="2_w0miv"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="3_mn8vp"]
 
@@ -78,7 +78,7 @@ _data = {
 
 [node name="player_bullet" type="Sprite2D"]
 texture_filter = 1
-texture = ExtResource("1_j7te5")
+texture = ExtResource("1_vsjhm")
 hframes = 3
 script = ExtResource("2_w0miv")
 

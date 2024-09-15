@@ -20,7 +20,7 @@ func _ready():
 	file_name = file_name.replace("'", "")
 	file_name = file_name.replace(" ", "_")
 	file_name = file_name.to_lower()
-	var Icon_path = "res://Assets/" + file_name + ".png"
+	var Icon_path = "res://Assets/Images/Weapons/" + file_name + ".png"
 	itemIcon.texture = ResourceLoader.load(Icon_path)
 	
 func _input(event):

@@ -289,11 +289,11 @@ func pick_item():
 		
 		check_slot_availability(current_slot)
 		set_grids.call_deferred(current_slot)
-	
+
 # Debug
 func _on_add_slot_pressed():
 	create_slot()
-	
+
 # Deleting item from inventory (do not mix up with delete_item function in item scene)
 func delete_from_inventory(thisItem):
 	if visible == true:

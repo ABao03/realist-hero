@@ -1,9 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=30 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_qvw2t"]
-[ext_resource type="Texture2D" uid="uid://cncqgi38r3poe" path="res://Assets/Images/girl_skeleton-Sheet.png" id="2_1nalt"]
+[ext_resource type="Texture2D" uid="uid://cncqgi38r3poe" path="res://Assets/Images/Characters/girl_skeleton-Sheet.png" id="2_1nalt"]
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_8mvuj"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
+[ext_resource type="Texture2D" uid="uid://bbtyeplvpm0i2" path="res://Assets/Images/Characters/yin-yang.png" id="5_k733h"]
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
 [ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/exp_background.png" id="7_hfoo5"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
@@ -140,9 +141,8 @@ radius = 90.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_0rg43"]
 radius = 18.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lbryr"]
-radius = 13.0
-height = 55.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_hhuec"]
+radius = 29.0043
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 2
@@ -207,9 +207,13 @@ collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrazeArea"]
 position = Vector2(0, 0.5)
-shape = SubResource("CapsuleShape2D_lbryr")
+shape = SubResource("CircleShape2D_hhuec")
 
 [node name="Sprite2D" type="Sprite2D" parent="GrazeArea"]
+modulate = Color(1, 1, 1, 0.411765)
+position = Vector2(0, 1)
+scale = Vector2(1.125, 1.11458)
+texture = ExtResource("5_k733h")
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 process_mode = 3
