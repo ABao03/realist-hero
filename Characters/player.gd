@@ -16,7 +16,7 @@ extends CharacterBody2D
 @onready var experience_level = 1
 var collected_experience = 0
 var held_items = []
-var x = true
+var startItemCollected = false
 
 # Movement
 @onready var axis = Vector2.ZERO
@@ -51,8 +51,8 @@ signal despawn_enemies()
 signal pause_spawning()
 signal player_level_up()
 
-@export var starting : Vector2 = Vector2(0, 1)
 @onready var animation = $AnimationPlayer
+@onready var hitFlashAnim = $HitFlashAnimation
 #@onready var animation_tree = $AnimationTree
 @onready var sprite = $Sprite2D
 var signal_emitted = false
@@ -70,7 +70,6 @@ var signal_emitted = false
 # Light stuff
 @onready var pointLight = $PointLight2D
 @onready var ambientLight = $PointLight2D3
-@onready var shader : Shader = load("res://Characters/player_adolf.gdshader")
 var shaderEnabled : bool = false
 
 func _ready():
@@ -128,7 +127,7 @@ func _physics_process(delta):
 	if playerPaused == true:
 		animation.stop()
 		animation.play("idle")
-	
+
 func _on_hurt_box_hurt(damage):
 	var percentDamageTaken = float(damage)/float(maxhp)
 	hpPercent -= percentDamageTaken
@@ -137,6 +136,9 @@ func _on_hurt_box_hurt(damage):
 		playerDead = true
 		SceneManager.load_new_scene("res://Menu/death.tscn","fade_to_black")
 	set_healthbar(maxhp*hpPercent, maxhp)
+	hitFlashAnim.play("hurt")
+	playerSnd.stream = load("res://Assets/SoundEffects/crit_hit.mp3")
+	playerSnd.play()
 
 # Changes the target variable inside of the xp drop from null to the player. 
 # So, the xp drop is pulled towards the player. 
@@ -164,7 +166,12 @@ func _on_collect_area_area_entered(area):
 # if you want enemy graze, you have to get_overlapping_bodies
 func check_graze_area():
 	var overlapping_areas = graze_area.get_overlapping_areas()
-	if overlapping_areas.size() > 0:
+	if startItemCollected == false:
+		if get_tree().current_scene.name == "Random-world":
+			levelup()
+			startItemCollected = true
+			experience_level -= 1
+	elif overlapping_areas.size() > 0:
 		calculate_experience(calculate_experiencecap()*0.02)
 
 func calculate_experience(gem_exp):
@@ -200,10 +207,9 @@ func set_expbar(set_value = 1, set_max_value = 100):
 	expBar.value = set_value
 	expBar.max_value = set_max_value
 
-func set_recallbar(set_value = 0):
-	recallBar.value = set_value
-
 func levelup():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	indicator.visible = false
 	# level up right away code
 	inventory.open() #Open inventory menu
 	var exp_required = calculate_experiencecap()

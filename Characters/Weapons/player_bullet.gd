@@ -23,7 +23,6 @@ var duration : int = 500
 @onready var weapon_origin = get_tree().get_first_node_in_group("weapon_origin")
 
 func _ready():
-	
 	position = weapon_origin.position
 
 func _process(delta):

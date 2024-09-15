@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Worlds/Procedural  World/Random-world.gd" id="1_v8noq"]
 [ext_resource type="Texture2D" uid="uid://b1y8petpk5k0j" path="res://Assets/Images/All the tilesets/TX Tileset Grass Night.png" id="2_e4qki"]
 [ext_resource type="Texture2D" uid="uid://bgc3a2dgis01h" path="res://Assets/Images/All the tilesets/floating island map test.png" id="3_4osue"]
-[ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="8_vfgpb"]
+[ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player.tscn" id="8_vfgpb"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="9_r3gj4"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="10_um2ss"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="11_b3e8h"]
@@ -289,27 +289,21 @@ sources/1 = SubResource("TileSetAtlasSource_na11f")
 
 [sub_resource type="Resource" id="Resource_g8xax"]
 script = ExtResource("11_b3e8h")
-time_start = 0
-time_end = 10000
 enemy = ExtResource("10_um2ss")
 enemy_num = 1
-enemy_spawn_delay = 0
+enemy_type = 0
 
 [sub_resource type="Resource" id="Resource_iq0vr"]
 script = ExtResource("11_b3e8h")
-time_start = 10
-time_end = 10000
 enemy = ExtResource("12_22y40")
 enemy_num = 1
-enemy_spawn_delay = 5
+enemy_type = 0
 
 [sub_resource type="Resource" id="Resource_rdqjc"]
 script = ExtResource("11_b3e8h")
-time_start = 0
-time_end = 10000
 enemy = ExtResource("14_72ou5")
 enemy_num = 1
-enemy_spawn_delay = 30
+enemy_type = 1
 
 [node name="Random-world" type="Node2D"]
 script = ExtResource("1_v8noq")

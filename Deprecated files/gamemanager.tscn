@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Deprecated files/gamemanager.gd" id="1_531g6"]
 [ext_resource type="PackedScene" uid="uid://5kkwx0t5l4e1" path="res://Deprecated files/Background/tree.tscn" id="2_arrib"]
-[ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="3_8mh2j"]
+[ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player.tscn" id="3_8mh2j"]
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Assets/Images/TX Tileset Grass.png" id="5_d4jm0"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="6_b1lhj"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="7_n3sif"]

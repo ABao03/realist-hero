@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Characters/Enemy/Ranged.gd" id="1_7vmal"]
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_1ondh"]
-[ext_resource type="Texture2D" uid="uid://carqcjy00lyew" path="res://Assets/Images/BabyCopperDragon.png" id="3_v6fps"]
+[ext_resource type="Texture2D" uid="uid://carqcjy00lyew" path="res://Assets/Images/Enemy Assets/BabyCopperDragon.png" id="3_v6fps"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="4_pwb1q"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="6_84v5k"]
 

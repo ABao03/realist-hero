@@ -6,7 +6,6 @@ func _ready():
 
 
 func display_number(damage: int, position: Vector2):
-	print("hi")
 	var number = Label.new()
 	number.global_position = position
 	number.text = str(damage)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpgjiwepnvy5b"
-path="res://.godot/imported/recall_progress.png-8f84180a2e5360772006557a52172200.ctex"
+uid="uid://bslq3vrrxnijx"
+path="res://.godot/imported/AdultGreenDragon.png-133009881a621a4466b33eb4e4175be3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/recall_progress.png"
-dest_files=["res://.godot/imported/recall_progress.png-8f84180a2e5360772006557a52172200.ctex"]
+source_file="res://Assets/Images/Enemy Assets/AdultGreenDragon.png"
+dest_files=["res://.godot/imported/AdultGreenDragon.png-133009881a621a4466b33eb4e4175be3.ctex"]
 
 [params]
 

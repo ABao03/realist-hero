@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Characters/Enemy/ranged_boss.gd" id="1_gvf1h"]
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_ro5v8"]
-[ext_resource type="Texture2D" uid="uid://bslq3vrrxnijx" path="res://Assets/AdultGreenDragon.png" id="3_6xsh1"]
+[ext_resource type="Texture2D" uid="uid://bslq3vrrxnijx" path="res://Assets/Images/Enemy Assets/AdultGreenDragon.png" id="3_6xsh1"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="4_8rotw"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="5_kjltm"]
 

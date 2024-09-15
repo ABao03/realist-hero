@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bslq3vrrxnijx"
-path="res://.godot/imported/AdultGreenDragon.png-e9ea0a25b0f594bd6bf4cbd964e0634a.ctex"
+uid="uid://cccyfr3ytebs2"
+path="res://.godot/imported/spawn_circle.png-b870e480253a90b13a19fb0bc846cda0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/AdultGreenDragon.png"
-dest_files=["res://.godot/imported/AdultGreenDragon.png-e9ea0a25b0f594bd6bf4cbd964e0634a.ctex"]
+source_file="res://Assets/Images/Enemy Assets/spawn_circle.png"
+dest_files=["res://.godot/imported/spawn_circle.png-b870e480253a90b13a19fb0bc846cda0.ctex"]
 
 [params]
 

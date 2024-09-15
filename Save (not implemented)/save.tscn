@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://danqq58rj0tqb"]
 
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Assets/Images/TX Tileset Grass.png" id="1_md4s6"]
-[ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player_adolf.tscn" id="2_tai6g"]
+[ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player.tscn" id="2_tai6g"]
 [ext_resource type="Script" path="res://Worlds/Hub World/door1.gd" id="4_s4dd0"]
 [ext_resource type="Script" path="res://Worlds/Hub World/Door2.gd" id="5_gygam"]
 

@@ -1,9 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=29 format=3 uid="uid://b5yppbmj6d2hq"]
 
-[ext_resource type="Script" path="res://Characters/player_adolf.gd" id="1_qvw2t"]
+[ext_resource type="Script" path="res://Characters/player.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://cncqgi38r3poe" path="res://Assets/Images/girl_skeleton-Sheet.png" id="2_1nalt"]
+[ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_8mvuj"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
-[ext_resource type="Texture2D" uid="uid://dpgjiwepnvy5b" path="res://Assets/Images/recall_progress.png" id="6_pc3d2"]
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
 [ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/exp_background.png" id="7_hfoo5"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
@@ -16,14 +16,20 @@
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="23_36e71"]
 [ext_resource type="AudioStream" uid="uid://d1wv3yjw44dlg" path="res://Music/death.mp3" id="24_2egwl"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fv580"]
+radius = 5.0
+height = 12.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d2hy7"]
+shader = ExtResource("2_8mvuj")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7sva7"]
 size = Vector2(10, 12)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4hegg"]
-radius = 3.63732
-height = 32.2119
-
 [sub_resource type="Animation" id="Animation_q5tuw"]
+resource_name = "RESET"
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -36,6 +42,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_f4pko"]
@@ -79,6 +97,43 @@ _data = {
 "walk": SubResource("Animation_sojb0")
 }
 
+[sub_resource type="Animation" id="Animation_0yjfi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_rp8gs"]
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_amou0"]
+_data = {
+"RESET": SubResource("Animation_0yjfi"),
+"hurt": SubResource("Animation_rp8gs")
+}
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_tc7j7"]
 radius = 90.0
 
@@ -86,17 +141,22 @@ radius = 90.0
 radius = 18.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lbryr"]
-radius = 11.0
-height = 47.0
+radius = 13.0
+height = 55.0
 
-[node name="PlayerAdolf" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 z_index = 2
 collision_layer = 2
 script = ExtResource("1_qvw2t")
 
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(3, -10)
+shape = SubResource("CapsuleShape2D_fv580")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
 texture_filter = 1
+material = SubResource("ShaderMaterial_d2hy7")
 position = Vector2(3, -10)
 texture = ExtResource("2_1nalt")
 hframes = 7
@@ -111,16 +171,15 @@ collision_mask = 20
 position = Vector2(-5, 18)
 shape = SubResource("RectangleShape2D_7sva7")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(3, -10)
-scale = Vector2(1.09971, 1.1176)
-shape = SubResource("CapsuleShape2D_4hegg")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 deterministic = true
 libraries = {
 "": SubResource("AnimationLibrary_fjfia")
+}
+
+[node name="HitFlashAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_amou0")
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -162,19 +221,6 @@ anchors_preset = 0
 offset_left = -16.0
 offset_right = 1136.0
 offset_bottom = 648.0
-
-[node name="RecallBar" type="TextureProgressBar" parent="GUILayer/GUI"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 570.0
-offset_top = 280.0
-offset_right = 720.0
-offset_bottom = 300.0
-scale = Vector2(0.3, 0.3)
-max_value = 5.0
-texture_under = ExtResource("7_f0adl")
-texture_progress = ExtResource("6_pc3d2")
 
 [node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
