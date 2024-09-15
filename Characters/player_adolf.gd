@@ -2,7 +2,8 @@
 extends CharacterBody2D
 
 # Stats in data/playerdata to be done
-@export var speed : float = 125
+@export var speed : float = 300
+@export var acceleration : float = 500.0
 @onready var collision = $CollisionShape2D
 @onready var animation_player: bool = true
 @onready var graze_area = $GrazeArea
@@ -87,32 +88,30 @@ func _ready():
 		if inven != null:
 			inventory = inven
 			
-	connect("selected_upgrade",Callable(inventory,"upgrade_character"))
-	connect("despawn_enemies",Callable(spawner,"despawn_enemies"))
-	connect("pause_spawning",Callable(spawner,"pause_spawning"))
+	connect("selected_upgrade", Callable(inventory, "upgrade_character"))
+	connect("despawn_enemies", Callable(spawner, "despawn_enemies"))
+	connect("pause_spawning", Callable(spawner, "pause_spawning"))
 	
-	connect("player_level_up",Callable(spawner,"player_level_up"))
+	connect("player_level_up", Callable(spawner, "player_level_up"))
 
 func _exit_tree():
 	remove_from_group("player")
 
 func _physics_process(delta):
-	var thisSpeed = speed * 100
-	velocity = delta * thisSpeed * axis
-	
 	axis.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left")) 
 	axis.y = int(Input.is_action_pressed("down")) - int(Input.is_action_pressed("up"))
 	
-	if axis.x < 0 && velocity != Vector2(0,0):
-		sprite.flip_h = true
-	elif axis.x > 0 && velocity != Vector2(0,0):
-		sprite.flip_h = false 
-	
 	# Movement stuff
 	if playerPaused == false:
-		velocity.normalized()
-			
-		if velocity == Vector2.ZERO:
+		var desired_velocity = axis.normalized() * speed
+		velocity = velocity.move_toward(desired_velocity, acceleration * delta)
+		
+		if axis.x < 0 and velocity.length() > 0:
+			sprite.flip_h = true
+		elif axis.x > 0 and velocity.length() > 0:
+			sprite.flip_h = false 
+		
+		if velocity.length() == 0:
 			animation.play("idle")
 		else:
 			lastDirectionVector = velocity
@@ -124,6 +123,7 @@ func _physics_process(delta):
 				playerSnd.play()
 		
 		move_and_slide()
+
 		
 	if playerPaused == true:
 		animation.stop()
