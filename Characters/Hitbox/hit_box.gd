@@ -16,7 +16,6 @@ func tempdisable():
 	collision.call_deferred("set", "disabled", true)
 	disableTimer.start()
 
-
 # Re-enable collisions after cooldown runs out. 
 func _on_disable_hitbox_timer_timeout():
 	collision.call_deferred("set", "disabled", false)

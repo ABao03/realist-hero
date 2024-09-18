@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 # Stats in data/playerdata to be done
 @export var speed : float = 300
-@export var acceleration : float = 500.0
+@export var acceleration : float = 1000.0
 @onready var collision = $CollisionShape2D
 @onready var animation_player: bool = true
 @onready var graze_area = $GrazeArea
@@ -104,6 +104,8 @@ func _physics_process(delta):
 	if playerPaused == false:
 		var desired_velocity = axis.normalized() * speed
 		velocity = velocity.move_toward(desired_velocity, acceleration * delta)
+		if axis == Vector2.ZERO:
+			velocity = Vector2.ZERO
 		
 		if axis.x < 0 and velocity.length() > 0:
 			sprite.flip_h = true
@@ -262,7 +264,7 @@ func upgrade_character(upgrade):
 	calculate_experience(0)
 
 func get_random_item():
-	var randomItem = DataHandler.item_data[str(randi_range(1,8))]
+	var randomItem = DataHandler.item_data[str(randi_range(1,7))]
 	return randomItem
 
 func update_stats(data):

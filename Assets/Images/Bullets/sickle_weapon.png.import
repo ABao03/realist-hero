@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy0aaj1fvvbov"
-path="res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"
+uid="uid://c7r0oj6rs58ky"
+path="res://.godot/imported/sickle_weapon.png-0ddcbbc9fef823792c54021400341da8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Bullets/gauntlets_weapon.png"
-dest_files=["res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"]
+source_file="res://Assets/Images/Bullets/sickle_weapon.png"
+dest_files=["res://.godot/imported/sickle_weapon.png-0ddcbbc9fef823792c54021400341da8.ctex"]
 
 [params]
 

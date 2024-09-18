@@ -1,15 +1,14 @@
 [gd_scene load_steps=22 format=3 uid="uid://bh4vi84vnnpf5"]
 
-[ext_resource type="Script" path="res://Characters/Enemy/slime.gd" id="1_dtmf7"]
+[ext_resource type="Script" path="res://Characters/Enemy/jiangshi.gd" id="1_8xwe7"]
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_hl17i"]
+[ext_resource type="Texture2D" uid="uid://c1gw7w8nunjcc" path="res://Assets/Images/Characters/basic_enemy_jiangshi-Sheet.png" id="3_3uyhh"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_moyka"]
-[ext_resource type="Texture2D" uid="uid://ckrpdremyt5p3" path="res://Assets/Images/Characters/slime-Sheet.png" id="3_qqlp7"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="4_d2e3y"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="5_yrl4f"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e5idd"]
-radius = 7.0
-height = 18.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odsrr"]
+size = Vector2(26, 6)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_he13n"]
 resource_local_to_scene = true
@@ -63,7 +62,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qbk7v"]
 resource_name = "idle"
-length = 0.9
+length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -72,10 +71,10 @@ tracks/0/path = NodePath("Slime:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [0, 0]
+"values": [0, 1, 2, 3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6kpg"]
@@ -111,44 +110,45 @@ states/move/position = Vector2(323, 100)
 transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_v76bw"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_xiuwx"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_ffldp")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yey8l"]
-size = Vector2(33, 20)
+size = Vector2(14, 39)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xg1"]
-size = Vector2(20, 10)
+size = Vector2(11, 29)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v580"]
 radius = 142.688
 
-[node name="slime" type="Node2D" groups=["enemy"]]
+[node name="Jiangshi" type="Node2D" groups=["enemy"]]
 
-[node name="slime" type="CharacterBody2D" parent="." groups=["slime"]]
-position = Vector2(16, 12)
+[node name="Jiangshi" type="CharacterBody2D" parent="." groups=["slime"]]
+scale = Vector2(1.25, 1.25)
 collision_layer = 4
 collision_mask = 30
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_dtmf7")
+script = ExtResource("1_8xwe7")
 experience = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="slime"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jiangshi"]
 z_index = 2
-position = Vector2(1, 5)
+position = Vector2(2, 4)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_e5idd")
+shape = SubResource("RectangleShape2D_odsrr")
 
-[node name="Slime" type="Sprite2D" parent="slime"]
+[node name="Slime" type="Sprite2D" parent="Jiangshi"]
 z_index = 2
+texture_filter = 1
 material = SubResource("ShaderMaterial_he13n")
-texture = ExtResource("3_qqlp7")
-hframes = 2
+texture = ExtResource("3_3uyhh")
+hframes = 4
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="slime"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Jiangshi"]
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")
 }
 speed_scale = 0.5
 
-[node name="AnimationTree" type="AnimationTree" parent="slime"]
+[node name="AnimationTree" type="AnimationTree" parent="Jiangshi"]
 libraries = {
 "": SubResource("AnimationLibrary_i6kpg")
 }
@@ -157,32 +157,31 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hurt = false
 parameters/conditions/move = false
 
-[node name="HurtBox" parent="slime" instance=ExtResource("3_moyka")]
-position = Vector2(-16, -12)
+[node name="HurtBox" parent="Jiangshi" instance=ExtResource("3_moyka")]
 collision_layer = 4
 collision_mask = 8
 
-[node name="CollisionShape2D" parent="slime/HurtBox" index="0"]
-position = Vector2(16.5, 16)
+[node name="CollisionShape2D" parent="Jiangshi/HurtBox" index="0"]
+position = Vector2(2, -0.5)
 shape = SubResource("RectangleShape2D_yey8l")
 
-[node name="HitBox" parent="slime" instance=ExtResource("4_d2e3y")]
+[node name="HitBox" parent="Jiangshi" instance=ExtResource("4_d2e3y")]
 collision_layer = 4
 
-[node name="CollisionShape2D" parent="slime/HitBox" index="0"]
-position = Vector2(1, 5)
+[node name="CollisionShape2D" parent="Jiangshi/HitBox" index="0"]
+position = Vector2(1.5, 0.5)
 shape = SubResource("RectangleShape2D_g0xg1")
 
-[node name="DamageNumbers" parent="slime" instance=ExtResource("5_yrl4f")]
+[node name="DamageNumbers" parent="Jiangshi" instance=ExtResource("5_yrl4f")]
 position = Vector2(1, -6)
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="slime"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="Jiangshi"]
 
-[node name="Timer" type="Timer" parent="slime"]
+[node name="Timer" type="Timer" parent="Jiangshi"]
 wait_time = 0.3
 autostart = true
 
-[node name="Snd" type="AudioStreamPlayer2D" parent="slime"]
+[node name="Snd" type="AudioStreamPlayer2D" parent="Jiangshi"]
 position = Vector2(-16, -12)
 volume_db = -5.0
 
@@ -194,11 +193,11 @@ collision_mask = 2
 position = Vector2(17, 17)
 shape = SubResource("CircleShape2D_5v580")
 
-[connection signal="animation_finished" from="slime/AnimationTree" to="slime" method="_on_animation_tree_animation_finished"]
-[connection signal="hurt" from="slime/HurtBox" to="slime" method="_on_hurt_box_hurt"]
-[connection signal="timeout" from="slime/Timer" to="slime" method="_on_timer_timeout"]
-[connection signal="finished" from="slime/Snd" to="slime" method="_on_snd_finished"]
-[connection signal="body_entered" from="Area2D" to="slime" method="_on_area_2d_body_entered"]
+[connection signal="animation_finished" from="Jiangshi/AnimationTree" to="Jiangshi" method="_on_animation_tree_animation_finished"]
+[connection signal="hurt" from="Jiangshi/HurtBox" to="Jiangshi" method="_on_hurt_box_hurt"]
+[connection signal="timeout" from="Jiangshi/Timer" to="Jiangshi" method="_on_timer_timeout"]
+[connection signal="finished" from="Jiangshi/Snd" to="Jiangshi" method="_on_snd_finished"]
+[connection signal="body_entered" from="Area2D" to="Jiangshi" method="_on_area_2d_body_entered"]
 
-[editable path="slime/HurtBox"]
-[editable path="slime/HitBox"]
+[editable path="Jiangshi/HurtBox"]
+[editable path="Jiangshi/HitBox"]

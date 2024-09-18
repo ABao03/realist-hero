@@ -38,8 +38,6 @@ func _ready():
 		if thisPlayer != null:
 			player = thisPlayer
 	
-	#sprite.visible = false
-	#if just_spawned == true:
 	$SpawnTimer.start()
 	connect("died",Callable(spawner,"on_enemy_death"))
 
@@ -48,32 +46,10 @@ func _physics_process(_delta):
 	var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	
 	velocity = direction * movement_speed
-	
-	#if just_spawned == true:
-		#await get_tree().create_timer(3).timeout
-		#just_spawned = false
-	#else:
-	
-	#if in_range == false or just_spawned == true:
-		#velocity = direction * movement_speed
-		#await get_tree().create_timer(3).timeout
-		#just_spawned = false
 		
 	if in_range == true and just_spawned == false:
 		velocity = Vector2(0.01,0.01)
 		
-		#if bow_cooldown == true:
-			#bow_cooldown = false
-			#
-			#var player_pos = player.global_position
-			#$Marker2D.look_at(player_pos)
-			#
-			#var arrow_instance = arrow.instantiate()
-			#
-			#arrow_instance.rotation = $Marker2D.rotation
-			#arrow_instance.global_position = $Marker2D.global_position
-			#add_child(arrow_instance)
-				
 	await get_tree().create_timer(5).timeout # Delay between projectile atacks
 			#bow_cooldown = true
 		
@@ -89,16 +65,6 @@ func _physics_process(_delta):
 		sprite.flip_h = false
 	elif direction.x < -0.1:
 		sprite.flip_h = true
-
-#func make_path():
-	#nav_agent.target_position = player.global_position
-	#if last_position == to_local(nav_agent.get_next_path_position()): 
-		#emit_signal("died") 
-		#queue_free()
-	#if last_position != Vector2(0,0):
-		#sprite.visible = true
-	#
-	#last_position = to_local(nav_agent.get_next_path_position())
 
 # Slime is killed by damage
 func death():
@@ -126,12 +92,8 @@ func _on_animation_tree_animation_finished(anim_name):
 	if anim_name == "hurt":
 		hurtAnimationPlaying = false
 
-#func _on_timer_timeout():
-	#make_path()
-
 func _on_area_2d_body_entered(body):
 	in_range = true
-	#$Marker2D.look_at(player_pos)
 
 func _on_area_2d_body_exited(body):
 	in_range = false
@@ -148,13 +110,6 @@ func shoot(angle):
 	
 	bullet.position = global_position
 	bullet.direction = get_vector(angle)
-	
-	if yinBullet == false:
-		yinBullet = true
-		bullet.type = 0
-	else:
-		yinBullet = false
-		bullet.type = 1
 	
 	get_tree().current_scene.call_deferred("add_child", bullet)
 

@@ -123,7 +123,7 @@ motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_7vmal")
 experience = 3
-alpha = 5.045
+alpha = 5.324
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2

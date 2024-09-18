@@ -1,11 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://84uroj3gdqvp"]
+[gd_scene load_steps=10 format=3 uid="uid://84uroj3gdqvp"]
 
-[ext_resource type="Texture2D" uid="uid://domfyg75mfgs0" path="res://Assets/Images/Bullets/wand_weapon.png" id="1_vsjhm"]
+[ext_resource type="Texture2D" uid="uid://coitcp8ngfe7a" path="res://Assets/Images/Bullets/pickaxe_weapon.png" id="1_drp4q"]
 [ext_resource type="Script" path="res://Characters/Weapons/player_bullet.gd" id="2_w0miv"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="3_mn8vp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3w3s2"]
-radius = 15.0
+radius = 13.3333
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4pr4"]
+size = Vector2(9.19239, 31.8198)
 
 [sub_resource type="Animation" id="Animation_ya238"]
 length = 0.5
@@ -78,22 +81,37 @@ _data = {
 
 [node name="player_bullet" type="Sprite2D"]
 texture_filter = 1
-texture = ExtResource("1_vsjhm")
+rotation = 6.1887
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_drp4q")
 hframes = 3
 script = ExtResource("2_w0miv")
 
-[node name="SpinningHitBox" parent="." instance=ExtResource("3_mn8vp")]
+[node name="CircleHitBox" parent="." instance=ExtResource("3_mn8vp")]
 collision_layer = 8
 collision_mask = 4
 
-[node name="CollisionShape2D" parent="SpinningHitBox" index="0"]
+[node name="CollisionShape2D" parent="CircleHitBox" index="0"]
 shape = SubResource("CircleShape2D_3w3s2")
+disabled = true
+
+[node name="RectHitBox" parent="." instance=ExtResource("3_mn8vp")]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="RectHitBox" index="0"]
+position = Vector2(0.5, 3.66977e-07)
+rotation = 0.785398
+shape = SubResource("RectangleShape2D_c4pr4")
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_djckb")
 }
 
-[connection signal="area_entered" from="SpinningHitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="CircleHitBox" to="." method="_on_circle_hit_box_area_entered"]
+[connection signal="area_entered" from="RectHitBox" to="." method="_on_rect_hit_box_area_entered"]
 
-[editable path="SpinningHitBox"]
+[editable path="CircleHitBox"]
+[editable path="RectHitBox"]

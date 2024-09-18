@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy0aaj1fvvbov"
-path="res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"
+uid="uid://bpx83f1wu7plj"
+path="res://.godot/imported/bulwark_weapon.png-779aacefffc2219e8bcf9c7a19cd8d55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Bullets/gauntlets_weapon.png"
-dest_files=["res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"]
+source_file="res://Assets/Images/Bullets/bulwark_weapon.png"
+dest_files=["res://.godot/imported/bulwark_weapon.png-779aacefffc2219e8bcf9c7a19cd8d55.ctex"]
 
 [params]
 

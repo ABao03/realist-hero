@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy0aaj1fvvbov"
-path="res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"
+uid="uid://rypkix36gaej"
+path="res://.godot/imported/suspicious_seal_weapon.png-8b80980f0bf75c4e7759ac7459f87509.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Bullets/gauntlets_weapon.png"
-dest_files=["res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"]
+source_file="res://Assets/Images/Bullets/suspicious_seal_weapon.png"
+dest_files=["res://.godot/imported/suspicious_seal_weapon.png-8b80980f0bf75c4e7759ac7459f87509.ctex"]
 
 [params]
 

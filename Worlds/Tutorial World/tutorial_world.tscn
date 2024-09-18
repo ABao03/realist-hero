@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="4_dsdcn"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="4_nwlgj"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/fill.gd" id="5_mjvyc"]
-[ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="5_yi8pc"]
+[ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/jiangshi.tscn" id="5_yi8pc"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="6_427l5"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="6_hbc73"]
 [ext_resource type="PackedScene" path="res://Characters/abilities/ability_handler.tscn" id="7_gqisf"]

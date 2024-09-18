@@ -36,8 +36,6 @@ func _physics_process(_delta):
 	
 	#var direction = to_local(nav_agent.get_next_path_position()).normalized()
 	var direction = global_position.direction_to(player.global_position)
-	sprite.look_at(player.global_position)
-	sprite.rotation -= PI / 2
 	
 	velocity = direction * movement_speed
 	if hurtAnimationPlaying == true:

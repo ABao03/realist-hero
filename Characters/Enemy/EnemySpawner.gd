@@ -69,7 +69,7 @@ func telegraph_spawn(enemy):
 	spawn_indicator.global_position = enemy.global_position
 	add_child(spawn_indicator)
 	
-		# Set a timer to delete the red circle after 3 seconds
+	# Set a timer to delete the red circle after 3 seconds
 	var timer = Timer.new()
 	timer.wait_time = 3.0
 	timer.one_shot = true
@@ -114,18 +114,6 @@ func dragon_spawn():
 	var enemy_instance = enemy.instantiate()
 	enemy_instance.global_position =Vector2(-450,-212)
 	add_child(enemy_instance)
-
-#func _on_dragon_timer_timeout():
-	#if player.experience_level == 2 && get_tree().current_scene.name != "Tutorial_World":
-		#timer.stop()
-		#for bruh in get_children():
-			#if bruh.is_in_group("enemy"):
-				#bruh.queue_free()
-			#print(player.experience_level)
-		#var enemy_instance = enemy.instantiate()
-		#enemy_instance.global_position =Vector2(10,200)
-		#add_child(enemy_instance)
-			
 
 # Randomly generate the enemy's position based on where the player is at 
 func get_random_position():

@@ -4,6 +4,7 @@
 
 [node name="EnemySpawner" type="Node2D" groups=["spawner"]]
 script = ExtResource("1_1i88b")
+spawns = null
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

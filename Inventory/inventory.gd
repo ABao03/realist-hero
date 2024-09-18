@@ -41,7 +41,7 @@ signal start_spawning()
 var weapon_origin
 
 # DEBUG
-@onready var itemArray = [3, 1]
+@onready var itemArray = [7]
 @onready var index = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -58,7 +58,6 @@ func _ready():
 	for i in range(80):
 		create_slot()
 	visible = false
-	
 
 # Open and close inventory
 func open():

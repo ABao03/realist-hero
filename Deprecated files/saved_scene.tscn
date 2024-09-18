@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player.tscn" id="4_u8pxi"]
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Assets/Images/Tilesets/TX Tileset Grass.png" id="6_5jt7j"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="7_ffooh"]
-[ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/slime.tscn" id="9_opc44"]
+[ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/jiangshi.tscn" id="9_opc44"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="10_wjdvv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gtnxh"]

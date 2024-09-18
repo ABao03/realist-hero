@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy0aaj1fvvbov"
-path="res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"
+uid="uid://c1gw7w8nunjcc"
+path="res://.godot/imported/basic_enemy_jiangshi-Sheet.png-bec5fb1dcb065b01b37fbcba361ed9bb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Bullets/gauntlets_weapon.png"
-dest_files=["res://.godot/imported/gauntlets_weapon.png-d1b4d9608442e0b296d67a40ec805789.ctex"]
+source_file="res://Assets/Images/Characters/basic_enemy_jiangshi-Sheet.png"
+dest_files=["res://.godot/imported/basic_enemy_jiangshi-Sheet.png-bec5fb1dcb065b01b37fbcba361ed9bb.ctex"]
 
 [params]
 

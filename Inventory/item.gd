@@ -7,10 +7,11 @@ extends Node2D
 var item_ID : String
 var item_name : String
 var item_grids := []
-#var stats_data := {}
+
 var item_damage : int
 var item_type : String
 var item_class : String
+var item_bullet_count : int
 var item_fire_rate : float
 var item_speed : int
 var item_bullet_type : String
@@ -70,8 +71,8 @@ func load_item(a_ItemID : int) -> void:
 	item_ID = str(DataHandler.item_data[str(a_ItemID)]["ID"])
 	item_name = DataHandler.item_data[str(a_ItemID)]["Name"]
 	item_damage = DataHandler.item_data[str(a_ItemID)]["Damage"]
-	item_type = DataHandler.item_data[str(a_ItemID)]["Type"]
 	item_class = DataHandler.item_data[str(a_ItemID)]["Class"]
+	item_bullet_count = DataHandler.item_data[str(a_ItemID)]["BulletCount"]
 	item_fire_rate = DataHandler.item_data[str(a_ItemID)]["FireRate"]
 	item_speed = DataHandler.item_data[str(a_ItemID)]["Speed"]
 	item_bullet_type = DataHandler.item_data[str(a_ItemID)]["BulletType"]

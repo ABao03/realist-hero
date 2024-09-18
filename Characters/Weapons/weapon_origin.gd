@@ -7,6 +7,10 @@ var player
 # Dictionary to keep track of timers and their identifiers
 var timers = {}
 
+# Track orbiting weapon instances
+var bulwarkCount = 0
+var gauntletsCount = 0
+
 func _ready():
 	var players = get_tree().get_nodes_in_group("player")
 	for thisPlayer in players:
@@ -47,53 +51,70 @@ func remove_timer(timer_id: String) -> void:
 # Function called when the Timer times out
 func _on_timer_timeout(timer_id: String) -> void:
 	# Perform any action based on the specific timer
-	var imageFilePath
 	var thisBullet = bullet.instantiate()
-	thisBullet.scale.x = 1.5
-	thisBullet.scale.y = 1.5
-	var thisItem
+
 	match timer_id:
 		"Pickaxe":
-			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
-			thisItem = DataHandler.item_data["1"]
-			
 			get_parent().add_child(thisBullet)
-			thisBullet.setup(imageFilePath, thisItem["Damage"], true)
+			thisBullet.setup("1", true)
+			
 		"Dagger":
-			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
-			thisItem = DataHandler.item_data["2"]
-			
 			get_parent().add_child(thisBullet)
-			thisBullet.setup(imageFilePath, thisItem["Damage"], true)
+			thisBullet.setup("2", true)
 			thisBullet.scale.x = 0.75
 			thisBullet.scale.y = 0.75
+			
 		"Wand":
-			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
-			thisItem = DataHandler.item_data["3"]
-			
 			get_parent().add_child(thisBullet)
-			thisBullet.setup(imageFilePath, thisItem["Damage"], false)
+			thisBullet.setup("3", false)
 			thisBullet.scale.x = 1.5
 			thisBullet.scale.y = 1.5
+			for i in range(thisBullet.bulletCount):
+				if i != 0:
+					thisBullet = bullet.instantiate()
+					get_parent().add_child(thisBullet)
+					thisBullet.setup("3", false)
+				thisBullet.add_even_spread(i)
+			
 		"Longsword":
-			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
-			thisItem = DataHandler.item_data["4"]
-			
 			get_parent().add_child(thisBullet)
-			thisBullet.setup(imageFilePath, thisItem["Damage"], false)
+			thisBullet.setup("4", false)
 			thisBullet.scale.x = 1.5
 			thisBullet.scale.y = 1.5
+			
 		"Bulwark":
-			imageFilePath = "res://Assets/Images/Bullets/" + timer_id.to_lower().replace(" ", "_") + "_weapon.png"
-			thisItem = DataHandler.item_data["5"]
-			
 			get_parent().add_child(thisBullet)
-			thisBullet.setup(imageFilePath, thisItem["Damage"], false)
-			thisBullet.scale.x = 1.5
-			thisBullet.scale.y = 1.5
+			thisBullet.setup("5", false)
+			thisBullet.orbitRadius = 40
+			bulwarkCount += 1
+			thisBullet.check_bulwark_count(bulwarkCount)
+			
+		"Sickle":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("6", true)
+			
+		"Suspicious Seal":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("7", true)
+			thisBullet.scale.x = 0.5
+			thisBullet.scale.y = 0.5
+			thisBullet.add_random_spread()
+		
+		#"Gauntlets":
+			#get_parent().add_child(thisBullet)
+			#thisBullet.setup("5", false)
+			#thisBullet.orbitRadius = 60
+			#gauntletCount += 1
+			#thisBullet.check_gauntlet_count(gauntletCount)
 
 func _process(delta):
 	position = player.position
+
+func bulwark_deleted():
+	bulwarkCount -= 1
+
+func gauntlets_deleted():
+	gauntletsCount -= 1
 
 # old
 #func _on_timer_timeout():
