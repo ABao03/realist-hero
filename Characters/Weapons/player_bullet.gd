@@ -94,7 +94,7 @@ func setup(itemID : String, isSpinning : bool):
 	activeHitBox.collision.disabled = false
 	activeHitBox.damage = thisItem["Damage"]
 
-func add_spread(currBulletIndex : int):
+func add_even_spread(currBulletIndex : int):
 	var spreadAngle = deg_to_rad(360/bulletCount * currBulletIndex)
 	direction = Vector2(cos(spreadAngle), sin(spreadAngle))
 	rotation = spreadAngle + deg_to_rad(45)
@@ -131,6 +131,12 @@ func _on_rect_hit_box_area_entered(area):
 		explode()
 
 func check_bulwark_count(currentCount : int):
-	if currentCount > bulletCount:
+	var activeBulwarks = 0
+	
+	for timer in weapon_origin.timers:
+		if timer == "Bulwark":
+			activeBulwarks += 1
+	
+	if currentCount > activeBulwarks:
 		emit_signal("bulwark_deleted")
 		queue_free()

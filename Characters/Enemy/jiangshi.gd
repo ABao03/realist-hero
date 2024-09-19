@@ -10,7 +10,7 @@ var enemy_type = 0
 @onready var loot_base = get_tree().get_first_node_in_group("loot")
 @onready var nav_agent := $NavigationAgent2D as NavigationAgent2D
 @onready var last_position = Vector2(0,0)
-@onready var sprite = $Slime
+@onready var sprite = $Jiangshi
 @onready var damage_numbers_origin = $DamageNumbers
 @onready var damage = $HitBox.damage
 
@@ -67,7 +67,7 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
-	emit_signal("died")
+	emit_signal("died", enemy_type)
 	queue_free()
 	
 	# Slime died but don't queue free yet because we need to play the sound

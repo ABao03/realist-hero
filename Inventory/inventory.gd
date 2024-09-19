@@ -41,7 +41,7 @@ signal start_spawning()
 var weapon_origin
 
 # DEBUG
-@onready var itemArray = [7]
+@onready var itemArray = [5,6]
 @onready var index = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -303,10 +303,15 @@ func delete_from_inventory(thisItem):
 				grid_array[grid_to_check].state = grid_array[grid_to_check].States.FREE 
 				grid_array[grid_to_check].item_stored = null
 				
+			# Clear the associated timer from weapon_origin
+			for timer in weapon_origin.timers:
+				if timer == thisItem.item_name:
+					weapon_origin.timers[timer].queue_free()
+				
 			# Wiping from currentInventory array
 			currentInventory.erase(thisItem)
 			thisItem.delete_item()
-				
+			
 			# Update grid
 			#set_grids.call_deferred(current_slot)
 		

@@ -72,7 +72,7 @@ func death():
 	new_gem.global_position = global_position
 	new_gem.experience = experience
 	loot_base.call_deferred("add_child", new_gem)
-	emit_signal("died") 
+	emit_signal("died", enemy_type) 
 	queue_free()
 
 func _on_hurt_box_hurt(damage):

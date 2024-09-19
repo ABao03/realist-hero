@@ -96,8 +96,8 @@ func _on_timer_timeout(timer_id: String) -> void:
 		"Suspicious Seal":
 			get_parent().add_child(thisBullet)
 			thisBullet.setup("7", true)
-			thisBullet.scale.x = 0.5
-			thisBullet.scale.y = 0.5
+			thisBullet.scale.x = 0.75
+			thisBullet.scale.y = 0.75
 			thisBullet.add_random_spread()
 		
 		#"Gauntlets":

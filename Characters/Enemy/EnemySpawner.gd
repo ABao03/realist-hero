@@ -56,9 +56,10 @@ func spawn_wave():
 	
 	while ranged_enemy_counter < ranged_enemy_cap: # when the number of enemies is smaller than the enemy cap
 		# randomly generate a new enemy using the ranged enemy id list (this will need to be manually updated probably)
-		var new_enemy = spawns[int(randf_range(0, ranged_enemy_id_list.size()))].enemy
+		var new_enemy = spawns[2].enemy
 		var enemy_spawn = new_enemy.instantiate()
 		telegraph_spawn(enemy_spawn)
+		print(enemy_spawn)
 		
 		ranged_enemy_counter += 1 # number of basic enemies gets incremeneted
 
@@ -164,9 +165,14 @@ func start_spawning():
 func start_spawn_minions():
 	timer.start()
 
-func on_enemy_death():
-	basic_enemy_counter -= 1
-	#print("hi", enemy_counter)
+func on_enemy_death(enemy_type_killed):
+	print(enemy_type_killed)
+	if enemy_type_killed == 0:
+		basic_enemy_counter -= 1
+		print("-1 basic\n")
+	elif enemy_type_killed == 1:
+		ranged_enemy_counter -= 1
+		print("-1 ranged\n")
 
 func player_level_up():
 	leveled_up = true
