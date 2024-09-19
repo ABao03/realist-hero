@@ -30,11 +30,13 @@ var activeHitBox
 # send signals to origin
 signal bulwark_deleted()
 signal gauntlet_deleted()
+signal oni_deleted()
 
 func _ready():
 	position = weapon_origin.position
 	connect("bulwark_deleted",Callable(weapon_origin,"bulwark_deleted"))
 	connect("gauntlet_deleted",Callable(weapon_origin,"gauntlet_deleted"))
+	connect("oni_deleted",Callable(weapon_origin, "oni_deleted"))
 
 func _process(delta):
 	# If bullet class is targeted or spread, it flies in a straight line, runs out of duration, and is deleted
@@ -118,6 +120,10 @@ func explode():
 	
 	if thisItem["Name"] == "Gauntlets":
 		emit_signal("gauntlets_deleted")
+	
+	if thisItem["Name"] == "Oni's Star":
+		emit_signal("oni_deleted")	
+	
 	queue_free()
 
 func _on_circle_hit_box_area_entered(area):
@@ -139,4 +145,15 @@ func check_bulwark_count(currentCount : int):
 	
 	if currentCount > activeBulwarks:
 		emit_signal("bulwark_deleted")
+		queue_free()
+
+func check_oni_count(currentCount : int):
+	var activeOni = 0
+	
+	for timer in weapon_origin.timers:
+		if timer == "Oni's Star":
+			activeOni += 1
+	
+	if currentCount > activeOni:
+		emit_signal("oni_deleted")
 		queue_free()

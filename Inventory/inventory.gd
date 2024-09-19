@@ -41,7 +41,7 @@ signal start_spawning()
 var weapon_origin
 
 # DEBUG
-@onready var itemArray = [5,6]
+@onready var itemArray = [10]
 @onready var index = 0
 
 # Called when the node enters the scene tree for the first time.

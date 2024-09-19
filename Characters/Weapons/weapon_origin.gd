@@ -10,6 +10,7 @@ var timers = {}
 # Track orbiting weapon instances
 var bulwarkCount = 0
 var gauntletsCount = 0
+var oniCount = 0
 
 func _ready():
 	var players = get_tree().get_nodes_in_group("player")
@@ -99,6 +100,18 @@ func _on_timer_timeout(timer_id: String) -> void:
 			thisBullet.scale.x = 0.75
 			thisBullet.scale.y = 0.75
 			thisBullet.add_random_spread()
+			
+		"Inverted Spear":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("12",false)
+		
+		"Oni's Star":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("10",true)
+			thisBullet.orbitRadius = 50
+			oniCount += 1
+			thisBullet.check_oni_count(oniCount)
+			
 		
 		#"Gauntlets":
 			#get_parent().add_child(thisBullet)
@@ -115,6 +128,9 @@ func bulwark_deleted():
 
 func gauntlets_deleted():
 	gauntletsCount -= 1
+
+func oni_deleted():
+	oniCount -= 1
 
 # old
 #func _on_timer_timeout():
