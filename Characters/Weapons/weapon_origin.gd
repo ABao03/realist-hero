@@ -112,6 +112,16 @@ func _on_timer_timeout(timer_id: String) -> void:
 			oniCount += 1
 			thisBullet.check_oni_count(oniCount)
 			
+		"Pulsing Halberd":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("11",false)
+			for i in range(thisBullet.bulletCount):
+				if i != 0:
+					thisBullet = bullet.instantiate()
+					get_parent().add_child(thisBullet)
+					thisBullet.setup("11", false)
+				thisBullet.add_even_spread(i)
+			
 		
 		#"Gauntlets":
 			#get_parent().add_child(thisBullet)
