@@ -726,7 +726,7 @@ Star Stage 1.png::CompressedTexture2D::4621132184121714826::1726781800::17267818
 sword.png::CompressedTexture2D::4315550935097419233::1726781800::1726781842::1::::<><>::
 top-down skeleton-Sheet.png::CompressedTexture2D::8742316391507907283::1726781800::1726781843::1::::<><>::
 x-button.png::CompressedTexture2D::1991411250533729648::1726781800::1726781843::1::::<><>::
-::res://Assets/Images/Bullets/::1726782975
+::res://Assets/Images/Bullets/::1726803436
 bulwark_weapon.png::CompressedTexture2D::3488787993406839099::1726781800::1726781842::1::::<><>::
 dagger_weapon.png::CompressedTexture2D::4436927166721223918::1726781800::1726781842::1::::<><>::
 dainsleif_bow_weapon.png::CompressedTexture2D::5837863257982172859::1726781800::1726781842::1::::<><>::
@@ -738,6 +738,7 @@ inverted_spear_weapon.png::CompressedTexture2D::3845107420794699393::1726782619:
 longsword_weapon.png::CompressedTexture2D::7038828546174696039::1726781800::1726781842::1::::<><>::
 onis_star_weapon.png::CompressedTexture2D::4423364817408047247::1726782925::1726782981::1::::<><>::
 pickaxe_weapon.png::CompressedTexture2D::5773158234229184952::1726781800::1726781842::1::::<><>::
+pulsing_halberd_weapon.png::CompressedTexture2D::3778548635629450597::1726803436::1726803438::1::::<><>::
 sickle_weapon.png::CompressedTexture2D::7055522232952846816::1726781800::1726781842::1::::<><>::
 suspicious_seal_weapon.png::CompressedTexture2D::1243684477805688049::1726781800::1726781842::1::::<><>::
 wand_weapon.png::CompressedTexture2D::8167025205031168701::1726781800::1726781842::1::::<><>::
@@ -859,16 +860,16 @@ hit_box.gd::GDScript::-1::1726781803::0::1::::<>Area2D<>::
 hit_box.tscn::PackedScene::7845138849173671698::1726781803::0::1::::<><>::res://Characters/Hitbox/hit_box.gd
 hurt_box.gd::GDScript::-1::1726781803::0::1::::<>Area2D<>::
 hurt_box.tscn::PackedScene::4717317525185579792::1726781803::0::1::::<><>::res://Characters/Hitbox/hurt_box.gd
-::res://Characters/Weapons/::1726782890
+::res://Characters/Weapons/::1726795246
 deathParticle.gd::GDScript::-1::1726781803::0::1::::<>GPUParticles2D<>::
 deathParticle.tscn::PackedScene::6260988104046404739::1726781803::0::1::::<><>::res://Characters/Weapons/deathParticle.gd
-player_bullet.gd::GDScript::-1::1726781803::0::1::::<>Sprite2D<>::
-player_bullet.tscn::PackedScene::2377344243785003473::1726782627::0::1::::<><>::uid://coitcp8ngfe7a::::res://Assets/Images/Bullets/pickaxe_weapon.png<>res://Characters/Weapons/player_bullet.gd<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn
-weapon_origin.gd::GDScript::-1::1726782890::0::1::::<>Marker2D<>::
-weapon_origin.tscn::PackedScene::187632906833321719::1726782890::0::1::::<><>::res://Characters/Weapons/weapon_origin.gd
-::res://Data/::1726782063
+player_bullet.gd::GDScript::-1::1726783582::0::1::::<>Sprite2D<>::
+player_bullet.tscn::PackedScene::2377344243785003473::1726795192::0::1::::<><>::uid://coitcp8ngfe7a::::res://Assets/Images/Bullets/pickaxe_weapon.png<>res://Characters/Weapons/player_bullet.gd<>uid://dj1ij488dekna::::res://Characters/Hitbox/hit_box.tscn
+weapon_origin.gd::GDScript::-1::1726794851::0::1::::<>Marker2D<>::
+weapon_origin.tscn::PackedScene::187632906833321719::1726795246::0::1::::<><>::res://Characters/Weapons/weapon_origin.gd
+::res://Data/::1726795169
 DataHandler.gd::GDScript::-1::1726781803::0::1::::<>Node<>::
-Item_data.json::JSON::-1::1726782063::0::1::::<><>::
+Item_data.json::JSON::-1::1726795169::0::1::::<><>::
 PlayerStatDataHandler.gd::GDScript::-1::1726781803::0::1::::<>Node<>::
 ::res://Deprecated files/::1726781803
 DEPRECATED_weapon.gd::GDScript::-1::1726781803::0::1::::<>Marker2D<>::
@@ -898,22 +899,22 @@ CAMBRIA.TTC::FontFile::178975118560672299::1726781803::1726781841::1::::<><>::
 CAMBRIAB.TTF::FontFile::4586833295546370841::1726781803::1726781841::1::::<><>::
 CAMBRIAI.TTF::FontFile::6442532545763141232::1726781803::1726781841::1::::<><>::
 CAMBRIAZ.TTF::FontFile::7186213338800642863::1726781803::1726781841::1::::<><>::
-::res://Inventory/::1726782454
+::res://Inventory/::1726795192
 hover_info.gd::GDScript::-1::1726781803::0::1::::<>ColorRect<>::
 hover_info.tscn::PackedScene::8456412683199391309::1726781803::0::1::::<><>::res://Inventory/hover_info.gd
-inventory.gd::GDScript::-1::1726782454::0::1::::<>Control<>::
+inventory.gd::GDScript::-1::1726795067::0::1::::<>Control<>::
 inventory.tscn::PackedScene::1782559254499775234::1726781803::0::1::::<><>::res://Inventory/inventory.gd<>uid://b2hs2ntkap0sh::::res://Assets/Images/Menus/backpack.png<>uid://dsql475l10syn::::res://Inventory/hover_info.tscn
 item.gd::GDScript::-1::1726781803::0::1::::<>Node2D<>::
-item.tscn::PackedScene::5220632423001930039::1726781803::0::1::::<><>::res://Inventory/item.gd<>uid://dacx3dsr3ysl8::::res://Characters/hit_flash.tres
+item.tscn::PackedScene::5220632423001930039::1726795192::0::1::::<><>::res://Inventory/item.gd<>uid://dacx3dsr3ysl8::::res://Characters/hit_flash.tres
 slot.gd::GDScript::-1::1726781803::0::1::::<>TextureRect<>::
 slot.tscn::PackedScene::3976353318320087248::1726781803::0::1::::<><>::uid://c0k38wcn2trlw::::res://Assets/slot1.png<>res://Inventory/slot.gd
-::res://Menu/::1726782627
+::res://Menu/::1726795192
 Death.gd::GDScript::-1::1726781803::0::1::::<>Control<>::
 death.tscn::PackedScene::3832934885968145673::1726781803::0::1::::<><>::res://Menu/Death.gd<>uid://cq14qho0qlf1x::::res://Assets/Images/Menus/discord.png
 loading_screen.gd::GDScript::-1::1726781803::0::1::::LoadingScreen<>CanvasLayer<>::
 loading_screen.tscn::PackedScene::9043442816996412473::1726781803::0::1::::<><>::res://Menu/loading_screen.gd
 Menu.gd::GDScript::-1::1726781803::0::1::::<>Control<>::
-menu.tscn::PackedScene::7296551313000196917::1726782627::0::1::::<><>::res://Menu/Menu.gd<>uid://0c8gqiday546::::res://Assets/Images/Menus/title screen.png<>uid://db82p0hpb4y75::::res://Assets/Images/Menus/start_button.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3<>uid://b3521ylth6p68::::res://Assets/Images/Menus/settings_button.png<>uid://dndvx3hf77erj::::res://Assets/Images/Menus/quit_button.png<>uid://cq14qho0qlf1x::::res://Assets/Images/Menus/discord.png
+menu.tscn::PackedScene::7296551313000196917::1726795192::0::1::::<><>::res://Menu/Menu.gd<>uid://0c8gqiday546::::res://Assets/Images/Menus/title screen.png<>uid://db82p0hpb4y75::::res://Assets/Images/Menus/start_button.png<>uid://csxxuldqoa2f::::res://Fonts/CAMBRIA.TTC<>uid://crugsjevjtoqc::::res://Music/the-white-lion-10379.mp3<>uid://b3521ylth6p68::::res://Assets/Images/Menus/settings_button.png<>uid://dndvx3hf77erj::::res://Assets/Images/Menus/quit_button.png<>uid://cq14qho0qlf1x::::res://Assets/Images/Menus/discord.png
 SceneManager.gd::GDScript::-1::1726781803::0::1::::<>Node<>::
 ::res://Menu/Pause/::1726781803
 PauseMenu.gd::GDScript::-1::1726781803::0::1::::<>CanvasLayer<>::
