@@ -20,11 +20,6 @@ func _ready():
 			
 	if player != null:
 		position = player.global_position
-	
-	# Example: Create multiple timers with different wait times
-	#create_timer(2.0, "timer_1")
-	#create_timer(4.0, "timer_2")
-	#create_timer(1.0, "timer_3")
 
 # Function to dynamically create a Timer node
 func create_timer(wait_time: float, timer_id: String) -> void:

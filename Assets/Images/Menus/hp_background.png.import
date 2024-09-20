@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdcys2h3m3tnr"
-path="res://.godot/imported/exp_progress.png-73064268fbf1db3dc07b01b4b79fb031.ctex"
+uid="uid://d18ev83q6aql5"
+path="res://.godot/imported/hp_background.png-0e103bdd73774ee2ab0bbad5a7753b76.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/exp_progress.png"
-dest_files=["res://.godot/imported/exp_progress.png-73064268fbf1db3dc07b01b4b79fb031.ctex"]
+source_file="res://Assets/Images/Menus/hp_background.png"
+dest_files=["res://.godot/imported/hp_background.png-0e103bdd73774ee2ab0bbad5a7753b76.ctex"]
 
 [params]
 

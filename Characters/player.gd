@@ -69,7 +69,6 @@ var signal_emitted = false
 
 # Light stuff
 @onready var pointLight = $PointLight2D
-@onready var ambientLight = $PointLight2D3
 var shaderEnabled : bool = false
 
 func _ready():
@@ -272,7 +271,6 @@ func update_stats(data):
 
 func disable_light():
 	pointLight.visible = false
-	ambientLight.visible = false
 
 func _on_level_up_debug_button_pressed():
 	calculate_experience(calculate_experiencecap())

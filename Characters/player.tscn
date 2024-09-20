@@ -5,13 +5,13 @@
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_8mvuj"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
 [ext_resource type="Texture2D" uid="uid://bbtyeplvpm0i2" path="res://Assets/Images/Characters/yin-yang.png" id="5_k733h"]
-[ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/hp_background.png" id="7_f0adl"]
-[ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/exp_background.png" id="7_hfoo5"]
-[ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/hp_progress.png" id="8_2a1gi"]
-[ext_resource type="Texture2D" uid="uid://cdcys2h3m3tnr" path="res://Assets/Images/exp_progress.png" id="8_myf4k"]
+[ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/Menus/hp_background.png" id="6_jtivg"]
+[ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/Menus/hp_progress.png" id="7_pttrg"]
 [ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
+[ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/Menus/exp_background.png" id="9_fr4an"]
 [ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="9_vrbu8"]
 [ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
+[ext_resource type="Texture2D" uid="uid://cdcys2h3m3tnr" path="res://Assets/Images/Menus/exp_progress.png" id="10_tfsah"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
 [ext_resource type="PackedScene" uid="uid://c6j6bswlesema" path="res://Characters/indicator.tscn" id="17_jwaba"]
 [ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="23_36e71"]
@@ -19,7 +19,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fv580"]
 radius = 5.0
-height = 12.0
+height = 42.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2hy7"]
 shader = ExtResource("2_8mvuj")
@@ -234,8 +234,8 @@ offset_top = 350.0
 offset_right = 720.0
 offset_bottom = 370.0
 scale = Vector2(0.3, 0.3)
-texture_under = ExtResource("7_f0adl")
-texture_progress = ExtResource("8_2a1gi")
+texture_under = ExtResource("6_jtivg")
+texture_progress = ExtResource("7_pttrg")
 
 [node name="CanvasLevelUp" type="CanvasLayer" parent="GUILayer/GUI"]
 
@@ -293,8 +293,8 @@ offset_bottom = 47.0
 scale = Vector2(1.25, 1.25)
 step = 0.01
 value = 20.0
-texture_under = ExtResource("7_hfoo5")
-texture_progress = ExtResource("8_myf4k")
+texture_under = ExtResource("9_fr4an")
+texture_progress = ExtResource("10_tfsah")
 
 [node name="Pausescreen" type="CanvasLayer" parent="GUILayer"]
 process_mode = 1
@@ -429,18 +429,11 @@ bus = &"sfx"
 bus = &"sfx"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.4
+scale = Vector2(0.3, 0.3)
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("23_36e71")
 texture_scale = 0.6
-
-[node name="PointLight2D3" type="PointLight2D" parent="."]
-energy = 0.3
-shadow_enabled = true
-shadow_filter = 2
-texture = ExtResource("23_36e71")
-texture_scale = 1.5
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("24_2egwl")

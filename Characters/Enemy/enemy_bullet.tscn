@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://wu71ryws3umf"]
+[gd_scene load_steps=9 format=3 uid="uid://wu71ryws3umf"]
 
 [ext_resource type="Texture2D" uid="uid://bxv135kotjjpy" path="res://Assets/Images/Bullets/fireBulletYang-Sheet.png" id="1_vhla8"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="2_atwqf"]
 [ext_resource type="Script" path="res://Characters/Enemy/enemy_bullet.gd" id="2_c27tt"]
+[ext_resource type="Texture2D" uid="uid://84gt8vrof23q" path="res://Assets/light.png" id="4_herob"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63el5"]
 radius = 9.0
@@ -62,5 +63,11 @@ shape = SubResource("CircleShape2D_63el5")
 libraries = {
 "": SubResource("AnimationLibrary_tewj7")
 }
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.3, 0.3)
+color = Color(1, 0.705882, 0.278431, 1)
+energy = 2.0
+texture = ExtResource("4_herob")
 
 [editable path="HitBox"]

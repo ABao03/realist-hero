@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d18ev83q6aql5"
-path="res://.godot/imported/hp_background.png-c0a082670da294279adff8b7cc726db5.ctex"
+uid="uid://cebbmwvvm327k"
+path="res://.godot/imported/floating island map test blue.png-5916f72823a74723fcdf2d92f3e10332.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/hp_background.png"
-dest_files=["res://.godot/imported/hp_background.png-c0a082670da294279adff8b7cc726db5.ctex"]
+source_file="res://Assets/Images/Tilesets/floating island map test blue.png"
+dest_files=["res://.godot/imported/floating island map test blue.png-5916f72823a74723fcdf2d92f3e10332.ctex"]
 
 [params]
 

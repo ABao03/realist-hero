@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uor1uregugxf"
-path="res://.godot/imported/exp_background.png-01c4d5993556e202b764fc0899fa947a.ctex"
+uid="uid://4ftintlhjpvj"
+path="res://.godot/imported/basic_enemy_pig-Sheet.png-d66705c57f00cf0c711ca7ef2d29f4f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/exp_background.png"
-dest_files=["res://.godot/imported/exp_background.png-01c4d5993556e202b764fc0899fa947a.ctex"]
+source_file="res://Assets/Images/Characters/basic_enemy_pig-Sheet.png"
+dest_files=["res://.godot/imported/basic_enemy_pig-Sheet.png-d66705c57f00cf0c711ca7ef2d29f4f2.ctex"]
 
 [params]
 

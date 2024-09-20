@@ -379,6 +379,10 @@ bus = &"music"
 
 [node name="weapon_origin" parent="." instance=ExtResource("7_n4o73")]
 
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(1, 1, 1, 0.372549)
+blend_mode = 1
+
 [connection signal="body_entered" from="Door1" to="." method="_on_door_1_body_entered"]
 [connection signal="body_entered" from="Door2" to="." method="_on_door_2_body_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

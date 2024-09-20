@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://duct1l4f25ios" path="res://Assets/Images/Tilesets/TX Tileset Grass.png" id="5_d4jm0"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="6_b1lhj"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/jiangshi.tscn" id="7_n3sif"]
-[ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/skeleton.tscn" id="8_gffs7"]
+[ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/pig.tscn" id="8_gffs7"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="8_uytoy"]
 [ext_resource type="Texture2D" uid="uid://clopaewqesprl" path="res://Assets/Images/Tilesets/wall_tilemap.png" id="9_55cxx"]
 

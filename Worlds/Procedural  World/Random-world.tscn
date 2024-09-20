@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=3 uid="uid://kf5ap7fe8shl"]
 
 [ext_resource type="Script" path="res://Worlds/Procedural  World/Random-world.gd" id="1_v8noq"]
+[ext_resource type="Texture2D" uid="uid://cebbmwvvm327k" path="res://Assets/Images/Tilesets/floating island map test blue.png" id="2_7vubl"]
 [ext_resource type="Texture2D" uid="uid://b1y8petpk5k0j" path="res://Assets/Images/Tilesets/TX Tileset Grass Night.png" id="2_e4qki"]
-[ext_resource type="Texture2D" uid="uid://bgc3a2dgis01h" path="res://Assets/Images/Tilesets/floating island map test.png" id="3_4osue"]
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player.tscn" id="8_vfgpb"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="9_r3gj4"]
 [ext_resource type="PackedScene" uid="uid://bh4vi84vnnpf5" path="res://Characters/Enemy/jiangshi.tscn" id="10_um2ss"]
 [ext_resource type="Script" path="res://spawn_info.gd" id="11_b3e8h"]
 [ext_resource type="PackedScene" uid="uid://cw5j0jbfrv4r" path="res://Characters/Weapons/weapon_origin.tscn" id="11_on3cu"]
-[ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/skeleton.tscn" id="12_22y40"]
+[ext_resource type="PackedScene" uid="uid://dhg2xqrtvfpi6" path="res://Characters/Enemy/pig.tscn" id="12_22y40"]
 [ext_resource type="PackedScene" uid="uid://b003famhrqw17" path="res://Characters/Enemy/ranged_mf.tscn" id="14_72ou5"]
 [ext_resource type="AudioStream" uid="uid://vfyxjjc1h526" path="res://Assets/Music/Tea House Echoes.mp3" id="17_thcus"]
 
@@ -312,9 +312,10 @@ script = ExtResource("1_v8noq")
 z_index = -1
 position = Vector2(0, 403)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_4osue")
+texture = ExtResource("2_7vubl")
 
 [node name="TileMap" type="TileMap" parent="FloatingIslandMapTest"]
+visible = false
 texture_filter = 1
 position = Vector2(0, -172.667)
 scale = Vector2(0.666667, 0.666667)
@@ -333,9 +334,6 @@ spawns = Array[ExtResource("11_b3e8h")]([SubResource("Resource_g8xax"), SubResou
 
 [node name="Loot" type="Node2D" parent="." groups=["loot"]]
 process_mode = 1
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.439333, 0.518444, 0.607513, 1)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
@@ -367,3 +365,7 @@ polygon = PackedVector2Array(1183, -21, 1183, -20, 1184, -20, 1184, -2, 1179, -2
 
 [node name="CollisionPolygon2D6" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-1016, 145, -955, 174, -891, 173, -883, 181, -823, 201, -798, 203, -727, 189, -660, 231, -648, 231, -648, 223, -625, 224, -624, 238, -582, 309, -565, 336, -552, 341, -541, 369, -529, 381, -528, 402, -518, 402, -490, 442, -478, 445, -462, 439, -416, 440, -330, 552, -261, 583, -240, 601, -232, 603, -216, 617, -209, 607, -210, 578, -205, 568, -155, 559, -140, 578, -132, 591, -99, 572, -46, 587, 47, 594, 56, 594, 64, 598, 135, 629, 147, 658, 201, 634, 218, 609, 380, 556, 396, 555, 413, 546, 474, 534, 472, 527, 582, 541, 590, 535, 607, 575, 119, 705, -301, 664, -739, 374, -1039, 193)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(1, 1, 1, 0.372549)
+blend_mode = 1
