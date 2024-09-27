@@ -54,7 +54,7 @@ signal player_level_up()
 @onready var animation = $AnimationPlayer
 @onready var hitFlashAnim = $HitFlashAnimation
 #@onready var animation_tree = $AnimationTree
-@onready var sprite = $Sprite2D
+@onready var sprite = $PlayerSprite
 var signal_emitted = false
 
 # GUI

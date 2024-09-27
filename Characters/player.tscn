@@ -1,15 +1,16 @@
-[gd_scene load_steps=30 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=31 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_qvw2t"]
-[ext_resource type="Texture2D" uid="uid://cncqgi38r3poe" path="res://Assets/Images/Characters/girl_skeleton-Sheet.png" id="2_1nalt"]
+[ext_resource type="Texture2D" uid="uid://bckgj6wphw7qt" path="res://Assets/Images/Characters/lantern.png" id="2_2c6nc"]
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_8mvuj"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="3_5wu8m"]
-[ext_resource type="Texture2D" uid="uid://bbtyeplvpm0i2" path="res://Assets/Images/Characters/yin-yang.png" id="5_k733h"]
+[ext_resource type="Texture2D" uid="uid://dwrqkuclmm6ra" path="res://Assets/Images/Characters/player_sheet.png" id="3_dapr6"]
+[ext_resource type="Texture2D" uid="uid://d26l4l0odomhv" path="res://Assets/Images/Characters/graze_area.png" id="5_xvxq1"]
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/Menus/hp_background.png" id="6_jtivg"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/Menus/hp_progress.png" id="7_pttrg"]
 [ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
-[ext_resource type="Texture2D" uid="uid://uor1uregugxf" path="res://Assets/Images/Menus/exp_background.png" id="9_fr4an"]
 [ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="9_vrbu8"]
+[ext_resource type="Texture2D" uid="uid://d1u1i31i5gylx" path="res://Assets/Images/Menus/level_up_bar.png" id="10_fumyt"]
 [ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
 [ext_resource type="Texture2D" uid="uid://cdcys2h3m3tnr" path="res://Assets/Images/Menus/exp_progress.png" id="10_tfsah"]
 [ext_resource type="PackedScene" uid="uid://0nqqxacxuayc" path="res://Inventory/inventory.tscn" id="12_0ii4i"]
@@ -19,15 +20,15 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fv580"]
 radius = 5.0
-height = 42.0
+height = 28.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2hy7"]
 shader = ExtResource("2_8mvuj")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sva7"]
-size = Vector2(10, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_40q05"]
+radius = 48.0
 
 [sub_resource type="Animation" id="Animation_q5tuw"]
 resource_name = "RESET"
@@ -35,7 +36,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -47,7 +48,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/1/path = NodePath("PlayerSprite:material:shader_parameter/enabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -64,14 +65,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0, 1]
 }
 
 [sub_resource type="Animation" id="Animation_sojb0"]
@@ -81,14 +82,14 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [3, 4, 5, 6]
+"values": [2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fjfia"]
@@ -103,7 +104,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/path = NodePath("PlayerSprite:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -119,7 +120,7 @@ length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/path = NodePath("PlayerSprite:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -150,26 +151,33 @@ collision_layer = 2
 script = ExtResource("1_qvw2t")
 
 [node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(3, -10)
+position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_fv580")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="LanternSprite" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(0, -4)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_2c6nc")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
 z_index = 1
 texture_filter = 1
 material = SubResource("ShaderMaterial_d2hy7")
-position = Vector2(3, -10)
-texture = ExtResource("2_1nalt")
-hframes = 7
+position = Vector2(2.38419e-07, -11)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("3_dapr6")
+hframes = 6
 
-[node name="HurtBox" parent="Sprite2D" instance=ExtResource("3_5wu8m")]
+[node name="HurtBox" parent="PlayerSprite" instance=ExtResource("3_5wu8m")]
 unique_name_in_owner = true
+position = Vector2(-1.90735e-06, 64)
 scale = Vector2(0.5, 0.5)
 collision_layer = 2
 collision_mask = 20
 
-[node name="CollisionShape2D" parent="Sprite2D/HurtBox" index="0"]
-position = Vector2(-5, 18)
-shape = SubResource("RectangleShape2D_7sva7")
+[node name="CollisionShape2D" parent="PlayerSprite/HurtBox" index="0"]
+shape = SubResource("CircleShape2D_40q05")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 deterministic = true
@@ -185,7 +193,7 @@ libraries = {
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GrabArea" type="Area2D" parent="."]
-position = Vector2(3, -10)
+position = Vector2(0, -10)
 collision_layer = 0
 collision_mask = 8
 
@@ -193,7 +201,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_tc7j7")
 
 [node name="CollectArea" type="Area2D" parent="."]
-position = Vector2(3, -10)
+position = Vector2(0, -10)
 collision_layer = 0
 collision_mask = 8
 
@@ -201,7 +209,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_0rg43")
 
 [node name="GrazeArea" type="Area2D" parent="."]
-position = Vector2(3, -10)
+position = Vector2(0, -10)
 collision_layer = 0
 collision_mask = 16
 
@@ -212,8 +220,8 @@ shape = SubResource("CircleShape2D_hhuec")
 [node name="Sprite2D" type="Sprite2D" parent="GrazeArea"]
 modulate = Color(1, 1, 1, 0.411765)
 position = Vector2(0, 1)
-scale = Vector2(1.125, 1.11458)
-texture = ExtResource("5_k733h")
+scale = Vector2(0.25, 0.248)
+texture = ExtResource("5_xvxq1")
 
 [node name="GUILayer" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -286,15 +294,16 @@ volume_db = -10.0
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 36.0
-offset_top = 17.0
-offset_right = 677.0
-offset_bottom = 47.0
+offset_left = 137.0
+offset_top = 18.0
+offset_right = 887.0
+offset_bottom = 48.0
 scale = Vector2(1.25, 1.25)
 step = 0.01
-value = 20.0
-texture_under = ExtResource("9_fr4an")
+value = 5.0
+texture_over = ExtResource("10_fumyt")
 texture_progress = ExtResource("10_tfsah")
+texture_progress_offset = Vector2(2, 0)
 
 [node name="Pausescreen" type="CanvasLayer" parent="GUILayer"]
 process_mode = 1
@@ -456,7 +465,7 @@ text = "LEVEL UP"
 wait_time = 0.5
 autostart = true
 
-[connection signal="hurt" from="Sprite2D/HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="hurt" from="PlayerSprite/HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="hidden" from="GUILayer/Pausescreen/Menu" to="." method="_on_menu_hidden"]
@@ -472,4 +481,4 @@ autostart = true
 [connection signal="pressed" from="LevelUpDebugButton" to="." method="_on_level_up_debug_button_pressed"]
 [connection signal="timeout" from="GrazeDetectTimer" to="." method="_on_graze_detect_timer_timeout"]
 
-[editable path="Sprite2D/HurtBox"]
+[editable path="PlayerSprite/HurtBox"]

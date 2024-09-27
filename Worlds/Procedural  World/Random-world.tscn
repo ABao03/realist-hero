@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://kf5ap7fe8shl"]
 
 [ext_resource type="Script" path="res://Worlds/Procedural  World/Random-world.gd" id="1_v8noq"]
-[ext_resource type="Texture2D" uid="uid://cebbmwvvm327k" path="res://Assets/Images/Tilesets/floating island map test blue.png" id="2_7vubl"]
+[ext_resource type="Texture2D" uid="uid://ffqthnjogq6i" path="res://Assets/Images/Tilesets/island test.png" id="2_660ni"]
 [ext_resource type="Texture2D" uid="uid://b1y8petpk5k0j" path="res://Assets/Images/Tilesets/TX Tileset Grass Night.png" id="2_e4qki"]
 [ext_resource type="PackedScene" uid="uid://b5yppbmj6d2hq" path="res://Characters/player.tscn" id="8_vfgpb"]
 [ext_resource type="PackedScene" uid="uid://btm4caichyfra" path="res://Characters/Enemy/enemy_spawner.tscn" id="9_r3gj4"]
@@ -312,7 +312,7 @@ script = ExtResource("1_v8noq")
 z_index = -1
 position = Vector2(0, 403)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("2_7vubl")
+texture = ExtResource("2_660ni")
 
 [node name="TileMap" type="TileMap" parent="FloatingIslandMapTest"]
 visible = false
