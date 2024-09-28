@@ -117,6 +117,9 @@ func _on_timer_timeout(timer_id: String) -> void:
 					thisBullet.setup("11", false)
 				thisBullet.add_even_spread(i)
 			
+		"Kassara":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("17", false)
 		
 		#"Gauntlets":
 			#get_parent().add_child(thisBullet)
