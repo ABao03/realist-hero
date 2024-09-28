@@ -9,6 +9,7 @@ var timers = {}
 
 # Track orbiting weapon instances
 var bulwarkCount = 0
+var dragShieldCount = 0
 var gauntletsCount = 0
 var oniCount = 0
 
@@ -121,6 +122,15 @@ func _on_timer_timeout(timer_id: String) -> void:
 			get_parent().add_child(thisBullet)
 			thisBullet.setup("17", false)
 		
+		"Dragon Shield":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("14",false)
+			thisBullet.orbitRadius = 40
+			dragShieldCount += 1
+			thisBullet.check_bulwark_count(bulwarkCount)
+			
+			
+		
 		#"Gauntlets":
 			#get_parent().add_child(thisBullet)
 			#thisBullet.setup("5", false)
@@ -133,6 +143,9 @@ func _process(delta):
 
 func bulwark_deleted():
 	bulwarkCount -= 1
+	
+func dragShield_deleted():
+	dragShieldCount -= 1
 
 func gauntlets_deleted():
 	gauntletsCount -= 1
