@@ -439,10 +439,12 @@ bus = &"sfx"
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(0.3, 0.3)
+color = Color(0.341176, 0.368627, 0.862745, 1)
+energy = 0.0
 shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("23_36e71")
-texture_scale = 0.6
+texture_scale = 5.0
 
 [node name="dead" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("24_2egwl")

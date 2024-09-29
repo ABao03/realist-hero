@@ -89,7 +89,7 @@ func _on_timer_timeout():
 	#enemy_cap = 7 + player_level*2 #max number of enemies per level
 	if player_level == 1:
 		basic_enemy_cap = 0
-		ranged_enemy_cap = 1
+		ranged_enemy_cap = 0
 	elif player_level == 2:
 		basic_enemy_cap = 7
 		ranged_enemy_cap = 2
