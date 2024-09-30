@@ -195,8 +195,8 @@ func calculate_experience(gem_exp):
 # Calculate experience needed to level up each time
 func calculate_experiencecap():
 	var exp_cap = experience_level
-	if experience_level < 20:
-		exp_cap = experience_level*5
+	if experience_level < 5:
+		exp_cap = experience_level*15
 	elif experience_level < 40:
 		exp_cap + 95 * (experience_level-19)*8
 	else:

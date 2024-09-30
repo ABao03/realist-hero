@@ -44,7 +44,7 @@ func spawn_wave():
 		# removed spawn delay counter
 		
 		# randomly generate a new enemy using the basic enemy id list (this will need to be manually updated probably)
-		var new_enemy = spawns[int(randf_range(0, basic_enemy_id_list.size()))].enemy
+		var new_enemy = spawns[int(0)].enemy
 		var enemy_spawn = new_enemy.instantiate()
 		telegraph_spawn(enemy_spawn)
 		
@@ -88,17 +88,17 @@ func _on_timer_timeout():
 	var player_level = player.experience_level
 	#enemy_cap = 7 + player_level*2 #max number of enemies per level
 	if player_level == 1:
-		basic_enemy_cap = 0
+		basic_enemy_cap = 5
 		ranged_enemy_cap = 0
 	elif player_level == 2:
-		basic_enemy_cap = 7
-		ranged_enemy_cap = 2
-	elif player_level == 3:
-		basic_enemy_cap = 12
-		ranged_enemy_cap = 2
-	elif player_level == 4:
 		basic_enemy_cap = 15
-		ranged_enemy_cap = 3
+		ranged_enemy_cap = 0
+	elif player_level == 3:
+		basic_enemy_cap = 30
+		ranged_enemy_cap = 0
+	elif player_level == 4:
+		basic_enemy_cap = 50
+		ranged_enemy_cap = 1
 		
 	spawn_wave()
 	

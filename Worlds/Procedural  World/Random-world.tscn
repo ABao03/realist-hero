@@ -350,9 +350,6 @@ autoplay = true
 
 [node name="weapon_origin" parent="." instance=ExtResource("11_on3cu")]
 
-[node name="Ranged" parent="." instance=ExtResource("14_72ou5")]
-position = Vector2(0, 182)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
