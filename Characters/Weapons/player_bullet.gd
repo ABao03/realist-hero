@@ -8,7 +8,7 @@ var bulletClass : String
 var bulletType : String
 var bulletCount : int
 var speed : int
-var piercing = 1 # probably also move to set_stats
+var piercing : int
 var spinning : bool = false
 
 # projectile stats
@@ -76,6 +76,7 @@ func setup(itemID : String, isSpinning : bool):
 	bulletClass = thisItem["Class"]
 	bulletCount = thisItem["BulletCount"]
 	bulletType = thisItem["BulletType"]
+	piercing = thisItem["Piercing"]
 	speed = thisItem["Speed"] * 50
 	
 	# Direction of the bullet: how it's fired, how it moves
