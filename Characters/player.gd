@@ -246,7 +246,6 @@ func levelup():
 			currentOptions.append(option_choice)
 		
 	get_tree().paused = true
-	
 
 func set_healthbar(hp, set_max_value):
 	healthBar.max_value = set_max_value

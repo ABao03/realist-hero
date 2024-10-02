@@ -1,17 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsql475l10syn"]
+[gd_scene load_steps=3 format=3 uid="uid://dsql475l10syn"]
 
 [ext_resource type="Script" path="res://Inventory/hover_info.gd" id="1_abwnu"]
+[ext_resource type="Texture2D" uid="uid://b2hs2ntkap0sh" path="res://Assets/Images/Menus/backpack.png" id="2_c6as6"]
 
 [node name="hoverInfo" type="ColorRect" groups=["info"]]
-offset_right = 199.0
-offset_bottom = 150.0
-color = Color(0.517647, 0.376471, 0.219608, 1)
+offset_right = 247.0
+offset_bottom = 269.0
+color = Color(1, 1, 1, 0)
 script = ExtResource("1_abwnu")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 unique_name_in_owner = true
-layout_mode = 0
-offset_left = 11.0
-offset_top = 10.0
-offset_right = 187.0
-offset_bottom = 50.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.5
+offset_top = 25.0
+offset_right = 88.5
+offset_bottom = 65.0
+grow_horizontal = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(124.5, 134)
+scale = Vector2(0.502, 0.453333)
+texture = ExtResource("2_c6as6")

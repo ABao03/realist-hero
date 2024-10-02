@@ -41,7 +41,7 @@ signal start_spawning()
 var weapon_origin
 
 # DEBUG
-@onready var itemArray = [17]
+@onready var itemArray = [1]
 @onready var index = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -55,7 +55,7 @@ func _ready():
 			weapon_origin = thisOrigin
 	connect("pass_upgrade",Callable(player,"update_stats"))
 	connect("start_spawning",Callable(spawner,"start_spawning"))
-	for i in range(80):
+	for i in range(64):
 		create_slot()
 	visible = false
 

@@ -296,11 +296,11 @@ volume_db = -10.0
 [node name="ExperienceBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 29.0
-offset_top = 14.0
-offset_right = 779.0
-offset_bottom = 44.0
-scale = Vector2(1.25, 1.25)
+offset_left = 68.0
+offset_top = 8.0
+offset_right = 818.0
+offset_bottom = 38.0
+scale = Vector2(0.75, 0.75)
 step = 0.01
 value = 5.0
 texture_over = ExtResource("10_fumyt")
@@ -452,16 +452,16 @@ stream = ExtResource("24_2egwl")
 
 [node name="Inventory" parent="." groups=["inventory"] instance=ExtResource("12_0ii4i")]
 z_index = 3
-offset_left = -665.0
-offset_top = -333.0
-offset_right = -665.0
-offset_bottom = -333.0
+offset_left = -524.0
+offset_top = -224.0
+offset_right = -524.0
+offset_bottom = -224.0
 
 [node name="LevelUpDebugButton" type="Button" parent="."]
-offset_left = -493.0
-offset_top = 192.0
-offset_right = -485.0
-offset_bottom = 200.0
+offset_left = -432.0
+offset_top = 184.0
+offset_right = -352.0
+offset_bottom = 215.0
 text = "LEVEL UP"
 
 [node name="GrazeDetectTimer" type="Timer" parent="."]

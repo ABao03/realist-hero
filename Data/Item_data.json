@@ -1,7 +1,7 @@
 {
    "1": {
 	  "ID": 1,
-	  "Name": "Pickaxe - do not pick",
+	  "Name": "Mace",
 	  "Grid": "0,0/0,1/0,2/-1,0/1,0",
 	  "Damage": 0,
 	  "Class": "Target",
@@ -76,7 +76,7 @@
    },
    "6": {
 	  "ID": 6,
-	  "Name": "Sickle - do not pick",
+	  "Name": "Sickle",
 	  "Grid": "0,1/1,0/1,1",
 	  "Damage": 0,
 	  "Class": "Target",
@@ -91,7 +91,7 @@
    },
    "7": {
 	  "ID": 7,
-	  "Name": "Suspicious Seal - do not pick",
+	  "Name": "Suspicious Seal",
 	  "Grid": "0,0/0,1/1,0/1,1",
 	  "Damage": 2,
 	  "Class": "Spread",
@@ -106,7 +106,7 @@
    },
    "8": {
 	  "ID": 8,
-	  "Name": "Armoured Gauntlets",
+	  "Name": "Gauntlets",
 	  "Grid": "-1,0/-1,1/0,1/1,1",
 	  "Damage": 8,
 	  "Class": "Orbit",

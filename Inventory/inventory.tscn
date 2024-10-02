@@ -12,6 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 script = ExtResource("1_jolrh")
 
 [node name="Timer" type="Timer" parent="."]
@@ -42,7 +43,6 @@ z_index = 1
 layout_mode = 2
 
 [node name="Header" type="HBoxContainer" parent="Background/MarginContainer/VBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_vertical = 2
@@ -81,20 +81,13 @@ position = Vector2(210, 262)
 texture = ExtResource("2_8cmgb")
 
 [node name="HoverCanvas" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="hoverInfo" parent="HoverCanvas" instance=ExtResource("3_hero3")]
 z_index = 1
-offset_left = 601.0
+offset_left = 585.0
 offset_top = 268.0
-offset_right = 831.0
+offset_right = 815.0
 offset_bottom = 418.0
-color = Color(0.439216, 0.439216, 0.439216, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="HoverCanvas/hoverInfo"]
-position = Vector2(115, 76)
-scale = Vector2(0.574, 0.316667)
-texture = ExtResource("2_8cmgb")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="Background/MarginContainer/VBoxContainer/Header/Button_Spawn" to="." method="_on_button_spawn_pressed"]

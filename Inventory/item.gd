@@ -9,13 +9,12 @@ var item_name : String
 var item_grids := []
 
 var item_damage : int
-var item_type : String
 var item_class : String
+var item_bullet_type : String
 var item_bullet_count : int
 var item_fire_rate : float
 var item_piercing : int
 var item_speed : int
-var item_bullet_type : String
 var item_info : String
 var item_score : String
 var selected = false
