@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=3 uid="uid://84uroj3gdqvp"]
 
-[ext_resource type="Texture2D" uid="uid://coitcp8ngfe7a" path="res://Assets/Images/Bullets/pickaxe_weapon.png" id="1_drp4q"]
+[ext_resource type="Texture2D" uid="uid://b4hjso1lwot07" path="res://Assets/Images/Bullets/dagger_weapon.png" id="1_ujhad"]
 [ext_resource type="Script" path="res://Characters/Weapons/player_bullet.gd" id="2_w0miv"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="3_mn8vp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3w3s2"]
-radius = 13.3333
+radius = 87.699
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c4pr4"]
-size = Vector2(9.19239, 31.8198)
+size = Vector2(34.8839, 166.877)
 
 [sub_resource type="Animation" id="Animation_ya238"]
 length = 0.5
@@ -81,9 +81,8 @@ _data = {
 
 [node name="player_bullet" type="Sprite2D"]
 texture_filter = 1
-rotation = 6.1887
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("1_drp4q")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ujhad")
 hframes = 3
 script = ExtResource("2_w0miv")
 
@@ -100,7 +99,7 @@ collision_layer = 8
 collision_mask = 4
 
 [node name="CollisionShape2D" parent="RectHitBox" index="0"]
-position = Vector2(0.5, 3.66977e-07)
+position = Vector2(1.01725e-05, 7.62939e-06)
 rotation = 0.785398
 shape = SubResource("RectangleShape2D_c4pr4")
 disabled = true
