@@ -13,7 +13,9 @@ var spinning : bool = false
 
 # projectile stats
 var direction : Vector2
+
 var duration : int = 500
+var boomerang_duration : int = 500
 var orbitRadius : int # only for orbiting weapons
 var angle = 0.0 # only for orbiting weapons
 
@@ -54,6 +56,30 @@ func _process(delta):
 		if duration <= 0:
 			queue_free()
 	
+	elif bulletClass == "Boomerang":
+		
+		boomerang_duration -= delta
+		
+		if boomerang_duration > 250:
+			position += direction * speed * delta
+			
+		elif boomerang_duration <= 250:
+			var player = get_tree().get_nodes_in_group("player")
+			if player.size() > 0:
+				player = player[0]
+			var player_position = player.global_position
+			direction = (player_position - global_position).normalized()
+			print(direction)
+			position += direction * speed * delta
+			
+			if position == player_position:
+				queue_free()
+			
+			
+		if boomerang_duration <= 0:
+			queue_free()
+			
+	
 	# If bullet class is orbit, it flies around the player and has infinite duration
 	elif bulletClass == "Orbit":
 		if bulletType == "PassiveOrbit":
@@ -83,8 +109,18 @@ func setup(itemID : String, isSpinning : bool):
 	speed = thisItem["Speed"] * 50
 	
 	# Direction of the bullet: how it's fired, how it moves
-	if bulletClass == "Target":
+	if bulletClass == "Target" or "Boomerrang":
 		direction = (get_global_mouse_position() - global_position).normalized()
+	
+	#if bulletClass == "Boomerang":
+		#direction1 = (get_global_mouse_position() - global_position).normalized()
+		
+		#var player = get_tree().get_nodes_in_group("player")
+		#if player.size() > 0:
+			#player = player[0]
+		#var player_position = player.global_position
+		
+		#direction2 = (player_position - global_position).normalized()
 	
 	# Set spinning status 
 	spinning = isSpinning

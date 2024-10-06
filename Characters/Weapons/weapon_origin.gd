@@ -50,6 +50,7 @@ func remove_timer(timer_id: String) -> void:
 func _on_timer_timeout(timer_id: String) -> void:
 	# Perform any action based on the specific timer
 	var thisBullet = bullet.instantiate()
+	var boomerrang = 0
 	
 	match timer_id:
 		"Mace":
