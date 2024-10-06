@@ -29,15 +29,17 @@ var activeHitBox
 
 # send signals to origin
 signal bulwark_deleted()
-signal dragShield_deleted()
 signal gauntlet_deleted()
 signal oni_deleted()
+signal hammer_deleted()
+signal dragShield_deleted()
 
 func _ready():
 	position = weapon_origin.position
 	connect("bulwark_deleted",Callable(weapon_origin,"bulwark_deleted"))
-	connect("gauntlet_deleted",Callable(weapon_origin,"gauntlet_deleted"))
+	connect("gauntlets_deleted",Callable(weapon_origin,"gauntlets_deleted"))
 	connect("oni_deleted",Callable(weapon_origin, "oni_deleted"))
+	connect("hammer_deleted",Callable(weapon_origin,"hammer_deleted"))
 	connect("dragShield_deleted", Callable(weapon_origin,"dragShield_deleted"))
 
 func _process(delta):
@@ -55,7 +57,8 @@ func _process(delta):
 	# If bullet class is orbit, it flies around the player and has infinite duration
 	elif bulletClass == "Orbit":
 		if bulletType == "PassiveOrbit":
-			angle += speed * delta
+			angle += speed * delta 
+			rotation = angle + deg_to_rad(135)
 		elif bulletType == "GuidedOrbit":
 			angle = (get_global_mouse_position() - position).normalized().angle()
 			rotation = angle + deg_to_rad(135)
@@ -125,7 +128,10 @@ func explode():
 		emit_signal("gauntlets_deleted")
 	
 	if thisItem["Name"] == "Oni's Star":
-		emit_signal("oni_deleted")	
+		emit_signal("oni_deleted")
+	
+	if thisItem["Name"] == "Hex Hammer":
+		emit_signal("hammer_deleted")
 	
 	if thisItem["Name"] == "Dragon Shield":
 		emit_signal("dragShield_deleted")
@@ -153,6 +159,17 @@ func check_bulwark_count(currentCount : int):
 		emit_signal("bulwark_deleted")
 		queue_free()
 
+func check_gauntlets_count(currentCount : int):
+	var activeGauntlets = 0
+	
+	for timer in weapon_origin.timers:
+		if timer == "Gauntlets":
+			activeGauntlets += 1
+	
+	if currentCount > activeGauntlets:
+		emit_signal("gauntlets_deleted")
+		queue_free()
+
 func check_dragShield_count(currentCount : int):
 	var activeDragShield = 0
 	
@@ -173,4 +190,15 @@ func check_oni_count(currentCount : int):
 	
 	if currentCount > activeOni:
 		emit_signal("oni_deleted")
+		queue_free()
+
+func check_hammer_count(currentCount : int):
+	var activeHammer = 0
+	
+	for timer in weapon_origin.timers:
+		if timer == "Hex Hammer":
+			activeHammer += 1
+	
+	if currentCount > activeHammer:
+		emit_signal("hammer_deleted")
 		queue_free()

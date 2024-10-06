@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b5yppbmj6d2hq"]
+[gd_scene load_steps=32 format=3 uid="uid://b5yppbmj6d2hq"]
 
 [ext_resource type="Script" path="res://Characters/player.gd" id="1_qvw2t"]
 [ext_resource type="Texture2D" uid="uid://bckgj6wphw7qt" path="res://Assets/Images/Characters/lantern.png" id="2_2c6nc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://d18ev83q6aql5" path="res://Assets/Images/Menus/hp_background.png" id="6_jtivg"]
 [ext_resource type="Texture2D" uid="uid://da6lw3e74eyy0" path="res://Assets/Images/Menus/hp_progress.png" id="7_pttrg"]
 [ext_resource type="Script" path="res://Menu/Pause/PauseMenu.gd" id="9_aacrx"]
+[ext_resource type="FontFile" uid="uid://o0bh22w8ke0a" path="res://Assets/Good Brush.ttf" id="9_gsade"]
 [ext_resource type="AudioStream" uid="uid://b021nbvvi66w3" path="res://Assets/SoundEffects/levelup.ogg" id="9_vrbu8"]
 [ext_resource type="Texture2D" uid="uid://d1u1i31i5gylx" path="res://Assets/Images/Menus/level_up_bar.png" id="10_fumyt"]
 [ext_resource type="PackedScene" uid="uid://rehlioxu3d30" path="res://Music/volume_slider.tscn" id="10_mcrcv"]
@@ -239,10 +240,10 @@ offset_bottom = 648.0
 [node name="HealthBar" type="TextureProgressBar" parent="GUILayer/GUI"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 570.0
-offset_top = 350.0
-offset_right = 720.0
-offset_bottom = 370.0
+offset_left = 476.0
+offset_top = 334.0
+offset_right = 626.0
+offset_bottom = 354.0
 scale = Vector2(0.3, 0.3)
 texture_under = ExtResource("6_jtivg")
 texture_progress = ExtResource("7_pttrg")
@@ -253,10 +254,10 @@ texture_progress = ExtResource("7_pttrg")
 unique_name_in_owner = true
 process_mode = 2
 texture_filter = 1
-offset_left = 1189.0
-offset_top = 91.0
-offset_right = 1469.0
-offset_bottom = 491.0
+offset_left = 1168.0
+offset_top = 16.0
+offset_right = 1448.0
+offset_bottom = 358.0
 scale = Vector2(1.25, 1.25)
 
 [node name="lbl_levelUp" type="Label" parent="GUILayer/GUI/CanvasLevelUp/LevelUp"]
@@ -270,6 +271,7 @@ offset_left = -100.0
 offset_right = 100.0
 offset_bottom = 50.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("9_gsade")
 theme_override_font_sizes/font_size = 25
 text = "Level Up! "
 horizontal_alignment = 1

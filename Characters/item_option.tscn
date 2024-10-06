@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://yes3vaj25c15"]
+[gd_scene load_steps=3 format=3 uid="uid://yes3vaj25c15"]
 
 [ext_resource type="Script" path="res://Characters/item_option.gd" id="1_86eoi"]
+[ext_resource type="FontFile" uid="uid://o0bh22w8ke0a" path="res://Assets/Good Brush.ttf" id="2_1u1ee"]
 
 [node name="itemOption" type="ColorRect"]
 custom_minimum_size = Vector2(240, 60)
@@ -10,12 +11,17 @@ color = Color(0.454902, 0.454902, 0.454902, 1)
 script = ExtResource("1_86eoi")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 26.0
-offset_bottom = 26.0
-color = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 17.0
+offset_top = -18.0
+offset_right = 41.0
+offset_bottom = 6.0
+grow_vertical = 2
+scale = Vector2(1.5, 1.5)
+color = Color(0, 0, 0, 0)
 
 [node name="ItemIcon" type="TextureRect" parent="ColorRect"]
 texture_filter = 1
@@ -27,22 +33,13 @@ expand_mode = 1
 [node name="lbl_name" type="Label" parent="."]
 texture_filter = 1
 layout_mode = 0
-offset_left = 35.3333
-offset_top = 0.666667
-offset_right = 87.3333
-offset_bottom = 25.6667
+offset_left = 66.0
+offset_top = 18.0
+offset_right = 118.0
+offset_bottom = 43.0
+theme_override_fonts/font = ExtResource("2_1u1ee")
 theme_override_font_sizes/font_size = 20
 text = "Name"
-
-[node name="lbl_description" type="Label" parent="."]
-texture_filter = 1
-layout_mode = 0
-offset_left = 4.0
-offset_top = 32.0
-offset_right = 170.0
-offset_bottom = 55.0
-theme_override_font_sizes/font_size = 12
-text = "Item Description"
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

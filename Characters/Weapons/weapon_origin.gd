@@ -12,6 +12,7 @@ var bulwarkCount = 0
 var dragShieldCount = 0
 var gauntletsCount = 0
 var oniCount = 0
+var hammerCount = 0
 
 func _ready():
 	var players = get_tree().get_nodes_in_group("player")
@@ -49,15 +50,17 @@ func remove_timer(timer_id: String) -> void:
 func _on_timer_timeout(timer_id: String) -> void:
 	# Perform any action based on the specific timer
 	var thisBullet = bullet.instantiate()
-
+	
 	match timer_id:
-		"Pickaxe":
+		"Mace":
 			get_parent().add_child(thisBullet)
 			thisBullet.setup("1", true)
 			
 		"Dagger":
 			get_parent().add_child(thisBullet)
 			thisBullet.setup("2", true)
+			thisBullet.scale.x = 0.15
+			thisBullet.scale.y = 0.15
 			
 		"Wand":
 			get_parent().add_child(thisBullet)
@@ -90,10 +93,17 @@ func _on_timer_timeout(timer_id: String) -> void:
 			get_parent().add_child(thisBullet)
 			thisBullet.setup("7", true)
 			thisBullet.add_random_spread()
-			
-		"Inverted Spear":
+		
+		"Gauntlets":
 			get_parent().add_child(thisBullet)
-			thisBullet.setup("12",false)
+			thisBullet.setup("8", false)
+			thisBullet.orbitRadius = 60
+			gauntletsCount += 1
+			thisBullet.check_gauntlets_count(gauntletsCount)
+		
+		"Dainsleif Bow":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("9", false)
 		
 		"Oni's Star":
 			get_parent().add_child(thisBullet)
@@ -101,7 +111,7 @@ func _on_timer_timeout(timer_id: String) -> void:
 			thisBullet.orbitRadius = 50
 			oniCount += 1
 			thisBullet.check_oni_count(oniCount)
-			
+		
 		"Pulsing Halberd":
 			get_parent().add_child(thisBullet)
 			thisBullet.setup("11",false)
@@ -110,11 +120,22 @@ func _on_timer_timeout(timer_id: String) -> void:
 					thisBullet = bullet.instantiate()
 					get_parent().add_child(thisBullet)
 					thisBullet.setup("11", false)
+				thisBullet.scale.x = 0.4
+				thisBullet.scale.y = 0.4
 				thisBullet.add_even_spread(i)
-			
-		"Kassara":
+		
+		"Inverted Spear":
 			get_parent().add_child(thisBullet)
-			thisBullet.setup("17", false)
+			thisBullet.setup("12",false)
+		
+		"Hex Hammer":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("13", false)
+			thisBullet.orbitRadius = 50
+			hammerCount += 1
+			thisBullet.scale.x = 0.5
+			thisBullet.scale.y = 0.5
+			thisBullet.check_hammer_count(hammerCount)
 		
 		"Dragon Shield":
 			get_parent().add_child(thisBullet)
@@ -122,8 +143,20 @@ func _on_timer_timeout(timer_id: String) -> void:
 			thisBullet.orbitRadius = 40
 			dragShieldCount += 1
 			thisBullet.check_bulwark_count(bulwarkCount)
-			
-			
+		
+		"Black Key":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("15",true)
+			for i in range(thisBullet.bulletCount):
+				if i != 0:
+					thisBullet = bullet.instantiate()
+					get_parent().add_child(thisBullet)
+					thisBullet.setup("15", true)
+				thisBullet.add_even_spread(i)
+		
+		"Kassara":
+			get_parent().add_child(thisBullet)
+			thisBullet.setup("16", false)
 		
 		#"Gauntlets":
 			#get_parent().add_child(thisBullet)
@@ -146,6 +179,9 @@ func gauntlets_deleted():
 
 func oni_deleted():
 	oniCount -= 1
+
+func hammer_deleted():
+	hammerCount -= 1
 
 # old
 #func _on_timer_timeout():

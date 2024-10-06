@@ -1,7 +1,6 @@
 extends ColorRect
 
 @onready var lblName = $lbl_name
-@onready var lblDescription = $lbl_description
 @onready var itemIcon = $ColorRect/ItemIcon
 
 var mouse_over = false
@@ -15,7 +14,6 @@ func _ready():
 	#if item == null:
 		#item = "food"
 	lblName.text = item["Name"]
-	lblDescription.text = item["Info"]
 	var file_name = DataHandler.item_data[str(item["ID"])]["Name"]
 	file_name = file_name.replace("'", "")
 	file_name = file_name.replace(" ", "_")

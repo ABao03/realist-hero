@@ -123,7 +123,6 @@ func _physics_process(delta):
 				playerSnd.play()
 		
 		move_and_slide()
-
 		
 	if playerPaused == true:
 		animation.stop()
@@ -226,7 +225,7 @@ func levelup():
 	emit_signal("player_level_up")
 	sndLevelUp.play()
 	var tween = levelPanel.create_tween()
-	tween.tween_property(levelPanel,"position",Vector2(600,100),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
+	tween.tween_property(levelPanel,"position",Vector2(600,75),0.2).set_trans(Tween.TRANS_QUINT).set_ease(Tween.EASE_IN)
 	tween.play()
 	levelPanel.visible = true
 	var optionsmax = 4
