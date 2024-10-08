@@ -24,7 +24,7 @@ radius = 5.0
 height = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_40q05"]
-radius = 48.0
+radius = 114.052
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2hy7"]
 shader = ExtResource("2_8mvuj")
@@ -155,22 +155,22 @@ script = ExtResource("1_qvw2t")
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_fv580")
 
-[node name="LanternSprite" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(0, 2)
-scale = Vector2(0.075, 0.075)
-texture = ExtResource("2_2c6nc")
-
-[node name="HurtBox" parent="LanternSprite" instance=ExtResource("3_5wu8m")]
+[node name="HurtBox" parent="." instance=ExtResource("3_5wu8m")]
 unique_name_in_owner = true
-position = Vector2(-1.90735e-06, -2.66666)
-scale = Vector2(1.33333, 1.33333)
+position = Vector2(0, -10)
+scale = Vector2(0.0533332, 0.0533332)
 collision_layer = 2
 collision_mask = 20
 
-[node name="CollisionShape2D" parent="LanternSprite/HurtBox" index="0"]
-position = Vector2(1.43051e-06, 22)
+[node name="CollisionShape2D" parent="HurtBox" index="0"]
 shape = SubResource("CircleShape2D_40q05")
+
+[node name="LanternSprite" type="Sprite2D" parent="."]
+visible = false
+z_index = 2
+position = Vector2(1, -7)
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_2c6nc")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 z_index = 1
@@ -433,6 +433,7 @@ text = "Load
 [node name="Indicator" parent="." instance=ExtResource("17_jwaba")]
 z_index = 2
 position = Vector2(217, 150)
+scale = Vector2(0.1, 0.1)
 
 [node name="Snd" type="AudioStreamPlayer2D" parent="."]
 volume_db = -10.0
@@ -470,7 +471,7 @@ text = "LEVEL UP"
 wait_time = 0.5
 autostart = true
 
-[connection signal="hurt" from="LanternSprite/HurtBox" to="." method="_on_hurt_box_hurt"]
+[connection signal="hurt" from="HurtBox" to="." method="_on_hurt_box_hurt"]
 [connection signal="area_entered" from="GrabArea" to="." method="_on_grab_area_area_entered"]
 [connection signal="area_entered" from="CollectArea" to="." method="_on_collect_area_area_entered"]
 [connection signal="hidden" from="GUILayer/Pausescreen/Menu" to="." method="_on_menu_hidden"]
@@ -486,4 +487,4 @@ autostart = true
 [connection signal="pressed" from="LevelUpDebugButton" to="." method="_on_level_up_debug_button_pressed"]
 [connection signal="timeout" from="GrazeDetectTimer" to="." method="_on_graze_detect_timer_timeout"]
 
-[editable path="LanternSprite/HurtBox"]
+[editable path="HurtBox"]

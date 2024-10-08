@@ -47,9 +47,9 @@ func _physics_process(_delta):
 		animation_tree["parameters/conditions/hurt"] = false
 	
 	if direction.x > 0.1:
-		sprite.flip_h = true
-	elif direction.x < -0.1:
 		sprite.flip_h = false
+	elif direction.x < -0.1:
+		sprite.flip_h = true
 
 func make_path():
 	nav_agent.target_position = player.global_position

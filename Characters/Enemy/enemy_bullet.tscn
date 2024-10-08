@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://wu71ryws3umf"]
 
-[ext_resource type="Texture2D" uid="uid://bxv135kotjjpy" path="res://Assets/Images/Bullets/fireBulletYang-Sheet.png" id="1_vhla8"]
+[ext_resource type="Texture2D" uid="uid://ci2vjuheanq0p" path="res://Assets/Images/Bullets/bullet_enemy.png" id="1_xfeyu"]
 [ext_resource type="PackedScene" uid="uid://dj1ij488dekna" path="res://Characters/Hitbox/hit_box.tscn" id="2_atwqf"]
 [ext_resource type="Script" path="res://Characters/Enemy/enemy_bullet.gd" id="2_c27tt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_63el5"]
-radius = 9.0
+radius = 121.655
 
 [sub_resource type="Animation" id="Animation_mu0er"]
 length = 0.001
@@ -21,10 +21,22 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.28319]
+}
 
 [sub_resource type="Animation" id="Animation_5i1jb"]
 resource_name = "idle"
-length = 0.9
+length = 1.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -33,10 +45,22 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2]
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-6.28319, 6.28319]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tewj7"]
@@ -47,8 +71,9 @@ _data = {
 
 [node name="enemy_bullet" type="Sprite2D" groups=["bullet"]]
 texture_filter = 1
-texture = ExtResource("1_vhla8")
-hframes = 3
+rotation = 6.28319
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_xfeyu")
 script = ExtResource("2_c27tt")
 
 [node name="HitBox" parent="." instance=ExtResource("2_atwqf")]

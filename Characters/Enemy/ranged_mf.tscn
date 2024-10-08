@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" path="res://Characters/Enemy/Ranged.gd" id="1_7vmal"]
 [ext_resource type="Shader" uid="uid://dacx3dsr3ysl8" path="res://Characters/hit_flash.tres" id="2_1ondh"]
-[ext_resource type="Texture2D" uid="uid://carqcjy00lyew" path="res://Assets/Images/Characters/BabyCopperDragon.png" id="3_v6fps"]
+[ext_resource type="Texture2D" uid="uid://bojn658prgbp6" path="res://Assets/Images/Characters/ninja_sheet.png" id="3_tl1lj"]
 [ext_resource type="PackedScene" uid="uid://b8hdsbgcfrf4k" path="res://Characters/Hitbox/hurt_box.tscn" id="4_pwb1q"]
 [ext_resource type="PackedScene" uid="uid://dpf38t6tmn6t3" path="res://Characters/damage_numbers.tscn" id="6_84v5k"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e5idd"]
-height = 48.0
+radius = 4.0
+height = 20.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_he13n"]
 resource_local_to_scene = true
@@ -61,7 +62,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qbk7v"]
 resource_name = "idle"
-length = 0.9
+length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -70,10 +71,10 @@ tracks/0/path = NodePath("Dragon:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 0, 2, 3, 3]
+"values": [0, 1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6kpg"]
@@ -109,7 +110,7 @@ states/move/position = Vector2(323, 100)
 transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_v76bw"), "move", "hurt", SubResource("AnimationNodeStateMachineTransition_xiuwx"), "hurt", "move", SubResource("AnimationNodeStateMachineTransition_ffldp")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yey8l"]
-size = Vector2(61, 61)
+size = Vector2(17, 47)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v580"]
 radius = 201.487
@@ -127,16 +128,15 @@ alpha = 5.324
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged"]
 z_index = 2
-position = Vector2(-1, 9)
+position = Vector2(1, 3)
 shape = SubResource("CapsuleShape2D_e5idd")
 
 [node name="Dragon" type="Sprite2D" parent="Ranged"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_he13n")
-scale = Vector2(4, 4)
-texture = ExtResource("3_v6fps")
-flip_h = true
-hframes = 4
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_tl1lj")
+hframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Ranged"]
 libraries = {
@@ -145,6 +145,9 @@ libraries = {
 speed_scale = 0.5
 
 [node name="AnimationTree" type="AnimationTree" parent="Ranged"]
+libraries = {
+"": SubResource("AnimationLibrary_i6kpg")
+}
 tree_root = SubResource("AnimationNodeStateMachine_sxs7k")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hurt = false
@@ -155,10 +158,11 @@ collision_layer = 4
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Ranged/HurtBox" index="0"]
-position = Vector2(0, 5)
+position = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_yey8l")
 
 [node name="DamageNumbers" parent="Ranged" instance=ExtResource("6_84v5k")]
+position = Vector2(2, -10)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Ranged"]
 
@@ -170,13 +174,11 @@ autostart = true
 volume_db = -5.0
 
 [node name="Area2D" type="Area2D" parent="Ranged"]
-visible = false
-position = Vector2(-16, -12)
+position = Vector2(2, 3)
 collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranged/Area2D"]
-position = Vector2(32, 39)
 shape = SubResource("CircleShape2D_5v580")
 
 [node name="Marker2D" type="Marker2D" parent="Ranged"]
